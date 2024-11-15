@@ -74,11 +74,14 @@ ID				= [A-Za-z][A-Za-z0-9]*
 LineTerminator	= \r|\n|\r\n
 WhiteSpace		= {LineTerminator} | [ \t]
 INTEGER			= 0 | [1-9][0-9]*
-Brackets		= [\(\)\[\]\{\}]*
-TableTwoNoTerm 	= [{ID}{INTEGER}{WhiteSpace}{Brackets}\?\!\+\-\*\/\.\;]*
-CommentOne		= \/\/{TableTwoNoTerm}{LineTerminator}
-CommentTwo		= \/\*[{TableTwoNoTerm}{LineTerminator}]*\*\/
+Bracket			= [\(\)\[\]\{\}]
+TableTwoNoTerm 	= [{ID}{INTEGER}{WhiteSpace}{Bracket}\?\!\+\-\*\/\.\;]
+CommentOne		= \/\/{TableTwoNoTerm}*{LineTerminator}
+CommentTwo		= \/\*[{TableTwoNoTerm}*{LineTerminator}]*\*\/
 Comment			= {CommentOne} | {CommentTwo}
+IllegalTokens	= [\,\:=\=\>\<]
+LegalTokens  	= [{TableTwoNoTerm}*{LineTerminator}]
+IllegalComment	= \/\*{LegalTokens}*{IllegalTokens}+{LegalTokens}*\*\/	| \/\/{TableTwoNoTerm}*{IllegalTokens}+{TableTwoNoTerm}*{LineTerminator}
 STRING			= \"[A-Za-z]*\"
 
 
@@ -100,6 +103,8 @@ STRING			= \"[A-Za-z]*\"
 /**************************************************************/
 
 <YYINITIAL> {
+{Comment}			{ /* just skip what was found, do nothing */ }
+{IllegalComment}	{ return symbol(TokenNames.ILLEGAL_COMMENT);}
 "class"				{ return symbol(TokenNames.CLASS);}
 "nil"				{ return symbol(TokenNames.NIL);}
 "array"				{ return symbol(TokenNames.ARRAY);}
@@ -129,7 +134,7 @@ STRING			= \"[A-Za-z]*\"
 ">"					{ return symbol(TokenNames.GT);}
 {INTEGER}			{ return symbol(TokenNames.INT, new Integer(yytext()));}
 {STRING}			{ return symbol(TokenNames.STRING, new String(yytext()));}
-{ID}				{ return symbol(TokenNames.ID,     new String( yytext()));}   
+{ID}				{ return symbol(TokenNames.ID,  new String( yytext()));}   
 {WhiteSpace}		{ /* just skip what was found, do nothing */ }
 <<EOF>>				{ return symbol(TokenNames.EOF);}
 }

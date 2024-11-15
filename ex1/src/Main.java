@@ -42,6 +42,27 @@ public class Main
 			/********************************/
 			while (s.sym != TokenNames.EOF)
 			{
+				/*********************/
+				/* [7] Print to file */
+				/*********************/
+				if (s == null)	// works for illegal comments and for invalid tokens
+				{
+					throw new Exception();
+				}
+				file_writer.print(s.sym);
+				if (s.sym == TokenNames.STRING || s.sym == TokenNames.INT ||  s.sym == TokenNames.ID)
+				{
+					file_writer.print(s.sym);
+					file_writer.print("(");
+					file_writer.print(s.value);
+					file_writer.print(")");
+				}
+				file_writer.print("[");
+				file_writer.print(l.getLine());
+				file_writer.print(",");
+				file_writer.print(l.getTokenStartPosition());
+				file_writer.print("]");
+
 				/************************/
 				/* [6] Print to console */
 				/************************/
@@ -52,14 +73,6 @@ public class Main
 				System.out.print("]:");
 				System.out.print(s.value);
 				System.out.print("\n");
-				
-				/*********************/
-				/* [7] Print to file */
-				/*********************/
-				file_writer.print(l.getLine());
-				file_writer.print(": ");
-				file_writer.print(s.value);
-				file_writer.print("\n");
 				
 				/***********************/
 				/* [8] Read next token */
@@ -80,7 +93,8 @@ public class Main
 			     
 		catch (Exception e)
 		{
-			e.printStackTrace();
+			file_writer = new PrintWriter(outputFilename);
+			file_writer.write("ERROR");
 		}
 	}
 }
