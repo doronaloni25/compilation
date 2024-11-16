@@ -75,12 +75,13 @@ LineTerminator	= \r|\n|\r\n
 WhiteSpace		= {LineTerminator} | [ \t]
 INTEGER			= 0 | [1-9][0-9]*
 Bracket			= [\(\)\[\]\{\}]
-TableTwoNoTerm 	= [{ID}{INTEGER}{WhiteSpace}{Bracket}\?\!\+\-\*\/\.\;]
+TableTwoNoTerm 	= {ID} | {INTEGER} | {WhiteSpace} | {Bracket} | [\?\!\+\-\*\/\.\;]
+TableTwo        = {TableTwoNoTerm} | {LineTerminator}
 CommentOne		= \/\/{TableTwoNoTerm}*{LineTerminator}
-CommentTwo		= \/\*[{TableTwoNoTerm}*{LineTerminator}]*\*\/
+CommentTwo		= \/\*{TableTwo}*\*\/
 Comment			= {CommentOne} | {CommentTwo}
 IllegalTokens	= [\,\:=\=\>\<]
-LegalTokens  	= [{TableTwoNoTerm}*{LineTerminator}]
+LegalTokens  	= {TableTwo}*
 IllegalComment	= \/\*{LegalTokens}*{IllegalTokens}+{LegalTokens}*\*\/	| \/\/{TableTwoNoTerm}*{IllegalTokens}+{TableTwoNoTerm}*{LineTerminator}
 STRING			= \"[A-Za-z]*\"
 
