@@ -46,7 +46,6 @@ public class Main
 				if (s.sym == TokenNames.ERROR)	// works for illegal comments and for invalid tokens
 				{	
 					// overide and write "ERROR" to output in case of error
-					System.out.println("danny is a rodant");
 					file_writer.close();
 					file_writer = new PrintWriter(outputFilename);
 					file_writer.write("ERROR");
@@ -108,11 +107,7 @@ public class Main
 			     
 		catch (Exception e)
 		{	
-			
-			System.out.print("error");
 			e.printStackTrace();
-		//	file_writer = new PrintWriter(outputFilename);
-		//	file_writer.write("ERROR");
 		}
 	}
 }
