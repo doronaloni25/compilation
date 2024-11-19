@@ -1,4 +1,5 @@
 public interface TokenNames {
+  
   /* terminals */
   public static final int EOF = 0;
   public static final int LPAREN = 1;
@@ -32,6 +33,84 @@ public interface TokenNames {
   public static final int STRING = 29;
   public static final int ID = 30;
   public static final int TYPE_STRING = 31;
-  public static final int ILLEGAL_COMMENT = 32;
+  public static final int ERROR = 32;
+  
+  
+  public static String getName(int tokenNum)
+  {
+    switch (tokenNum)
+    {
+      case EOF:
+        return "EOF";
+      case LPAREN:
+        return "LPAREN";
+      case RPAREN:
+        return "RPAREN";
+      case LBRACK:
+        return "LBRACK";
+      case RBRACK:
+        return "RBRACK";
+      case LBRACE:
+        return "LBRACE";
+      case RBRACE:
+        return "RBRACE";
+      case NIL:
+        return "NIL";
+      case PLUS:
+        return "PLUS";
+      case MINUS:
+        return "MINUS";
+      case TIMES:
+        return "TIMES";
+      case DIVIDE:
+        return "DIVIDE";
+      case COMMA:
+        return "COMMA";
+      case DOT:
+        return "DOT";
+      case SEMICOLON:
+        return "SEMICOLON";
+      case TYPE_INT:
+        return "TYPE_INT";
+      case TYPE_VOID:
+        return "TYPE_VOID";
+      case ASSIGN:
+        return "ASSIGN";
+      case EQ:
+        return "EQ";
+      case LT:
+        return "LT";
+      case GT:
+        return "GT";
+      case ARRAY:
+        return "ARRAY";
+      case CLASS:
+        return "CLASS";
+      case EXTENDS:
+        return "EXTENDS";
+      case RETURN:
+        return "RETURN";
+      case WHILE:
+        return "WHILE";
+      case IF:
+        return "IF";
+      case NEW:
+        return "NEW";
+      case INT:
+        return "INT";
+      case STRING:
+        return "STRING";
+      case ID:
+        return "ID";
+      case TYPE_STRING:
+        return "TYPE_STRING";
+      case ERROR:
+        return "ERROR";
+      default:
+        return null;
+       
+    }
+}
 
 }
+

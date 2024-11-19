@@ -42,17 +42,26 @@ public class Main
 			/********************************/
 			while (s.sym != TokenNames.EOF)
 			{
+
+				if (s.sym == TokenNames.ERROR)	// works for illegal comments and for invalid tokens
+				{	
+					// overide and write "ERROR" to output in case of error
+					System.out.println("danny is a rodant");
+					file_writer.close();
+					file_writer = new PrintWriter(outputFilename);
+					file_writer.write("ERROR");
+					System.out.println("ERROR");
+					break;
+				}
+
 				/*********************/
 				/* [7] Print to file */
 				/*********************/
-				if (s == null)	// works for illegal comments and for invalid tokens
-				{
-					throw new Exception();
-				}
-				file_writer.print(s.sym);
+
+				file_writer.print(TokenNames.getName(s.sym));
 				if (s.sym == TokenNames.STRING || s.sym == TokenNames.INT ||  s.sym == TokenNames.ID)
 				{
-					file_writer.print(s.sym);
+			
 					file_writer.print("(");
 					file_writer.print(s.value);
 					file_writer.print(")");
@@ -61,18 +70,24 @@ public class Main
 				file_writer.print(l.getLine());
 				file_writer.print(",");
 				file_writer.print(l.getTokenStartPosition());
-				file_writer.print("]");
+				file_writer.print("]\n");
 
 				/************************/
 				/* [6] Print to console */
 				/************************/
+				System.out.print(TokenNames.getName(s.sym));
+				if (s.sym == TokenNames.STRING || s.sym == TokenNames.INT ||  s.sym == TokenNames.ID)
+				{
+			
+					System.out.print("(");
+					System.out.print(s.value);
+					System.out.print(")");
+				}
 				System.out.print("[");
 				System.out.print(l.getLine());
 				System.out.print(",");
 				System.out.print(l.getTokenStartPosition());
-				System.out.print("]:");
-				System.out.print(s.value);
-				System.out.print("\n");
+				System.out.print("]\n");
 				
 				/***********************/
 				/* [8] Read next token */
@@ -92,9 +107,12 @@ public class Main
     	}
 			     
 		catch (Exception e)
-		{
-			file_writer = new PrintWriter(outputFilename);
-			file_writer.write("ERROR");
+		{	
+			
+			System.out.print("error");
+			e.printStackTrace();
+		//	file_writer = new PrintWriter(outputFilename);
+		//	file_writer.write("ERROR");
 		}
 	}
 }
