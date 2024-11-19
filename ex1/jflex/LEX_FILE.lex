@@ -86,6 +86,7 @@ ID				= [A-Za-z][A-Za-z0-9]*
 LineTerminator	= \r|\n|\r\n
 WhiteSpace		= {LineTerminator} | [ \t]
 INTEGER			= 0 | [1-9][0-9]*
+IllegalInteger  = 0[0-9]+
 Bracket			= [\(\)\[\]\{\}]
 TableTwoNoTerm 	= {ID} | {INTEGER} | [ \t] | {Bracket} | [\?\!\+\-\*\/\.\;]
 TableTwo        = {TableTwoNoTerm} | {LineTerminator}
@@ -146,6 +147,7 @@ STRING			= \"[A-Za-z]*\"
 "="					{ return symbol(TokenNames.EQ);}
 "<"					{ return symbol(TokenNames.LT);}
 ">"					{ return symbol(TokenNames.GT);}
+{IllegalInteger}	{ return symbol(TokenNames.ERROR);}
 {INTEGER}			{ return symbolFromInteger(new Integer(yytext()));}
 {STRING}			{ return symbol(TokenNames.STRING, new String(yytext()));}
 {ID}				{ return symbol(TokenNames.ID,  new String( yytext()));}   
