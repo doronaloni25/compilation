@@ -89,15 +89,18 @@ INTEGER			= 0 | [1-9][0-9]*
 IllegalInteger  = 0[0-9]+
 Bracket			= [\(\)\[\]\{\}]
 TableTwoNoTerm 	= {ID} | {INTEGER} | [ \t] | {Bracket} | [\?\!\+\-\*\/\.\;]
+TableTwoNoSlashNoStar 	= {ID} | {INTEGER} | [ \t] | {Bracket} | [\?\!\+\-\.\;] | {LineTerminator}
+TableTwoNoStar  = {ID} | {INTEGER} | [ \t] | {Bracket} | [\?\!\+\-\.\;\/] | {LineTerminator}
+StarsNoSlash	= (\*)+{TableTwoNoSlashNoStar}
+NoStarORStarsNoSlash 	= {TableTwoNoStar} | {StarsNoSlash}
 TableTwo        = {TableTwoNoTerm} | {LineTerminator}
 CommentOne		= \/\/{TableTwoNoTerm}*{LineTerminator}
-CommentTwo		= \/\*{TableTwo}*\*\/
+CommentTwo		= \/\*{NoStarORStarsNoSlash}*(\*)*\*\/
 Comment			= {CommentOne} | {CommentTwo}
 IllegalTokens	= [\,\:=\=\>\<]
 LegalTokens  	= {TableTwo}*
 IllegalComment	= \/\*{LegalTokens}*{IllegalTokens}+{LegalTokens}*\*\/	| \/\/{TableTwoNoTerm}*{IllegalTokens}+{TableTwoNoTerm}*{LineTerminator} | \/\*[^(\*\/)]*
 STRING			= \"[A-Za-z]*\"
-
 
 
 /******************************/
