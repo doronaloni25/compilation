@@ -69,12 +69,19 @@ import java_cup.runtime.*;
 	/******************************/
 	/* checks if integer is valid */
 	/******************************/
-	private Symbol symbolFromInteger(int num)
+	private Symbol symbolFromNumber(String stringNum)
 	{
+		if(stringNum.length() > 5){
+			return symbol(TokenNames.ERROR);
+		}
+		
+		int num = new Integer(stringNum);
+
 		if(num <= 32767)
 		{
-			return symbol(TokenNames.INT, new Integer(yytext()));
+			return symbol(TokenNames.INT, num);
 		}
+
 		return symbol(TokenNames.ERROR);
 	}  
 %}
@@ -151,7 +158,7 @@ STRING			= \"[A-Za-z]*\"
 "<"					{ return symbol(TokenNames.LT);}
 ">"					{ return symbol(TokenNames.GT);}
 {IllegalInteger}	{ return symbol(TokenNames.ERROR);}
-{INTEGER}			{ return symbolFromInteger(new Integer(yytext()));}
+{INTEGER}			{ return symbolFromNumber(new String(yytext()));}
 {STRING}			{ return symbol(TokenNames.STRING, new String(yytext()));}
 {ID}				{ return symbol(TokenNames.ID,  new String( yytext()));}   
 {WhiteSpace}		{ /* just skip what was found, do nothing */ }
