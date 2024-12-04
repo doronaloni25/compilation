@@ -134,23 +134,23 @@ stmtList	::=		stmt:s	stmtList:l		{: RESULT = new AST_STMT_LIST(s,l);    :}
 					| stmt:s				{: RESULT = new AST_STMT_LIST(s,null); :}
 					;
 
-program		::=		decList:l 				{: RESULT = new AST_DEC_LIST(null,l);   :}
+program		::=		decList:l 				{: RESULT = new AST_PROGRAM(l);   :}
 					;
 
 decList		::= 	dec:d   decList:l		{: RESULT = new AST_DEC_LIST(d,l);		:}
 					| dec:d 				{: RESULT = new AST_DEC_LIST(d,null);	:}
 					;
 
-dec			::=		varDec:d 				{: RESULT = new AST_DEC(d);				:}
-					| funcDec:d				{: RESULT = new AST_DEC(d);				:}
-					| classDec:d 			{: RESULT = new AST_DEC(d);				:}
+dec			::=		varDec:d 				{: RESULT = new AST_VAR_DEC(d);				:}
+					| funcDec:d				{: RESULT = new AST_FUNC_DEC(d);				:}
+					| classDec:d 			{: RESULT = new AST_CLASS_DEC(d);				:}
 					| arrayTypedef:a 		{: RESULT = new AST_ARRAY_TYPE_DEF(a);	:}
 					;
 
-type		::= 	TYPE_INT:t 				{: RESULT = new AST_TYPE(t);			:}
-					| TYPE_STRING:t 		{: RESULT = new AST_TYPE(t);			:}
-					| TYPE_VOID:t 			{: RESULT = new AST_TYPE(t);			:}
-					| ID:name				{: RESULT = new AST_VAR_SIMPLE(ID);		:}
+type		::= 	TYPE_INT			{: RESULT = new AST_TYPE("int", false);			:}  /* check if t is needed*/
+					| TYPE_STRING 		{: RESULT = new AST_TYPE("String", false);			:}
+					| TYPE_VOID 			{: RESULT = new AST_TYPE("void", false);			:}
+					| ID:name				{: RESULT = new AST_TYPE(name, true);		:}
 					;
 
 varDec		::=		type:t ID:name ASSIGN exp:e SEMICOLON		{: RESULT = new:}

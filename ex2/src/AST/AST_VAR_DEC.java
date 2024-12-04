@@ -1,28 +1,33 @@
 package AST;
 
-public class AST_TYPE extends AST_Node {
+public class AST_VAR_DEC extends AST_DEC 
+{
     
-    public String type; 
-    public Boolean id;
+	public AST_TYPE type;
+	public String name;
+    public AST_EXP exp;
+    public AST_NEW_EXP newExp;
 
-    /******************/
-	/* CONSTRUCTOR(S) */
-	/******************/
-    public AST_TYPE(String type, Boolean id) {
+
+    public AST_VAR_DEC (AST_TYPE type, String name, AST_EXP exp, AST_NEW_EXP newExp) {
         // Set a unique serial number
         SerialNumber = AST_Node_Serial_Number.getFresh();
 
         
-        if (id) {
+    
+        this.type = type;
+        this.name = name;
+        this.exp = exp;
+        this.newExp = newExp;
+    }
+// TODO - change:
+
+
+    if (id) {
             System.out.format("type -> ID(%s)\n", type);
         } else {
             System.out.format("type -> %s\n", type);
         }
-
-        
-        this.type = type;
-        this.id = id;
-    }
 
     public void PrintMe() {
         if (id) {
@@ -44,3 +49,10 @@ public class AST_TYPE extends AST_Node {
 
     }
 }
+
+	
+	
+}
+  
+
+
