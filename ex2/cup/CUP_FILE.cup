@@ -17,11 +17,19 @@ parser code
 	}
 	public void report_error(String message, Object info)
 	{
-		this.file_writer.write("ERROR");
-		this.file_writer.write("(");
-		this.file_writer.write(lexer.getLine());
-		this.file_writer.write(")");		
-		System.exit(0);
+		try
+		{
+			this.file_writer.write("ERROR");
+			this.file_writer.write("(");
+			this.file_writer.write(lexer.getLine());
+			this.file_writer.write(")");		
+			file_writer.close();
+			System.exit(0);
+		}
+		catch (Exception e)	
+		{
+
+		}
 	}
 :}
 
@@ -32,7 +40,6 @@ scan with
 {:
 	Symbol s;
 	s = lexer.next_token();
-	//System.out.print(s.sym);
 	System.out.print("[");
 	System.out.print(lexer.getLine());
 	System.out.print(":");
@@ -133,11 +140,13 @@ start with program;
 /* DERIVATION RULES */
 /********************/
 
-stmtList	::=		stmt:s	stmtList:l		{: RESULT = new AST_STMT_LIST(s,l);    :}
-					| stmt:s				{: RESULT = new AST_STMT_LIST(s,null); :}
-					;
 
 program		::=		decList:l				{: RESULT = new AST_PROGRAM(l);   :}
+					| /*	EMPTY	*/
+					;
+					
+stmtList	::=		stmt:s	stmtList:l		{: RESULT = new AST_STMT_LIST(s, l);    :}
+					| stmt:s				{: RESULT = new AST_STMT_LIST(s, null); :}
 					;
 
 decList		::= 	dec:d   decList:l		{: RESULT = new AST_DEC_LIST(d,l);		:}
@@ -162,12 +171,12 @@ varDec		::=		type:t ID:name ASSIGN exp:e SEMICOLON		{: RESULT = new AST_VAR_DEC_
 					;
 
 funcDec		::= 	type:t1 ID:name1 LPAREN type:t2 ID:name2 commaTypeIdList:l1 RPAREN LBRACE stmtList:l2 RBRACE	{: RESULT = new AST_FUNC_DEC_RULE_ONE(t1, name1, t2, name2, l1, l2);	:} 
-					type:t1 ID:name1 LPAREN type:t2 ID:name2 RPAREN LBRACE stmtList:l RBRACE					{: RESULT = new AST_FUNC_DEC_RULE_TWO(t1, name1, t2, name2, l);:}
-					| type:t ID:name LPAREN RPAREN LBRACE stmtList:l RBRACE										{: RESULT = new AST_FUNC_DEC_RULE_THREE(t, name, l);:}
+					type:t1 ID:name1 LPAREN type:t2 ID:name2 RPAREN LBRACE stmtList:l RBRACE					{: RESULT = new AST_FUNC_DEC_RULE_TWO(t1, name1, t2, name2, l);		:}
+					| type:t ID:name LPAREN RPAREN LBRACE stmtList:l RBRACE										{: RESULT = new AST_FUNC_DEC_RULE_THREE(t, name, l);		:}
 					;
 
-commaTypeIdList ::= COMMA type:t ID:name commaTypeIdList:l	{: RESULT = new COMMA_TYPE_ID_LIST(new COMMA_TYPE_ID(t, name), l);:}
-					| COMMA type:t ID:name					{: RESULT = new COMMA_TYPE_ID_LIST(new COMMA_TYPE_ID(t, name), null);:}
+commaTypeIdList ::= COMMA type:t ID:name commaTypeIdList:l	{: RESULT = new COMMA_TYPE_ID_LIST(new COMMA_TYPE_ID(t, name), l);	:}
+					| COMMA type:t ID:name					{: RESULT = new COMMA_TYPE_ID_LIST(new COMMA_TYPE_ID(t, name), null);	:}
 					;
 
 classDec 		::= CLASS ID:name LBRACE cFieldList:l RBRACE					{: RESULT = new AST_CLASS_DEC_ONE(name, l);	:}
@@ -181,15 +190,15 @@ arrayTypedef	::=		ARRAY ID:name EQ type:t	LBRACK RBRACK SEMICOLON {: RESULT = ne
 exp			::=		var:v								{: RESULT = new AST_EXP_VAR(v);          	:}
 					| LPAREN exp:e RPAREN				{: RESULT = new AST_EXP_SIMPLE(e);			:}
 					| exp:e1 BINOP:bop exp:e2			{: RESULT = new AST_EXP_BINOP(e1, e2, bop);	:}
-					| var:v DOT ID:name LPAREN RPAREN {: RESULT = new AST_EXP_VAR_DOT(v, name, null, null);:}
-					| var:v DOT ID:name LPAREN exp:e RPAREN {: RESULT = new AST_EXP_VAR_DOT(v, name, e, null);:}
-					| var:v DOT ID:name LPAREN exp:e commaExpList:el RPAREN {: RESULT = new AST_EXP_VAR_DOT(v, name, e, el);:}
+					| var:v DOT ID:name LPAREN RPAREN {: RESULT = new AST_EXP_VAR_DOT(v, name, null, null);		:}
+					| var:v DOT ID:name LPAREN exp:e RPAREN {: RESULT = new AST_EXP_VAR_DOT(v, name, e, null);	:}
+					| var:v DOT ID:name LPAREN exp:e commaExpList:el RPAREN {: RESULT = new AST_EXP_VAR_DOT(v, name, e, el);	:}
 					| ID:name LPAREN RPAREN {: RESULT = new AST_EXP_ID(name, null, null);	:}
 					| ID:name LPAREN exp:e RPAREN {: RESULT = new AST_EXP_ID(name, e, null);	:}
 					| ID:name LPAREN exp:e1 commaExpList:el RPAREN {: RESULT = new AST_EXP_ID(name, e, el); :}
 					| MINUS INT:i {: RESULT = new AST_EXP_INT(i, true); 	:}
 					| INT:i {: RESULT = new AST_EXP_INT(i, false);	:}
-					| NIL {: RESULT = newAST_EXP_NIL();		:}
+					| NIL {: RESULT = new AST_EXP_NIL();		:}
 					| STRING:s {: RESULT = new AST_EXP_STRING(s);	:}
 					;					
 
@@ -209,8 +218,8 @@ stmt		::=		varDec:d {: RESULT = new AST_STMT_VAR_DEC(d);	:}
 					| var:v DOT ID:name LPAREN exp:e RPAREN SEMICOLON {: RESULT = new AST_STMT_VAR_DOT(v, name, e, null);	:}
 					| var:v DOT ID:name LPAREN exp:e commaExpList:el RPAREN SEMICOLON {: RESULT = new AST_STMT_VAR_DOT(v, name, e, el);	:}
 					| ID:name LPAREN RPAREN SEMICOLON {: RESULT = new AST_STMT_ID(name, null, null);	:}
-					| ID:name LPAREN exp:e RPAREN SEMICOLON {: RESULT = new AST_STMT_ID(name, e, null);:}
-					| ID:name LPAREN exp:e commaExpList:el RPAREN SEMICOLON {: RESULT = new AST_STMT_ID(name, e, el);:}
+					| ID:name LPAREN exp:e RPAREN SEMICOLON {: RESULT = new AST_STMT_ID(name, e, null);	:}
+					| ID:name LPAREN exp:e commaExpList:el RPAREN SEMICOLON {: RESULT = new AST_STMT_ID(name, e, el);	:}
 					;
 
 commaExpList::=     COMMA exp:e commaExpList:l {: RESULT = new AST_COMMA_EXP_LIST(e, l);	:}
@@ -235,7 +244,7 @@ BINOP		::=		PLUS {:RESULT = new AST_BINOP(0);	:}
 					| DIVIDE {:RESULT = new AST_BINOP(3);	:}
 					| LT {:RESULT = new AST_BINOP(4);	:}
 					| GT {:RESULT = new AST_BINOP(5);	:}
-					| EQ {:RESULT = new AST_BINOP(6);:	}
+					| EQ {:RESULT = new AST_BINOP(6);	:}
 					;
 
 
