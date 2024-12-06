@@ -1,14 +1,15 @@
 package AST;
 
-public class AST_STMT_VAR_DEC extends AST_STMT
+public class AST_EXP_BINOP extends AST_EXP
 {
-
-	public AST_VAR_DEC varDec;
-
-	/*******************/
-	/*  CONSTRUCTOR(S) */
-	/*******************/
-	public AST_STMT_VAR_DEC(AST_VAR_DEC varDec)
+	public AST_BINOP OP;
+	public AST_EXP left;
+	public AST_EXP right;
+	
+	/******************/
+	/* CONSTRUCTOR(S) */
+	/******************/
+	public AST_EXP_BINOP(AST_EXP left,AST_EXP right, AST_BINOP OP)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
@@ -18,11 +19,13 @@ public class AST_STMT_VAR_DEC extends AST_STMT
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		System.out.print("====================== stmt -> varDec( %s ) \n", varDec);
+		System.out.format("====================== exp -> exp(%S) BINOP exp(%S)\n", left, right);
 
 		/*******************************/
 		/* COPY INPUT DATA NENBERS ... */
 		/*******************************/
-		this.varDec = varDec;
+		this.left = left;
+		this.right = right;
+		this.OP = OP;
 	}
 }

@@ -15,7 +15,7 @@ public class AST_STMT_WHILE extends AST_STMT
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 		
-		System.out,format("=========STMT -> WHILE LPAREN exp( %s ) RPAREN LBRACE stmtList( %s ) RBRACE\n", cond, body)
+		System.out.format("=========STMT -> WHILE LPAREN exp( %s ) RPAREN LBRACE stmtList( %s ) RBRACE\n", cond, body);
 
 		this.cond = cond;
 		this.body = body;

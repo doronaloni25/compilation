@@ -3,6 +3,7 @@
 /*************/
 import java_cup.runtime.*;
 import AST.*;
+import java.io.PrintWriter;
 
 parser code 
 {:
@@ -43,7 +44,7 @@ scan with
 	System.out.print("[");
 	System.out.print(lexer.getLine());
 	System.out.print(":");
-	System.out.print(lexer.getCharPos());
+	System.out.print(lexer.getTokenStartPosition());
 	System.out.print("] ");
 	System.out.print(TokenNames.terminalNames[s.sym]);
 	if (s.value != null)
@@ -103,17 +104,17 @@ terminal String STRING;
 non terminal AST_PROGRAM program;
 non terminal AST_DEC dec;
 non terminal AST_TYPE type;
-non terminal AST_DEC varDec;
-non terminal AST_DEC funcDec;
-non terminal AST_DEC classDec;
+non terminal AST_VAR_DEC varDec;
+non terminal AST_FUNC_DEC funcDec;
+non terminal AST_CLASS_DEC_ONE classDec;
 non terminal AST_ARRAY_TYPE_DEF arrayTypedef;
 non terminal AST_EXP exp;
 non terminal AST_VAR var;
 non terminal AST_STMT stmt;
 non terminal AST_STMT_LIST stmtList; //start non-terminal
-non terminal AST_EXP newExp;
+non terminal AST_NEW_EXP newExp;
 non terminal AST_CFIELD cField;
-non terminal AST_EXP_BINOP BINOP;
+non terminal AST_BINOP BINOP;
 // new non-terminals for regex
 non terminal AST_DEC_LIST decList;
 non terminal AST_COMMA_TYPE_ID_LIST commaTypeIdList;
@@ -153,10 +154,10 @@ decList		::= 	dec:d   decList:l		{: RESULT = new AST_DEC_LIST(d,l);		:}
 					| dec:d 				{: RESULT = new AST_DEC_LIST(d,null);	:}
 					;
 
-dec			::=		varDec:d 				{: RESULT = new AST_VAR_DEC(d);				:}
-					| funcDec:d				{: RESULT = new AST_FUNC_DEC(d);				:}
-					| classDec:d 			{: RESULT = new AST_CLASS_DEC(d);				:}
-					| arrayTypedef:a 		{: RESULT = new AST_ARRAY_TYPE_DEF(a);	:}
+dec			::=		varDec:d 				{: RESULT = new AST_VARDEC_DEC(d);				:}
+					| funcDec:d				{: RESULT = new AST_FUNCDEC_DEC(d);				:}
+					| classDec:d 			{: RESULT = new AST_CLASSDEC_DEC(d);				:}
+					| arrayTypedef:a 		{: RESULT = new AST_ARRAY_TYPE_DEF_DEC(a);	:}
 					;
 
 type		::= 	TYPE_INT			{: RESULT = new AST_TYPE("int", false);			:}  
@@ -170,13 +171,13 @@ varDec		::=		type:t ID:name ASSIGN exp:e SEMICOLON		{: RESULT = new AST_VAR_DEC_
 					| type:t ID:name ASSIGN newExp:ne SEMICOLON 	{: RESULT =  new AST_VAR_DEC_NEW_EXP(t, name, ne);	:}
 					;
 
-funcDec		::= 	type:t1 ID:name1 LPAREN type:t2 ID:name2 commaTypeIdList:l1 RPAREN LBRACE stmtList:l2 RBRACE	{: RESULT = new AST_FUNC_DEC_RULE_ONE(t1, name1, t2, name2, l1, l2);	:} 
-					type:t1 ID:name1 LPAREN type:t2 ID:name2 RPAREN LBRACE stmtList:l RBRACE					{: RESULT = new AST_FUNC_DEC_RULE_TWO(t1, name1, t2, name2, l);		:}
-					| type:t ID:name LPAREN RPAREN LBRACE stmtList:l RBRACE										{: RESULT = new AST_FUNC_DEC_RULE_THREE(t, name, l);		:}
+funcDec		::= 	type:t ID:name LPAREN RPAREN LBRACE stmtList:l RBRACE										{: RESULT = new AST_FUNC_DEC_RULE_ONE(t, name, l);		:}
+					| type:t1 ID:name1 LPAREN type:t2 ID:name2 RPAREN LBRACE stmtList:l RBRACE					{: RESULT = new AST_FUNC_DEC_RULE_TWO(t1, name1, t2, name2, l);		:}
+					| type:t1 ID:name1 LPAREN type:t2 ID:name2 commaTypeIdList:l1 RPAREN LBRACE stmtList:l2 RBRACE	{: RESULT = new AST_FUNC_DEC_RULE_THREE(t1, name1, t2, name2, l1, l2);	:}
 					;
 
-commaTypeIdList ::= COMMA type:t ID:name commaTypeIdList:l	{: RESULT = new COMMA_TYPE_ID_LIST(new COMMA_TYPE_ID(t, name), l);	:}
-					| COMMA type:t ID:name					{: RESULT = new COMMA_TYPE_ID_LIST(new COMMA_TYPE_ID(t, name), null);	:}
+commaTypeIdList ::= COMMA type:t ID:name commaTypeIdList:l	{: RESULT = new AST_COMMA_TYPE_ID_LIST(new AST_COMMA_TYPE_ID(t, name), l);	:}
+					| COMMA type:t ID:name					{: RESULT = new AST_COMMA_TYPE_ID_LIST(new AST_COMMA_TYPE_ID(t, name), null);	:}
 					;
 
 classDec 		::= CLASS ID:name LBRACE cFieldList:l RBRACE					{: RESULT = new AST_CLASS_DEC_ONE(name, l);	:}
@@ -195,7 +196,7 @@ exp			::=		var:v								{: RESULT = new AST_EXP_VAR(v);          	:}
 					| var:v DOT ID:name LPAREN exp:e commaExpList:el RPAREN {: RESULT = new AST_EXP_VAR_DOT(v, name, e, el);	:}
 					| ID:name LPAREN RPAREN {: RESULT = new AST_EXP_ID(name, null, null);	:}
 					| ID:name LPAREN exp:e RPAREN {: RESULT = new AST_EXP_ID(name, e, null);	:}
-					| ID:name LPAREN exp:e1 commaExpList:el RPAREN {: RESULT = new AST_EXP_ID(name, e, el); :}
+					| ID:name LPAREN exp:e commaExpList:el RPAREN {: RESULT = new AST_EXP_ID(name, e, el); :}
 					| MINUS INT:i {: RESULT = new AST_EXP_INT(i, true); 	:}
 					| INT:i {: RESULT = new AST_EXP_INT(i, false);	:}
 					| NIL {: RESULT = new AST_EXP_NIL();		:}

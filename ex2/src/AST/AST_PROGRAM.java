@@ -1,17 +1,17 @@
--package AST;
+package AST;
 
-public class AST_CFIELD_LIST extends AST_Node
-{
+public class AST_PROGRAM extends AST_Node{
+
 	/****************/
 	/* DATA MEMBERS */
 	/****************/
-	public AST_CFIELD head;
-	public AST_CFIELD_LIST tail;
+	
+	public AST_DEC_LIST dl;
 
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_CFIELD_LIST(AST_CFIELD head,AST_CFIELD_LIST tail)
+	public AST_PROGRAM(AST_DEC_LIST dl)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
@@ -21,12 +21,15 @@ public class AST_CFIELD_LIST extends AST_Node
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		if (tail != null) System.out.print("====================== cFieldList -> cField cFieldList\n");
-		if (tail == null) System.out.print("====================== cFieldList -> cField      \n");
+		System.out.format("====================== program -> declist( %s )\n",dl);
 
 		/*******************************/
 		/* COPY INPUT DATA NENBERS ... */
 		/*******************************/
-		this.head = head;
-		this.tail = tail;
+		this.dl = dl;
+		
 	}
+
+
+}
+

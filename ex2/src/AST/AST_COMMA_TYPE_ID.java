@@ -15,6 +15,6 @@ public class AST_COMMA_TYPE_ID extends AST_Node {
         System.out.format("----------AST_COMMA_TYPE_ID -> COMMA type(%s) ID(%s)\n", type, name);
         
         this.type = type;
-        this.id = id;
+        this.name = name;
     }
 }

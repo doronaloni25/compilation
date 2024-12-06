@@ -17,20 +17,6 @@ public class AST_VAR_DEC extends AST_DEC
         System.out.format("====================== varDec -> type( %s ) ID( %s ) SEMICOLON \n", type, name);
     }
 
-    public void PrintMe() {
-
-        // Print to AST GRAPHVIZ DOT file
-        if (id) {
-            AST_GRAPHVIZ.getInstance().logNode(
-                    SerialNumber,
-                    String.format("TYPE ID(%s)", type));
-        } else {
-            AST_GRAPHVIZ.getInstance().logNode(
-                    SerialNumber,
-                    String.format("TYPE %s", type));
-        }
-
-    }
 }
 
 	

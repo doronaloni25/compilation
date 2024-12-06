@@ -11,7 +11,7 @@ public class AST_EXP_SIMPLE extends AST_EXP
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		System.out.print("====================== exp -> LPARAN exp( %s) RPARAN\n", exp);
+		System.out.format("====================== exp -> LPARAN exp( %s) RPARAN\n", exp);
 
 		/*******************************/
 		/* COPY INPUT DATA NENBERS ... */
