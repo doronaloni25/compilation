@@ -10,6 +10,13 @@ public class AST_STMT_IF extends AST_STMT
 	/*******************/
 	public AST_STMT_IF(AST_EXP cond,AST_STMT_LIST body)
 	{
+		/******************************/
+		/* SET A UNIQUE SERIAL NUMBER */
+		/******************************/
+		SerialNumber = AST_Node_Serial_Number.getFresh();
+
+		System.out,format("=========STMT -> IF LPAREN exp( %s ) RPAREN LBRACE stmtList( %s ) RBRACE\n", cond, body)
+		
 		this.cond = cond;
 		this.body = body;
 	}

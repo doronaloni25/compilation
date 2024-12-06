@@ -3,11 +3,11 @@ package AST;
 public class AST_EXP_INT extends AST_EXP
 {
 	public int value;
-	
+	public Boolean isMinus;
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_EXP_INT(int value)
+	public AST_EXP_INT(int value, Boolean isMinus)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
@@ -17,12 +17,21 @@ public class AST_EXP_INT extends AST_EXP
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		System.out.format("====================== exp -> INT( %d )\n", value);
+		if(isMinus)
+		{
+			System.out.format("====================== exp -> MINUS INT( %d )\n", value);
+		}
+		else
+		{
+			System.out.format("====================== exp -> INT( %d )\n", value);
+		}
+		
 
 		/*******************************/
 		/* COPY INPUT DATA NENBERS ... */
 		/*******************************/
 		this.value = value;
+		this.isMinus = isMinus;
 	}
 
 	/************************************************/
