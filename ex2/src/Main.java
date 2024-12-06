@@ -42,7 +42,9 @@ public class Main
 			/***********************************/
 			/* [5] 3 ... 2 ... 1 ... Parse !!! */
 			/***********************************/
-			AST = (AST_STMT_LIST) p.parse().value;
+			AST = (AST_PROGRAM) p.parse().value;
+			// if we reach here - no error
+			file_writer.write("OK\n"); 
 			
 			/*************************/
 			/* [6] Print the AST ... */
