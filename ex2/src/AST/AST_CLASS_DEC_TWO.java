@@ -11,6 +11,6 @@ public class AST_CLASS_DEC_TWO extends AST_CLASS_DEC_ONE
         super(name, cFieldList);
 
         this.nameTwo = nameTwo;
-        System.out.format("====================== ClassDec -> CLASS ID( %s ) LBRACE cFieldList(%s) RBRACE \n", name, cFieldList);
+        System.out.format("====================== ClassDec -> CLASS ID LBRACE cFieldList RBRACE \n");
     }
 }

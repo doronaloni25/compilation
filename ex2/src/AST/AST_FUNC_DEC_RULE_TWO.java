@@ -12,6 +12,6 @@ public class AST_FUNC_DEC_RULE_TWO extends AST_FUNC_DEC
 
         this.typeTwo = typeTwo;
         this.nameTwo = nameTwo;
-        System.out.format("====================== funcDec -> type( %s ) ID( %s ) LPAREN type( %s ) ID( %s ) RPAREN LBRACE STMT_LIST( %s )RBRACE \n", type, name, typeTwo, nameTwo, stmt_list);
+        System.out.format("====================== funcDec -> type ID LPAREN type ID RPAREN LBRACE STMT_LIST RBRACE \n");
     }
 }

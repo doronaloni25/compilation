@@ -8,6 +8,6 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
         // Set a unique serial number/*  */
         SerialNumber = AST_Node_Serial_Number.getFresh();
         
-        System.out.format("====================== funcDec -> type( %s ) ID( %s ) LPARAN RPARAN LBRACE STMT_LIST( %s )RBRACE \n", type, name, stmtList);
+        System.out.format("====================== funcDec -> type ID LPARAN RPARAN LBRACE STMT_LIST RBRACE \n");
     }
 }

@@ -15,7 +15,7 @@ public class AST_STMT_IF extends AST_STMT
 		/******************************/
 		SerialNumber = AST_Node_Serial_Number.getFresh();
 
-		System.out.format("=========STMT -> IF LPAREN exp( %s ) RPAREN LBRACE stmtList( %s ) RBRACE\n", cond, body);
+		System.out.format("=========STMT -> IF LPAREN exp RPAREN LBRACE stmtList RBRACE\n");
 		
 		this.cond = cond;
 		this.body = body;

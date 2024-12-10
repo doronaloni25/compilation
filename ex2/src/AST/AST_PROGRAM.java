@@ -21,7 +21,7 @@ public class AST_PROGRAM extends AST_Node{
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		System.out.format("====================== program -> declist( %s )\n",dl);
+		System.out.format("====================== program -> declist\n");
 
 		/*******************************/
 		/* COPY INPUT DATA NENBERS ... */

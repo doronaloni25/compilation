@@ -19,11 +19,11 @@ public class AST_EXP_INT extends AST_EXP
 		/***************************************/
 		if(isMinus)
 		{
-			System.out.format("====================== exp -> MINUS INT( %d )\n", value);
+			System.out.format("====================== exp -> MINUS INT\n");
 		}
 		else
 		{
-			System.out.format("====================== exp -> INT( %d )\n", value);
+			System.out.format("====================== exp -> INT\n");
 		}
 		
 

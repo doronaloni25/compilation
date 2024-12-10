@@ -14,9 +14,9 @@ public class AST_TYPE extends AST_Node {
 
         
         if (id) {
-            System.out.format("type -> ID(%s)\n", type);
+            System.out.format("type -> ID\n");
         } else {
-            System.out.format("type -> %s\n", type);
+            System.out.format("type -> (%s)\n", type);
         }
 
         

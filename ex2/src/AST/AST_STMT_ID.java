@@ -14,15 +14,15 @@ public class AST_STMT_ID extends AST_STMT
 		/***************************************/
         if( exp == null)
         {
-            System.out.format("====================== exp ->  ID( %s) LPARAN RPARAN SEMICOLON\n", name);
+            System.out.format("====================== exp ->  ID LPARAN RPARAN SEMICOLON\n");
         }
         else if(expList == null)
         {
-		    System.out.format("====================== exp ->  ID( %s ) LPAREN exp(%s) RPAREN SEMICOLON\n", name, exp);
+		    System.out.format("====================== exp ->  ID LPAREN exp RPAREN SEMICOLON\n");
         }
         else
         {
-           System.out.format("====================== exp ->  ID( %s ) LPAREN exp(%s) commaExpList (%s) RPAREN SEMICOLON\n",  name, exp, expList);
+           System.out.format("====================== exp ->  ID LPAREN exp commaExpList RPAREN SEMICOLON\n");
         }
 
 		/*******************************/

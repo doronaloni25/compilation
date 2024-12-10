@@ -20,7 +20,7 @@ public class AST_VAR_SIMPLE extends AST_VAR
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		System.out.format("====================== var -> ID( %s )\n",name);
+		System.out.format("====================== var -> ID\n");
 
 		/*******************************/
 		/* COPY INPUT DATA NENBERS ... */

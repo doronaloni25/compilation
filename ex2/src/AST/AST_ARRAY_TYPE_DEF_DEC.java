@@ -11,7 +11,7 @@ public class AST_ARRAY_TYPE_DEF_DEC extends AST_DEC
         SerialNumber = AST_Node_Serial_Number.getFresh();
 
         this.arrayTypedef = arrayTypedef;
-        System.out.format("====================== dec -> arrayTypedef ( %s )  \n", arrayTypedef);
+        System.out.print("====================== dec -> arrayTypedef \n");
     }
 }
 

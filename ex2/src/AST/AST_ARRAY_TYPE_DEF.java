@@ -11,6 +11,6 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node{
 
         this.name = name;
         this.type = type;
-        System.out.format("====================== AST_ARRAY_TYPE_DEF -> ARRAY ID( %s ) EQ type(%s) LBRACK RBRACK SEMICOLON \n", name, type);
+        System.out.print("====================== AST_ARRAY_TYPE_DEF -> ARRAY ID EQ type LBRACK RBRACK SEMICOLON \n");
     }
 }

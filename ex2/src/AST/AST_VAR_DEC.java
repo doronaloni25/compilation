@@ -14,7 +14,7 @@ public class AST_VAR_DEC extends AST_DEC
         this.type = type;
         this.name = name;
 
-        System.out.format("====================== varDec -> type( %s ) ID( %s ) SEMICOLON \n", type, name);
+        System.out.format("====================== varDec -> type ID SEMICOLON \n");
     }
 
 }

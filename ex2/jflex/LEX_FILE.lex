@@ -72,7 +72,7 @@ import java_cup.runtime.*;
 	private Symbol symbolFromNumber(String stringNum)
 	{
 		if(stringNum.length() > 5){
-			return symbol(TokenNames.ERROR);
+			return symbol(TokenNames.error);
 		}
 		
 		int num = new Integer(stringNum);
@@ -82,7 +82,7 @@ import java_cup.runtime.*;
 			return symbol(TokenNames.INT, num);
 		}
 
-		return symbol(TokenNames.ERROR);
+		return symbol(TokenNames.error);
 	}  
 %}
 
@@ -128,7 +128,7 @@ STRING			= \"[A-Za-z]*\"
 
 <YYINITIAL> {
 {Comment}			{ /* just skip what was found, do nothing */ }
-{IllegalComment}	{ return symbol(TokenNames.ERROR);}
+{IllegalComment}	{ return symbol(TokenNames.error);}
 "class"				{ return symbol(TokenNames.CLASS);}
 "nil"				{ return symbol(TokenNames.NIL);}
 "array"				{ return symbol(TokenNames.ARRAY);}
@@ -157,11 +157,11 @@ STRING			= \"[A-Za-z]*\"
 "="					{ return symbol(TokenNames.EQ);}
 "<"					{ return symbol(TokenNames.LT);}
 ">"					{ return symbol(TokenNames.GT);}
-{IllegalInteger}	{ return symbol(TokenNames.ERROR);}
+{IllegalInteger}	{ return symbol(TokenNames.error);}
 {INTEGER}			{ return symbolFromNumber(new String(yytext()));}
 {STRING}			{ return symbol(TokenNames.STRING, new String(yytext()));}
 {ID}				{ return symbol(TokenNames.ID,  new String( yytext()));}   
 {WhiteSpace}		{ /* just skip what was found, do nothing */ }
 <<EOF>>				{ return symbol(TokenNames.EOF);}
-.					{return symbol(TokenNames.ERROR);}
+.					{return symbol(TokenNames.error);}
 }

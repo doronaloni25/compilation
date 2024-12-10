@@ -15,15 +15,15 @@ public class AST_STMT_VAR_DOT extends AST_STMT
 		/***************************************/
         if( exp == null)
         {
-            System.out.format("====================== stmt -> var(%s) DOT ID( %s) LPARAN RPARAN SEMICOLON\n", v, name);
+            System.out.format("====================== stmt -> var DOT ID LPARAN RPARAN SEMICOLON\n");
         }
         else if(expList == null)
         {
-		    System.out.format("====================== stmt -> var(%s) DOT ID( %s ) LPAREN exp(%s) RPAREN SEMICOLON\n", v, name, exp);
+		    System.out.format("====================== stmt -> var DOT ID LPAREN exp RPAREN SEMICOLON\n");
         }
         else
         {
-           System.out.format("====================== stmt -> var(%s) DOT ID( %s ) LPAREN exp(%s) commaExpList (%s) RPAREN SEMICOLON\n", v, name, exp, expList);
+           System.out.format("====================== stmt -> var DOT ID LPAREN exp commaExpList  RPAREN SEMICOLON\n");
         }
 
 		/*******************************/

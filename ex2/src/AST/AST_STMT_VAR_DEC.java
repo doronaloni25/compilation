@@ -18,7 +18,7 @@ public class AST_STMT_VAR_DEC extends AST_STMT
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		System.out.format("====================== stmt -> varDec( %s ) \n", varDec);
+		System.out.format("====================== stmt -> varDec \n");
 
 		/*******************************/
 		/* COPY INPUT DATA NENBERS ... */

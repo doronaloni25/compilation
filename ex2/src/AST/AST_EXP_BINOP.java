@@ -19,7 +19,7 @@ public class AST_EXP_BINOP extends AST_EXP
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		System.out.format("====================== exp -> exp(%S) BINOP exp(%S)\n", left, right);
+		System.out.format("====================== exp -> exp BINOP exp\n");
 
 		/*******************************/
 		/* COPY INPUT DATA NENBERS ... */

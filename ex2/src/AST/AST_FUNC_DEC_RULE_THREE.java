@@ -13,6 +13,6 @@ public class AST_FUNC_DEC_RULE_THREE extends AST_FUNC_DEC
         this.nameTwo = nameTwo;
         this.commaTypeIdList = commaTypeIdList;
 
-        System.out.format("====================== funcDec -> type( %s ) ID( %s ) LPAREN RPAREN LBRACE STMT_LIST( %s )RBRACE \n", type, name, stmt_list);
+        System.out.format("====================== funcDec -> type ID LPAREN RPAREN LBRACE STMT_LIST RBRACE \n");
     }
 }

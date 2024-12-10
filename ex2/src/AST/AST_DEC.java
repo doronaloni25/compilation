@@ -1,5 +1,5 @@
 package AST;
 
 public class AST_DEC extends AST_Node {
-    // TODO: DEC = declaration
+    // yes
 }

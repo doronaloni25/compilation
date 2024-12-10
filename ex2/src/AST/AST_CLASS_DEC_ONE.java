@@ -13,7 +13,7 @@ public class AST_CLASS_DEC_ONE extends AST_DEC
 
         this.name = name;
         this.cFieldList = cFieldList;
-        System.out.format("====================== ClassDec -> CLASS ID( %s ) LBRACE cFieldList(%s) RBRACE \n", name,cFieldList);
+        System.out.format("====================== ClassDec -> CLASS ID LBRACE cFieldList RBRACE \n");
     }
 }
 

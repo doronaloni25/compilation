@@ -18,7 +18,7 @@ public class AST_STMT_RETURN extends AST_STMT {
 		}
 		else
 		{
-			System.out.format("====================== stmt -> RETURN exp ( %s ) SEMICOLON\n");
+			System.out.format("====================== stmt -> RETURN exp  SEMICOLON\n");
 
 		}
 

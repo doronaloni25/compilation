@@ -14,15 +14,15 @@ public class AST_EXP_ID extends AST_EXP
 		/***************************************/
         if( exp == null)
         {
-            System.out.format("====================== exp ->  ID( %s) LPARAN RPARAN\n", name);
+            System.out.format("====================== exp ->  ID LPARAN RPARAN\n");
         }
         else if(expList == null)
         {
-		    System.out.format("====================== exp ->  ID( %s ) LPAREN exp(%s) RPAREN\n", name, exp);
+		    System.out.format("====================== exp ->  ID LPAREN RPAREN\n");
         }
         else
         {
-           System.out.format("====================== exp ->  ID( %s ) LPAREN exp(%s) commaExpList (%s) RPAREN\n",  name, exp, expList);
+           System.out.format("====================== exp ->  ID LPAREN exp commaExpList RPAREN\n");
         }
 
 		/*******************************/

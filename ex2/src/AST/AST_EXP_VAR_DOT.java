@@ -15,15 +15,15 @@ public class AST_EXP_VAR_DOT extends AST_EXP
 		/***************************************/
         if( exp == null)
         {
-            System.out.format("====================== exp -> var(%s) DOT ID( %s) LPARAN RPARAN\n", v, name);
+            System.out.format("====================== exp -> var DOT ID LPARAN RPARAN\n");
         }
         else if(expList == null)
         {
-		    System.out.format("====================== exp -> var(%s) DOT ID( %s ) LPAREN exp(%s) RPAREN\n", v, name, exp);
+		    System.out.format("====================== exp -> var DOT ID LPAREN exp RPAREN\n");
         }
         else
         {
-           System.out.format("====================== exp -> var(%s) DOT ID( %s ) LPAREN exp(%s) commaExpList (%s) RPAREN\n", v, name, exp, expList);
+           System.out.format("====================== exp -> var DOT ID LPAREN exp commaExpList RPAREN\n");
         }
 
 		/*******************************/

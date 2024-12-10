@@ -12,7 +12,7 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC
         super(type, name);
 
         this.exp = exp;
-        System.out.format("====================== varDec -> type( %s ) ID( %s ) ASSIGN exp( %s ) SEMICOLON \n", type, name, exp);
+        System.out.format("====================== varDec -> type ID ASSIGN exp SEMICOLON \n");
     }
 }
   

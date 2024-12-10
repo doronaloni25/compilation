@@ -89,7 +89,6 @@ terminal WHILE;
 terminal IF;
 terminal NEW;
 terminal TYPE_STRING;
-terminal ERROR;
 
 /*************/
 /* TERMINALS */

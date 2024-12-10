@@ -13,3 +13,6 @@ ex1/input/Input.txt
 ex1/bin/Lexer.class
 ex1/output/OutputTokens.txt
 ex2/bin
+ex2/src/Lexer.java
+ex2/src/TokenNames.java
+ex2/src/Parser.java

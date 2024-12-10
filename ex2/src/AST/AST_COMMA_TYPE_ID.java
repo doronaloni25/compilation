@@ -12,7 +12,7 @@ public class AST_COMMA_TYPE_ID extends AST_Node {
         // Set a unique serial number
         SerialNumber = AST_Node_Serial_Number.getFresh();
         
-        System.out.format("----------AST_COMMA_TYPE_ID -> COMMA type(%s) ID(%s)\n", type, name);
+        System.out.format("----------AST_COMMA_TYPE_ID -> COMMA type ID\n");
         
         this.type = type;
         this.name = name;

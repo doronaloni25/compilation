@@ -12,7 +12,7 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC
         super(type, name);
         
         this.neExp = neExp;
-        System.out.format("====================== varDec -> type( %s ) ID( %s ) ASSIGN newEXP( %s ) SEMICOLON \n", type, name, neExp);
+        System.out.format("====================== varDec -> type ID ASSIGN newEXP SEMICOLON \n");
     }
 }
 

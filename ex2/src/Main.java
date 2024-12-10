@@ -33,11 +33,13 @@ public class Main
 			/* [3] Initialize a new lexer */
 			/******************************/
 			l = new Lexer(file_reader);
+			if(l == null)
+			{System.out.println("lexer is null"); }
 			
 			/*******************************/
 			/* [4] Initialize a new parser */
 			/*******************************/
-			p = new Parser(l);
+			p = new Parser(l, file_writer);
 
 			/***********************************/
 			/* [5] 3 ... 2 ... 1 ... Parse !!! */
