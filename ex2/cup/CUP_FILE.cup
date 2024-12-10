@@ -22,7 +22,7 @@ parser code
 		{
 			this.file_writer.write("ERROR");
 			this.file_writer.write("(");
-			this.file_writer.write(lexer.getLine());
+			this.file_writer.write(Integer.toString(lexer.getLine()));
 			this.file_writer.write(")");		
 			file_writer.close();
 			System.exit(0);
