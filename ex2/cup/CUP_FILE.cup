@@ -9,6 +9,7 @@ parser code
 {:
 	public Lexer lexer;
 	PrintWriter file_writer;
+	public boolean lexical_error_flag = false;
 
 	public Parser(Lexer lexer, PrintWriter file_writer)
 	{
@@ -20,10 +21,15 @@ parser code
 	{
 		try
 		{
-			this.file_writer.write("ERROR");
-			this.file_writer.write("(");
-			this.file_writer.write(Integer.toString(lexer.getLine()));
-			this.file_writer.write(")");		
+			if (lexical_error_flag){
+				file_writer.write("ERROR");
+				file_writer.close();
+				System.exit(0);
+			}
+			file_writer.write("ERROR");
+			file_writer.write("(");
+			file_writer.write(Integer.toString(lexer.getLine()));
+			file_writer.write(")");		
 			file_writer.close();
 			System.exit(0);
 		}
@@ -41,6 +47,9 @@ scan with
 {:
 	Symbol s;
 	s = lexer.next_token();
+	if (s.sym == TokenNames.error){
+		lexical_error_flag = true;
+	}
 	System.out.print("[");
 	System.out.print(lexer.getLine());
 	System.out.print(":");
