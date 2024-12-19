@@ -22,14 +22,14 @@ parser code
 		try
 		{
 			if (lexical_error_flag){
-				file_writer.write("ERROR");
+				file_writer.write("ERROR\n");
 				file_writer.close();
 				System.exit(0);
 			}
 			file_writer.write("ERROR");
 			file_writer.write("(");
 			file_writer.write(Integer.toString(lexer.getLine()));
-			file_writer.write(")");		
+			file_writer.write(")\n");		
 			file_writer.close();
 			System.exit(0);
 		}
