@@ -7,4 +7,8 @@ public class AST_FUNCDEC_DEC extends AST_DEC
         SerialNumber = AST_Node_Serial_Number.getFresh();
         this.funcDec = funcDec;
     }
+
+    public TYPE semantMe() {
+        return funcDec.semantMe();
+    }
 }

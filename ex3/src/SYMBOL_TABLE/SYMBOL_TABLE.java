@@ -26,6 +26,7 @@ public class SYMBOL_TABLE
 	private SYMBOL_TABLE_ENTRY[] table = new SYMBOL_TABLE_ENTRY[hashArraySize];
 	private SYMBOL_TABLE_ENTRY top;
 	private int top_index = 0;
+	private int scope_index = 0;
 	
 	/**************************************************************/
 	/* A very primitive hash function for exposition purposes ... */
@@ -135,6 +136,7 @@ public class SYMBOL_TABLE
 		/* Print the symbol table after every change */
 		/*********************************************/
 		PrintMe();
+		scope_index++;
 	}
 
 	/********************************************************************************/
@@ -163,6 +165,12 @@ public class SYMBOL_TABLE
 		/* Print the symbol table after every change */		
 		/*********************************************/
 		PrintMe();
+		scope_index--;
+	}
+
+	public boolean isGlobalScope()
+	{
+		return scope_index == 0;
 	}
 	
 	public static int n=0;

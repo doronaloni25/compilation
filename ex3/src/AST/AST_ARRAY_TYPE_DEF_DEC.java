@@ -13,6 +13,10 @@ public class AST_ARRAY_TYPE_DEF_DEC extends AST_DEC
         this.arrayTypedef = arrayTypedef;
         System.out.print("====================== dec -> arrayTypedef \n");
     }
+
+    public TYPE semantMe() {
+        return arrayTypedef.semantMe();
+    }
 }
 
   
