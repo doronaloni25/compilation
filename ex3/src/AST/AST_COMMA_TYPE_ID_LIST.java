@@ -1,7 +1,7 @@
 package AST;
 
 
-public class AST_COMMA_TYPE_ID_LIST extends AST_Node
+public class AST_COMMA_TYPE_ID_LIST extends AST_LIST
 {
 	/****************/
 	/* DATA MEMBERS */
@@ -31,4 +31,6 @@ public class AST_COMMA_TYPE_ID_LIST extends AST_Node
 		this.head = head;
 		this.tail = tail;
 	}
+	
+	/*semantme method is implemented in AST_LIST*/
 }
