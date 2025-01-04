@@ -12,4 +12,8 @@ public class AST_FUNC_DEC extends AST_DEC
         this.name = name;
         this.stmt_list = stmt_list;
     }
+   public TYPE SemantMe ()
+   {
+    return null;
+   }
 }
