@@ -6,12 +6,12 @@ public class AST_PROGRAM extends AST_Node{
 	/* DATA MEMBERS */
 	/****************/
 	
-	public AST_DEC_LIST dl;
+	public AST_DEC_LIST dec_list;
 
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-	public AST_PROGRAM(AST_DEC_LIST dl)
+	public AST_PROGRAM(AST_DEC_LIST dec_list)
 	{
 		/******************************/
 		/* SET A UNIQUE SERIAL NUMBER */
@@ -26,9 +26,15 @@ public class AST_PROGRAM extends AST_Node{
 		/*******************************/
 		/* COPY INPUT DATA NENBERS ... */
 		/*******************************/
-		this.dl = dl;
+		this.dec_list = dec_list;
 		
 	}
+	@Override
+    public TYPE SemantMe() 
+	{
+        return this.dec_list.SemantMe();
+    }
+
 
 
 }

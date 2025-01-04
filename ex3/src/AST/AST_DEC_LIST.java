@@ -1,6 +1,6 @@
 package AST;
 
-public class AST_DEC_LIST extends AST_Node
+public class AST_DEC_LIST extends AST_LIST
 {
 	/****************/
 	/* DATA MEMBERS */
@@ -30,6 +30,18 @@ public class AST_DEC_LIST extends AST_Node
 		this.head = head;
 		this.tail = tail;
 	}
+
+	@Override
+    public AST_DEC getHead() 
+	{
+        return this.head;
+    }
+
+    @Override
+    public AST_DEC_LIST getTail() 
+	{
+        return this.tail;
+    }
 
 	/******************************************************/
 	/* The printing message for a statement list AST node */
