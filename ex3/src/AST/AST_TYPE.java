@@ -8,14 +8,17 @@ public class AST_TYPE extends AST_Node {
     /******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
-    public AST_TYPE(String type, Boolean id) {
+    public AST_TYPE(String type, Boolean id) 
+    {
         // Set a unique serial number
         SerialNumber = AST_Node_Serial_Number.getFresh();
 
         
-        if (id) {
+        if(id) 
+        {
             System.out.format("type -> ID\n");
-        } else {
+        }else 
+        {
             System.out.format("type -> (%s)\n", type);
         }
 
@@ -23,8 +26,25 @@ public class AST_TYPE extends AST_Node {
         this.type = type;
         this.id = id;
     }
+    
+    @Override
+    public TYPE SemantMe() 
+    {
+        TYPE t;
+        // checks void type as it is a special case
+        if(type.equals("void"))
+            return TYPE_VOID.getInstance();
+        // checks if the type was decleared before
+        t = SYMBOL_TABLE.getInstance().find(type);
+        if (t == null) 
+        {
+            //TODO: return exception with line number
+        }
+        return t;
+    }
 
-    public void PrintMe() {
+    public void PrintMe() 
+    {
         if (id) {
             System.out.format("AST_TYPE ID(%s)\n", type);
         } else {
@@ -43,4 +63,5 @@ public class AST_TYPE extends AST_Node {
         }
 
     }
+
 }
