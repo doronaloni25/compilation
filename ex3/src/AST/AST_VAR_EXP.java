@@ -60,6 +60,7 @@ public class AST_VAR_EXP extends AST_VAR
 	public TYPE SemantMe() {
 		TYPE expType = exp.SemantMe();
 		//if the expression is not an int (it is an array[exp])
+		//TODO- make sure expType is not negative!
 		if(expType != TYPE_INT.getInstance()) {
 			//TODO- throw exception
 		}

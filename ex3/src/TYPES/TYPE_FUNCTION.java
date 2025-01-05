@@ -22,4 +22,6 @@ public class TYPE_FUNCTION extends TYPE
 		this.returnType = returnType;
 		this.params = params;
 	}
+
+	
 }

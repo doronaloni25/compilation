@@ -57,7 +57,7 @@ public class AST_VAR_FIELD extends AST_VAR
 	}
 	@Override
 	public TYPE SemantMe() {
-		varType = var.SemantMe();
+		TYPE varType = var.SemantMe();
 		if(vartype == null) {
 			//TODO- throw exception, the identifier is not defined
 		}
@@ -68,16 +68,14 @@ public class AST_VAR_FIELD extends AST_VAR
 		else {
 			//TODO- throw exception, the variable is not a class
 		}
-		for(TYPE_LIST dataMembers = classType.data_members; dataMembers!=null; dataMembers = dataMembers.tail)
-			{
-				TYPE_CLASS_VAR_DEC var_dec = (TYPE_CLASS_VAR_DEC)dataMembers.head;
-				if(varDec.name.equals(fieldName)) {
-					return varDec.t;
-				}
-		
-			}
+		//check if the field is defined in the class, and if it is, return its type
+		if(HelperUtils.checkVarIsField(classType, fieldName) == true) {
+			return varType;
 		}
-		//TODO- throw exception, the field is not defined
+		else
+		{
+			//TODO- throw exception, the field is not defined
+		}
 		return null;
 	}
 

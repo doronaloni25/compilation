@@ -19,4 +19,33 @@ public class HelperUtils{
         }
         return false;
     }
+
+    public static boolean compareTypeLists(TYPE_LIST typelist1, TYPE_LIST typeList2) {
+        // Check if the arguments of the function are the same
+        if (t1 == null && t2 == null) {
+            return true;
+        }
+        //not the same length
+        if (t1 == null || t2 == null) {
+            return false;
+        }
+        //arguments not the same type or not inherited
+        if (isInhiritedFromOrNil(t1.head, t2.head) == false) {
+            return false;
+        }
+        return compareFunctionArgumentsTypes(t1.tail, t2.tail);
+    }
+
+    public static boolean checkVarIsField(TYPE_CLASS classType, String fieldName) {
+       for(TYPE_LIST dataMembers = classType.data_members; dataMembers!=null; dataMembers = dataMembers.tail)
+			{
+				TYPE_CLASS_VAR_DEC var_dec = (TYPE_CLASS_VAR_DEC)dataMembers.head;
+				if(varDec.name.equals(fieldName)) {
+					return true;
+				}
+		
+			}
+        return false;
+    }
+
 }
