@@ -44,7 +44,7 @@ public class AST_STMT_RETURN extends AST_STMT {
 			{
 				//TODO: return exception with line number
 			}
-			return null;
+			return new TYPE_VOID();
 		}
 		// if the return type is not void, we should check the expression
 		else
@@ -55,7 +55,7 @@ public class AST_STMT_RETURN extends AST_STMT {
 			{
 				//TODO: return exception with line number
 			}
-			return null;
+			return t;
 		}
 	}
 }

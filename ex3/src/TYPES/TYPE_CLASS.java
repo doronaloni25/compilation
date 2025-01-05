@@ -33,17 +33,17 @@ public class TYPE_CLASS extends TYPE
 	}
 	@Override
 	public boolean isClass(){ return true;}
-	public boolean functionInClass(String name)
+	public TYPE_FUNCTION functionInClass(String name)
 	{
 		TYPE_LIST currFunction = function_list;
 		while(currFunction != null)
 		{
 			if(currFunction.head.name.equals(name))
 			{
-				return true;
+				return currFunction.head;
 			}
 			currFunction = currFunction.tail;
 		}
-		return false;
+		return null;
 	}
 }

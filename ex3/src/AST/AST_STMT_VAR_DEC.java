@@ -30,6 +30,10 @@ public class AST_STMT_VAR_DEC extends AST_STMT
     public TYPE SemantMe() 
     {
         TYPE type = varDec.SemantMe();
+		if (type == null) 
+		{
+			//TODO: return exception with line number
+		}
         return type;
     }
 }

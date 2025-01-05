@@ -47,7 +47,7 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		{
 			//TODO: return exception with line number
 		}
-		return null;
+		return t1;
 	}
 
 	/*********************************************************/

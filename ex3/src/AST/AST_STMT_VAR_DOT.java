@@ -41,23 +41,29 @@ public class AST_STMT_VAR_DOT extends AST_STMT
         // we work on "class.function() or class.function(exp, exp, exp)"
 
         TYPE varType = v.SemantMe();
-        TYPE nameType = name.SemantMe();
-        //check if the variable is a class and if the name is not null
-        if(varType == null || !(varType.isClass())|| nameType == null)
+        //check if the variable is a class type
+        if(varType == null || !(varType.isClass()))
         {
             //TODO: return exception with line number
         }
         //check if the class has a method with the given name
-        boolean found_function = varType.functionInClass(nameType.name);
-        if((!found_function))
+        TYPE_FUNCTION found_function = varType.functionInClass(name);
+        if(found_function == null)
         {
             //  TODO: return exception with line number
         }
+        //check if the function has the right number of arguments
+        TYPE_LIST function_arguments_list = new TYPE_LIST(null, null); 
         if(exp != null)
         {
-            //use irit function to check the params!!
+            function_arguments_list.head = exp.SemantMe();
+            if(expList == null)
+            {
+                function_arguments_list.tail = expList.SemantMe();
+            }
         }
-            
+        compareTypeLists(function_arguments_list, found_function.params);
+        return found_function.returnType;
     }
 	
 }

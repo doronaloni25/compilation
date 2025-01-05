@@ -216,7 +216,7 @@ var			::=		ID:name									{: RESULT = new AST_VAR_SIMPLE(name);       :}
 					| var:v LBRACK exp:e RBRACK				{: RESULT = new AST_VAR_EXP(v,e);     :} 
 					;	
 
-stmt		::=		varDec:d {: RESULT = new AST_STMT_VAR_DEC(d);	:}
+stmt		::=		varDec:d 													{: RESULT = new AST_STMT_VAR_DEC(d);	:}
 					| var:v ASSIGN exp:e SEMICOLON								{: RESULT = new AST_STMT_ASSIGN(v,e, false); :}
 					| var:v ASSIGN newExp:e SEMICOLON							{: RESULT = new AST_STMT_ASSIGN(v,e, true); :}
 					| RETURN exp:e SEMICOLON									{: RESULT = new AST_STMT_RETURN(e); :}

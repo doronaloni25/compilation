@@ -25,7 +25,8 @@ public class AST_STMT_WHILE extends AST_STMT
     public TYPE SemantMe() 
     {
 		TYPE t = cond.SemantMe();
-		if(t != TYPE_INT.getInstance())
+		TYPE_INT intType = TYPE_INT.getInstance();
+		if(t != intType)
 		{
 			//TODO: return exception with line number
 		}
@@ -33,6 +34,6 @@ public class AST_STMT_WHILE extends AST_STMT
 		SYMBOL_TABLE.getInstance().beginScope();
 		body.SemantMe();
 		SYMBOL_TABLE.getInstance().endScope();
-		return null;
+		return intType;
 	}
 }
