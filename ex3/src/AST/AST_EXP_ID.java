@@ -1,4 +1,5 @@
 package AST;
+import TYPES.*;
 
 public class AST_EXP_ID extends AST_EXP
 {
@@ -31,5 +32,15 @@ public class AST_EXP_ID extends AST_EXP
         this.name = name;
         this.exp = exp;
         this.expList = expList;
+    }
+
+    public TYPE SemantMe(){
+        // TODO: implement
+        if (exp == null){   
+        }
+        else if (expList == null){
+        }
+        else{
+        }
     }
 }

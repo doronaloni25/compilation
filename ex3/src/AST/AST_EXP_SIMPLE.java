@@ -1,5 +1,5 @@
 package AST;
-
+import TYPES.*;
 
 public class AST_EXP_SIMPLE extends AST_EXP
 {
@@ -18,4 +18,9 @@ public class AST_EXP_SIMPLE extends AST_EXP
 		/*******************************/
 		this.exp = exp;
     }
+
+	public TYPE SemantMe()
+	{
+		return exp.SemantMe();
+	}
 }
