@@ -27,7 +27,8 @@ public class SYMBOL_TABLE
 	private SYMBOL_TABLE_ENTRY top;
 	private int top_index = 0;
 	private int scope_index = 0;
-	
+	public TYPE_CLASS inClass = null;
+	public TYPE_FUNCTION inFunction = null;
 	/**************************************************************/
 	/* A very primitive hash function for exposition purposes ... */
 	/**************************************************************/

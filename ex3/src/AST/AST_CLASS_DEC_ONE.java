@@ -20,22 +20,23 @@ public class AST_CLASS_DEC_ONE extends AST_DEC
     @Override
     public TYPE SemantMe() 
     {
+        //null is passed as the father of the class as we do not extend
+        TYPE_CLASS classType = new TYPE_CLASS(null, name);
+        SYMBOL_TABLE.getInstance().isClass = classType;
         //checks if the class was decleared before
-        TYPE currType = SYMBOL_TABLE.getInstance().findWithinScope(name);
-        if(currType != null)
+        TYPE isFirstTime = SYMBOL_TABLE.getInstance().find(name);
+        if(isFirstTime != null || !SYMBOL_TABLE.getInstance().isGlobalScope())
         {
             //TODO: return exception with line number
         }
-        SYMBOL_TABLE.getInstance().beginScope();
-        //null is passed as the father of the class
-        TYPE_CLASS classType = new TYPE_CLASS(null, name, cFieldList.SemantMe());
-        SYMBOL_TABLE.getInstance().endScope();
-        
-
-
         SYMBOL_TABLE.getInstance().enter(name, classType);
-    }
 
+        SYMBOL_TABLE.getInstance().beginScope();
+        // the cFieldList will recursivly insert the fiels into the Symbol table
+        cFieldList.SemantMe();
+        SYMBOL_TABLE.getInstance().endScope();
+        SYMBOL_TABLE.getInstance().isClass = false;
+    }
 }
 
   

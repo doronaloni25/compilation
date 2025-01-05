@@ -29,7 +29,6 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		else
 		{
 			System.out.format("====================== stmt -> var ASSIGN exp SEMICOLON\n");
-
 		}
 
 		/*******************************/
@@ -38,6 +37,17 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		this.var = var;
 		this.exp = exp;
 		this.isNewExp = isNewExp;
+	}
+	@Override
+    public TYPE SemantMe() 
+    {
+		TYPE t1 = var.SemantMe();
+		TYPE t2 = exp.SemantMe();
+		if(!isInhiritedFromOrNil(t2, t1))
+		{
+			//TODO: return exception with line number
+		}
+		return null;
 	}
 
 	/*********************************************************/

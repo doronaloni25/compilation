@@ -1,5 +1,6 @@
 package AST;
-
+import TYPES.TYPE;
+import SymbolTable.SYMBOL_TABLE;
 public class AST_STMT_VAR_DOT extends AST_STMT
 {
     AST_VAR v;
@@ -34,4 +35,29 @@ public class AST_STMT_VAR_DOT extends AST_STMT
         this.exp = exp;
         this.expList = expList;
     }
+    @Override
+    public TYPE SemantMe() 
+    {
+        // we work on "class.function() or class.function(exp, exp, exp)"
+
+        TYPE varType = v.SemantMe();
+        TYPE nameType = name.SemantMe();
+        //check if the variable is a class and if the name is not null
+        if(varType == null || !(varType.isClass())|| nameType == null)
+        {
+            //TODO: return exception with line number
+        }
+        //check if the class has a method with the given name
+        boolean found_function = varType.functionInClass(nameType.name);
+        if((!found_function))
+        {
+            //  TODO: return exception with line number
+        }
+        if(exp != null)
+        {
+            //use irit function to check the params!!
+        }
+            
+    }
+	
 }

@@ -25,4 +25,11 @@ public class AST_STMT_VAR_DEC extends AST_STMT
 		/*******************************/
 		this.varDec = varDec;
 	}
+	
+	@Override
+    public TYPE SemantMe() 
+    {
+        TYPE type = varDec.SemantMe();
+        return type;
+    }
 }
