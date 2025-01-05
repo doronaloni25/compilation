@@ -7,4 +7,8 @@ public class AST_CLASSDEC_DEC extends AST_DEC
 
         this.classDec = classDec;
     }
+
+    public TYPE semantMe() {
+        return classDec.semantMe();
+    }
 }

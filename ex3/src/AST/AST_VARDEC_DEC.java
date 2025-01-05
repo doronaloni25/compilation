@@ -8,4 +8,8 @@ public class AST_VARDEC_DEC extends AST_DEC
         this.varDec = varDec;
         System.out.println("====================== DEC -> varDec");
     }
+
+    public TYPE semantMe() {
+        return varDec.semantMe();
+    }
 }

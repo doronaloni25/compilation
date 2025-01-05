@@ -15,6 +15,10 @@ public class TYPE_CLASS extends TYPE
 	public TYPE_LIST data_members;
 	public TYPE_LIST function_list;
 	
+	@Override
+	public boolean isClass() {
+		return true;
+	}
 	/****************/
 	/* CTROR(S) ... */
 	/****************/
