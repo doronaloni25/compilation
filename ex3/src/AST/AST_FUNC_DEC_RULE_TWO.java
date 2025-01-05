@@ -36,14 +36,14 @@ public class AST_FUNC_DEC_RULE_TWO extends AST_FUNC_DEC
         //TODO- throw exeption
     }
     //name2,type2 = the parametersList
-  
-    TYPE_LIST paramList = type2.SemantMe();
-    //one paramter
+    //one paramter, assume that after semantme on paramList, paramList is already in the symbol table
+    TYPE param = type2.SemantMe();
+    TYPE_LIST paramList= new TYPE_LIST(param,null);
+    paramList.semantMe();
     stmtList.SemantMe();
-    //TODO- check if name 2 is already declared before entering to symbol table
-    SYMBOL_TABLE.getInstance().enter(name2, type2);
-    TYPE_FUNCTION function = new TYPE_FUNCTION(funcReturnType, name, paramList);
     SYMBOL_TABLE.getInstance().endScope();
+    //enter the function to the symbol table, afrter stmstList is done
+    TYPE_FUNCTION function = new TYPE_FUNCTION(funcReturnType, name, paramList);
     SYMBOL_TABLE.getInstance().enter(name, function);
     return function;
     

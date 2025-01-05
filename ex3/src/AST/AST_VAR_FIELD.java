@@ -55,4 +55,29 @@ public class AST_VAR_FIELD extends AST_VAR
 		/****************************************/
 		if (var != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,var.SerialNumber);
 	}
-}
+	@Override
+	public TYPE SemantMe() {
+		varType = var.SemantMe();
+		if(vartype == null) {
+			//TODO- throw exception, the identifier is not defined
+		}
+		//make sure the variable is a class, so you can access its fields
+		if(varType.isClass()) {
+			TYPE_CLASS classType = (TYPE_CLASS)varType;
+		}
+		else {
+			//TODO- throw exception, the variable is not a class
+		}
+		for(TYPE_LIST dataMembers = classType.data_members; dataMembers!=null; dataMembers = dataMembers.tail)
+			{
+				TYPE_CLASS_VAR_DEC var_dec = (TYPE_CLASS_VAR_DEC)dataMembers.head;
+				if(varDec.name.equals(fieldName)) {
+					return varDec.t;
+				}
+		
+			}
+		}
+		//TODO- throw exception, the field is not defined
+		return null;
+	}
+

@@ -45,4 +45,13 @@ public class AST_VAR_SIMPLE extends AST_VAR
 			SerialNumber,
 			String.format("SIMPLE\nVAR\n(%s)",name));
 	}
+	@Override
+	public TYPE SemantMe() {
+		TYPE type =SYMBOL_TABLE.getInstance().find(name) 
+		if(type == null) {
+			//TODO- throw exception, the identifier is not defined
+		}
+		return type;
+
+	}
 }

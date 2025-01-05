@@ -56,4 +56,14 @@ public class AST_VAR_EXP extends AST_VAR
 		if (var       != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,var.SerialNumber);
 		if (exp != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,exp.SerialNumber);
 	}
+	@Override
+	public TYPE SemantMe() {
+		TYPE expType = exp.SemantMe();
+		//if the expression is not an int (it is an array[exp])
+		if(expType != TYPE_INT.getInstance()) {
+			//TODO- throw exception
+		}
+		TYPE_ARRAY array = (TYPE_ARRAY) var.SemantMe();
+		return array.type;
+	}
 }
