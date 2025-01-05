@@ -1,4 +1,5 @@
 package AST;
+import TYPES.*;
 
 public class AST_EXP_STRING extends AST_EXP
 {
@@ -24,5 +25,9 @@ public class AST_EXP_STRING extends AST_EXP
 		/*******************************/
 		this.s = s;
 	}
-	
+
+	public TYPE SemantMe()
+	{
+		return TYPE_STRING.getInstance();
+	}
 }

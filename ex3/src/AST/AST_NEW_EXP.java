@@ -31,5 +31,5 @@ public class AST_NEW_EXP extends AST_EXP
 		/*******************************/
 		this.type = type;
         this.exp = exp;
-	}	
+	}
 }
