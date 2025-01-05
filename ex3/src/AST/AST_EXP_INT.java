@@ -55,13 +55,6 @@ public class AST_EXP_INT extends AST_EXP
 
 	public TYPE SemantMe()
 	{
-		if (isMinus)
-		{
-			return TYPE_INT_NEGATIVE.getInstance();
-		}
-		if (value == 0){
-			return TYPE_INT_ZERO.getInstance();
-		}
 		return TYPE_INT.getInstance();
 	}
 }
