@@ -22,7 +22,7 @@ public class AST_CLASS_DEC_ONE extends AST_DEC
     {
         //null is passed as the father of the class as we do not extend
         TYPE_CLASS classType = new TYPE_CLASS(null, name);
-        SYMBOL_TABLE.getInstance().isClass = classType;
+        SYMBOL_TABLE.getInstance().inClass = classType;
         //checks if the class was decleared before
         TYPE isFirstTime = SYMBOL_TABLE.getInstance().find(name);
         if(isFirstTime != null || !SYMBOL_TABLE.getInstance().isGlobalScope())
@@ -35,7 +35,7 @@ public class AST_CLASS_DEC_ONE extends AST_DEC
         // the cFieldList will recursivly insert the fiels into the Symbol table
         cFieldList.SemantMe();
         SYMBOL_TABLE.getInstance().endScope();
-        SYMBOL_TABLE.getInstance().isClass = false;
+        SYMBOL_TABLE.getInstance().inClass = false;
     }
 }
 
