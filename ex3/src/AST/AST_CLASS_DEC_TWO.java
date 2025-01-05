@@ -19,7 +19,7 @@ public class AST_CLASS_DEC_TWO extends AST_CLASS_DEC_ONE
      public TYPE SemantMe() 
      {
         TYPE_CLASS classType = new TYPE_CLASS(null, name);
-        SYMBOL_TABLE.getInstance().isClass = classType;
+        SYMBOL_TABLE.getInstance().inClass = classType;
         TYPE isFirstTime = SYMBOL_TABLE.getInstance().find(name);
         TYPE fatherType = SYMBOL_TABLE.getInstance().find(name2);
         // checks this is the first decleration of the class, in the global scope and we have a father
@@ -35,6 +35,6 @@ public class AST_CLASS_DEC_TWO extends AST_CLASS_DEC_ONE
         // the cFieldList will recursivly insert the fiels into the Symbol table
         cFieldList.SemantMe();
         SYMBOL_TABLE.getInstance().endScope();
-        SYMBOL_TABLE.getInstance().isClass = false;
+        SYMBOL_TABLE.getInstance().inClass = null;
      }
 }

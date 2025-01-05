@@ -35,7 +35,7 @@ public class AST_CLASS_DEC_ONE extends AST_DEC
         // the cFieldList will recursivly insert the fiels into the Symbol table
         cFieldList.SemantMe();
         SYMBOL_TABLE.getInstance().endScope();
-        SYMBOL_TABLE.getInstance().inClass = false;
+        SYMBOL_TABLE.getInstance().inClass = null;
     }
 }
 
