@@ -19,7 +19,7 @@ public class TYPE_INT_ZERO extends TYPE{
 		if (instance == null)
 		{
 			instance = new TYPE_INT_ZERO();
-			instance.name = "int_NEGATIVE";
+			instance.name = "int_ZERO";
 		}
 		return instance;
 	}
