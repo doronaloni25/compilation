@@ -36,6 +36,7 @@ public class AST_CLASS_DEC_ONE extends AST_DEC
         cFieldList.SemantMe();
         SYMBOL_TABLE.getInstance().endScope();
         SYMBOL_TABLE.getInstance().inClass = null;
+        return classType;
     }
 }
 
