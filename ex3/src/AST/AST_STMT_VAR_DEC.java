@@ -1,5 +1,6 @@
 package AST;
-
+import TYPES.TYPE;
+import SymbolTable.SYMBOL_TABLE;
 public class AST_STMT_VAR_DEC extends AST_STMT
 {
 
@@ -25,4 +26,15 @@ public class AST_STMT_VAR_DEC extends AST_STMT
 		/*******************************/
 		this.varDec = varDec;
 	}
+	
+	@Override
+    public TYPE SemantMe() 
+    {
+        TYPE type = varDec.SemantMe();
+		if (type == null) 
+		{
+			//TODO: return exception with line number
+		}
+        return type;
+    }
 }
