@@ -1,5 +1,5 @@
 package AST;
-
+import TYPES.*;
 public class AST_COMMA_TYPE_ID extends AST_Node {
     
     public AST_TYPE type; 

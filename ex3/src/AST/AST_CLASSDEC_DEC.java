@@ -1,5 +1,5 @@
 package AST;
-
+import TYPES.*;
 public class AST_CLASSDEC_DEC extends AST_DEC
 {
     public AST_CLASS_DEC_ONE classDec;

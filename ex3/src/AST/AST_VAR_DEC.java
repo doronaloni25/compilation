@@ -1,5 +1,6 @@
 package AST;
 import SYMBOL_TABLE.SYMBOL_TABLE;
+import TYPES.*;
 public class AST_VAR_DEC extends AST_DEC 
 {
     

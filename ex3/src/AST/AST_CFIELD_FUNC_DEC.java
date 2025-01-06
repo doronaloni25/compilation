@@ -1,5 +1,5 @@
 package AST;
-
+import TYPES.*;
 public class AST_CFIELD_FUNC_DEC extends AST_CFIELD
 {
     AST_FUNC_DEC funcDec;
@@ -12,4 +12,9 @@ public class AST_CFIELD_FUNC_DEC extends AST_CFIELD
         System.out.format("====================== cField -> funcDec \n");
         this.funcDec = funcDec;
     }
+    public TYPE SemantMe()
+    {
+        return funcDec.SemantMe();
+    }
+
 }

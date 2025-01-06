@@ -46,4 +46,18 @@ public class TYPE_CLASS extends TYPE
 		}
 		return null;
 	}
+	//check if a field is in the class
+	public boolean fieldInClass(String name)
+	{
+		TYPE_LIST currField = data_members;
+		while(currField != null)
+		{
+			if(currField.head.name.equals(name))
+			{
+				return true;
+			}
+			currField = currField.tail;
+		}
+		return false;
+	}
 }

@@ -33,19 +33,8 @@ public class HelperUtils{
         if (isInhiritedFromOrNil(t1.head, t2.head) == false) {
             return false;
         }
-        return compareFunctionArgumentsTypes(t1.tail, t2.tail);
+        return compareTypeLists(t1.tail, t2.tail);
     }
 
-    public static boolean checkVarIsField(TYPE_CLASS classType, String fieldName) {
-       for(TYPE_LIST dataMembers = classType.data_members; dataMembers!=null; dataMembers = dataMembers.tail)
-			{
-				TYPE_CLASS_VAR_DEC var_dec = (TYPE_CLASS_VAR_DEC)dataMembers.head;
-				if(varDec.name.equals(fieldName)) {
-					return true;
-				}
-		
-			}
-        return false;
-    }
-
+   
 }

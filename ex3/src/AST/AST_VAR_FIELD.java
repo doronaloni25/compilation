@@ -1,5 +1,5 @@
 package AST;
-
+import TYPES.*;
 public class AST_VAR_FIELD extends AST_VAR
 {
 	public AST_VAR var;
@@ -69,7 +69,7 @@ public class AST_VAR_FIELD extends AST_VAR
 			//TODO- throw exception, the variable is not a class
 		}
 		//check if the field is defined in the class, and if it is, return its type
-		if(HelperUtils.checkVarIsField(classType, fieldName) == true) {
+		if(classType.fieldInClass(fieldName) == true) {
 			return varType;
 		}
 		else

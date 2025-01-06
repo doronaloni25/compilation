@@ -2,7 +2,7 @@ package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
 import HelperUtils;
-public class AST_COMMA_EXP_LIST extends AST_List
+public class AST_COMMA_EXP_LIST extends AST_LIST
 {
 	/****************/
 	/* DATA MEMBERS */
@@ -33,32 +33,7 @@ public class AST_COMMA_EXP_LIST extends AST_List
 		this.tail = tail;
 	}
 
-	@Override
-	public TYPE SemantMe(TYPE_FUNCTION func)
-	{
-		
-		//comma exp list is used in function call:
-		//paramListFunc- the parameters of the original function
-		//paramListCheck- the parameters of the function call, that we check if they are correct
-		// check if the arguments types match to the function declaration
-		//TODO: check if the arguments are already in the symbol table
-	
-	
-		TYPE_LIST paramListFunc = func.params;
-
-		//create TYPE_LIST of paramListCheck:
-		TYPE checkListhead = head.SemantMe();
-		TYPE_LIST paramListCheck = new TYPE_LIST(checkListhead, tail.SemantMe());
-		//make sure the arguments are correct:
-		if(compareTypeLists(paramListFunc,paramListCheck) == false){
-			//TODO- throw error
-		}
-		else
-		{
-			return paramListCheck;
-		}
-
-	}
+	//semant me is implemented in AST_LIST
 	
 	
 }
