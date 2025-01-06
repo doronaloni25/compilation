@@ -10,9 +10,10 @@ public class TYPE_CLASS extends TYPE
 	/**************************************************/
 	/* Gather up all data members in one place        */
 	/* Note that data members coming from the AST are */
-	/* packed together with the class methods         */
+	/* packed together wcurrFunctionh the class methods         */
 	/**************************************************/
 	public TYPE_LIST data_members;
+	public TYPE_LIST function_list;
 	
 	@Override
 	public boolean isClass() {
@@ -21,10 +22,28 @@ public class TYPE_CLASS extends TYPE
 	/****************/
 	/* CTROR(S) ... */
 	/****************/
-	public TYPE_CLASS(TYPE_CLASS father,String name,TYPE_LIST data_members)
+	public TYPE_CLASS(TYPE_CLASS father,String name)
 	{
+		//if father is null, this is the root class
 		this.name = name;
 		this.father = father;
-		this.data_members = data_members;
+		this.data_members = new TYPE_LIST(null, null);
+		this.function_list = new TYPE_LIST(null, null);
+		//here we need to add function and arguments of the class 
+	}
+	@Override
+	public boolean isClass(){ return true;}
+	public TYPE_FUNCTION functionInClass(String name)
+	{
+		TYPE_LIST currFunction = function_list;
+		while(currFunction != null)
+		{
+			if(currFunction.head.name.equals(name))
+			{
+				return currFunction.head;
+			}
+			currFunction = currFunction.tail;
+		}
+		return null;
 	}
 }

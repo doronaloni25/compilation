@@ -164,18 +164,18 @@ decList		::= 	dec:d   decList:l		{: RESULT = new AST_DEC_LIST(d,l);		:}
 
 dec			::=		varDec:d 				{: RESULT = new AST_VARDEC_DEC(d);				:}
 					| funcDec:d				{: RESULT = new AST_FUNCDEC_DEC(d);				:}
-					| classDec:d 			{: RESULT = new AST_CLASSDEC_DEC(d);				:}
-					| arrayTypedef:a 		{: RESULT = new AST_ARRAY_TYPE_DEF_DEC(a);	:}
+					| classDec:d 			{: RESULT = new AST_CLASSDEC_DEC(d);			:}
+					| arrayTypedef:a 		{: RESULT = new AST_ARRAY_TYPE_DEF_DEC(a);		:}
 					;
 
-type		::= 	TYPE_INT			{: RESULT = new AST_TYPE("int", false);			:}  
+type		::= 	TYPE_INT			{: RESULT = new AST_TYPE("int", false);				:}  
 					| TYPE_STRING 		{: RESULT = new AST_TYPE("String", false);			:}
-					| TYPE_VOID 			{: RESULT = new AST_TYPE("void", false);			:}
-					| ID:name				{: RESULT = new AST_TYPE(name, true);		:}
+					| TYPE_VOID 			{: RESULT = new AST_TYPE("void", false);		:}
+					| ID:name				{: RESULT = new AST_TYPE(name, true);			:}
 					;
 
-varDec		::=		type:t ID:name ASSIGN exp:e SEMICOLON		{: RESULT = new AST_VAR_DEC_EXP(t, name, e);	:}
-					| type:t ID:name SEMICOLON					{: RESULT =  new AST_VAR_DEC(t, name);	:}
+varDec		::=		type:t ID:name ASSIGN exp:e SEMICOLON		{: RESULT = new AST_VAR_DEC_EXP(t, name, e);			:}
+					| type:t ID:name SEMICOLON					{: RESULT =  new AST_VAR_DEC(t, name);					:}
 					| type:t ID:name ASSIGN newExp:ne SEMICOLON 	{: RESULT =  new AST_VAR_DEC_NEW_EXP(t, name, ne);	:}
 					;
 
@@ -216,7 +216,7 @@ var			::=		ID:name									{: RESULT = new AST_VAR_SIMPLE(name);       :}
 					| var:v LBRACK exp:e RBRACK				{: RESULT = new AST_VAR_EXP(v,e);     :} 
 					;	
 
-stmt		::=		varDec:d {: RESULT = new AST_STMT_VAR_DEC(d);	:}
+stmt		::=		varDec:d 													{: RESULT = new AST_STMT_VAR_DEC(d);	:}
 					| var:v ASSIGN exp:e SEMICOLON								{: RESULT = new AST_STMT_ASSIGN(v,e, false); :}
 					| var:v ASSIGN newExp:e SEMICOLON							{: RESULT = new AST_STMT_ASSIGN(v,e, true); :}
 					| RETURN exp:e SEMICOLON									{: RESULT = new AST_STMT_RETURN(e); :}
