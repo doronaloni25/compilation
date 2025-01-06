@@ -1,4 +1,6 @@
 package AST;
+import SYMBOL_TABLE.SYMBOL_TABLE;
+import HelperUtils.HelperUtils;
 import TYPES.*;
 
 public class AST_EXP_ID extends AST_EXP
@@ -35,12 +37,27 @@ public class AST_EXP_ID extends AST_EXP
     }
 
     public TYPE SemantMe(){
-        // TODO: implement
-        if (exp == null){   
+        // same as AST_STMT_ID
+        TYPE_FUNCTION found_function = SYMBOL_TABLE.getInstance().find(name);
+        if(found_function == null)
+        {
+            //  TODO: return exception with line number
         }
-        else if (expList == null){
+        //check if the function has the right number of arguments
+        TYPE_LIST function_arguments_list = new TYPE_LIST(null, null); 
+        if(exp != null)
+        {
+            function_arguments_list.head = exp.SemantMe();
+            if(expList == null)
+            {
+                function_arguments_list.tail = expList.SemantMe();
+            }
         }
-        else{
+        if( !compareTypeLists(function_arguments_list, found_function.params))
+        {
+            //TODO: return exception with line number
         }
+        
+        return found_function.returnType;
     }
 }

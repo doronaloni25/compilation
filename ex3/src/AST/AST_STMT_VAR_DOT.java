@@ -1,6 +1,7 @@
 package AST;
 import TYPES.TYPE;
 import SymbolTable.SYMBOL_TABLE;
+import HelperUtils.HelperUtils;
 public class AST_STMT_VAR_DOT extends AST_STMT
 {
     AST_VAR v;
@@ -47,7 +48,7 @@ public class AST_STMT_VAR_DOT extends AST_STMT
             //TODO: return exception with line number
         }
         //check if the class has a method with the given name
-        TYPE_FUNCTION found_function = (TYPE_FUNCTION)varType.functionInClass(name);
+        TYPE_FUNCTION found_function = (TYPE_CLASS)varType.functionInClass(name);
         if(found_function == null)
         {
             //  TODO: return exception with line number

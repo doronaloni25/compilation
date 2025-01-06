@@ -1,6 +1,7 @@
 package AST;
-import TYPES.TYPE;
+import TYPES.*;
 import SymbolTable.SYMBOL_TABLE;
+import HelperUtils.HelperUtils;
 public class AST_STMT_ID extends AST_STMT
 {
     String name;

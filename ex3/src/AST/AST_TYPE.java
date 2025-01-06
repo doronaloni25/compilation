@@ -26,7 +26,7 @@ public class AST_TYPE extends AST_Node {
         this.type = type;
         this.id = id;
     }
-    
+
     @Override
     public TYPE SemantMe() 
     {
@@ -34,7 +34,7 @@ public class AST_TYPE extends AST_Node {
         // checks void type as it is a special case
         if(type.equals("void"))
             return TYPE_VOID.getInstance();
-        // checks if the type was decleared before
+        // checks if the type was declared before
         t = SYMBOL_TABLE.getInstance().find(type);
         if (t == null) 
         {
