@@ -1,5 +1,6 @@
 package AST;
-
+import TYPES.TYPE;
+import SymbolTable.SYMBOL_TABLE;
 public class AST_STMT_VAR_DEC extends AST_STMT
 {
 
