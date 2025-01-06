@@ -51,7 +51,11 @@ public class AST_STMT_ID extends AST_STMT
                 function_arguments_list.tail = expList.SemantMe();
             }
         }
-        compareTypeLists(function_arguments_list, found_function.params);
+        if( !compareTypeLists(function_arguments_list, found_function.params))
+        {
+            //TODO: return exception with line number
+        }
+        
         return found_function.returnType;
     }
 }

@@ -47,7 +47,7 @@ public class AST_STMT_VAR_DOT extends AST_STMT
             //TODO: return exception with line number
         }
         //check if the class has a method with the given name
-        TYPE_FUNCTION found_function = varType.functionInClass(name);
+        TYPE_FUNCTION found_function = (TYPE_FUNCTION)varType.functionInClass(name);
         if(found_function == null)
         {
             //  TODO: return exception with line number
@@ -62,7 +62,10 @@ public class AST_STMT_VAR_DOT extends AST_STMT
                 function_arguments_list.tail = expList.SemantMe();
             }
         }
-        compareTypeLists(function_arguments_list, found_function.params);
+        if(!compareTypeLists(function_arguments_list, found_function.params))
+        {
+            //TODO: return exception with line number
+        }
         return found_function.returnType;
     }
 	

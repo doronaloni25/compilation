@@ -55,7 +55,8 @@ public class AST_STMT_RETURN extends AST_STMT {
 			{
 				//TODO: return exception with line number
 			}
-			return t;
+			//check if it should be t
+			return currentFunction.returnType;
 		}
 	}
 }
