@@ -18,7 +18,7 @@ public class AST_CLASS_DEC_TWO extends AST_CLASS_DEC_ONE
     @Override
      public TYPE SemantMe() 
      {
-        TYPE_CLASS classType = new TYPE_CLASS(null, name);
+        
         SYMBOL_TABLE.getInstance().inClass = classType;
         TYPE isFirstTime = SYMBOL_TABLE.getInstance().find(name);
         TYPE fatherType = SYMBOL_TABLE.getInstance().find(name2);
@@ -28,6 +28,7 @@ public class AST_CLASS_DEC_TWO extends AST_CLASS_DEC_ONE
             //TODO: return exception with line number
         }
         //give the son all father parameters
+        TYPE_CLASS classType = new TYPE_CLASS( (TYPE_CLASS)fatherType, name);
         classType.function_list = fatherType.function_list;
         classType.data_members = fatherType.data_members;
         SYMBOL_TABLE.getInstance().enter(name, classType);
