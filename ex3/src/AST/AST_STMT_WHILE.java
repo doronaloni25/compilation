@@ -1,5 +1,6 @@
 package AST;
-
+import TYPES.TYPE;
+import SymbolTable.SYMBOL_TABLE;
 public class AST_STMT_WHILE extends AST_STMT
 {
 	public AST_EXP cond;
@@ -19,5 +20,20 @@ public class AST_STMT_WHILE extends AST_STMT
 
 		this.cond = cond;
 		this.body = body;
+	}
+	@Override
+    public TYPE SemantMe() 
+    {
+		TYPE t = cond.SemantMe();
+		TYPE_INT intType = TYPE_INT.getInstance();
+		if(t != intType)
+		{
+			//TODO: return exception with line number
+		}
+		//need to open scope for the while body
+		SYMBOL_TABLE.getInstance().beginScope();
+		body.SemantMe();
+		SYMBOL_TABLE.getInstance().endScope();
+		return intType;
 	}
 }

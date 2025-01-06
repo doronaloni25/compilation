@@ -1,5 +1,6 @@
 package AST;
-
+import TYPES.TYPE;
+import SymbolTable.SYMBOL_TABLE;
 public class AST_STMT_ID extends AST_STMT
 {
     String name;
@@ -31,5 +32,30 @@ public class AST_STMT_ID extends AST_STMT
         this.name = name;
         this.exp = exp;
         this.expList = expList;
+    }
+    @Override
+    public TYPE SemantMe() 
+    {
+        TYPE_FUNCTION found_function = SYMBOL_TABLE.getInstance().find(name);
+        if(found_function == null)
+        {
+            //  TODO: return exception with line number
+        }
+        //check if the function has the right number of arguments
+        TYPE_LIST function_arguments_list = new TYPE_LIST(null, null); 
+        if(exp != null)
+        {
+            function_arguments_list.head = exp.SemantMe();
+            if(expList == null)
+            {
+                function_arguments_list.tail = expList.SemantMe();
+            }
+        }
+        if( !compareTypeLists(function_arguments_list, found_function.params))
+        {
+            //TODO: return exception with line number
+        }
+        
+        return found_function.returnType;
     }
 }
