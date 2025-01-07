@@ -46,8 +46,10 @@ public class AST_EXP_VAR_DOT extends AST_EXP
         {
             //TODO: return exception with line number
         }
+        // cast to type class
+        TYPE_CLASS varType = (TYPE_CLASS)varType;
         //check if the class has a method with the given name
-        TYPE_FUNCTION found_function = (TYPE_CLASS)varType.functionInClass(name);
+        TYPE_FUNCTION found_function = varType.functionInClass(name);
         if(found_function == null)
         {
             //  TODO: return exception with line number
