@@ -61,4 +61,15 @@ public class TYPE_CLASS_DEC extends TYPE
 		}
 		return null;
 	}
+
+	public void addField(TYPE t, String name)
+	{
+		TYPE_CLASS_VAR_DEC newField = new TYPE_CLASS_VAR_DEC(t, name);
+		data_members = new TYPE_CLASS_VAR_DEC_LIST(newField, data_members);
+	}
+
+	public void addFunction(TYPE_FUNCTION f)
+	{
+		function_list = new TYPE_LIST(f, function_list);
+	}
 }
