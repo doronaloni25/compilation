@@ -7,6 +7,13 @@ import TYPES.*;
 import AST.*;
 
 public class HelperUtils{
+    
+    public static PrintWriter file_writer = null;
+
+    public static void setFileWriter(PrintWriter writer) {
+        HelperFunctions.file_writer = writer;
+    }
+
     public static boolean isInhiritedFromOrNil(TYPE t1, TYPE t2) {
         // Check if t1 is Inherited from t2
         if (t1 == t2) {
