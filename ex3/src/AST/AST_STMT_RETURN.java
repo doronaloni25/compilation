@@ -1,6 +1,7 @@
 package AST;
-import SYMBOL_TABLE.SYMBOL_TABLE;
 import TYPES.*;
+import SYMBOL_TABLE.*;
+import HelperUtils.HelperUtils;
 public class AST_STMT_RETURN extends AST_STMT {
     AST_EXP exp;
     public AST_STMT_RETURN(AST_EXP exp)
@@ -35,14 +36,14 @@ public class AST_STMT_RETURN extends AST_STMT {
 		TYPE_FUNCTION currentFunction = SYMBOL_TABLE.getInstance().inFunction;
 		if(currentFunction == null)
 		{
-			//TODO: return exception with line number
+			HelperUtils.printError(line);
 		}
 		// if the return type is void, the expression should be null
 		if(exp == null)
 		{
 			if(currentFunction.returnType != TYPE_VOID.getInstance())
 			{
-				//TODO: return exception with line number
+				HelperUtils.printError(line);
 			}
 			return new TYPE_VOID();
 		}
@@ -53,7 +54,7 @@ public class AST_STMT_RETURN extends AST_STMT {
 			//check if the return type is the same as the expression type or son of it
 			if(!isInhiritedFromOrNil(t, currentFunction.returnType))
 			{
-				//TODO: return exception with line number
+				HelperUtils.printError(line);
 			}
 			//check if it should be t
 			return currentFunction.returnType;

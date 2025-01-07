@@ -1,5 +1,7 @@
 package AST;
-import TYPES.TYPE;
+import TYPES.*;
+import SYMBOL_TABLE.*;
+import HelperUtils.HelperUtils;
 public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
 { 
 
@@ -15,13 +17,13 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
  {
      if(SYMBOL_TABLE.getInstance().inFunction != null)
     {
-        //TODO- throw exeption
+        HelperUtils.printError(line);
     }
    
     TYPE returnType = type.SemantMe();
     if(returnType == null)
     {
-        //TODO- throw exeption
+        HelperUtils.printError(line);
     }
     TYPE_FUNCTION function = new TYPE_FUNCTION(returnType, name, null);
     SYMBOL_TABLE.getInstance().enter(name, function);
@@ -36,7 +38,7 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
         TYPE functionReturnType = stmtList.SemantMe();
         if(HelperUtils.isInhiritedFromOrNil(functionReturnType, returnType) == false)
         {
-            //TODO- throw exeption
+            HelperUtils.printError(line);
         }
         classDec.addFunction(function);
         SYMBOL_TABLE.getInstance.endScope();
@@ -50,22 +52,22 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
        
         if (SYMBOL_TABLE.getInstance().find(name) != null)
         {
-            //TODO - throw exception
+            HelperUtils.printError(line);
         }
         if (SYMBOL_TABLE.getInstance().isGlobalScope() == False)
         {
-            //TODO- throw exeption
+            HelperUtils.printError(line);
         }
         if (name.equals("PrintInt") || name.equals("PrintString"))
         {
-                //TODO- throw exeption
+            HelperUtils.printError(line);
         }
         SYMBOL_TABLE.getInstance.beginScope();
         SYMBOL_TABLE.getInstance().inFunction = function;
         TYPE functionReturnType = stmtList.SemantMe();
         if(HelperUtils.isInhiritedFromOrNil(functionReturnType, returnType) == false)
             {
-                //TODO- throw exeption
+                HelperUtils.printError(line);
             }
     
         SYMBOL_TABLE.getInstance().endScope();

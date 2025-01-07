@@ -1,5 +1,6 @@
 package AST;
 import TYPES.*;
+import SYMBOL_TABLE.*;
 import HelperUtils.HelperUtils;
 public class AST_VAR_EXP extends AST_VAR
 {
@@ -61,21 +62,22 @@ public class AST_VAR_EXP extends AST_VAR
 	public TYPE SemantMe() {
 		TYPE expType = exp.SemantMe();
 		if (expType == null) {
-			//TODO- throw exception
+			HelperUtils.printError(line);
 		}
 		//if the expression is not an int (it is an array[exp])
 		if(expType != TYPE_INT.getInstance()) {
-			//TODO- throw exception
+			HelperUtils.printError(line);
 		}
 		// if exp is constant, check if its not negative
 		if(HelperUtils.isConstant(exp) && ((AST_EXP_INT)exp).value < 0) {
-			//TODO- throw exception
+			HelperUtils.printError(line);
 		}
+		// the next line also takes care of verifying the var is well defined.
 		TYPE varType = var.SemantMe();
 
 		if(varType == null || !varType.isArray())
 		{
-			//TODO- throw exception
+			HelperUtils.printError(line);
 		}
 		TYPE_ARRAY array = (TYPE_ARRAY) varType;
 		return array.getType();

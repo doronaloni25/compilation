@@ -1,5 +1,7 @@
 package AST;
-
+import TYPES.*;
+import SYMBOL_TABLE.*;
+import HelperUtils.HelperUtils;
 public class AST_BINOP extends AST_Node{
     public int op;
     // PLUS = 0

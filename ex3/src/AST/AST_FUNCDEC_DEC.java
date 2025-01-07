@@ -1,5 +1,7 @@
 package AST;
-
+import TYPES.*;
+import SYMBOL_TABLE.*;
+import HelperUtils.HelperUtils;
 public class AST_FUNCDEC_DEC extends AST_DEC
 {
     public AST_FUNC_DEC funcDec;

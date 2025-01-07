@@ -1,5 +1,7 @@
 package AST;
 import TYPES.*;
+import SYMBOL_TABLE.*;
+import HelperUtils.HelperUtils;
 
 public class AST_EXP_SIMPLE extends AST_EXP
 {

@@ -1,7 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.SYMBOL_TABLE;
-
+import HelperUtils.HelperUtils;
 public class AST_ARRAY_TYPE_DEF extends AST_Node{
     public String name;
     public AST_TYPE type;
@@ -19,14 +19,14 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node{
     public TYPE semantMe(){
         // can only declare array in global scope
         if (!SYMBOL_TABLE.getInstance().isGlobalScope()){
-            // TODO: throw exception
+            HelperUtils.printError(line);
         }
 
         ARRAY_TYPE t = type.semantMe(); 
         
         // can only declare array of existing class
         if (SYMBOL_TABLE.getInstance().find(t) == null){
-            // TODO: throw exception
+            HelperUtils.printError(line);
         }
         
         SYMBOL_TABLE.getInstance().enter(name, t);
