@@ -1,7 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperUtils.HelperUtils;
+import HelperFunctions.HelperFunctions;
 
 public class AST_STMT_LIST extends AST_LIST
 {
@@ -64,17 +64,14 @@ public class AST_STMT_LIST extends AST_LIST
 		if (tail != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,tail.SerialNumber);
 	}
 
-	
-
-
 	@Override
-    public AST_DEC getHead() 
+    public AST_STMT getHead() 
 	{
         return this.head;
     }
 
     @Override
-    public AST_DEC_LIST getTail() 
+    public AST_STMT_LIST getTail() 
 	{
         return this.tail;
     }

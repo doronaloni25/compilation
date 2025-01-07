@@ -1,7 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperUtils.HelperUtils;
+import HelperFunctions.HelperFunctions;
 public class AST_CFIELD_LIST extends AST_LIST
 {
 	/****************/
@@ -32,5 +32,17 @@ public class AST_CFIELD_LIST extends AST_LIST
 		this.head = head;
 		this.tail = tail;
 	}
+
 	//semant me is implemented in AST_LIST
+	@Override
+    public AST_CFIELD getHead() 
+	{
+        return this.head;
+    }
+
+    @Override
+    public AST_CFIELD_LIST getTail() 
+	{
+        return this.tail;
+    }
 }

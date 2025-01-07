@@ -1,7 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperUtils.HelperUtils;
+import HelperFunctions.HelperFunctions;
 public class AST_VAR_FIELD extends AST_VAR
 {
 	public AST_VAR var;
@@ -62,25 +62,24 @@ public class AST_VAR_FIELD extends AST_VAR
 		// we are trying to get the type of a field in a class
 		// the next line also takes care of verifying the var is well defined.
 		TYPE varType = var.SemantMe();
-		if(vartype == null) {
-			HelperUtils.printError(line);
+		if(varType == null) {
+			HelperFunctions.printError(line);
 		}
 		//make sure the variable is a class, so you can access its fields
-		if(varType.isClass()) {
-			TYPE_CLASS classType = (TYPE_CLASS)varType;
+		if(!varType.isClass()) {
+			HelperFunctions.printError(line);
 		}
-		else {
-			HelperUtils.printError(line);
-		}
+		TYPE_CLASS classType = (TYPE_CLASS)varType;
 		//check if the field is defined in the class, and if it is, return its type
-		TYPE fieldType = classType.classDec.fieldInClass(fieldName);
+		TYPE_CLASS_VAR_DEC fieldType = classType.classDec.fieldInClass(fieldName);
 		if(fieldType != null) {
-			return fieldType;
+			return fieldType.t;
 		}
 		else
 		{
-			HelperUtils.printError(line);
+			HelperFunctions.printError(line);
 		}
 		return null;
 	}
+}
 

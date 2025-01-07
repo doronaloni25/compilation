@@ -1,7 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperUtils.HelperUtils;
+import HelperFunctions.HelperFunctions;
 
 public class AST_EXP_ID extends AST_EXP
 {
@@ -38,17 +38,17 @@ public class AST_EXP_ID extends AST_EXP
 
     public TYPE SemantMe(){
         // same as AST_STMT_ID
-        TYPE found_function = SYMBOL_TABLE.getInstance().find(name);
-        if(found_function == null)
+        TYPE found_functionT = SYMBOL_TABLE.getInstance().find(name);
+        if(found_functionT == null)
         {
-            HelperUtils.printError(line);
+            HelperFunctions.printError(line);
         }
-        if(!found_function.isFunction())
+        if(!found_functionT.isFunction())
         {
-            HelperUtils.printError(line);
+            HelperFunctions.printError(line);
         }
         // cast to type function
-        TYPE_FUNCTION found_function = (TYPE_FUNCTION)found_function;
+        TYPE_FUNCTION found_function = (TYPE_FUNCTION)found_functionT;
         //check if the function has the right number of arguments
         TYPE_LIST function_arguments_list = new TYPE_LIST(null, null); 
         if(exp != null)
@@ -59,9 +59,9 @@ public class AST_EXP_ID extends AST_EXP
                 function_arguments_list.tail = expList.SemantMe();
             }
         }
-        if( !compareTypeLists(function_arguments_list, found_function.params))
+        if(!HelperFunctions.compareTypeLists(function_arguments_list, found_function.params))
         {
-            HelperUtils.printError(line);
+            HelperFunctions.printError(line);
         }
         
         return found_function.returnType;

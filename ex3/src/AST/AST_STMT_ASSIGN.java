@@ -1,7 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperUtils.HelperUtils;
+import HelperFunctions.HelperFunctions;
 
 public class AST_STMT_ASSIGN extends AST_STMT
 {
@@ -46,9 +46,9 @@ public class AST_STMT_ASSIGN extends AST_STMT
     {
 		TYPE t1 = var.SemantMe();
 		TYPE t2 = exp.SemantMe();
-		if(!isInhiritedFromOrNil(t2, t1))
+		if(!HelperFunctions.isInhiritedFromOrNil(t2, t1))
 		{
-			HelperUtils.printError(line);
+			HelperFunctions.printError(line);
 		}
 		return t1;
 	}

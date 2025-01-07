@@ -1,7 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperUtils.HelperUtils;
+import HelperFunctions.HelperFunctions;
 public class AST_VAR_DEC_EXP extends AST_VAR_DEC 
 {
     
@@ -25,23 +25,25 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC
         if(classType != null)
         {
             // check if exp is constant:
-            if (!HelperUtils.isConstant(exp)) {
-                // TODO: return exception with line number
+            if (!HelperFunctions.isConstant(exp)) {
+                HelperFunctions.printError(line);
             }
         }
         TYPE expType = exp.SemantMe();
         if (expType == null)
         {
-            // TODO: return exception with line number
+            HelperFunctions.printError(line);
         }
-        // take care of semantMe on "type ID", adds it to the symbol table and takes care of class field if relevant 
+        // take care of SemantMe on "type ID", adds it to the symbol table and takes care of class field if relevant 
         TYPE currType = super.SemantMe();
-        if (HelperUtils.isInhiritedFromOrNil(expType, currType)) {
+        if (HelperFunctions.isInhiritedFromOrNil(expType, currType)) {
             return currType;
         }
         else {
-            // TODO: return exception with line number
+            HelperFunctions.printError(line);
         }
+        // unreachable code
+        return currType;
     }   
 }
 

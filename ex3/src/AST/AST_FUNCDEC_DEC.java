@@ -1,7 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperUtils.HelperUtils;
+import HelperFunctions.HelperFunctions;
 public class AST_FUNCDEC_DEC extends AST_DEC
 {
     public AST_FUNC_DEC funcDec;
@@ -10,7 +10,7 @@ public class AST_FUNCDEC_DEC extends AST_DEC
         this.funcDec = funcDec;
     }
 
-    public TYPE semantMe() {
-        return funcDec.semantMe();
+    public TYPE SemantMe() {
+        return funcDec.SemantMe();
     }
 }

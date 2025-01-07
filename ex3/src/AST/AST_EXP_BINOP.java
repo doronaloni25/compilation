@@ -1,7 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperUtils.HelperUtils;
+import HelperFunctions.HelperFunctions;
 public class AST_EXP_BINOP extends AST_EXP
 {
 	public AST_BINOP OP;
@@ -38,14 +38,14 @@ public class AST_EXP_BINOP extends AST_EXP
 		if(OP.op == 6){
 			// cant eqaute NIL with STRING
 			if ((leftType == TYPE_STRING.getInstance() && rightType == TYPE_NIL.getInstance()) || (leftType == TYPE_NIL.getInstance() && rightType == TYPE_STRING.getInstance())){
-				HelperUtils.printError(line);
+				HelperFunctions.printError(line);
 			}
 			else
-			if (HelperUtils.isInhiritedFromOrNil(leftType, rightType) || HelperUtils.isInhiritedFromOrNil(rightType, leftType)){
+			if (HelperFunctions.isInhiritedFromOrNil(leftType, rightType) || HelperFunctions.isInhiritedFromOrNil(rightType, leftType)){
 				return TYPE_INT.getInstance();
 			}
 			else{
-				HelperUtils.printError(line);
+				HelperFunctions.printError(line);
 			}
 		}
 
@@ -58,7 +58,7 @@ public class AST_EXP_BINOP extends AST_EXP
 				return TYPE_STRING.getInstance();
 			}
 			else{
-				HelperUtils.printError(line);
+				HelperFunctions.printError(line);
 			}
 		}
 
@@ -66,13 +66,13 @@ public class AST_EXP_BINOP extends AST_EXP
 		else if (OP.op == 3){
 			if (leftType == TYPE_INT.getInstance() && rightType == TYPE_INT.getInstance()){
 				// If right is constant, check if its 0 and throw exception if so.
-				if (HelperUtils.isConstant(right) && ((AST_TYPE_INT)right).value == 0){
-					HelperUtils.printError(line);
+				if (HelperFunctions.isConstant(right) && ((AST_EXP_INT)right).value == 0){
+					HelperFunctions.printError(line);
 				}
 				return TYPE_INT.getInstance();
 			}
 			else{
-				HelperUtils.printError(line);
+				HelperFunctions.printError(line);
 			}
 		}
 
@@ -82,9 +82,10 @@ public class AST_EXP_BINOP extends AST_EXP
 				return TYPE_INT.getInstance();
 			}
 			else{
-				HelperUtils.printError(line);
+				HelperFunctions.printError(line);
 			}
 		}
-		
+		//Unreachable code
+		return TYPE_INT.getInstance();
 	}
 }

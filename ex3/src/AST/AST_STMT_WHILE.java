@@ -1,7 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperUtils.HelperUtils;
+import HelperFunctions.HelperFunctions;
 public class AST_STMT_WHILE extends AST_STMT
 {
 	public AST_EXP cond;
@@ -29,7 +29,7 @@ public class AST_STMT_WHILE extends AST_STMT
 		TYPE_INT intType = TYPE_INT.getInstance();
 		if(t != intType)
 		{
-			HelperUtils.printError(line);
+			HelperFunctions.printError(line);
 		}
 		//need to open scope for the while body
 		SYMBOL_TABLE.getInstance().beginScope();

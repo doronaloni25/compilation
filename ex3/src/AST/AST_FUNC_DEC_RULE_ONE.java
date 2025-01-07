@@ -1,7 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperUtils.HelperUtils;
+import HelperFunctions.HelperFunctions;
 public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
 { 
 
@@ -12,36 +12,36 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
         
         System.out.format("====================== funcDec -> type ID LPARAN RPARAN LBRACE STMT_LIST RBRACE \n");
     }
-@Overrride
+@Override
  public TYPE SemantMe()
  {
      if(SYMBOL_TABLE.getInstance().inFunction != null)
     {
-        HelperUtils.printError(line);
+        HelperFunctions.printError(line);
     }
    
     TYPE returnType = type.SemantMe();
     if(returnType == null)
     {
-        HelperUtils.printError(line);
+        HelperFunctions.printError(line);
     }
     TYPE_FUNCTION function = new TYPE_FUNCTION(returnType, name, null);
     SYMBOL_TABLE.getInstance().enter(name, function);
-    TYPE_CLASS_DEC classDec = SYMBOL_TABLE.getInstance.inClass();
+    TYPE_CLASS_DEC classDec = SYMBOL_TABLE.getInstance().inClass;
 
     //func declaration inside a class
     if (classDec != null)
     {
        
-        SYMBOL_TABLE.getInstance.beginScope();
+        SYMBOL_TABLE.getInstance().beginScope();
         SYMBOL_TABLE.getInstance().inFunction = function;
         TYPE functionReturnType = stmtList.SemantMe();
-        if(HelperUtils.isInhiritedFromOrNil(functionReturnType, returnType) == false)
+        if(HelperFunctions.isInhiritedFromOrNil(functionReturnType, returnType) == false)
         {
-            HelperUtils.printError(line);
+            HelperFunctions.printError(line);
         }
-        classDec.addFunction(function);
-        SYMBOL_TABLE.getInstance.endScope();
+        classDec.addFunction(function, line);
+        SYMBOL_TABLE.getInstance().endScope();
         SYMBOL_TABLE.getInstance().inFunction = null;
         return function;
 
@@ -52,22 +52,22 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
        
         if (SYMBOL_TABLE.getInstance().find(name) != null)
         {
-            HelperUtils.printError(line);
+            HelperFunctions.printError(line);
         }
-        if (SYMBOL_TABLE.getInstance().isGlobalScope() == False)
+        if (!SYMBOL_TABLE.getInstance().isGlobalScope())
         {
-            HelperUtils.printError(line);
+            HelperFunctions.printError(line);
         }
         if (name.equals("PrintInt") || name.equals("PrintString"))
         {
-            HelperUtils.printError(line);
+            HelperFunctions.printError(line);
         }
-        SYMBOL_TABLE.getInstance.beginScope();
+        SYMBOL_TABLE.getInstance().beginScope();
         SYMBOL_TABLE.getInstance().inFunction = function;
         TYPE functionReturnType = stmtList.SemantMe();
-        if(HelperUtils.isInhiritedFromOrNil(functionReturnType, returnType) == false)
+        if(HelperFunctions.isInhiritedFromOrNil(functionReturnType, returnType) == false)
             {
-                HelperUtils.printError(line);
+                HelperFunctions.printError(line);
             }
     
         SYMBOL_TABLE.getInstance().endScope();

@@ -1,7 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperUtils.HelperUtils;
+import HelperFunctions.HelperFunctions;
 public class AST_STMT_VAR_DEC extends AST_STMT
 {
 
@@ -34,7 +34,7 @@ public class AST_STMT_VAR_DEC extends AST_STMT
         TYPE type = varDec.SemantMe();
 		if (type == null) 
 		{
-			HelperUtils.printError(line);
+			HelperFunctions.printError(line);
 		}
         return type;
     }

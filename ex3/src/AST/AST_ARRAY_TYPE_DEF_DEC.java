@@ -1,7 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperUtils.HelperUtils;
+import HelperFunctions.HelperFunctions;
 public class AST_ARRAY_TYPE_DEF_DEC extends AST_DEC 
 {
     AST_ARRAY_TYPE_DEF arrayTypedef;
@@ -16,8 +16,8 @@ public class AST_ARRAY_TYPE_DEF_DEC extends AST_DEC
         System.out.print("====================== dec -> arrayTypedef \n");
     }
 
-    public TYPE semantMe() {
-        return arrayTypedef.semantMe();
+    public TYPE SemantMe() {
+        return arrayTypedef.SemantMe();
     }
 }
 

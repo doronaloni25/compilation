@@ -26,6 +26,8 @@ parser code
 				file_writer.close();
 				System.exit(0);
 			}
+			System.out.println("whyyyy");
+        	System.out.println(Integer.toString(lexer.getLine()));
 			file_writer.write("ERROR");
 			file_writer.write("(");
 			file_writer.write(Integer.toString(lexer.getLine()));
@@ -46,11 +48,11 @@ parser code
 scan with
 {:
 	Symbol s;
-	AST_Node.line = lexer.getLine();
 	s = lexer.next_token();
 	if (s.sym == TokenNames.error){
 		lexical_error_flag = true;
 	}
+	AST_Node.generalLine = lexer.getLine();
 	System.out.print("[");
 	System.out.print(lexer.getLine());
 	System.out.print(":");
