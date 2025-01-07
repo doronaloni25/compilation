@@ -79,9 +79,13 @@ public class TYPE_CLASS_DEC extends TYPE
 	//add the function to a class if there isnt alredy the same one(overriding), and if overloading throw exception
 	public void addFunction(TYPE_FUNCTION f)
 	{
-		if(!isInMethods(f))
+		if(!isInMethods(f) && fieldInClass(f.name) == null)
 		{
 			function_list = new TYPE_LIST(f, function_list);
+		}
+		else
+		{
+			//TODO- throw exeption
 		}
 		
 	}

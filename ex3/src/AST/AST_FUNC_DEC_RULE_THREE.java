@@ -15,11 +15,15 @@ public class AST_FUNC_DEC_RULE_THREE extends AST_FUNC_DEC
 
         System.out.format("====================== funcDec -> type ID LPAREN RPAREN LBRACE STMT_LIST RBRACE \n");
     }
-//TOD-change according to the rule one and rule two
+
 @Overrride
 public TYPE SemantMe()
  {
   
+    if(SYMBOL_TABLE.getInstance().inFunction!==null)
+    {
+        //TODO- throw exeption
+    }
     TYPE returnType = type.SemantMe();
     if(returnType == null)
     {
@@ -33,7 +37,7 @@ public TYPE SemantMe()
     //function declaration inside a class
     if(classDec!=null)
     {
-        
+    
         SYMBOL_TABLE.getInstance.beginScope();
         SYMBOL_TABLE.getInstance().inFunction = function;
         AST_COMMA_TYPE_ID commaTypeId  = new AST_COMMA_TYPE_ID(typeTwo, nameTwo);

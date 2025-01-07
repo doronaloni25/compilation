@@ -13,12 +13,19 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
 @Overrride
  public TYPE SemantMe()
  {
-    
+     if(SYMBOL_TABLE.getInstance().inFunction!==null)
+    {
+        //TODO- throw exeption
+    }
    
     TYPE returnType = type.SemantMe();
+    if(returnType == null)
+    {
+        //TODO- throw exeption
+    }
     TYPE_FUNCTION function = new TYPE_FUNCTION(returnType, name, null);
     SYMBOL_TABLE.getInstance().enter(name, function);
-    TYPE_CLASS_DEC calssDec = SYMBOL_TABLE.getInstance.inClass();
+    TYPE_CLASS_DEC classDec = SYMBOL_TABLE.getInstance.inClass();
 
     //func declaration inside a class
     if (classDec != null)
