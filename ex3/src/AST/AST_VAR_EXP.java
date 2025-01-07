@@ -1,5 +1,6 @@
 package AST;
 import TYPES.*;
+import HelperUtils.HelperUtils;
 public class AST_VAR_EXP extends AST_VAR
 {
 	public AST_VAR var;
@@ -59,9 +60,15 @@ public class AST_VAR_EXP extends AST_VAR
 	@Override
 	public TYPE SemantMe() {
 		TYPE expType = exp.SemantMe();
+		if (expType == null) {
+			//TODO- throw exception
+		}
 		//if the expression is not an int (it is an array[exp])
-		//TODO- make sure expType is not negative!
 		if(expType != TYPE_INT.getInstance()) {
+			//TODO- throw exception
+		}
+		// if exp is constant, check if its not negative
+		if(HelperUtils.isConstant(exp) && ((AST_EXP_INT)exp).value < 0) {
 			//TODO- throw exception
 		}
 		TYPE varType = var.SemantMe();

@@ -1,5 +1,6 @@
 package AST;
 import TYPES.*;
+import HelperUtils.HelperUtils;
 public class AST_VAR_DEC_EXP extends AST_VAR_DEC 
 {
     
@@ -14,7 +15,33 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC
         this.exp = exp;
         System.out.format("====================== varDec -> type ID ASSIGN exp SEMICOLON \n");
     }
+
+    @Override
+    public TYPE SemantMe() 
+    {
+        // check if we are inside class, since we cant assign non-constants to variables inside of a class declaration
+        TYPE_CLASS_DEC classType = SYMBOL_TABLE.getInstance().inClass;
+        if(classType != null)
+        {
+            // check if exp is constant:
+            if (!HelperUtils.isConstant(exp)) {
+                // TODO: return exception with line number
+            }
+        }
+        TYPE expType = exp.SemantMe();
+        if (expType == null)
+        {
+            // TODO: return exception with line number
+        }
+        // take care of semantMe on "type ID", adds it to the symbol table and takes care of class field if relevant 
+        TYPE currType = super.SemantMe();
+        if (HelperUtils.isInhiritedFromOrNil(expType, currType)) {
+            return currType;
+        }
+        else {
+            // TODO: return exception with line number
+        }
+    }   
 }
-  
 
 

@@ -1,7 +1,7 @@
 package AST;
 import org.jcp.xml.dsig.internal.dom.Utils;
 import TYPES.*;
-import HelperUtils;
+import HelperUtils.HelperUtils;
 
 public class AST_EXP_BINOP extends AST_EXP
 {
@@ -65,8 +65,11 @@ public class AST_EXP_BINOP extends AST_EXP
 
 		// check if op is DIVIDE, can be only done on int, and second int can't be 0
 		else if (OP.op == 3){
-			// TODO: check if right is 0
 			if (leftType == TYPE_INT.getInstance() && rightType == TYPE_INT.getInstance()){
+				// If right is constant, check if its 0 and throw exception if so.
+				if (HelperUtils.isConstant(right) && ((AST_TYPE_INT)right).value == 0){
+					// TODO: throw exception
+				}
 				return TYPE_INT.getInstance();
 			}
 			else{
