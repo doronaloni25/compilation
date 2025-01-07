@@ -14,6 +14,29 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
 @Overrride
  public TYPE SemantMe()
  {
+
+    TYPE_CLASS_DEC calssDec = SYMBOL_TABLE.getInstance.inClass();
+    if (classDec != null)
+    {
+        SYMBOL_TABLE.getInstance.beginScope();
+        if (name.equals("PrintInt") || name.equals("PrintString"))
+        {
+            //TODO- throw exeption
+        }
+        TYPE returnType = type.SemantMe();
+        TYPE_FUNCTION function = new TYPE_FUNCTION(funcReturnType, name, null);
+        TYPE functionReturnType = stmtList.SemantMe();
+        if(HelperUtils.isInhiritedFromOrNil(functionReturnType, returnType) == false)
+        {
+            //TODO- throw exeption
+        }
+        classDec.addFunction(function);
+
+
+    }
+    else{}
+
+
     //TODO- check if in the global scope
     //check if not overloading
     //their names should not be PrintMe and PrintString
