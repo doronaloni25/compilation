@@ -35,6 +35,7 @@ public class AST_STMT_VAR_DEC extends AST_STMT
 		if (type == null) 
 		{
 			HelperUtils.printError(line);
+		}
         return type;
     }
 }
