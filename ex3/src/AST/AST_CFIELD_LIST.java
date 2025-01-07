@@ -1,6 +1,6 @@
 package AST;
-
-public class AST_CFIELD_LIST extends AST_Node
+import TYPES.*;
+public class AST_CFIELD_LIST extends AST_LIST
 {
 	/****************/
 	/* DATA MEMBERS */
@@ -30,4 +30,5 @@ public class AST_CFIELD_LIST extends AST_Node
 		this.head = head;
 		this.tail = tail;
 	}
+	//semant me is implemented in AST_LIST
 }

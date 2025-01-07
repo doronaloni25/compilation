@@ -1,5 +1,5 @@
 package AST;
-
+import TYPES.*;
 public class AST_VARDEC_DEC extends AST_DEC
 {
     public AST_VAR_DEC varDec;

@@ -1,5 +1,5 @@
 package AST;
-
+import TYPES.*;
 public class AST_CFIELD_VAR_DEC extends AST_CFIELD
 {
     AST_VAR_DEC varDec;
@@ -11,5 +11,10 @@ public class AST_CFIELD_VAR_DEC extends AST_CFIELD
 
         System.out.format("====================== cField -> varDec \n");
         this.varDec = varDec;
+    }
+    @Override
+    public TYPE SemantMe()
+    {
+        return varDec.SemantMe();
     }
 }

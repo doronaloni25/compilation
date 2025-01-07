@@ -1,5 +1,5 @@
 package AST;
-
+import TYPES.*;
 public class AST_VAR_FIELD extends AST_VAR
 {
 	public AST_VAR var;
@@ -55,4 +55,28 @@ public class AST_VAR_FIELD extends AST_VAR
 		/****************************************/
 		if (var != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,var.SerialNumber);
 	}
-}
+	@Override
+	public TYPE SemantMe() {
+		TYPE varType = var.SemantMe();
+		if(vartype == null) {
+			//TODO- throw exception, the identifier is not defined
+		}
+		//make sure the variable is a class, so you can access its fields
+		if(varType.isClass()) {
+			TYPE_CLASS classType = (TYPE_CLASS)varType;
+		}
+		else {
+			//TODO- throw exception, the variable is not a class
+		}
+		//check if the field is defined in the class, and if it is, return its type
+		TYPE fieldType = classType.fieldInClass(fieldName);
+		if(fieldType != null) {
+			return fieldType;
+		}
+		else
+		{
+			//TODO- throw exception, the field is not defined
+		}
+		return null;
+	}
+

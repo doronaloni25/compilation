@@ -19,4 +19,22 @@ public class HelperUtils{
         }
         return false;
     }
+
+    public static boolean compareTypeLists(TYPE_LIST typelist1, TYPE_LIST typeList2) {
+        // Check if the arguments of the function are the same
+        if (t1 == null && t2 == null) {
+            return true;
+        }
+        //not the same length
+        if (t1 == null || t2 == null) {
+            return false;
+        }
+        //arguments not the same type or not inherited
+        if (isInhiritedFromOrNil(t1.head, t2.head) == false) {
+            return false;
+        }
+        return compareTypeLists(t1.tail, t2.tail);
+    }
+
+   
 }

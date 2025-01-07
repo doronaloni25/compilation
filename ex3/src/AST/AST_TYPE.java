@@ -1,5 +1,5 @@
 package AST;
-
+import TYPES.*;
 public class AST_TYPE extends AST_Node {
     
     public String type; 

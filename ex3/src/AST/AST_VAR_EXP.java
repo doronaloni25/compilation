@@ -1,5 +1,5 @@
 package AST;
-
+import TYPES.*;
 public class AST_VAR_EXP extends AST_VAR
 {
 	public AST_VAR var;
@@ -55,5 +55,22 @@ public class AST_VAR_EXP extends AST_VAR
 		/****************************************/
 		if (var       != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,var.SerialNumber);
 		if (exp != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,exp.SerialNumber);
+	}
+	@Override
+	public TYPE SemantMe() {
+		TYPE expType = exp.SemantMe();
+		//if the expression is not an int (it is an array[exp])
+		//TODO- make sure expType is not negative!
+		if(expType != TYPE_INT.getInstance()) {
+			//TODO- throw exception
+		}
+		TYPE varType = var.SemantMe();
+
+		if(varType == null || !varType.isArray())
+		{
+			//TODO- throw exception
+		}
+		TYPE_ARRAY array = (TYPE_ARRAY) varType;
+		return array.getType();
 	}
 }

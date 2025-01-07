@@ -1,6 +1,8 @@
 package AST;
-
-public class AST_COMMA_EXP_LIST extends AST_Node
+import TYPES.*;
+import SYMBOL_TABLE.*;
+import HelperUtils;
+public class AST_COMMA_EXP_LIST extends AST_LIST
 {
 	/****************/
 	/* DATA MEMBERS */
@@ -30,4 +32,8 @@ public class AST_COMMA_EXP_LIST extends AST_Node
 		this.head = head;
 		this.tail = tail;
 	}
+
+	//semant me is implemented in AST_LIST
+	
+	
 }

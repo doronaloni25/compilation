@@ -1,5 +1,5 @@
 package AST;
-
+import TYPES.*;
 public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC 
 {
     
