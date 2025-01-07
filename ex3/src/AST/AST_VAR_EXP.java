@@ -60,6 +60,9 @@ public class AST_VAR_EXP extends AST_VAR
 	@Override
 	public TYPE SemantMe() {
 		TYPE expType = exp.SemantMe();
+		if (expType == null) {
+			//TODO- throw exception
+		}
 		//if the expression is not an int (it is an array[exp])
 		if(expType != TYPE_INT.getInstance()) {
 			//TODO- throw exception
@@ -67,7 +70,6 @@ public class AST_VAR_EXP extends AST_VAR
 		// if exp is constant, check if its not negative
 		if(HelperUtils.isConstant(exp) && ((AST_EXP_INT)exp).value < 0) {
 			//TODO- throw exception
-
 		}
 		TYPE varType = var.SemantMe();
 
