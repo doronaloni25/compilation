@@ -7,6 +7,13 @@ import TYPES.*;
 import AST.*;
 
 public class HelperUtils{
+    
+    public static PrintWriter file_writer = null;
+
+    public static void setFileWriter(PrintWriter writer) {
+        HelperFunctions.file_writer = writer;
+    }
+
     public static boolean isInhiritedFromOrNil(TYPE t1, TYPE t2) {
         // Check if t1 is Inherited from t2
         if (t1 == t2) {
@@ -39,6 +46,16 @@ public class HelperUtils{
 
     public static boolean isConstant(AST_EXP exp){
         return (exp instanceof AST_EXP_INT || exp instanceof AST_EXP_STRING || exp instanceof AST_EXP_NIL);   
+    }
+
+    public static void printError(int line)
+    {
+        file_writer.write("ERROR");
+		file_writer.write("(");
+		file_writer.write(Integer.toString(line));
+		file_writer.write(")\n");		
+		file_writer.close();
+		System.exit(0);
     }
 
    

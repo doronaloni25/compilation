@@ -3,7 +3,7 @@ import java.io.*;
 import java.io.PrintWriter;
 import java_cup.runtime.Symbol;
 import AST.*;
-
+import HelperUtils.HelperUtils;
 public class Main
 {
 	static public void main(String argv[])
@@ -29,6 +29,7 @@ public class Main
 			/* [2] Initialize a file writer */
 			/********************************/
 			file_writer = new PrintWriter(outputFilename);
+			HelperFunctions.setFileWriter(file_writer);
 			
 			/******************************/
 			/* [3] Initialize a new lexer */
