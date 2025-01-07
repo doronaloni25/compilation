@@ -63,11 +63,11 @@ public class AST_VAR_FIELD extends AST_VAR
 		// the next line also takes care of verifying the var is well defined.
 		TYPE varType = var.SemantMe();
 		if(varType == null) {
-			HelperFunctions.printError(line);
+			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
 		//make sure the variable is a class, so you can access its fields
 		if(!varType.isClass()) {
-			HelperFunctions.printError(line);
+			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
 		TYPE_CLASS classType = (TYPE_CLASS)varType;
 		//check if the field is defined in the class, and if it is, return its type
@@ -77,7 +77,7 @@ public class AST_VAR_FIELD extends AST_VAR
 		}
 		else
 		{
-			HelperFunctions.printError(line);
+			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
 		return null;
 	}

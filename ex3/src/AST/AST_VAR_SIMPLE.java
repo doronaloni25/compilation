@@ -57,7 +57,7 @@ public class AST_VAR_SIMPLE extends AST_VAR
 				// Attempt finding name in global scope if not found in class's ancestors scopes
 				TYPE type = SYMBOL_TABLE.getInstance().find(name);
 				if(type == null) {
-					HelperFunctions.printError(line);
+					HelperFunctions.printError(line, this.getClass().getSimpleName());
 				}
 				return type;
 			}
@@ -66,7 +66,7 @@ public class AST_VAR_SIMPLE extends AST_VAR
 		// Not in class scope, check if the variable is defined
 		TYPE type =SYMBOL_TABLE.getInstance().find(name); 
 		if(type == null) {
-			HelperFunctions.printError(line);
+			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
 		return type;
 

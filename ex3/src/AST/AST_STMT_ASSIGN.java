@@ -48,7 +48,7 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		TYPE t2 = exp.SemantMe();
 		if(!HelperFunctions.isInhiritedFromOrNil(t2, t1))
 		{
-			HelperFunctions.printError(line);
+			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
 		return t1;
 	}

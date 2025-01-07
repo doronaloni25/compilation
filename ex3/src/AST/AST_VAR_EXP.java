@@ -62,22 +62,22 @@ public class AST_VAR_EXP extends AST_VAR
 	public TYPE SemantMe() {
 		TYPE expType = exp.SemantMe();
 		if (expType == null) {
-			HelperFunctions.printError(line);
+			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
 		//if the expression is not an int (it is an array[exp])
 		if(expType != TYPE_INT.getInstance()) {
-			HelperFunctions.printError(line);
+			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
 		// if exp is constant, check if its not negative
 		if(HelperFunctions.isConstant(exp) && ((AST_EXP_INT)exp).value < 0) {
-			HelperFunctions.printError(line);
+			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
 		// the next line also takes care of verifying the var is well defined.
 		TYPE varType = var.SemantMe();
 
 		if(varType == null || !varType.isArray())
 		{
-			HelperFunctions.printError(line);
+			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
 		TYPE_ARRAY array = (TYPE_ARRAY) varType;
 		return array.getType();

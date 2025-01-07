@@ -40,7 +40,7 @@ public class AST_TYPE extends AST_Node {
         t = SYMBOL_TABLE.getInstance().find(type);
         if (t == null) 
         {
-            HelperFunctions.printError(line);
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         return t;
     }

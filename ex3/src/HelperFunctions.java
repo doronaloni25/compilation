@@ -5,6 +5,7 @@ import java.io.PrintWriter;
 import java_cup.runtime.Symbol;
 import TYPES.*;
 import AST.*;
+import SYMBOL_TABLE.*;
 
 public class HelperFunctions{
     
@@ -48,10 +49,12 @@ public class HelperFunctions{
         return (exp instanceof AST_EXP_INT || exp instanceof AST_EXP_STRING || exp instanceof AST_EXP_NIL);   
     }
 
-    public static void printError(int line)
+    public static void printError(int line, String name)
     {
-        System.out.println("whyyyy");
-        System.out.println(Integer.toString(line));
+        SYMBOL_TABLE.getInstance().PrintMe();
+        System.out.print("Error");
+        System.out.println(" at " + name);
+        System.out.println("row = " + Integer.toString(line));
         file_writer.write("ERROR");
 		file_writer.write("(");
 		file_writer.write(Integer.toString(line));

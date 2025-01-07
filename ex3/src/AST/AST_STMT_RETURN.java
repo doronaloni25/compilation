@@ -36,14 +36,14 @@ public class AST_STMT_RETURN extends AST_STMT {
 		TYPE_FUNCTION currentFunction = SYMBOL_TABLE.getInstance().inFunction;
 		if(currentFunction == null)
 		{
-			HelperFunctions.printError(line);
+			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
 		// if the return type is void, the expression should be null
 		if(exp == null)
 		{
 			if(currentFunction.returnType != TYPE_VOID.getInstance())
 			{
-				HelperFunctions.printError(line);
+				HelperFunctions.printError(line, this.getClass().getSimpleName());
 			}
 			return TYPE_VOID.getInstance();
 		}
@@ -54,7 +54,7 @@ public class AST_STMT_RETURN extends AST_STMT {
 			//check if the return type is the same as the expression type or son of it
 			if(!HelperFunctions.isInhiritedFromOrNil(t, currentFunction.returnType))
 			{
-				HelperFunctions.printError(line);
+				HelperFunctions.printError(line, this.getClass().getSimpleName());
 			}
 			//check if it should be t
 			return currentFunction.returnType;

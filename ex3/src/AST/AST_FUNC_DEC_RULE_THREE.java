@@ -24,12 +24,12 @@ public class AST_FUNC_DEC_RULE_THREE extends AST_FUNC_DEC
     
         if(SYMBOL_TABLE.getInstance().inFunction!=null)
         {
-            HelperFunctions.printError(line);
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         TYPE returnType = type.SemantMe();
         if(returnType == null)
         {
-            HelperFunctions.printError(line);
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
 
         TYPE_CLASS_DEC classDec = SYMBOL_TABLE.getInstance().inClass;
@@ -50,7 +50,7 @@ public class AST_FUNC_DEC_RULE_THREE extends AST_FUNC_DEC
             TYPE functionReturnType = stmtList.SemantMe();
             if(HelperFunctions.isInhiritedFromOrNil(functionReturnType, returnType) == false)
             {
-                HelperFunctions.printError(line);
+                HelperFunctions.printError(line, this.getClass().getSimpleName());
             }
             
             classDec.addFunction(function, line);
@@ -63,15 +63,15 @@ public class AST_FUNC_DEC_RULE_THREE extends AST_FUNC_DEC
         else{
                 if (SYMBOL_TABLE.getInstance().find(name) != null)
                 {
-                    HelperFunctions.printError(line);
+                    HelperFunctions.printError(line, this.getClass().getSimpleName());
                 }
                 if (SYMBOL_TABLE.getInstance().isGlobalScope() == false)
                 {
-                    HelperFunctions.printError(line);
+                    HelperFunctions.printError(line, this.getClass().getSimpleName());
                 }
                 if (name.equals("PrintInt") || name.equals("PrintString"))
                     {
-                        HelperFunctions.printError(line);
+                        HelperFunctions.printError(line, this.getClass().getSimpleName());
                     }
 
                 SYMBOL_TABLE.getInstance().beginScope();
@@ -84,7 +84,7 @@ public class AST_FUNC_DEC_RULE_THREE extends AST_FUNC_DEC
                 TYPE functionReturnType = stmtList.SemantMe();
                 if(HelperFunctions.isInhiritedFromOrNil(functionReturnType, returnType) == false)
                     {
-                        HelperFunctions.printError(line);
+                        HelperFunctions.printError(line, this.getClass().getSimpleName());
                     }
                 SYMBOL_TABLE.getInstance().endScope();
                 SYMBOL_TABLE.getInstance().inFunction = null;

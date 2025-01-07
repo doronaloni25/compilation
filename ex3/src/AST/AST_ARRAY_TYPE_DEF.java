@@ -19,18 +19,18 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node{
     public TYPE SemantMe(){
         // can only declare array in global scope
         if (!SYMBOL_TABLE.getInstance().isGlobalScope()){
-            HelperFunctions.printError(line);
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
 
         // check if name is occupied
         TYPE checkNameType = SYMBOL_TABLE.getInstance().find(name);
         if (checkNameType != null){
-            HelperFunctions.printError(line);
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         
         TYPE t = type.SemantMe();
         if (t == null){
-            HelperFunctions.printError(line);
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         TYPE_ARRAY newArray = new TYPE_ARRAY(t); 
         SYMBOL_TABLE.getInstance().enter(name, newArray);

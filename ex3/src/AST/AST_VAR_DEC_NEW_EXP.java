@@ -24,19 +24,19 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC
         TYPE_CLASS_DEC classType = SYMBOL_TABLE.getInstance().inClass;
         if(classType != null)
         {
-            HelperFunctions.printError(line);
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         TYPE newExpType = neExp.SemantMe();
         if (newExpType == null)
         {
-            HelperFunctions.printError(line);
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         TYPE currType = super.SemantMe();
         if (HelperFunctions.isInhiritedFromOrNil(newExpType, currType)) {
             return currType;
         }
         else {
-            HelperFunctions.printError(line);
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         // unreachable code
         return currType;

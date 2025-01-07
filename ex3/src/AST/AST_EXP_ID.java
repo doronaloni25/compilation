@@ -41,11 +41,11 @@ public class AST_EXP_ID extends AST_EXP
         TYPE found_functionT = SYMBOL_TABLE.getInstance().find(name);
         if(found_functionT == null)
         {
-            HelperFunctions.printError(line);
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         if(!found_functionT.isFunction())
         {
-            HelperFunctions.printError(line);
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         // cast to type function
         TYPE_FUNCTION found_function = (TYPE_FUNCTION)found_functionT;
@@ -61,7 +61,7 @@ public class AST_EXP_ID extends AST_EXP
         }
         if(!HelperFunctions.compareTypeLists(function_arguments_list, found_function.params))
         {
-            HelperFunctions.printError(line);
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         
         return found_function.returnType;
