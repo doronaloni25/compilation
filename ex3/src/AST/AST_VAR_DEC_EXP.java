@@ -1,5 +1,6 @@
 package AST;
 import TYPES.*;
+import SYMBOL_TABLE.*;
 import HelperUtils.HelperUtils;
 public class AST_VAR_DEC_EXP extends AST_VAR_DEC 
 {

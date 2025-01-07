@@ -1,6 +1,6 @@
 package AST;
-import TYPES.TYPE;
-import SymbolTable.SYMBOL_TABLE;
+import TYPES.*;
+import SYMBOL_TABLE.*;
 import HelperUtils.HelperUtils;
 public class AST_STMT_VAR_DOT extends AST_STMT
 {
@@ -45,7 +45,7 @@ public class AST_STMT_VAR_DOT extends AST_STMT
         //check if the variable is a class type
         if(varType == null || !(varType.isClass()))
         {
-            //TODO: return exception with line number
+            HelperUtils.printError(line);
         }
         // cast to type class
         TYPE_CLASS varType = (TYPE_CLASS)varType;
@@ -53,7 +53,7 @@ public class AST_STMT_VAR_DOT extends AST_STMT
         TYPE_FUNCTION found_function = varType.classDec.functionInClass(name);
         if(found_function == null)
         {
-            //  TODO: return exception with line number
+            HelperUtils.printError(line);
         }
         //check if the function has the right number of arguments
         TYPE_LIST function_arguments_list = new TYPE_LIST(null, null); 
@@ -67,7 +67,7 @@ public class AST_STMT_VAR_DOT extends AST_STMT
         }
         if(!compareTypeLists(function_arguments_list, found_function.params))
         {
-            //TODO: return exception with line number
+            HelperUtils.printError(line);
         }
         return found_function.returnType;
     }

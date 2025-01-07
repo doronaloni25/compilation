@@ -1,8 +1,7 @@
 package AST;
-import org.jcp.xml.dsig.internal.dom.Utils;
 import TYPES.*;
+import SYMBOL_TABLE.*;
 import HelperUtils.HelperUtils;
-
 public class AST_EXP_BINOP extends AST_EXP
 {
 	public AST_BINOP OP;
@@ -39,14 +38,14 @@ public class AST_EXP_BINOP extends AST_EXP
 		if(OP.op == 6){
 			// cant eqaute NIL with STRING
 			if ((leftType == TYPE_STRING.getInstance() && rightType == TYPE_NIL.getInstance()) || (leftType == TYPE_NIL.getInstance() && rightType == TYPE_STRING.getInstance())){
-				// TODO: throw exception
+				HelperUtils.printError(line);
 			}
 			else
 			if (HelperUtils.isInhiritedFromOrNil(leftType, rightType) || HelperUtils.isInhiritedFromOrNil(rightType, leftType)){
 				return TYPE_INT.getInstance();
 			}
 			else{
-				// TODO: throw exception
+				HelperUtils.printError(line);
 			}
 		}
 
@@ -59,7 +58,7 @@ public class AST_EXP_BINOP extends AST_EXP
 				return TYPE_STRING.getInstance();
 			}
 			else{
-				// TODO: throw exception
+				HelperUtils.printError(line);
 			}
 		}
 
@@ -68,12 +67,12 @@ public class AST_EXP_BINOP extends AST_EXP
 			if (leftType == TYPE_INT.getInstance() && rightType == TYPE_INT.getInstance()){
 				// If right is constant, check if its 0 and throw exception if so.
 				if (HelperUtils.isConstant(right) && ((AST_TYPE_INT)right).value == 0){
-					// TODO: throw exception
+					HelperUtils.printError(line);
 				}
 				return TYPE_INT.getInstance();
 			}
 			else{
-				// TODO: throw exception
+				HelperUtils.printError(line);
 			}
 		}
 
@@ -83,7 +82,7 @@ public class AST_EXP_BINOP extends AST_EXP
 				return TYPE_INT.getInstance();
 			}
 			else{
-				// TODO: throw exception
+				HelperUtils.printError(line);
 			}
 		}
 		

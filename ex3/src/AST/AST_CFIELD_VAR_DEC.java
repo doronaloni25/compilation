@@ -1,5 +1,7 @@
 package AST;
 import TYPES.*;
+import SYMBOL_TABLE.*;
+import HelperUtils.HelperUtils;
 public class AST_CFIELD_VAR_DEC extends AST_CFIELD
 {
     AST_VAR_DEC varDec;

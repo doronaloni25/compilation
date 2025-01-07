@@ -1,6 +1,7 @@
 package AST;
-import SYMBOL_TABLE.SYMBOL_TABLE;
 import TYPES.*;
+import SYMBOL_TABLE.*;
+import HelperUtils.HelperUtils;
 public class AST_VAR_DEC extends AST_DEC 
 {
     
@@ -23,12 +24,12 @@ public class AST_VAR_DEC extends AST_DEC
         TYPE currType = SYMBOL_TABLE.getInstance().findWithinScope(name);
         if(currType != null)
         {
-            //TODO: return exception with line number
+            HelperUtils.printError(line);
         }
         TYPE t = type.SemantMe();
         if (t == null)
         {
-            // TODO: return exception with line number
+            HelperUtils.printError(line);
         }
         SYMBOL_TABLE.getInstance().enter(name, t);
         // check if im in class scope, and if so add to the class fields

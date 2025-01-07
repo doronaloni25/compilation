@@ -1,5 +1,7 @@
 package AST;
 import TYPES.*;
+import SYMBOL_TABLE.*;
+import HelperUtils.HelperUtils;
 public class AST_CLASSDEC_DEC extends AST_DEC
 {
     public AST_CLASS_DEC_ONE classDec;

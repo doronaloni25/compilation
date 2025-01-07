@@ -1,8 +1,7 @@
 package AST;
-
-import TYPES.TYPE;
-import TYPES.TYPE_LIST;
-
+import TYPES.*;
+import SYMBOL_TABLE.*;
+import HelperUtils.HelperUtils;
 public abstract class AST_LIST extends AST_Node 
 {
     public abstract AST_Node getHead();

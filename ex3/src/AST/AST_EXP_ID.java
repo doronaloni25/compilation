@@ -1,7 +1,7 @@
 package AST;
-import SYMBOL_TABLE.SYMBOL_TABLE;
-import HelperUtils.HelperUtils;
 import TYPES.*;
+import SYMBOL_TABLE.*;
+import HelperUtils.HelperUtils;
 
 public class AST_EXP_ID extends AST_EXP
 {
@@ -41,11 +41,12 @@ public class AST_EXP_ID extends AST_EXP
         TYPE found_function = SYMBOL_TABLE.getInstance().find(name);
         if(found_function == null)
         {
-            //  TODO: return exception with line number
+            HelperUtils.printError(line);
         }
-        if(!found_function.isFunction(){
-            // TODO: return exception with line number
-        })  
+        if(!found_function.isFunction())
+        {
+            HelperUtils.printError(line);
+        }
         // cast to type function
         TYPE_FUNCTION found_function = (TYPE_FUNCTION)found_function;
         //check if the function has the right number of arguments
@@ -60,7 +61,7 @@ public class AST_EXP_ID extends AST_EXP
         }
         if( !compareTypeLists(function_arguments_list, found_function.params))
         {
-            //TODO: return exception with line number
+            HelperUtils.printError(line);
         }
         
         return found_function.returnType;
