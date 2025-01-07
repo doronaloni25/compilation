@@ -28,7 +28,7 @@ public class TYPE_CLASS_DEC extends TYPE
 		//if father is null, this is the root class
 		this.name = name;
 		this.father = father;
-		this.data_members = new TYPE_LIST(null, null);
+		this.data_members = new TYPE_CLASS_VAR_DEC_LIST(null, null);
 		this.function_list = new TYPE_LIST(null, null);
 		//here we need to add function and arguments of the class 
 	}
@@ -50,12 +50,12 @@ public class TYPE_CLASS_DEC extends TYPE
 	//check if a field is in the class and return its type
 	public TYPE fieldInClass(String name)
 	{
-		TYPE_LIST currField = data_members;
+		TYPE_CLASS_VAR_DEC_LIST currField = data_members;
 		while(currField != null)
 		{
 			if(currField.head.name.equals(name))
 			{
-				return currField.head;
+				return currField.head.t;
 			}
 			currField = currField.tail;
 		}
