@@ -32,5 +32,9 @@ public class AST_COMMA_TYPE_ID_LIST extends AST_LIST
 		this.tail = tail;
 	}
 	
-	/*semantme method is implemented in AST_LIST*/
+	//semant me implented in AST_LIST (semant me on each (name, type)pair implemented in AST_COMMA_TYPE_ID)
+
+
+
+	
 }
