@@ -64,7 +64,13 @@ public class AST_VAR_EXP extends AST_VAR
 		if(expType != TYPE_INT.getInstance()) {
 			//TODO- throw exception
 		}
-		TYPE_ARRAY array = (TYPE_ARRAY) var.SemantMe();
-		return array.type;
+		TYPE varType = var.SemantMe();
+
+		if(varType == null || !varType.isArray())
+		{
+			//TODO- throw exception
+		}
+		TYPE_ARRAY array = (TYPE_ARRAY) varType;
+		return array.getType();
 	}
 }
