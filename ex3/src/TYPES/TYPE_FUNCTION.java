@@ -15,7 +15,6 @@ public class TYPE_FUNCTION extends TYPE
 	/****************/
 	/* CTROR(S) ... */
 	/****************/
-	//if no parametes, (rule one) then params is null
 	public TYPE_FUNCTION(TYPE returnType,String name,TYPE_LIST params)
 	{
 		this.name = name;
@@ -23,5 +22,8 @@ public class TYPE_FUNCTION extends TYPE
 		this.params = params;
 	}
 
-	
+	@Override
+	public boolean isFunction() {
+		return true;
+	}
 }

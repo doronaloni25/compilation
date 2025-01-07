@@ -13,4 +13,8 @@ public class AST_BINOP extends AST_Node{
     {
         this.op = op;
     }
+    public TYPE SemantMe()
+    {
+        return null;
+    }
 }
