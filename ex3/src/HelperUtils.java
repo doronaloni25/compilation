@@ -14,8 +14,8 @@ public class HelperUtils{
         if (t1 == TYPE_NIL.getInstance() && t2 != TYPE_STRING.getInstance() && t2 != TYPE_INT.getInstance()) {
             return true;
         }
-        if (t1.isClass()) {
-            return isInhiritedFromOrNil(((TYPE_CLASS) t1).father, t2);
+        if (t1.isClassDec()) {
+            return isInhiritedFromOrNil(((TYPE_CLASS_DEC) t1).father, t2);
         }
         return false;
     }

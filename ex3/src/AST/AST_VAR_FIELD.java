@@ -69,7 +69,7 @@ public class AST_VAR_FIELD extends AST_VAR
 			//TODO- throw exception, the variable is not a class
 		}
 		//check if the field is defined in the class, and if it is, return its type
-		TYPE fieldType = classType.fieldInClass(fieldName);
+		TYPE fieldType = classType.classDec.fieldInClass(fieldName);
 		if(fieldType != null) {
 			return fieldType;
 		}

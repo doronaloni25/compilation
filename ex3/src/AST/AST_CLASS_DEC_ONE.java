@@ -21,7 +21,7 @@ public class AST_CLASS_DEC_ONE extends AST_DEC
     public TYPE SemantMe() 
     {
         //null is passed as the father of the class as we do not extend
-        TYPE_CLASS classType = new TYPE_CLASS(null, name);
+        TYPE_CLASS classType = new TYPE_CLASS_DEC(null, name);
         SYMBOL_TABLE.getInstance().inClass = classType;
         //checks if the class was decleared before
         TYPE isFirstTime = SYMBOL_TABLE.getInstance().find(name);
