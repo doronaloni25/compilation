@@ -57,6 +57,8 @@ public class AST_VAR_FIELD extends AST_VAR
 	}
 	@Override
 	public TYPE SemantMe() {
+		// we are trying to get the type of a field in a class
+		// the next line also takes care of verifying the var is well defined.
 		TYPE varType = var.SemantMe();
 		if(vartype == null) {
 			//TODO- throw exception, the identifier is not defined

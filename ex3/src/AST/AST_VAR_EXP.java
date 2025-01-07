@@ -71,6 +71,7 @@ public class AST_VAR_EXP extends AST_VAR
 		if(HelperUtils.isConstant(exp) && ((AST_EXP_INT)exp).value < 0) {
 			//TODO- throw exception
 		}
+		// the next line also takes care of verifying the var is well defined.
 		TYPE varType = var.SemantMe();
 
 		if(varType == null || !varType.isArray())

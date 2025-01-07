@@ -30,10 +30,8 @@ public class TYPE_CLASS_DEC extends TYPE
 		this.father = father;
 		this.data_members = new TYPE_CLASS_VAR_DEC_LIST(null, null);
 		this.function_list = new TYPE_LIST(null, null);
-		//here we need to add function and arguments of the class 
 	}
-	@Override
-	public boolean isClass(){ return true;}
+
 	public TYPE_FUNCTION functionInClass(String name)
 	{
 		TYPE_LIST currFunction = function_list;
