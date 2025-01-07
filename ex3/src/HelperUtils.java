@@ -41,5 +41,15 @@ public class HelperUtils{
         return (exp instanceof AST_EXP_INT || exp instanceof AST_EXP_STRING || exp instanceof AST_EXP_NIL);   
     }
 
+    public static void printError(int line)
+    {
+        file_writer.write("ERROR");
+		file_writer.write("(");
+		file_writer.write(Integer.toString(line));
+		file_writer.write(")\n");		
+		file_writer.close();
+		System.exit(0);
+    }
+
    
 }
