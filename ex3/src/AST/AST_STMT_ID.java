@@ -40,11 +40,11 @@ public class AST_STMT_ID extends AST_STMT
         TYPE found_functionT = SYMBOL_TABLE.getInstance().find(name);
         if(found_functionT == null)
         {
-            HelperFunctions.printError(line);
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         //check if the function has the right number of arguments
         if(!found_functionT.isFunction()){
-            HelperFunctions.printError(line);
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         // cast to type function
         TYPE_FUNCTION found_function = (TYPE_FUNCTION)found_functionT;
@@ -60,7 +60,7 @@ public class AST_STMT_ID extends AST_STMT
         }
         if( !HelperFunctions.compareTypeLists(function_arguments_list, found_function.params))
         {
-            HelperFunctions.printError(line);
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         
         return found_function.returnType;

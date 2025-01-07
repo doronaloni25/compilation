@@ -395,8 +395,6 @@ public class Parser extends java_cup.runtime.lr_parser {
 				file_writer.close();
 				System.exit(0);
 			}
-			System.out.println("whyyyy");
-        	System.out.println(Integer.toString(lexer.getLine()));
 			file_writer.write("ERROR");
 			file_writer.write("(");
 			file_writer.write(Integer.toString(lexer.getLine()));
@@ -585,7 +583,7 @@ class CUP$Parser$actions {
           case 12: // type ::= TYPE_STRING 
             {
               AST_TYPE RESULT =null;
-		 RESULT = new AST_TYPE("String", false);			
+		 RESULT = new AST_TYPE("string", false);			
               CUP$Parser$result = parser.getSymbolFactory().newSymbol("type",2, ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), ((java_cup.runtime.Symbol)CUP$Parser$stack.peek()), RESULT);
             }
           return CUP$Parser$result;

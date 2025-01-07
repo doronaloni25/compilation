@@ -29,7 +29,7 @@ public class AST_STMT_WHILE extends AST_STMT
 		TYPE_INT intType = TYPE_INT.getInstance();
 		if(t != intType)
 		{
-			HelperFunctions.printError(line);
+			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
 		//need to open scope for the while body
 		SYMBOL_TABLE.getInstance().beginScope();

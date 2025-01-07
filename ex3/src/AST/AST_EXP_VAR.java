@@ -61,7 +61,7 @@ public class AST_EXP_VAR extends AST_EXP
 		TYPE t = var.SemantMe();
 		if (t == null)
 		{
-			HelperFunctions.printError(line);
+			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
 		return t;
 	}

@@ -38,14 +38,14 @@ public class AST_EXP_BINOP extends AST_EXP
 		if(OP.op == 6){
 			// cant eqaute NIL with STRING
 			if ((leftType == TYPE_STRING.getInstance() && rightType == TYPE_NIL.getInstance()) || (leftType == TYPE_NIL.getInstance() && rightType == TYPE_STRING.getInstance())){
-				HelperFunctions.printError(line);
+				HelperFunctions.printError(line, this.getClass().getSimpleName());
 			}
 			else
 			if (HelperFunctions.isInhiritedFromOrNil(leftType, rightType) || HelperFunctions.isInhiritedFromOrNil(rightType, leftType)){
 				return TYPE_INT.getInstance();
 			}
 			else{
-				HelperFunctions.printError(line);
+				HelperFunctions.printError(line, this.getClass().getSimpleName());
 			}
 		}
 
@@ -58,7 +58,7 @@ public class AST_EXP_BINOP extends AST_EXP
 				return TYPE_STRING.getInstance();
 			}
 			else{
-				HelperFunctions.printError(line);
+				HelperFunctions.printError(line, this.getClass().getSimpleName());
 			}
 		}
 
@@ -67,12 +67,12 @@ public class AST_EXP_BINOP extends AST_EXP
 			if (leftType == TYPE_INT.getInstance() && rightType == TYPE_INT.getInstance()){
 				// If right is constant, check if its 0 and throw exception if so.
 				if (HelperFunctions.isConstant(right) && ((AST_EXP_INT)right).value == 0){
-					HelperFunctions.printError(line);
+					HelperFunctions.printError(line, this.getClass().getSimpleName());
 				}
 				return TYPE_INT.getInstance();
 			}
 			else{
-				HelperFunctions.printError(line);
+				HelperFunctions.printError(line, this.getClass().getSimpleName());
 			}
 		}
 
@@ -82,7 +82,7 @@ public class AST_EXP_BINOP extends AST_EXP
 				return TYPE_INT.getInstance();
 			}
 			else{
-				HelperFunctions.printError(line);
+				HelperFunctions.printError(line, this.getClass().getSimpleName());
 			}
 		}
 		//Unreachable code

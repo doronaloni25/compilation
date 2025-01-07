@@ -45,7 +45,7 @@ public class AST_EXP_VAR_DOT extends AST_EXP
         //check if the variable is a class type
         if(varTypeT == null || !(varTypeT.isClass()))
         {
-            HelperFunctions.printError(line);
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         // cast to type class
         TYPE_CLASS varType = (TYPE_CLASS)varTypeT;
@@ -53,7 +53,7 @@ public class AST_EXP_VAR_DOT extends AST_EXP
         TYPE_FUNCTION found_function = varType.classDec.functionInClass(name);
         if(found_function == null)
         {
-            HelperFunctions.printError(line);
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         //check if the function has the right number of arguments
         TYPE_LIST function_arguments_list = new TYPE_LIST(null, null); 
@@ -67,7 +67,7 @@ public class AST_EXP_VAR_DOT extends AST_EXP
         }
         if(!HelperFunctions.compareTypeLists(function_arguments_list, found_function.params))
         {
-            HelperFunctions.printError(line);
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         return found_function.returnType;
     }

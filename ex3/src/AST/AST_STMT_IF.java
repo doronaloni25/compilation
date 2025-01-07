@@ -28,19 +28,19 @@ public class AST_STMT_IF extends AST_STMT
 		TYPE t = cond.SemantMe();
 		if (t == null)
 		{
-			HelperFunctions.printError(line);
+			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
 		TYPE_INT intType = TYPE_INT.getInstance();
 		if(t != intType)
 		{
-			HelperFunctions.printError(line);
+			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
 		//need to open scope for the if body
 		SYMBOL_TABLE.getInstance().beginScope();
 		body.SemantMe();
 		if (t == null)
 		{
-			HelperFunctions.printError(line);
+			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
 		SYMBOL_TABLE.getInstance().endScope();
 		return intType;

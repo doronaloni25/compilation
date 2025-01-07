@@ -17,13 +17,13 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
  {
      if(SYMBOL_TABLE.getInstance().inFunction != null)
     {
-        HelperFunctions.printError(line);
+        HelperFunctions.printError(line, this.getClass().getSimpleName());
     }
    
     TYPE returnType = type.SemantMe();
     if(returnType == null)
     {
-        HelperFunctions.printError(line);
+        HelperFunctions.printError(line, this.getClass().getSimpleName());
     }
     TYPE_FUNCTION function = new TYPE_FUNCTION(returnType, name, null);
     SYMBOL_TABLE.getInstance().enter(name, function);
@@ -38,7 +38,7 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
         TYPE functionReturnType = stmtList.SemantMe();
         if(HelperFunctions.isInhiritedFromOrNil(functionReturnType, returnType) == false)
         {
-            HelperFunctions.printError(line);
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         classDec.addFunction(function, line);
         SYMBOL_TABLE.getInstance().endScope();
@@ -52,22 +52,22 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
        
         if (SYMBOL_TABLE.getInstance().find(name) != null)
         {
-            HelperFunctions.printError(line);
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         if (!SYMBOL_TABLE.getInstance().isGlobalScope())
         {
-            HelperFunctions.printError(line);
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         if (name.equals("PrintInt") || name.equals("PrintString"))
         {
-            HelperFunctions.printError(line);
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         SYMBOL_TABLE.getInstance().beginScope();
         SYMBOL_TABLE.getInstance().inFunction = function;
         TYPE functionReturnType = stmtList.SemantMe();
         if(HelperFunctions.isInhiritedFromOrNil(functionReturnType, returnType) == false)
             {
-                HelperFunctions.printError(line);
+                HelperFunctions.printError(line, this.getClass().getSimpleName());
             }
     
         SYMBOL_TABLE.getInstance().endScope();

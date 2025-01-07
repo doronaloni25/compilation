@@ -34,7 +34,7 @@ public class AST_STMT_VAR_DEC extends AST_STMT
         TYPE type = varDec.SemantMe();
 		if (type == null) 
 		{
-			HelperFunctions.printError(line);
+			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
         return type;
     }

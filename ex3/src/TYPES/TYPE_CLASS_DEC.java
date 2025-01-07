@@ -51,6 +51,9 @@ public class TYPE_CLASS_DEC extends TYPE
 		TYPE_CLASS_VAR_DEC_LIST currField = data_members;
 		while(currField != null)
 		{
+			if(currField.head == null){
+				return null;
+			}
 			if(currField.head.name.equals(name))
 			{
 				return currField.head;
@@ -99,7 +102,7 @@ public class TYPE_CLASS_DEC extends TYPE
 			{
 				if(!currHead.returnType.equals(f.returnType)|| !HelperFunctions.compareTypeLists(currHead.params, f.params) )
 				{
-					HelperFunctions.printError(line);
+					HelperFunctions.printError(line, this.getClass().getSimpleName());
 				}
 				else
 				{

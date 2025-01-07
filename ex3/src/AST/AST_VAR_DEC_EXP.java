@@ -26,13 +26,13 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC
         {
             // check if exp is constant:
             if (!HelperFunctions.isConstant(exp)) {
-                HelperFunctions.printError(line);
+                HelperFunctions.printError(line, this.getClass().getSimpleName());
             }
         }
         TYPE expType = exp.SemantMe();
         if (expType == null)
         {
-            HelperFunctions.printError(line);
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         // take care of SemantMe on "type ID", adds it to the symbol table and takes care of class field if relevant 
         TYPE currType = super.SemantMe();
@@ -40,7 +40,7 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC
             return currType;
         }
         else {
-            HelperFunctions.printError(line);
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         // unreachable code
         return currType;

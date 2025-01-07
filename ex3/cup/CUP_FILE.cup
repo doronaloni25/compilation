@@ -26,8 +26,6 @@ parser code
 				file_writer.close();
 				System.exit(0);
 			}
-			System.out.println("whyyyy");
-        	System.out.println(Integer.toString(lexer.getLine()));
 			file_writer.write("ERROR");
 			file_writer.write("(");
 			file_writer.write(Integer.toString(lexer.getLine()));
@@ -172,7 +170,7 @@ dec			::=		varDec:d 				{: RESULT = new AST_VARDEC_DEC(d);				:}
 					;
 
 type		::= 	TYPE_INT			{: RESULT = new AST_TYPE("int", false);				:}  
-					| TYPE_STRING 		{: RESULT = new AST_TYPE("String", false);			:}
+					| TYPE_STRING 		{: RESULT = new AST_TYPE("string", false);			:}
 					| TYPE_VOID 			{: RESULT = new AST_TYPE("void", false);		:}
 					| ID:name				{: RESULT = new AST_TYPE(name, true);			:}
 					;
