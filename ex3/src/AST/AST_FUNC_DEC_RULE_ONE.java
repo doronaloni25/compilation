@@ -13,7 +13,7 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
 @Overrride
  public TYPE SemantMe()
  {
-     if(SYMBOL_TABLE.getInstance().inFunction!==null)
+     if(SYMBOL_TABLE.getInstance().inFunction != null)
     {
         //TODO- throw exeption
     }

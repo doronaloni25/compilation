@@ -19,7 +19,7 @@ public class AST_FUNC_DEC_RULE_TWO extends AST_FUNC_DEC
  public TYPE SemantMe()
  {
    
-     if(SYMBOL_TABLE.getInstance().inFunction!==null)
+     if(SYMBOL_TABLE.getInstance().inFunction != null)
     {
         //TODO- throw exeption
     }
