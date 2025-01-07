@@ -38,11 +38,16 @@ public class AST_EXP_ID extends AST_EXP
 
     public TYPE SemantMe(){
         // same as AST_STMT_ID
-        TYPE_FUNCTION found_function = SYMBOL_TABLE.getInstance().find(name);
+        TYPE found_function = SYMBOL_TABLE.getInstance().find(name);
         if(found_function == null)
         {
             //  TODO: return exception with line number
         }
+        if(!found_function.isFunction(){
+            // TODO: return exception with line number
+        })  
+        // cast to type function
+        TYPE_FUNCTION found_function = (TYPE_FUNCTION)found_function;
         //check if the function has the right number of arguments
         TYPE_LIST function_arguments_list = new TYPE_LIST(null, null); 
         if(exp != null)
