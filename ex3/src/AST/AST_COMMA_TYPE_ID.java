@@ -17,4 +17,17 @@ public class AST_COMMA_TYPE_ID extends AST_Node {
         this.type = type;
         this.name = name;
     }
+
+    //this method used in funtion declaration to add the function parameters to the symbol table
+@Override
+public TYPE semantMe()
+{
+    TYPE t = type.SemantMe();
+    if(t == null)
+    {
+        //TODO- throw exeption
+    }
+    SYMBOL_TABLE.getInstance().enter(name, t);
+    return t;
+}
 }

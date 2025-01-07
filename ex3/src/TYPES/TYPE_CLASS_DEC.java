@@ -60,14 +60,53 @@ public class TYPE_CLASS_DEC extends TYPE
 		return null;
 	}
 
+
 	public void addField(TYPE t, String name)
 	{
-		TYPE_CLASS_VAR_DEC newField = new TYPE_CLASS_VAR_DEC(t, name);
-		data_members = new TYPE_CLASS_VAR_DEC_LIST(newField, data_members);
+		if(fieldInClass(name) == null)
+		{
+			TYPE_CLASS_VAR_DEC newField = new TYPE_CLASS_VAR_DEC(t, name);
+			data_members = new TYPE_CLASS_VAR_DEC_LIST(newField, data_members);
+		}
+		//cant add the same field twice
+		else
+		{
+			//TODO- throw exeption
+		}
 	}
-
+	//add the function to a class if there isnt alredy the same one(overriding), and if overloading throw exception
 	public void addFunction(TYPE_FUNCTION f)
 	{
-		function_list = new TYPE_LIST(f, function_list);
+		if(!isInMethods(f) && fieldInClass(f.name) == null)
+		{
+			function_list = new TYPE_LIST(f, function_list);
+		}
+		else
+		{
+			//TODO- throw exeption
+		}
+		
 	}
+//check if the function is already in the class, and if there is overloading throw exception
+	public boolean isInMethods(TYPE_FUNCTION f)
+	{
+		TYPE_LIST allFunction = function_list;
+		TYPE_LIST currHead allFunction.head;
+		while(currHead!=null)
+		{
+			if(currHead.name.equals(f.name))
+			{
+				if(!currHead.returnType.equals(f.returnType)|| !HelperUtils.compareTypeList(currHead.params, f.params) )
+				{
+					//TODO- throw exeption
+				}
+				else
+				{
+					return true;
+				}
+			}
+		}
+		
+	}
+	
 }

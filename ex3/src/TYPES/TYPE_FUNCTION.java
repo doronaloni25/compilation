@@ -26,4 +26,5 @@ public class TYPE_FUNCTION extends TYPE
 	public boolean isFunction() {
 		return true;
 	}
+	
 }

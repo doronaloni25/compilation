@@ -1,5 +1,5 @@
 package AST;
-
+import TYPES.*;
 public class AST_ARRAY_TYPE_DEF_DEC extends AST_DEC 
 {
     AST_ARRAY_TYPE_DEF arrayTypedef;
