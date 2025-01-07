@@ -11,6 +11,7 @@ public class Main
 		Lexer l;
 		Parser p;
 		Symbol s;
+		int line = 1;
 		AST_DEC_LIST AST;
 		FileReader file_reader;
 		PrintWriter file_writer;
