@@ -1,4 +1,4 @@
-package HelperUtils;
+package HelperFunctions;
 
 import java.io.*;
 import java.io.PrintWriter;
@@ -6,7 +6,7 @@ import java_cup.runtime.Symbol;
 import TYPES.*;
 import AST.*;
 
-public class HelperUtils{
+public class HelperFunctions{
     
     public static PrintWriter file_writer = null;
 
@@ -28,7 +28,7 @@ public class HelperUtils{
         return false;
     }
 
-    public static boolean compareTypeLists(TYPE_LIST typelist1, TYPE_LIST typeList2) {
+    public static boolean compareTypeLists(TYPE_LIST t1, TYPE_LIST t2) {
         // Check if the arguments of the function are the same
         if (t1 == null && t2 == null) {
             return true;
@@ -50,6 +50,8 @@ public class HelperUtils{
 
     public static void printError(int line)
     {
+        System.out.println("whyyyy");
+        System.out.println(Integer.toString(line));
         file_writer.write("ERROR");
 		file_writer.write("(");
 		file_writer.write(Integer.toString(line));

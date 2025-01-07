@@ -1,7 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperUtils.HelperUtils;
+import HelperFunctions.HelperFunctions;
 public class AST_TYPE extends AST_Node {
     
     public String type; 
@@ -40,7 +40,7 @@ public class AST_TYPE extends AST_Node {
         t = SYMBOL_TABLE.getInstance().find(type);
         if (t == null) 
         {
-            HelperUtils.printError(line);
+            HelperFunctions.printError(line);
         }
         return t;
     }

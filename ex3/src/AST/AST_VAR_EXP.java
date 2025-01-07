@@ -1,7 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperUtils.HelperUtils;
+import HelperFunctions.HelperFunctions;
 public class AST_VAR_EXP extends AST_VAR
 {
 	public AST_VAR var;
@@ -62,22 +62,22 @@ public class AST_VAR_EXP extends AST_VAR
 	public TYPE SemantMe() {
 		TYPE expType = exp.SemantMe();
 		if (expType == null) {
-			HelperUtils.printError(line);
+			HelperFunctions.printError(line);
 		}
 		//if the expression is not an int (it is an array[exp])
 		if(expType != TYPE_INT.getInstance()) {
-			HelperUtils.printError(line);
+			HelperFunctions.printError(line);
 		}
 		// if exp is constant, check if its not negative
-		if(HelperUtils.isConstant(exp) && ((AST_EXP_INT)exp).value < 0) {
-			HelperUtils.printError(line);
+		if(HelperFunctions.isConstant(exp) && ((AST_EXP_INT)exp).value < 0) {
+			HelperFunctions.printError(line);
 		}
 		// the next line also takes care of verifying the var is well defined.
 		TYPE varType = var.SemantMe();
 
 		if(varType == null || !varType.isArray())
 		{
-			HelperUtils.printError(line);
+			HelperFunctions.printError(line);
 		}
 		TYPE_ARRAY array = (TYPE_ARRAY) varType;
 		return array.getType();

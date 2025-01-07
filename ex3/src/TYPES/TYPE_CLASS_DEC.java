@@ -1,5 +1,5 @@
 package TYPES;
-
+import HelperFunctions.HelperFunctions;
 public class TYPE_CLASS_DEC extends TYPE
 {
 	// THIS CLASS REPRESENTS A CLASS DECLARATION IN THE LANGUAGE
@@ -13,7 +13,7 @@ public class TYPE_CLASS_DEC extends TYPE
 	/* Note that data members coming from the AST are */
 	/* packed together wcurrFunctionh the class methods         */
 	/**************************************************/
-	public TYPE_LIST data_members;
+	public TYPE_CLASS_VAR_DEC_LIST data_members;
 	public TYPE_LIST function_list;
 	
 	@Override
@@ -39,21 +39,21 @@ public class TYPE_CLASS_DEC extends TYPE
 		{
 			if(currFunction.head.name.equals(name))
 			{
-				return currFunction.head;
+				return (TYPE_FUNCTION)currFunction.head;
 			}
 			currFunction = currFunction.tail;
 		}
 		return null;
 	}
 	//check if a field is in the class and return its type
-	public TYPE fieldInClass(String name)
+	public TYPE_CLASS_VAR_DEC fieldInClass(String name)
 	{
 		TYPE_CLASS_VAR_DEC_LIST currField = data_members;
 		while(currField != null)
 		{
 			if(currField.head.name.equals(name))
 			{
-				return currField.head.t;
+				return currField.head;
 			}
 			currField = currField.tail;
 		}
@@ -61,7 +61,7 @@ public class TYPE_CLASS_DEC extends TYPE
 	}
 
 
-	public void addField(TYPE t, String name)
+	public void addField(String name, TYPE t)
 	{
 		if(fieldInClass(name) == null)
 		{
@@ -75,9 +75,9 @@ public class TYPE_CLASS_DEC extends TYPE
 		}
 	}
 	//add the function to a class if there isnt alredy the same one(overriding), and if overloading throw exception
-	public void addFunction(TYPE_FUNCTION f)
+	public void addFunction(TYPE_FUNCTION f, int line)
 	{
-		if(!isInMethods(f) && fieldInClass(f.name) == null)
+		if(!isInMethods(f, line) && fieldInClass(f.name) == null)
 		{
 			function_list = new TYPE_LIST(f, function_list);
 		}
@@ -88,25 +88,26 @@ public class TYPE_CLASS_DEC extends TYPE
 		
 	}
 //check if the function is already in the class, and if there is overloading throw exception
-	public boolean isInMethods(TYPE_FUNCTION f)
+	public boolean isInMethods(TYPE_FUNCTION f, int line)
 	{
 		TYPE_LIST allFunction = function_list;
-		TYPE_LIST currHead allFunction.head;
-		while(currHead!=null)
+		TYPE_FUNCTION currHead;
+		while(allFunction.head!=null)
 		{
+			currHead = (TYPE_FUNCTION)allFunction.head;
 			if(currHead.name.equals(f.name))
 			{
-				if(!currHead.returnType.equals(f.returnType)|| !HelperUtils.compareTypeList(currHead.params, f.params) )
+				if(!currHead.returnType.equals(f.returnType)|| !HelperFunctions.compareTypeLists(currHead.params, f.params) )
 				{
-					//TODO- throw exeption
+					HelperFunctions.printError(line);
 				}
 				else
 				{
 					return true;
 				}
 			}
+			allFunction = allFunction.tail;
 		}
-		
+		return false;
 	}
-	
 }

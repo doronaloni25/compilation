@@ -1,7 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.SYMBOL_TABLE;
-import HelperUtils.HelperUtils;
+import HelperFunctions.HelperFunctions;
 public class AST_ARRAY_TYPE_DEF extends AST_Node{
     public String name;
     public AST_TYPE type;
@@ -16,19 +16,24 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node{
         System.out.print("====================== AST_ARRAY_TYPE_DEF -> ARRAY ID EQ type LBRACK RBRACK SEMICOLON \n");
     }
 
-    public TYPE semantMe(){
+    public TYPE SemantMe(){
         // can only declare array in global scope
         if (!SYMBOL_TABLE.getInstance().isGlobalScope()){
-            HelperUtils.printError(line);
+            HelperFunctions.printError(line);
         }
 
-        ARRAY_TYPE t = type.semantMe(); 
-        
-        // can only declare array of existing class
-        if (SYMBOL_TABLE.getInstance().find(t) == null){
-            HelperUtils.printError(line);
+        // check if name is occupied
+        TYPE checkNameType = SYMBOL_TABLE.getInstance().find(name);
+        if (checkNameType != null){
+            HelperFunctions.printError(line);
         }
         
-        SYMBOL_TABLE.getInstance().enter(name, t);
+        TYPE t = type.SemantMe();
+        if (t == null){
+            HelperFunctions.printError(line);
+        }
+        TYPE_ARRAY newArray = new TYPE_ARRAY(t); 
+        SYMBOL_TABLE.getInstance().enter(name, newArray);
+        return newArray;
     }
 }

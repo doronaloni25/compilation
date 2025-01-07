@@ -1,7 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperUtils.HelperUtils;
+import HelperFunctions.HelperFunctions;
 public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC 
 {
     
@@ -24,20 +24,22 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC
         TYPE_CLASS_DEC classType = SYMBOL_TABLE.getInstance().inClass;
         if(classType != null)
         {
-            // TODO: return exception with line number
+            HelperFunctions.printError(line);
         }
         TYPE newExpType = neExp.SemantMe();
         if (newExpType == null)
         {
-            // TODO: return exception with line number
+            HelperFunctions.printError(line);
         }
         TYPE currType = super.SemantMe();
-        if (HelperUtils.isInhiritedFromOrNil(newExpType, currType)) {
+        if (HelperFunctions.isInhiritedFromOrNil(newExpType, currType)) {
             return currType;
         }
         else {
-            // TODO: return exception with line number
+            HelperFunctions.printError(line);
         }
+        // unreachable code
+        return currType;
     }
 }
 

@@ -1,7 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperUtils.HelperUtils;
+import HelperFunctions.HelperFunctions;
 public class AST_COMMA_TYPE_ID extends AST_Node {
     
     public AST_TYPE type; 
@@ -22,7 +22,7 @@ public class AST_COMMA_TYPE_ID extends AST_Node {
 
     //this method used in funtion declaration to add the function parameters to the symbol table
 @Override
-public TYPE semantMe()
+public TYPE SemantMe()
 {
     TYPE t = type.SemantMe();
     if(t == null)

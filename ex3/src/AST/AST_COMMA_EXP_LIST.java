@@ -1,7 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperUtils.HelperUtils;
+import HelperFunctions.HelperFunctions;
 public class AST_COMMA_EXP_LIST extends AST_LIST
 {
 	/****************/
@@ -34,6 +34,16 @@ public class AST_COMMA_EXP_LIST extends AST_LIST
 	}
 
 	//semant me is implemented in AST_LIST
-	
+	@Override
+    public AST_EXP getHead() 
+	{
+        return this.head;
+    }
+
+    @Override
+    public AST_COMMA_EXP_LIST getTail() 
+	{
+        return this.tail;
+    }
 	
 }

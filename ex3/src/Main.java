@@ -3,7 +3,7 @@ import java.io.*;
 import java.io.PrintWriter;
 import java_cup.runtime.Symbol;
 import AST.*;
-import HelperUtils.HelperUtils;
+import HelperFunctions.HelperFunctions;
 public class Main
 {
 	static public void main(String argv[])
@@ -12,7 +12,7 @@ public class Main
 		Parser p;
 		Symbol s;
 		int line = 1;
-		AST_DEC_LIST AST;
+		AST_PROGRAM AST;
 		FileReader file_reader;
 		PrintWriter file_writer;
 		String inputFilename = argv[0];
@@ -39,7 +39,7 @@ public class Main
 			/*******************************/
 			/* [4] Initialize a new parser */
 			/*******************************/
-			p = new Parser(l);
+			p = new Parser(l, file_writer);
 
 			/***********************************/
 			/* [5] 3 ... 2 ... 1 ... Parse !!! */

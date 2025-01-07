@@ -1,7 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperUtils.HelperUtils;
+import HelperFunctions.HelperFunctions;
 public class AST_CLASS_DEC_TWO extends AST_CLASS_DEC_ONE 
 {
     
@@ -18,17 +18,17 @@ public class AST_CLASS_DEC_TWO extends AST_CLASS_DEC_ONE
     @Override
      public TYPE SemantMe() 
      {
-        
-        SYMBOL_TABLE.getInstance().inClass = classType;
         TYPE isFirstTime = SYMBOL_TABLE.getInstance().find(name);
-        TYPE fatherType = SYMBOL_TABLE.getInstance().find(name2);
+        TYPE fatherT = SYMBOL_TABLE.getInstance().find(nameTwo);
         // checks this is the first decleration of the class, in the global scope and we have a father (thats a class dec)
-        if(isFirstTime != null || fatherType == null || !SYMBOL_TABLE.getInstance().isGlobalScope() || !fatherType.isClassDec())
+        if(isFirstTime != null || fatherT == null || !SYMBOL_TABLE.getInstance().isGlobalScope() || !fatherT.isClassDec())
         {
             //TODO: return exception with line number
         }
+        TYPE_CLASS_DEC fatherType = (TYPE_CLASS_DEC)fatherT;
         //give the son all father parameters
-        TYPE_CLASS_DEC classType = new TYPE_CLASS_DEC( (TYPE_CLASS_DEC)fatherType, name);
+        TYPE_CLASS_DEC classType = new TYPE_CLASS_DEC(fatherType, name);
+        SYMBOL_TABLE.getInstance().inClass = classType;
         classType.function_list = fatherType.function_list;
         classType.data_members = fatherType.data_members;
         SYMBOL_TABLE.getInstance().enter(name, classType);

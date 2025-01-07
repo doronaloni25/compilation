@@ -1,7 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperUtils.HelperUtils;
+import HelperFunctions.HelperFunctions;
 public class AST_STMT_VAR_DOT extends AST_STMT
 {
     AST_VAR v;
@@ -41,19 +41,19 @@ public class AST_STMT_VAR_DOT extends AST_STMT
     {
         // we work on "class.function() or class.function(exp, exp, exp)"
 
-        TYPE varType = v.SemantMe();
+        TYPE varTypeT = v.SemantMe();
         //check if the variable is a class type
-        if(varType == null || !(varType.isClass()))
+        if(varTypeT == null || !(varTypeT.isClass()))
         {
-            HelperUtils.printError(line);
+            HelperFunctions.printError(line);
         }
         // cast to type class
-        TYPE_CLASS varType = (TYPE_CLASS)varType;
+        TYPE_CLASS varType = (TYPE_CLASS)varTypeT;
         //check if the class has a method with the given name
         TYPE_FUNCTION found_function = varType.classDec.functionInClass(name);
         if(found_function == null)
         {
-            HelperUtils.printError(line);
+            HelperFunctions.printError(line);
         }
         //check if the function has the right number of arguments
         TYPE_LIST function_arguments_list = new TYPE_LIST(null, null); 
@@ -65,9 +65,9 @@ public class AST_STMT_VAR_DOT extends AST_STMT
                 function_arguments_list.tail = expList.SemantMe();
             }
         }
-        if(!compareTypeLists(function_arguments_list, found_function.params))
+        if(!HelperFunctions.compareTypeLists(function_arguments_list, found_function.params))
         {
-            HelperUtils.printError(line);
+            HelperFunctions.printError(line);
         }
         return found_function.returnType;
     }

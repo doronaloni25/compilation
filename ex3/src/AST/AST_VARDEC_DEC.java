@@ -1,7 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperUtils.HelperUtils;
+import HelperFunctions.HelperFunctions;
 public class AST_VARDEC_DEC extends AST_DEC
 {
     public AST_VAR_DEC varDec;
@@ -11,7 +11,7 @@ public class AST_VARDEC_DEC extends AST_DEC
         System.out.println("====================== DEC -> varDec");
     }
 
-    public TYPE semantMe() {
-        return varDec.semantMe();
+    public TYPE SemantMe() {
+        return varDec.SemantMe();
     }
 }

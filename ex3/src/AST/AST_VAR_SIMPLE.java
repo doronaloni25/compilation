@@ -1,7 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperUtils.HelperUtils;
+import HelperFunctions.HelperFunctions;
 public class AST_VAR_SIMPLE extends AST_VAR
 {
 	/************************/
@@ -50,23 +50,23 @@ public class AST_VAR_SIMPLE extends AST_VAR
 	@Override
 	public TYPE SemantMe() {
 		// if the variable is accessed within class, need to make sure it is defined
-		TYPE_CLASS_DEC classDec = SYMBOL_TABLE.getInstance().inClass();
+		TYPE_CLASS_DEC classDec = SYMBOL_TABLE.getInstance().inClass;
 		if (classDec != null){
 			TYPE_CLASS_VAR_DEC fieldDec = classDec.fieldInClass(name); 
 			if (fieldDec == null){
 				// Attempt finding name in global scope if not found in class's ancestors scopes
 				TYPE type = SYMBOL_TABLE.getInstance().find(name);
 				if(type == null) {
-					HelperUtils.printError(line);
+					HelperFunctions.printError(line);
 				}
 				return type;
 			}
 			return fieldDec.t;
 		}
 		// Not in class scope, check if the variable is defined
-		TYPE type =SYMBOL_TABLE.getInstance().find(name) 
+		TYPE type =SYMBOL_TABLE.getInstance().find(name); 
 		if(type == null) {
-			HelperUtils.printError(line);
+			HelperFunctions.printError(line);
 		}
 		return type;
 

@@ -1,7 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperUtils.HelperUtils;
+import HelperFunctions.HelperFunctions;
 public class AST_COMMA_TYPE_ID_LIST extends AST_LIST
 {
 	/****************/
@@ -34,8 +34,15 @@ public class AST_COMMA_TYPE_ID_LIST extends AST_LIST
 	}
 	
 	//semant me implented in AST_LIST (semant me on each (name, type)pair implemented in AST_COMMA_TYPE_ID)
+	@Override
+    public AST_COMMA_TYPE_ID getHead() 
+	{
+        return this.head;
+    }
 
-
-
-	
+    @Override
+    public AST_COMMA_TYPE_ID_LIST getTail() 
+	{
+        return this.tail;
+    }
 }
