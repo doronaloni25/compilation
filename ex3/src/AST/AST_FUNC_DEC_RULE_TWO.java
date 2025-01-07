@@ -1,5 +1,7 @@
 package AST;
-
+import TYPES.*;
+import SYMBOL_TABLE.*;
+import HelperUtils.HelperUtils;
 public class AST_FUNC_DEC_RULE_TWO extends AST_FUNC_DEC
 { 
 	public AST_TYPE typeTwo;
@@ -21,12 +23,12 @@ public class AST_FUNC_DEC_RULE_TWO extends AST_FUNC_DEC
    
      if(SYMBOL_TABLE.getInstance().inFunction!==null)
     {
-        //TODO- throw exeption
+        HelperUtils.printError(line);
     }
     TYPE returnType = type.SemantMe();
     if(returnType == null)
     {
-        //TODO- throw exeption
+        HelperUtils.printError(line);
     }
 
     TYPE_CLASS_DEC classDec = SYMBOL_TABLE.getInstance.inClass();
@@ -47,7 +49,7 @@ public class AST_FUNC_DEC_RULE_TWO extends AST_FUNC_DEC
         TYPE functionReturnType = stmtList.SemantMe();
         if(HelperUtils.isInhiritedFromOrNil(functionReturnType, returnType) == false)
         {
-            //TODO- throw exeption
+            HelperUtils.printError(line);
         }
         
         classDec.addFunction(function);
@@ -60,15 +62,15 @@ public class AST_FUNC_DEC_RULE_TWO extends AST_FUNC_DEC
     else{
             if (SYMBOL_TABLE.getInstance().find(name) != null)
             {
-                //TODO - throw exception
+                HelperUtils.printError(line);
             }
             if (SYMBOL_TABLE.getInstance().isGlobalScope() == false)
             {
-                //TODO- throw exeption
+                HelperUtils.printError(line);
             }
             if (name.equals("PrintInt") || name.equals("PrintString"))
                 {
-                        //TODO- throw exeption
+                    HelperUtils.printError(line);
                 }
             
             SYMBOL_TABLE.getInstance.beginScope();
@@ -82,7 +84,7 @@ public class AST_FUNC_DEC_RULE_TWO extends AST_FUNC_DEC
             TYPE functionReturnType = stmtList.SemantMe();
             if(HelperUtils.isInhiritedFromOrNil(functionReturnType, returnType) == false)
                 {
-                    //TODO- throw exeption
+                    HelperUtils.printError(line);
                 }
             SYMBOL_TABLE.getInstance().endScope();
             SYMBOL_TABLE.getInstance().inFunction = null;

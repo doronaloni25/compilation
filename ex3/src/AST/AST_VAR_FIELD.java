@@ -1,5 +1,7 @@
 package AST;
 import TYPES.*;
+import SYMBOL_TABLE.*;
+import HelperUtils.HelperUtils;
 public class AST_VAR_FIELD extends AST_VAR
 {
 	public AST_VAR var;
@@ -61,14 +63,14 @@ public class AST_VAR_FIELD extends AST_VAR
 		// the next line also takes care of verifying the var is well defined.
 		TYPE varType = var.SemantMe();
 		if(vartype == null) {
-			//TODO- throw exception, the identifier is not defined
+			HelperUtils.printError(line);
 		}
 		//make sure the variable is a class, so you can access its fields
 		if(varType.isClass()) {
 			TYPE_CLASS classType = (TYPE_CLASS)varType;
 		}
 		else {
-			//TODO- throw exception, the variable is not a class
+			HelperUtils.printError(line);
 		}
 		//check if the field is defined in the class, and if it is, return its type
 		TYPE fieldType = classType.classDec.fieldInClass(fieldName);
@@ -77,7 +79,7 @@ public class AST_VAR_FIELD extends AST_VAR
 		}
 		else
 		{
-			//TODO- throw exception, the field is not defined
+			HelperUtils.printError(line);
 		}
 		return null;
 	}

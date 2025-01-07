@@ -1,6 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
+import HelperUtils.HelperUtils;
 public class AST_VAR_SIMPLE extends AST_VAR
 {
 	/************************/
@@ -56,7 +57,7 @@ public class AST_VAR_SIMPLE extends AST_VAR
 				// Attempt finding name in global scope if not found in class's ancestors scopes
 				TYPE type = SYMBOL_TABLE.getInstance().find(name);
 				if(type == null) {
-					//TODO- throw exception, the identifier is not defined
+					HelperUtils.printError(line);
 				}
 				return type;
 			}
@@ -65,7 +66,7 @@ public class AST_VAR_SIMPLE extends AST_VAR
 		// Not in class scope, check if the variable is defined
 		TYPE type =SYMBOL_TABLE.getInstance().find(name) 
 		if(type == null) {
-			//TODO- throw exception, the identifier is not defined
+			HelperUtils.printError(line);
 		}
 		return type;
 

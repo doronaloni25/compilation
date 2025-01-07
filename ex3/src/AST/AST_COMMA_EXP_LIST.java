@@ -1,7 +1,7 @@
 package AST;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperUtils;
+import HelperUtils.HelperUtils;
 public class AST_COMMA_EXP_LIST extends AST_LIST
 {
 	/****************/

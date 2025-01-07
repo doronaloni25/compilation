@@ -1,6 +1,7 @@
 package AST;
 import TYPES.*;
-
+import SYMBOL_TABLE.*;
+import HelperUtils.HelperUtils;
 public class AST_EXP_VAR extends AST_EXP
 {
 	public AST_VAR var;
@@ -60,7 +61,7 @@ public class AST_EXP_VAR extends AST_EXP
 		TYPE t = var.SemantMe();
 		if (t == null)
 		{
-			// TODO: throw exception
+			HelperUtils.printError(line);
 		}
 		return t;
 	}

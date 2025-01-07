@@ -1,4 +1,7 @@
 package AST;
+import TYPES.*;
+import SYMBOL_TABLE.*;
+import HelperUtils.HelperUtils;
 
 public class AST_STMT_ASSIGN extends AST_STMT
 {
@@ -45,7 +48,7 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		TYPE t2 = exp.SemantMe();
 		if(!isInhiritedFromOrNil(t2, t1))
 		{
-			//TODO: return exception with line number
+			HelperUtils.printError(line);
 		}
 		return t1;
 	}

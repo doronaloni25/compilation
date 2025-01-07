@@ -1,5 +1,7 @@
 package AST;
 import TYPES.*;
+import SYMBOL_TABLE.*;
+import HelperUtils.HelperUtils;
 public class AST_COMMA_TYPE_ID extends AST_Node {
     
     public AST_TYPE type; 

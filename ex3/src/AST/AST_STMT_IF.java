@@ -1,6 +1,7 @@
 package AST;
-import TYPES.TYPE;
-import SymbolTable.SYMBOL_TABLE;
+import TYPES.*;
+import SYMBOL_TABLE.*;
+import HelperUtils.HelperUtils;
 public class AST_STMT_IF extends AST_STMT
 {
 	public AST_EXP cond;
@@ -27,18 +28,19 @@ public class AST_STMT_IF extends AST_STMT
 		TYPE t = cond.SemantMe();
 		if (t == null)
 		{
-			// TODO: return exception with line number
+			HelperUtils.printError(line);
 		}
 		TYPE_INT intType = TYPE_INT.getInstance();
 		if(t != intType)
 		{
-			//TODO: return exception with line number
+			HelperUtils.printError(line);
 		}
 		//need to open scope for the if body
 		SYMBOL_TABLE.getInstance().beginScope();
 		body.SemantMe();
-		if (t == null){
-			// TODO: return exception with line number
+		if (t == null)
+		{
+			HelperUtils.printError(line);
 		}
 		SYMBOL_TABLE.getInstance().endScope();
 		return intType;

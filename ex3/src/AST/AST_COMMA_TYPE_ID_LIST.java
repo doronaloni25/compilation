@@ -1,6 +1,7 @@
 package AST;
 import TYPES.*;
-
+import SYMBOL_TABLE.*;
+import HelperUtils.HelperUtils;
 public class AST_COMMA_TYPE_ID_LIST extends AST_LIST
 {
 	/****************/
