@@ -25,6 +25,10 @@ public class AST_STMT_IF extends AST_STMT
     public TYPE SemantMe() 
     {
 		TYPE t = cond.SemantMe();
+		if (t == null)
+		{
+			// TODO: return exception with line number
+		}
 		TYPE_INT intType = TYPE_INT.getInstance();
 		if(t != intType)
 		{
@@ -33,6 +37,9 @@ public class AST_STMT_IF extends AST_STMT
 		//need to open scope for the if body
 		SYMBOL_TABLE.getInstance().beginScope();
 		body.SemantMe();
+		if (t == null){
+			// TODO: return exception with line number
+		}
 		SYMBOL_TABLE.getInstance().endScope();
 		return intType;
 	}

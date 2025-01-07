@@ -4,6 +4,7 @@ import java.io.*;
 import java.io.PrintWriter;
 import java_cup.runtime.Symbol;
 import TYPES.*;
+import AST.*;
 
 public class HelperUtils{
     public static boolean isInhiritedFromOrNil(TYPE t1, TYPE t2) {
@@ -34,6 +35,10 @@ public class HelperUtils{
             return false;
         }
         return compareTypeLists(t1.tail, t2.tail);
+    }
+
+    public static boolean isConstant(AST_EXP exp){
+        return (exp instanceof AST_EXP_INT || exp instanceof AST_EXP_STRING || exp instanceof AST_EXP_NIL);   
     }
 
    

@@ -26,7 +26,18 @@ public class AST_VAR_DEC extends AST_DEC
             //TODO: return exception with line number
         }
         TYPE t = type.SemantMe();
+        if (t == null)
+        {
+            // TODO: return exception with line number
+        }
         SYMBOL_TABLE.getInstance().enter(name, t);
+        // check if im in class scope, and if so add to the class fields
+        TYPE_CLASS_DEC classType = SYMBOL_TABLE.getInstance().inClass;
+        if(classType != null)
+        {
+            // This also checks that the field was not declared before (in any ancestor of the class)
+            classType.addField(name, t);
+        }
         return t;
     }
 }
