@@ -1,5 +1,6 @@
 package AST;
 import TYPES.*;
+import HelperUtils.HelperUtils;
 
 public class AST_EXP_VAR_DOT extends AST_EXP
 {
@@ -37,15 +38,36 @@ public class AST_EXP_VAR_DOT extends AST_EXP
     }
 
     public TYPE SemantMe(){
-        // TODO: implement
-        if (exp == null){
+        // we work on "class.function() or class.function(exp, exp, exp)"
 
+        TYPE varType = v.SemantMe();
+        //check if the variable is a class type
+        if(varType == null || !(varType.isClass()))
+        {
+            //TODO: return exception with line number
         }
-        else if (expList == null){
-
+        // cast to type class
+        TYPE_CLASS varType = (TYPE_CLASS)varType;
+        //check if the class has a method with the given name
+        TYPE_FUNCTION found_function = varType.functionInClass(name);
+        if(found_function == null)
+        {
+            //  TODO: return exception with line number
         }
-        else{
-
+        //check if the function has the right number of arguments
+        TYPE_LIST function_arguments_list = new TYPE_LIST(null, null); 
+        if(exp != null)
+        {
+            function_arguments_list.head = exp.SemantMe();
+            if(expList == null)
+            {
+                function_arguments_list.tail = expList.SemantMe();
+            }
         }
+        if(!compareTypeLists(function_arguments_list, found_function.params))
+        {
+            //TODO: return exception with line number
+        }
+        return found_function.returnType;
     }
 }

@@ -1,6 +1,7 @@
 package AST;
-import TYPES.TYPE;
+import TYPES.*;
 import SymbolTable.SYMBOL_TABLE;
+import HelperUtils.HelperUtils;
 public class AST_STMT_ID extends AST_STMT
 {
     String name;
@@ -36,11 +37,17 @@ public class AST_STMT_ID extends AST_STMT
     @Override
     public TYPE SemantMe() 
     {
-        TYPE_FUNCTION found_function = SYMBOL_TABLE.getInstance().find(name);
+        TYPE found_function = SYMBOL_TABLE.getInstance().find(name);
         if(found_function == null)
         {
             //  TODO: return exception with line number
         }
+        //check if the function has the right number of arguments
+        if(!found_function.isFunction(){
+            // TODO: return exception with line number
+        })  
+        // cast to type function
+        TYPE_FUNCTION found_function = (TYPE_FUNCTION)found_function;
         //check if the function has the right number of arguments
         TYPE_LIST function_arguments_list = new TYPE_LIST(null, null); 
         if(exp != null)
