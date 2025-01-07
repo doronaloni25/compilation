@@ -17,4 +17,8 @@ public class AST_COMMA_TYPE_ID extends AST_Node {
         this.type = type;
         this.name = name;
     }
+
+    //TODO- implement semantme, insert to symbol table without checking if the name is already in the table, 
+    //since these are arguments to function declraion, but the type does exist in the symbol table/
+    //return TYPLE_LIST of inly types' and insert the names of the arguments to the symbol table
 }

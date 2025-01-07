@@ -18,38 +18,70 @@ public class AST_FUNC_DEC_RULE_TWO extends AST_FUNC_DEC
 @Overrride
  public TYPE SemantMe()
  {
-    //TODO- check if in the global scope
-    //check if not overloading
-    //their names should not be PrintMe and PrintString
-    SYMBOL_TABLE.getInstance.beginScope();
-    funcReturnType = type.SemantMe();
-    if (SYMBOL_TABLE.getInstance().find(name) != null)
-    {
-        //TODO - throw exception
-    }
-    if (SYMBOL_TABLE.getInstance().isGlobalScope() == False)
-    {
-        //TODO- throw exeption
-    }
+   
     if (name.equals("PrintInt") || name.equals("PrintString"))
+      {
+            //TODO- throw exeption
+      }
+
+    TYPE returnType = type.SemantMe();
+    if(returnType == null)
     {
         //TODO- throw exeption
     }
-    //name2,type2 = the parametersList
-    //one paramter, assume that after semantme on paramList, paramList is already in the symbol table
-    TYPE param = type2.SemantMe();
-    TYPE_LIST paramList= new TYPE_LIST(param,null);
-    paramList.semantMe();
-    stmtList.SemantMe();
-    SYMBOL_TABLE.getInstance().endScope();
-    //enter the function to the symbol table, afrter stmstList is done
-    TYPE_FUNCTION function = new TYPE_FUNCTION(funcReturnType, name, paramList);
-    SYMBOL_TABLE.getInstance().enter(name, function);
-    return function;
-    
 
- }
+    TYPE_CLASS_DEC classDec = SYMBOL_TABLE.getInstance.inClass();
+    //function declaration inside a class
+    if(classDec!=null)
+    {
+        
+        SYMBOL_TABLE.getInstance.beginScope();
+        AST_COMMA_TYPE_ID commaTypeId  = new AST_COMMA_TYPE_ID(typeTwo, nameTwo);
+        AST_COMMA_TYPE_ID_LIST commaTypeIdList = new AST_COMMA_TYPE_ID_LIST(commaTypeId, null);
+        //asume semantMe on commaTypeidList returns TYPE_LIST contains only the types, and doesnt check if they are already in the symbol table
+        TYPE_LIST paramList = commaTypeIdList.SemantMe();
+        TYPE_FUNCTION function = new TYPE_FUNCTION(returnType, name, paramList);
+        SYMBOL_TABLE.getInstance().inFunction = function;
 
-//TODO - implement classSemantMe
+        TYPE functionReturnType = stmtList.SemantMe();
+        if(HelperUtils.isInhiritedFromOrNil(functionReturnType, returnType) == false)
+        {
+            //TODO- throw exeption
+        }
+        
+        classDec.addFunction(function);
+        SYMBOL_TABLE.getInstance().endScope();
+        SYMBOL_TABLE.getInstance().inFunction = null;
+        SYMNOL_TABLE.getInstance().enter(name, function);
+        return function;
+    }
+    //function declaration in a global scope
+    else{
+            if (SYMBOL_TABLE.getInstance().find(name) != null)
+            {
+                //TODO - throw exception
+            }
+            if (SYMBOL_TABLE.getInstance().isGlobalScope() == false)
+            {
+                //TODO- throw exeption
+            }
+            SYMBOL_TABLE.getInstance.beginScope();
+            AST_COMMA_TYPE_ID commaTypeId  = new AST_COMMA_TYPE_ID(typeTwo, nameTwo);
+            AST_COMMA_TYPE_ID_LIST commaTypeIdList = new AST_COMMA_TYPE_ID_LIST(commaTypeId, null);
+            //asume semantMe on commaTypeidList returns TYPE_LIST contains only the types, and doesnt check if they are already in the symbol table
+            TYPE_LIST paramList = commaTypeIdList.SemantMe();
+            TYPE_FUNCTION function = new TYPE_FUNCTION(returnType, name, paramList);
+            SYMBOL_TABLE.getInstance().inFunction = function;
 
+            TYPE functionReturnType = stmtList.SemantMe();
+            if(HelperUtils.isInhiritedFromOrNil(functionReturnType, returnType) == false)
+                {
+                    //TODO- throw exeption
+                }
+            SYMBOL_TABLE.getInstance().endScope();
+            SYMBOL_TABLE.getInstance().inFunction = null;
+            SYMBOL_TABLE.getInstance().enter(name, function);
+            return function;
+        }
+    }
 }

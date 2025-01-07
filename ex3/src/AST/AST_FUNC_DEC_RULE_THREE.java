@@ -15,7 +15,7 @@ public class AST_FUNC_DEC_RULE_THREE extends AST_FUNC_DEC
 
         System.out.format("====================== funcDec -> type ID LPAREN RPAREN LBRACE STMT_LIST RBRACE \n");
     }
-
+//TOD-change according to the rule one and rule two
 @Overrride
  public TYPE SemantMe()
  {
