@@ -38,7 +38,7 @@ public class AST_STMT_RETURN extends AST_STMT {
 		{
 			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
-		// if the return type is void, the expression should be null
+		// if the expression is null, the return type should be void
 		if(exp == null)
 		{
 			if(currentFunction.returnType != TYPE_VOID.getInstance())
@@ -47,10 +47,12 @@ public class AST_STMT_RETURN extends AST_STMT {
 			}
 			return TYPE_VOID.getInstance();
 		}
-		// if the return type is not void, we should check the expression
+		// if the expression isnt null
 		else
 		{
 			TYPE t = exp.SemantMe();
+			System.out.println("return type is " + t.name);
+			System.out.println("return type of func is " + currentFunction.returnType.name);
 			//check if the return type is the same as the expression type or son of it
 			if(!HelperFunctions.isInhiritedFromOrNil(t, currentFunction.returnType))
 			{

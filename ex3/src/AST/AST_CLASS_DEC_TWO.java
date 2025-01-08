@@ -23,7 +23,7 @@ public class AST_CLASS_DEC_TWO extends AST_CLASS_DEC_ONE
         // checks this is the first decleration of the class, in the global scope and we have a father (thats a class dec)
         if(isFirstTime != null || fatherT == null || !SYMBOL_TABLE.getInstance().isGlobalScope() || !fatherT.isClassDec())
         {
-            //TODO: return exception with line number
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         TYPE_CLASS_DEC fatherType = (TYPE_CLASS_DEC)fatherT;
         //give the son all father parameters

@@ -64,7 +64,7 @@ public class TYPE_CLASS_DEC extends TYPE
 	}
 
 
-	public void addField(String name, TYPE t)
+	public void addField(String name, TYPE t, int line)
 	{
 		if(fieldInClass(name) == null)
 		{
@@ -74,7 +74,7 @@ public class TYPE_CLASS_DEC extends TYPE
 		//cant add the same field twice
 		else
 		{
-			//TODO- throw exeption
+			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
 	}
 	//add the function to a class if there isnt alredy the same one(overriding), and if overloading throw exception

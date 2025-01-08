@@ -45,6 +45,7 @@ public class AST_EXP_VAR_DOT extends AST_EXP
         //check if the variable is a class type
         if(varTypeT == null || !(varTypeT.isClass()))
         {
+            System.out.println("error, vartype isnt a class, its actually " + varTypeT.name);
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         // cast to type class
@@ -53,6 +54,7 @@ public class AST_EXP_VAR_DOT extends AST_EXP
         TYPE_FUNCTION found_function = varType.classDec.functionInClass(name);
         if(found_function == null)
         {
+            System.out.println("error, function not found in var: " + name);
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         //check if the function has the right number of arguments

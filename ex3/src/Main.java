@@ -64,7 +64,7 @@ public class Main
 			/*************************************/
 			/* [9] Finalize AST GRAPHIZ DOT file */
 			/*************************************/
-			AST_GRAPHVIZ.getInstance().finalizeFile();			
+			//AST_GRAPHVIZ.getInstance().finalizeFile();			
     	}
 			     
 		catch (Exception e)

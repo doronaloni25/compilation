@@ -37,7 +37,7 @@ public class AST_VAR_DEC extends AST_DEC
         if(classType != null)
         {
             // This also checks that the field was not declared before (in any ancestor of the class)
-            classType.addField(name, t);
+            classType.addField(name, t, line);
         }
         return t;
     }

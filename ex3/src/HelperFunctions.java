@@ -16,12 +16,14 @@ public class HelperFunctions{
     }
 
     public static boolean isInhiritedFromOrNil(TYPE t1, TYPE t2) {
-        // Check if t1 is Inherited from t2
-        if (t1 == t2) {
+        if (t1 == null && t2 == null){
             return true;
         }
-        if (t1 == null){
-            return false;
+        if (t1 == null || t2 == null){
+            return true;
+        }
+        if (t1.name == t2.name) {
+            return true;
         }
         if (t1 == TYPE_NIL.getInstance() && t2 != TYPE_STRING.getInstance() && t2 != TYPE_INT.getInstance()) {
             return true;
@@ -43,7 +45,6 @@ public class HelperFunctions{
             return false;
         }
         //arguments not the same type or not inherited
-        
         if (isInhiritedFromOrNil(t1.head, t2.head) == false) {
             return false;
         }
