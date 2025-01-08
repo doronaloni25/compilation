@@ -51,7 +51,7 @@ CUP_FLAGS =                                \
 #########################
 # DEFINITIONS :: PARSER #
 #########################
-INPUT    = ${INPUT_DIR}/Input.txt
+INPUT    = ${INPUT_DIR}/TEST_03_Merge_Lists.txt
 OUTPUT   = ${OUTPUT_DIR}/SemanticStatus.txt
 
 ##########
@@ -247,4 +247,5 @@ debug:
 	@echo "*                                                                *"
 	@echo "******************************************************************"
 	eog ${OUTPUT_DIR}/SYMBOL_TABLE_0.jpeg &
-	
+tests: 
+	./run_all_inputs.sh

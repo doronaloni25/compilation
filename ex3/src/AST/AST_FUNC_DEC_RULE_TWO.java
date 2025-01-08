@@ -11,7 +11,6 @@ public class AST_FUNC_DEC_RULE_TWO extends AST_FUNC_DEC
         super(type, name, stmtList);
         // Set a unique serial number/*  */
         SerialNumber = AST_Node_Serial_Number.getFresh();
-        this.type = null;
         this.typeTwo = typeTwo;
         this.nameTwo = nameTwo;
         System.out.format("====================== funcDec -> type ID LPAREN type ID RPAREN LBRACE STMT_LIST RBRACE \n");
@@ -33,12 +32,10 @@ public class AST_FUNC_DEC_RULE_TWO extends AST_FUNC_DEC
 
     TYPE_CLASS_DEC classDec = SYMBOL_TABLE.getInstance().inClass;
     TYPE_FUNCTION function = new TYPE_FUNCTION(returnType, name, null);
-    SYMBOL_TABLE.getInstance().enter(name, function);
     //function declaration inside a class
     if(classDec!=null)
     {
-        
-        
+        SYMBOL_TABLE.getInstance().enter(name, function);
         SYMBOL_TABLE.getInstance().beginScope();
         SYMBOL_TABLE.getInstance().inFunction = function;
         AST_COMMA_TYPE_ID commaTypeId  = new AST_COMMA_TYPE_ID(typeTwo, nameTwo);
@@ -46,12 +43,8 @@ public class AST_FUNC_DEC_RULE_TWO extends AST_FUNC_DEC
         //asume SemantMe on commaTypeidList returns TYPE_LIST contains only the types, and doesnt check if they are already in the symbol table
         TYPE_LIST paramList = commaTypeIdList.SemantMe();
         function.params = paramList;
-        TYPE functionReturnType = stmtList.SemantMe();
-        if(HelperFunctions.isInhiritedFromOrNil(functionReturnType, returnType) == false)
-        {
-            HelperFunctions.printError(line, this.getClass().getSimpleName());
-        }
-        
+        // will take care of return type matching
+        stmtList.SemantMe();
         classDec.addFunction(function, line);
         SYMBOL_TABLE.getInstance().endScope();
         SYMBOL_TABLE.getInstance().inFunction = null;
@@ -60,35 +53,32 @@ public class AST_FUNC_DEC_RULE_TWO extends AST_FUNC_DEC
     }
     //function declaration in a global scope
     else{
-            if (SYMBOL_TABLE.getInstance().find(name) != null)
-            {
-                HelperFunctions.printError(line, this.getClass().getSimpleName());
-            }
-            if (SYMBOL_TABLE.getInstance().isGlobalScope() == false)
-            {
-                HelperFunctions.printError(line, this.getClass().getSimpleName());
-            }
-            if (name.equals("PrintInt") || name.equals("PrintString"))
-                {
-                    HelperFunctions.printError(line, this.getClass().getSimpleName());
-                }
-            
-            SYMBOL_TABLE.getInstance().beginScope();
-            SYMBOL_TABLE.getInstance().inFunction = function;
-            AST_COMMA_TYPE_ID commaTypeId  = new AST_COMMA_TYPE_ID(typeTwo, nameTwo);
-            AST_COMMA_TYPE_ID_LIST commaTypeIdList = new AST_COMMA_TYPE_ID_LIST(commaTypeId, null);
-            //asume SemantMe on commaTypeidList returns TYPE_LIST contains only the types, and doesnt check if they are already in the symbol table
-            TYPE_LIST paramList = commaTypeIdList.SemantMe();
-            function.params = paramList;
-
-            TYPE functionReturnType = stmtList.SemantMe();
-            if(HelperFunctions.isInhiritedFromOrNil(functionReturnType, returnType) == false)
-                {
-                    HelperFunctions.printError(line, this.getClass().getSimpleName());
-                }
-            SYMBOL_TABLE.getInstance().endScope();
-            SYMBOL_TABLE.getInstance().inFunction = null;
-            return function;
+        if (SYMBOL_TABLE.getInstance().find(name) != null)
+        {
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
+        }
+        SYMBOL_TABLE.getInstance().enter(name, function);
+        if (SYMBOL_TABLE.getInstance().isGlobalScope() == false)
+        {
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
+        }
+        if (name.equals("PrintInt") || name.equals("PrintString"))
+        {
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
+        }
+        
+        SYMBOL_TABLE.getInstance().beginScope();
+        SYMBOL_TABLE.getInstance().inFunction = function;
+        AST_COMMA_TYPE_ID commaTypeId  = new AST_COMMA_TYPE_ID(typeTwo, nameTwo);
+        AST_COMMA_TYPE_ID_LIST commaTypeIdList = new AST_COMMA_TYPE_ID_LIST(commaTypeId, null);
+        //asume SemantMe on commaTypeidList returns TYPE_LIST contains only the types, and doesnt check if they are already in the symbol table
+        TYPE_LIST paramList = commaTypeIdList.SemantMe();
+        function.params = paramList;
+        // will take care of return type matching
+        stmtList.SemantMe();
+        SYMBOL_TABLE.getInstance().endScope();
+        SYMBOL_TABLE.getInstance().inFunction = null;
+        return function;
         }
     }
 }

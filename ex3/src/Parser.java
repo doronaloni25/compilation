@@ -357,9 +357,10 @@ public class Parser extends java_cup.runtime.lr_parser {
 	if (s.sym == TokenNames.error){
 		lexical_error_flag = true;
 	}
-	AST_Node.generalLine = lexer.getLine();
+	int line = lexer.getLine();
+	AST_Node.generalLine = line;
 	System.out.print("[");
-	System.out.print(lexer.getLine());
+	System.out.print(line);
 	System.out.print(":");
 	System.out.print(lexer.getTokenStartPosition());
 	System.out.print("] ");

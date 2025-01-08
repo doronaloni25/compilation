@@ -8,6 +8,7 @@ public class TYPE_CLASS extends TYPE
     public TYPE_CLASS(TYPE_CLASS_DEC classDec)
     {
         this.classDec = classDec;
+        this.name = classDec.name;
     }
     
     @Override

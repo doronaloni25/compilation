@@ -42,6 +42,10 @@ public class AST_TYPE extends AST_Node {
         {
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
+        // if t is a class dec, we are trying to semant an instance of the class
+        if (t.isClassDec()){
+            return new TYPE_CLASS((TYPE_CLASS_DEC)t);
+        }
         return t;
     }
 

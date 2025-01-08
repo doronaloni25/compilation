@@ -26,20 +26,16 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
         HelperFunctions.printError(line, this.getClass().getSimpleName());
     }
     TYPE_FUNCTION function = new TYPE_FUNCTION(returnType, name, null);
-    SYMBOL_TABLE.getInstance().enter(name, function);
     TYPE_CLASS_DEC classDec = SYMBOL_TABLE.getInstance().inClass;
 
     //func declaration inside a class
     if (classDec != null)
     {
-       
+        SYMBOL_TABLE.getInstance().enter(name, function);
         SYMBOL_TABLE.getInstance().beginScope();
         SYMBOL_TABLE.getInstance().inFunction = function;
-        TYPE functionReturnType = stmtList.SemantMe();
-        if(HelperFunctions.isInhiritedFromOrNil(functionReturnType, returnType) == false)
-        {
-            HelperFunctions.printError(line, this.getClass().getSimpleName());
-        }
+        // will take care of return type matching
+        stmtList.SemantMe();
         classDec.addFunction(function, line);
         SYMBOL_TABLE.getInstance().endScope();
         SYMBOL_TABLE.getInstance().inFunction = null;
@@ -49,11 +45,11 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
     }
     //func declaration in a global scope
     else{
-       
         if (SYMBOL_TABLE.getInstance().find(name) != null)
         {
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
+        SYMBOL_TABLE.getInstance().enter(name, function);
         if (!SYMBOL_TABLE.getInstance().isGlobalScope())
         {
             HelperFunctions.printError(line, this.getClass().getSimpleName());
@@ -64,17 +60,11 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
         }
         SYMBOL_TABLE.getInstance().beginScope();
         SYMBOL_TABLE.getInstance().inFunction = function;
-        TYPE functionReturnType = stmtList.SemantMe();
-        if(HelperFunctions.isInhiritedFromOrNil(functionReturnType, returnType) == false)
-            {
-                HelperFunctions.printError(line, this.getClass().getSimpleName());
-            }
-    
+        // will take care of return type matching
+        stmtList.SemantMe();
         SYMBOL_TABLE.getInstance().endScope();
         SYMBOL_TABLE.getInstance().inFunction = null;
         return function;
-        
-
     }
  }
 

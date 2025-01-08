@@ -32,6 +32,20 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         TYPE currType = super.SemantMe();
+        // if one of them is an array, both should be
+        if (currType.isArray() || newExpType.isArray()){
+            if (!(currType.isArray() && newExpType.isArray())){
+                HelperFunctions.printError(line, this.getClass().getSimpleName());
+            }
+            TYPE_ARRAY currTypeArr = (TYPE_ARRAY)currType;
+            TYPE_ARRAY newExpTypeArr = (TYPE_ARRAY)newExpType;
+            if (currTypeArr.type.name.equals(newExpTypeArr.type.name)){
+                return currTypeArr;
+            }
+            else{
+                HelperFunctions.printError(line, this.getClass().getSimpleName());
+            }          
+        }
         if (HelperFunctions.isInhiritedFromOrNil(newExpType, currType)) {
             return currType;
         }
