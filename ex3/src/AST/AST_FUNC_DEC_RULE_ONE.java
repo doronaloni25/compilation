@@ -25,7 +25,7 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
     {
         HelperFunctions.printError(line, this.getClass().getSimpleName());
     }
-    TYPE_FUNCTION function = new TYPE_FUNCTION(returnType, name, null);
+    TYPE_FUNCTION function = new TYPE_FUNCTION(returnType, name, new TYPE_LIST(null, null));
     TYPE_CLASS_DEC classDec = SYMBOL_TABLE.getInstance().inClass;
 
     //func declaration inside a class

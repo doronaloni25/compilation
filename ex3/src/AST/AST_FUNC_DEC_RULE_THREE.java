@@ -36,7 +36,7 @@ public class AST_FUNC_DEC_RULE_THREE extends AST_FUNC_DEC
         }
 
         TYPE_CLASS_DEC classDec = SYMBOL_TABLE.getInstance().inClass;
-        TYPE_FUNCTION function = new TYPE_FUNCTION(returnType, name, null);
+        TYPE_FUNCTION function = new TYPE_FUNCTION(returnType, name, new TYPE_LIST(null, null));
         
         //function declaration inside a class
         if(classDec!=null)
