@@ -22,13 +22,20 @@ public class HelperFunctions{
         if (t1 == null || t2 == null){
             return true;
         }
-        if (t1.name == t2.name) {
+        System.out.print("inhertince check, t1 name is " + t1.name);
+        System.out.println("; t2 name is " + t2.name);
+        if (t1.name.equals(t2.name)) {
+            System.out.println("inhertince check, t1 and t2 has same name");
             return true;
         }
         if (t1 == TYPE_NIL.getInstance() && t2 != TYPE_STRING.getInstance() && t2 != TYPE_INT.getInstance()) {
             return true;
         }
+        if (t1.isClass()){
+            System.out.println("unlucky");
+        }
         if (t1.isClassDec()) {
+            System.out.println("inhertince t1's father is " + (((TYPE_CLASS_DEC) t1).father).name);
             return isInhiritedFromOrNil(((TYPE_CLASS_DEC) t1).father, t2);
         }
         return false;

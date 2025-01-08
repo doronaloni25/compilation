@@ -43,8 +43,12 @@ public class AST_FUNC_DEC_RULE_TWO extends AST_FUNC_DEC
         //asume SemantMe on commaTypeidList returns TYPE_LIST contains only the types, and doesnt check if they are already in the symbol table
         TYPE_LIST paramList = commaTypeIdList.SemantMe();
         function.params = paramList;
+        // ignore the fact that stmt list is in class
+        SYMBOL_TABLE.getInstance().inClass = null;
         // will take care of return type matching
         stmtList.SemantMe();
+        // remember we are in a class
+        SYMBOL_TABLE.getInstance().inClass = classDec;
         classDec.addFunction(function, line);
         SYMBOL_TABLE.getInstance().endScope();
         SYMBOL_TABLE.getInstance().inFunction = null;
