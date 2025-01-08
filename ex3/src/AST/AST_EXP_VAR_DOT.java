@@ -60,7 +60,7 @@ public class AST_EXP_VAR_DOT extends AST_EXP
         if(exp != null)
         {
             function_arguments_list.head = exp.SemantMe();
-            if(expList == null)
+            if(expList != null)
             {
                 function_arguments_list.tail = expList.SemantMe();
             }

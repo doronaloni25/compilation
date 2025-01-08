@@ -24,7 +24,6 @@ public class AST_VAR_DEC extends AST_DEC
         TYPE currType = SYMBOL_TABLE.getInstance().findWithinScope(name);
         if(currType != null)
         {
-            System.out.println("Error");
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         TYPE t = type.SemantMe();

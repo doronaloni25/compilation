@@ -20,6 +20,9 @@ public class HelperFunctions{
         if (t1 == t2) {
             return true;
         }
+        if (t1 == null){
+            return false;
+        }
         if (t1 == TYPE_NIL.getInstance() && t2 != TYPE_STRING.getInstance() && t2 != TYPE_INT.getInstance()) {
             return true;
         }
@@ -36,9 +39,11 @@ public class HelperFunctions{
         }
         //not the same length
         if (t1 == null || t2 == null) {
+            
             return false;
         }
         //arguments not the same type or not inherited
+        
         if (isInhiritedFromOrNil(t1.head, t2.head) == false) {
             return false;
         }

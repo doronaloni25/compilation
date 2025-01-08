@@ -35,4 +35,28 @@ public class AST_NEW_EXP extends AST_EXP
 		this.type = type;
         this.exp = exp;
 	}
+	public TYPE SemantMe()
+	{
+		TYPE t = type.SemantMe();
+		if(t == null)
+		{
+			HelperFunctions.printError(line,  this.getClass().getSimpleName());
+		}
+		if (exp != null){
+			TYPE expType = exp.SemantMe();
+			if (expType == null) {
+				HelperFunctions.printError(line, this.getClass().getSimpleName());
+			}
+			//if the expression is not an int (it is an array[exp])
+			if(expType != TYPE_INT.getInstance()) {
+				HelperFunctions.printError(line, this.getClass().getSimpleName());
+			}
+			// if exp is constant, check if its not negative
+			if(HelperFunctions.isConstant(exp) && ((AST_EXP_INT)exp).value < 0) {
+				HelperFunctions.printError(line, this.getClass().getSimpleName());
+			}
+			return new TYPE_ARRAY(t);
+		}
+		return t;
+	}
 }

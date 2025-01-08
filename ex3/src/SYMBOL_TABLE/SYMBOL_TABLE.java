@@ -103,9 +103,8 @@ public class SYMBOL_TABLE
 	public TYPE findWithinScope(String name)
 	{
 		SYMBOL_TABLE_ENTRY e;	
-		for (e = table[top_index]; e != null; e = e.next)
+		for (e = top; e != null; e = e.next)
 		{
-			System.out.println("current name " + e.name);
 			if(e.name == "SCOPE-BOUNDARY")
 			{
 				return null;

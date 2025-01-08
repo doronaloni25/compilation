@@ -41,11 +41,34 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		this.exp = exp;
 		this.isNewExp = isNewExp;
 	}
+
 	@Override
     public TYPE SemantMe() 
     {
 		TYPE t1 = var.SemantMe();
+		if (t1 == null){
+			HelperFunctions.printError(line, this.getClass().getSimpleName());
+		}
 		TYPE t2 = exp.SemantMe();
+		if (t2 == null){
+			HelperFunctions.printError(line, this.getClass().getSimpleName());
+		}
+		if (isNewExp){
+			// if one of them is an array, both should be
+			if (t1.isArray() || t2.isArray()){
+				if (!(t1.isArray() && t2.isArray())){
+					HelperFunctions.printError(line, this.getClass().getSimpleName());
+				}
+				TYPE_ARRAY t1Arr = (TYPE_ARRAY)t1;
+				TYPE_ARRAY t2Arr = (TYPE_ARRAY)t2;
+				if (t1Arr.type.name.equals(t2Arr.type.name)){
+					return t1Arr;
+				}
+				else{
+					HelperFunctions.printError(line, this.getClass().getSimpleName());
+				}          
+			}
+		}
 		if(!HelperFunctions.isInhiritedFromOrNil(t2, t1))
 		{
 			HelperFunctions.printError(line, this.getClass().getSimpleName());

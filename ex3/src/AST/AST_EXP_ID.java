@@ -54,13 +54,17 @@ public class AST_EXP_ID extends AST_EXP
         if(exp != null)
         {
             function_arguments_list.head = exp.SemantMe();
-            if(expList == null)
+            if(expList != null)
             {
+
                 function_arguments_list.tail = expList.SemantMe();
             }
         }
+        System.out.println("function_arguments_list1 " +function_arguments_list.head.name);
+        System.out.println("function_arguments_list1 " +found_function.params.head.name);
         if(!HelperFunctions.compareTypeLists(function_arguments_list, found_function.params))
         {
+            System.out.println("error compare types in function args");
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         

@@ -34,11 +34,24 @@ public class AST_EXP_BINOP extends AST_EXP
 	public TYPE SemantMe(){
 		TYPE leftType = left.SemantMe();
 		TYPE rightType = right.SemantMe();
+		if (leftType == null || rightType == null){
+			HelperFunctions.printError(line, this.getClass().getSimpleName());
+		}
 		// check if op is EQ, can only compare equality (coded as 6) if the types are the same or inherit from one another
 		if(OP.op == 6){
 			// cant eqaute NIL with STRING
 			if ((leftType == TYPE_STRING.getInstance() && rightType == TYPE_NIL.getInstance()) || (leftType == TYPE_NIL.getInstance() && rightType == TYPE_STRING.getInstance())){
 				HelperFunctions.printError(line, this.getClass().getSimpleName());
+			}
+			// if one of the types is array both should be - compare by name
+			else if(leftType.isArray() || rightType.isArray()){
+				if (!(leftType.isArray() && rightType.isArray())){
+                	HelperFunctions.printError(line, this.getClass().getSimpleName());
+            	}
+				if (!leftType.name.equals(rightType.name)){
+					HelperFunctions.printError(line, this.getClass().getSimpleName());
+				}
+				return TYPE_INT.getInstance();
 			}
 			else
 			if (HelperFunctions.isInhiritedFromOrNil(leftType, rightType) || HelperFunctions.isInhiritedFromOrNil(rightType, leftType)){
