@@ -45,6 +45,9 @@ public class AST_EXP_BINOP extends AST_EXP
 			}
 			// if one of the types is array both should be - compare by name
 			else if(leftType.isArray() || rightType.isArray()){
+				if (rightType == TYPE_NIL.getInstance() || leftType == TYPE_NIL.getInstance()){
+					return TYPE_INT.getInstance();
+				}
 				if (!(leftType.isArray() && rightType.isArray())){
                 	HelperFunctions.printError(line, this.getClass().getSimpleName());
             	}

@@ -48,15 +48,6 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC
                 HelperFunctions.printError(line, this.getClass().getSimpleName());
             }          
         }
-        if (newExpType.isClass()){
-            if (HelperFunctions.isInhiritedFromOrNil(((TYPE_CLASS)newExpType).classDec, currType)) {
-                return currType;
-            }
-            else {
-                System.out.println(newExpType.name + " is not inherited from " + currType.name);
-                HelperFunctions.printError(line, this.getClass().getSimpleName());
-            }
-        }
         if (HelperFunctions.isInhiritedFromOrNil(newExpType, currType)) {
             return currType;
         }

@@ -54,8 +54,11 @@ public class AST_STMT_ASSIGN extends AST_STMT
 			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
 		if (isNewExp){
-			// if one of them is an array, both should be
+			// if one of them is an array, both should be (or t2 is NIL)
 			if (t1.isArray() || t2.isArray()){
+				if (t2 == TYPE_NIL.getInstance()){
+					return (TYPE_ARRAY)t1;
+				}
 				if (!(t1.isArray() && t2.isArray())){
 					HelperFunctions.printError(line, this.getClass().getSimpleName());
 				}
@@ -69,6 +72,7 @@ public class AST_STMT_ASSIGN extends AST_STMT
 				}          
 			}
 		}
+
 		if(!HelperFunctions.isInhiritedFromOrNil(t2, t1))
 		{
 			HelperFunctions.printError(line, this.getClass().getSimpleName());
