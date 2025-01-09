@@ -18,3 +18,6 @@ ex2/src/Lexer.java
 ex2/src/TokenNames.java
 ex2/src/Parser.java
 tester
+output/
+bin
+ex3/bin/AST/AST_STMT_ID.class
