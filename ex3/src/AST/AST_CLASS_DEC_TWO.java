@@ -33,6 +33,8 @@ public class AST_CLASS_DEC_TWO extends AST_CLASS_DEC_ONE
         classType.data_members = fatherType.data_members;
         SYMBOL_TABLE.getInstance().enter(name, classType);
         SYMBOL_TABLE.getInstance().beginScope();
+        // After opening the scope, add ancestor's fields to symbol table
+        HelperFunctions.addInheritedVarsToSymbolTable(classType.data_members, classType.function_list);
         // the cFieldList will recursivly insert the fiels into the Symbol table
         cFieldList.SemantMe();
         SYMBOL_TABLE.getInstance().endScope();

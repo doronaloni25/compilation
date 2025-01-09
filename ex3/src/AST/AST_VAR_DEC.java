@@ -32,9 +32,10 @@ public class AST_VAR_DEC extends AST_DEC
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         SYMBOL_TABLE.getInstance().enter(name, t);
-        // check if im in class scope, and if so add to the class fields
+        // check if im in class scope (but not in func), and if so add to the class fields
         TYPE_CLASS_DEC classType = SYMBOL_TABLE.getInstance().inClass;
-        if(classType != null)
+        TYPE_FUNCTION funcType = SYMBOL_TABLE.getInstance().inFunction;
+        if(classType != null && funcType == null)
         {
             // This also checks that the field was not declared before (in any ancestor of the class)
             classType.addField(name, t, line);

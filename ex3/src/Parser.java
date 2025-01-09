@@ -353,11 +353,11 @@ public class Parser extends java_cup.runtime.lr_parser {
     {
 
 	Symbol s;
+	int line = lexer.getLine();
 	s = lexer.next_token();
 	if (s.sym == TokenNames.error){
 		lexical_error_flag = true;
 	}
-	int line = lexer.getLine();
 	AST_Node.generalLine = line;
 	System.out.print("[");
 	System.out.print(line);

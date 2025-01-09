@@ -80,17 +80,21 @@ public class TYPE_CLASS_DEC extends TYPE
 	//add the function to a class if there isnt alredy the same one(overriding), and if overloading throw exception
 	public void addFunction(TYPE_FUNCTION f, int line)
 	{
-		if(!isInMethods(f, line) && fieldInClass(f.name) == null)
+		if(fieldInClass(f.name) != null)
+		{
+			System.out.println("Field exists in class with same name as func");
+			HelperFunctions.printError(line, this.getClass().getSimpleName());
+			
+		}
+		// If method exists in class (overriding) theres no need to re-add it to function list.
+		// isinmethods will take care of throwing exception in case of overloading.
+		else if (!isInMethods(f, line))
 		{
 			function_list = new TYPE_LIST(f, function_list);
 		}
-		else
-		{
-			//TODO- throw exeption
-		}
 		
 	}
-//check if the function is already in the class, and if there is overloading throw exception
+	//check if the function is already in the class, and if there is overloading throw exception
 	public boolean isInMethods(TYPE_FUNCTION f, int line)
 	{
 		TYPE_LIST allFunction = function_list;
@@ -102,6 +106,7 @@ public class TYPE_CLASS_DEC extends TYPE
 			{
 				if(!currHead.returnType.equals(f.returnType)|| !HelperFunctions.compareTypeLists(currHead.params, f.params) )
 				{
+					System.out.println("Method overloading");
 					HelperFunctions.printError(line, this.getClass().getSimpleName());
 				}
 				else

@@ -46,11 +46,11 @@ parser code
 scan with
 {:
 	Symbol s;
+	int line = lexer.getLine();
 	s = lexer.next_token();
 	if (s.sym == TokenNames.error){
 		lexical_error_flag = true;
 	}
-	int line = lexer.getLine();
 	AST_Node.generalLine = line;
 	System.out.print("[");
 	System.out.print(line);

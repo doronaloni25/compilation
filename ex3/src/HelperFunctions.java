@@ -26,6 +26,10 @@ public class HelperFunctions{
         if (t1.isClass()){
             t1 = ((TYPE_CLASS)t1).classDec;
         }
+        // Special case, if one of them is type_void, return false
+        if (t1 == TYPE_VOID.getInstance() || t2 == TYPE_VOID.getInstance()){
+            return false;
+        }
         System.out.print("inhertince check, t1 name is " + t1.name);
         System.out.println("; t2 name is " + t2.name);
         if (t1.name.equals(t2.name)) {
@@ -74,6 +78,29 @@ public class HelperFunctions{
 		file_writer.write(")\n");		
 		file_writer.close();
 		System.exit(0);
+    }
+
+    public static void addInheritedVarsToSymbolTable(TYPE_CLASS_VAR_DEC_LIST varDecs, TYPE_LIST funcList){
+        TYPE_CLASS_VAR_DEC varDec;
+        TYPE_FUNCTION funcDec;
+        if (varDecs.head == null || funcList.head == null){
+            return;
+        }
+        // Enter var decs to the symbol table
+        while (varDecs != null && varDecs.head != null){
+            varDec = varDecs.head;
+            TYPE varType = varDec.t;
+            String varName = varDec.name;
+            SYMBOL_TABLE.getInstance().enter(varName, varType);
+            varDecs = varDecs.tail;
+        }
+        // Enter func decs to the symbol table
+        while (funcList != null && funcList.head != null){
+            funcDec = (TYPE_FUNCTION)funcList.head;
+            String funcName = funcDec.name;
+            SYMBOL_TABLE.getInstance().enter(funcName, funcDec);
+            funcList = funcList.tail;
+        }
     }
 
    

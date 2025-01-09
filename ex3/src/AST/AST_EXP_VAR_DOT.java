@@ -42,6 +42,8 @@ public class AST_EXP_VAR_DOT extends AST_EXP
         // we work on "class.function() or class.function(exp, exp, exp)"
 
         TYPE varTypeT = v.SemantMe();
+        System.out.println("Semanting var.id(), var is: " + varTypeT.name);
+
         //check if the variable is a class type
         if(varTypeT == null || !(varTypeT.isClass()))
         {
