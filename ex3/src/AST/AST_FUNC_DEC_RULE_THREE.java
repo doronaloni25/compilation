@@ -21,26 +21,27 @@ public class AST_FUNC_DEC_RULE_THREE extends AST_FUNC_DEC
     @Override
     public TYPE SemantMe()
     {
-        System.out.println("rule 3 start at line " + line);
-        System.out.println("my name is " + name);
+        //System.out.println("rule 3 start at line " + line);
+        //System.out.println("my name is " + name);
         if(SYMBOL_TABLE.getInstance().inFunction!=null)
         {
-            System.out.println("error rec function");
+            //System.out.println("error rec function");
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         TYPE returnType = type.SemantMe();
         if(returnType == null)
         {
-            System.out.println("error return type no good");
+            //System.out.println("error return type no good");
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
 
         TYPE_CLASS_DEC classDec = SYMBOL_TABLE.getInstance().inClass;
-        TYPE_FUNCTION function = new TYPE_FUNCTION(returnType, name, null);
+        TYPE_FUNCTION function = new TYPE_FUNCTION(returnType, name, new TYPE_LIST(null, null));
         
         //function declaration inside a class
         if(classDec!=null)
         {
+            TYPE funcCheck = SYMBOL_TABLE.getInstance().findWithinScope(name);
             SYMBOL_TABLE.getInstance().enter(name, function);
             SYMBOL_TABLE.getInstance().beginScope();
             SYMBOL_TABLE.getInstance().inFunction = function;
@@ -49,9 +50,9 @@ public class AST_FUNC_DEC_RULE_THREE extends AST_FUNC_DEC
             //asume SemantMe on commaTypeidList returns TYPE_LIST contains only the types, and doesnt check if they are already in the symbol table
             TYPE_LIST paramList = commaTypeIdListFunc.SemantMe();
             function.params = paramList;
+            HelperFunctions.checkValidMethod(function, funcCheck, classDec, line, this.getClass().getSimpleName());
             // will take care of return type matching
             stmtList.SemantMe();
-            classDec.addFunction(function, line);
             SYMBOL_TABLE.getInstance().endScope();
             SYMBOL_TABLE.getInstance().inFunction = null;
             return function;
@@ -60,13 +61,13 @@ public class AST_FUNC_DEC_RULE_THREE extends AST_FUNC_DEC
         else{
             if (SYMBOL_TABLE.getInstance().find(name) != null)
             {
-                System.out.println("same name exists");
+                //System.out.println("same name exists");
                 HelperFunctions.printError(line, this.getClass().getSimpleName());
             }
             SYMBOL_TABLE.getInstance().enter(name, function);
             if (SYMBOL_TABLE.getInstance().isGlobalScope() == false)
             {
-                System.out.println("not global");
+                //System.out.println("not global");
                 HelperFunctions.printError(line, this.getClass().getSimpleName());
             }
             if (name.equals("PrintInt") || name.equals("PrintString"))
@@ -85,7 +86,7 @@ public class AST_FUNC_DEC_RULE_THREE extends AST_FUNC_DEC
             stmtList.SemantMe();
             SYMBOL_TABLE.getInstance().endScope();
             SYMBOL_TABLE.getInstance().inFunction = null;
-            System.out.println("rule 3 done");
+            //System.out.println("rule 3 done");
             return function;
         }
     }

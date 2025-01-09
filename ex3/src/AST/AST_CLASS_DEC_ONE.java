@@ -28,7 +28,7 @@ public class AST_CLASS_DEC_ONE extends AST_DEC
         TYPE isFirstTime = SYMBOL_TABLE.getInstance().find(name);
         if(isFirstTime != null || !SYMBOL_TABLE.getInstance().isGlobalScope())
         {
-            //TODO: return exception with line number
+            HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         SYMBOL_TABLE.getInstance().enter(name, classType);
 

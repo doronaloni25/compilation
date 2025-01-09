@@ -55,7 +55,7 @@ public class AST_NEW_EXP extends AST_EXP
 			if(HelperFunctions.isConstant(exp) && ((AST_EXP_INT)exp).value < 0) {
 				HelperFunctions.printError(line, this.getClass().getSimpleName());
 			}
-			return new TYPE_ARRAY(t);
+			return new TYPE_ARRAY(t, null);
 		}
 		return t;
 	}

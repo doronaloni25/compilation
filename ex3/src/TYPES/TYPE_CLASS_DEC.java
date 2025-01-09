@@ -64,7 +64,7 @@ public class TYPE_CLASS_DEC extends TYPE
 	}
 
 
-	public void addField(String name, TYPE t)
+	public void addField(String name, TYPE t, int line)
 	{
 		if(fieldInClass(name) == null)
 		{
@@ -74,43 +74,12 @@ public class TYPE_CLASS_DEC extends TYPE
 		//cant add the same field twice
 		else
 		{
-			//TODO- throw exeption
+			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
 	}
-	//add the function to a class if there isnt alredy the same one(overriding), and if overloading throw exception
-	public void addFunction(TYPE_FUNCTION f, int line)
+	// add the function to the class function list
+	public void addFunction(TYPE_FUNCTION f)
 	{
-		if(!isInMethods(f, line) && fieldInClass(f.name) == null)
-		{
-			function_list = new TYPE_LIST(f, function_list);
-		}
-		else
-		{
-			//TODO- throw exeption
-		}
-		
-	}
-//check if the function is already in the class, and if there is overloading throw exception
-	public boolean isInMethods(TYPE_FUNCTION f, int line)
-	{
-		TYPE_LIST allFunction = function_list;
-		TYPE_FUNCTION currHead;
-		while(allFunction.head!=null)
-		{
-			currHead = (TYPE_FUNCTION)allFunction.head;
-			if(currHead.name.equals(f.name))
-			{
-				if(!currHead.returnType.equals(f.returnType)|| !HelperFunctions.compareTypeLists(currHead.params, f.params) )
-				{
-					HelperFunctions.printError(line, this.getClass().getSimpleName());
-				}
-				else
-				{
-					return true;
-				}
-			}
-			allFunction = allFunction.tail;
-		}
-		return false;
+		this.function_list = new TYPE_LIST(f, this.function_list);
 	}
 }

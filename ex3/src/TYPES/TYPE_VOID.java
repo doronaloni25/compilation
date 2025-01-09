@@ -10,7 +10,9 @@ public class TYPE_VOID extends TYPE
 	/*****************************/
 	/* PREVENT INSTANTIATION ... */
 	/*****************************/
-	protected TYPE_VOID() {}
+	protected TYPE_VOID() {
+		this.name = "void";
+	}
 
 	/******************************/
 	/* GET SINGLETON INSTANCE ... */

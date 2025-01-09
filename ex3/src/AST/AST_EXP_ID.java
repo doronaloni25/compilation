@@ -21,7 +21,7 @@ public class AST_EXP_ID extends AST_EXP
         }
         else if(expList == null)
         {
-		    System.out.format("====================== exp ->  ID LPAREN RPAREN\n");
+		    System.out.format("====================== exp ->  ID LPAREN exp RPAREN\n");
         }
         else
         {
@@ -51,20 +51,22 @@ public class AST_EXP_ID extends AST_EXP
         TYPE_FUNCTION found_function = (TYPE_FUNCTION)found_functionT;
         //check if the function has the right number of arguments
         TYPE_LIST function_arguments_list = new TYPE_LIST(null, null); 
+        //System.out.println("before exp != null");
         if(exp != null)
         {
             function_arguments_list.head = exp.SemantMe();
+            //System.out.println("exp in func type: " + function_arguments_list.head.name);
             if(expList != null)
             {
 
                 function_arguments_list.tail = expList.SemantMe();
             }
         }
-        System.out.println("function_arguments_list1 " +function_arguments_list.head.name);
-        System.out.println("function_arguments_list1 " +found_function.params.head.name);
+        //System.out.println("function_arguments_list1 " +function_arguments_list.head.name);
+        //System.out.println("function_arguments_list1 " +found_function.params.head.name);
         if(!HelperFunctions.compareTypeLists(function_arguments_list, found_function.params))
         {
-            System.out.println("error compare types in function args");
+            //System.out.println("error compare types in function args");
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         

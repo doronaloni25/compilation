@@ -62,20 +62,20 @@ public class AST_VAR_FIELD extends AST_VAR
 		// we are trying to get the type of a field in a class
 		// the next line also takes care of verifying the var is well defined.
 		TYPE varType = var.SemantMe();
-		System.out.println("type is: " + varType.name);
+		//System.out.println("type is: " + varType.name);
 		if(varType == null) {
 			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
 		//make sure the variable is a class, so you can access its fields
 		if(!varType.isClass()) {
-			System.out.println("not a class, vartype is: " + varType.name);
+			//System.out.println("not a class, vartype is: " + varType.name);
 			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
 		TYPE_CLASS classType = (TYPE_CLASS)varType;
 		//check if the field is defined in the class, and if it is, return its type
 		TYPE_CLASS_VAR_DEC fieldType = classType.classDec.fieldInClass(fieldName);
-		System.out.println("fieldName = " + fieldName);
-		System.out.println("fieldType = " + fieldType.t.name);
+		//System.out.println("fieldName = " + fieldName);
+		////System.out.println("fieldType = " + fieldType.t.name);
 		if(fieldType != null) {
 			return fieldType.t;
 		}

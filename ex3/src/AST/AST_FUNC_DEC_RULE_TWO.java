@@ -31,10 +31,11 @@ public class AST_FUNC_DEC_RULE_TWO extends AST_FUNC_DEC
     }
 
     TYPE_CLASS_DEC classDec = SYMBOL_TABLE.getInstance().inClass;
-    TYPE_FUNCTION function = new TYPE_FUNCTION(returnType, name, null);
+    TYPE_FUNCTION function = new TYPE_FUNCTION(returnType, name, new TYPE_LIST(null, null));
     //function declaration inside a class
     if(classDec!=null)
     {
+        TYPE funcCheck = SYMBOL_TABLE.getInstance().findWithinScope(name);
         SYMBOL_TABLE.getInstance().enter(name, function);
         SYMBOL_TABLE.getInstance().beginScope();
         SYMBOL_TABLE.getInstance().inFunction = function;
@@ -43,9 +44,9 @@ public class AST_FUNC_DEC_RULE_TWO extends AST_FUNC_DEC
         //asume SemantMe on commaTypeidList returns TYPE_LIST contains only the types, and doesnt check if they are already in the symbol table
         TYPE_LIST paramList = commaTypeIdList.SemantMe();
         function.params = paramList;
+        HelperFunctions.checkValidMethod(function, funcCheck, classDec, line, this.getClass().getSimpleName());
         // will take care of return type matching
         stmtList.SemantMe();
-        classDec.addFunction(function, line);
         SYMBOL_TABLE.getInstance().endScope();
         SYMBOL_TABLE.getInstance().inFunction = null;
        

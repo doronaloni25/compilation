@@ -40,10 +40,12 @@ public class AST_STMT_ID extends AST_STMT
         TYPE found_functionT = SYMBOL_TABLE.getInstance().find(name);
         if(found_functionT == null)
         {
+            //System.out.println("func not found");
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
-        //check if the function has the right number of arguments
+        //check if the type returned is a function
         if(!found_functionT.isFunction()){
+            //System.out.println("func is not a func");
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         // cast to type function
@@ -53,6 +55,7 @@ public class AST_STMT_ID extends AST_STMT
         if(exp != null)
         {
             function_arguments_list.head = exp.SemantMe();
+            //System.out.println("exp in func type: " + function_arguments_list.head.name);
             if(expList != null)
             {
                 function_arguments_list.tail = expList.SemantMe();

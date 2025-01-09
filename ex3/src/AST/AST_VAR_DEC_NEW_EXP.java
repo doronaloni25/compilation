@@ -39,6 +39,8 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC
             }
             TYPE_ARRAY currTypeArr = (TYPE_ARRAY)currType;
             TYPE_ARRAY newExpTypeArr = (TYPE_ARRAY)newExpType;
+            //System.out.println("type of currtypearr " + currTypeArr.type.name);
+            //System.out.println("type of currtypearr " + newExpTypeArr.type.name);
             if (currTypeArr.type.name.equals(newExpTypeArr.type.name)){
                 return currTypeArr;
             }
@@ -50,6 +52,7 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC
             return currType;
         }
         else {
+            //System.out.println(newExpType.name + " is not inherited from " + currType.name);
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         // unreachable code
