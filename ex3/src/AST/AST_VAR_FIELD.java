@@ -75,7 +75,7 @@ public class AST_VAR_FIELD extends AST_VAR
 		//check if the field is defined in the class, and if it is, return its type
 		TYPE_CLASS_VAR_DEC fieldType = classType.classDec.fieldInClass(fieldName);
 		System.out.println("fieldName = " + fieldName);
-		System.out.println("fieldType = " + fieldType.t.name);
+		//System.out.println("fieldType = " + fieldType.t.name);
 		if(fieldType != null) {
 			return fieldType.t;
 		}
