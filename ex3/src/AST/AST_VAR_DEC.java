@@ -35,6 +35,8 @@ public class AST_VAR_DEC extends AST_DEC
         // check if im in class scope (but not in func), and if so add to the class fields
         TYPE_CLASS_DEC classType = SYMBOL_TABLE.getInstance().inClass;
         TYPE_FUNCTION funcType = SYMBOL_TABLE.getInstance().inFunction;
+        // This basically means we are inside a class, but in its "main" scope - 
+        // - not inside any funcs, if's, and while - since they are all inside funcdec
         if(classType != null && funcType == null)
         {
             // This also checks that the field was not declared before (in any ancestor of the class)
