@@ -25,18 +25,20 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
     {
         HelperFunctions.printError(line, this.getClass().getSimpleName());
     }
-    TYPE_FUNCTION function = new TYPE_FUNCTION(returnType, name, new TYPE_LIST(null, null));
+    TYPE_FUNCTION function = new TYPE_FUNCTION(returnType, name, new TYPE_LIST(null, null)); // isInherited = false
     TYPE_CLASS_DEC classDec = SYMBOL_TABLE.getInstance().inClass;
 
     //func declaration inside a class
     if (classDec != null)
     {
+        System.out.println("func in class");
+        TYPE funcCheck = SYMBOL_TABLE.getInstance().findWithinScope(name);
+        HelperFunctions.checkValidMethod(function, funcCheck, classDec, line, this.getClass().getSimpleName());
         SYMBOL_TABLE.getInstance().enter(name, function);
         SYMBOL_TABLE.getInstance().beginScope();
         SYMBOL_TABLE.getInstance().inFunction = function;
         // will take care of return type matching
         stmtList.SemantMe();
-        classDec.addFunction(function, line);
         SYMBOL_TABLE.getInstance().endScope();
         SYMBOL_TABLE.getInstance().inFunction = null;
         return function;

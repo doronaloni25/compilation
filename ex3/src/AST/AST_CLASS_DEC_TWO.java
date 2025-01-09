@@ -30,6 +30,7 @@ public class AST_CLASS_DEC_TWO extends AST_CLASS_DEC_ONE
         TYPE_CLASS_DEC classType = new TYPE_CLASS_DEC(fatherType, name);
         SYMBOL_TABLE.getInstance().inClass = classType;
         classType.function_list = fatherType.function_list;
+        HelperFunctions.setFunctionListInherited(classType.function_list);
         classType.data_members = fatherType.data_members;
         SYMBOL_TABLE.getInstance().enter(name, classType);
         SYMBOL_TABLE.getInstance().beginScope();

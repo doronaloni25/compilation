@@ -102,19 +102,20 @@ public class SYMBOL_TABLE
 	
 	public TYPE findWithinScope(String name)
 	{
-		SYMBOL_TABLE_ENTRY e;	
-		for (e = top; e != null; e = e.next)
-		{
-			if(e.name == "SCOPE-BOUNDARY")
-			{
-				return null;
-			}
-			if (name.equals(e.name))
-			{
-				return e.type;
-			}
+		if (isGlobalScope()){
+			return find(name);
 		}
-		
+		SYMBOL_TABLE_ENTRY e = top;	
+		if (e == null){
+			return null;
+		}
+		while (!e.name.equals(name) && !e.name.equals("SCOPE-BOUNDARY"))
+		{
+			e = e.prevtop;
+		}
+		if (e.name.equals(name)){
+			return e.type;
+		}
 		return null;
 	}
 
@@ -283,7 +284,6 @@ public class SYMBOL_TABLE
 			/*************************************/
 			/* [2] How should we handle void ??? */
 			/*************************************/
-
 			/***************************************/
 			/* [3] Enter library function PrintInt */
 			/***************************************/

@@ -21,6 +21,7 @@ public class AST_VAR_DEC extends AST_DEC
     @Override
     public TYPE SemantMe() 
     {
+        System.out.println("name vardec: " + name);
         TYPE currType = SYMBOL_TABLE.getInstance().findWithinScope(name);
         if(currType != null)
         {
