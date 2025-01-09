@@ -51,8 +51,8 @@ public class AST_STMT_RETURN extends AST_STMT {
 		else
 		{
 			TYPE t = exp.SemantMe();
-			System.out.println("return type is " + t.name);
-			System.out.println("return type of func is " + currentFunction.returnType.name);
+			//System.out.println("return type is " + t.name);
+			//System.out.println("return type of func is " + currentFunction.returnType.name);
 			//check if the return type is the same as the expression type or son of it
 			if(!HelperFunctions.isInhiritedFromOrNil(t, currentFunction.returnType))
 			{

@@ -21,17 +21,17 @@ public class AST_FUNC_DEC_RULE_THREE extends AST_FUNC_DEC
     @Override
     public TYPE SemantMe()
     {
-        System.out.println("rule 3 start at line " + line);
-        System.out.println("my name is " + name);
+        //System.out.println("rule 3 start at line " + line);
+        //System.out.println("my name is " + name);
         if(SYMBOL_TABLE.getInstance().inFunction!=null)
         {
-            System.out.println("error rec function");
+            //System.out.println("error rec function");
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         TYPE returnType = type.SemantMe();
         if(returnType == null)
         {
-            System.out.println("error return type no good");
+            //System.out.println("error return type no good");
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
 
@@ -61,13 +61,13 @@ public class AST_FUNC_DEC_RULE_THREE extends AST_FUNC_DEC
         else{
             if (SYMBOL_TABLE.getInstance().find(name) != null)
             {
-                System.out.println("same name exists");
+                //System.out.println("same name exists");
                 HelperFunctions.printError(line, this.getClass().getSimpleName());
             }
             SYMBOL_TABLE.getInstance().enter(name, function);
             if (SYMBOL_TABLE.getInstance().isGlobalScope() == false)
             {
-                System.out.println("not global");
+                //System.out.println("not global");
                 HelperFunctions.printError(line, this.getClass().getSimpleName());
             }
             if (name.equals("PrintInt") || name.equals("PrintString"))
@@ -86,7 +86,7 @@ public class AST_FUNC_DEC_RULE_THREE extends AST_FUNC_DEC
             stmtList.SemantMe();
             SYMBOL_TABLE.getInstance().endScope();
             SYMBOL_TABLE.getInstance().inFunction = null;
-            System.out.println("rule 3 done");
+            //System.out.println("rule 3 done");
             return function;
         }
     }

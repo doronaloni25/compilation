@@ -31,9 +31,9 @@ public class HelperFunctions{
             return false;
         }
         //System.out.print("inhertince check, t1 name is " + t1.name);
-        //System.out.println("; t2 name is " + t2.name);
+        ////System.out.println("; t2 name is " + t2.name);
         if (t1.name.equals(t2.name)) {
-            //System.out.println("inhertince check, t1 and t2 has same name");
+            ////System.out.println("inhertince check, t1 and t2 has same name");
             return true;
         }
         if (t1 == TYPE_NIL.getInstance() && t2 != TYPE_STRING.getInstance() && t2 != TYPE_INT.getInstance()) {
@@ -70,8 +70,8 @@ public class HelperFunctions{
     {
         SYMBOL_TABLE.getInstance().PrintMe();
         System.out.print("Error");
-        System.out.println(" at " + name);
-        System.out.println("row = " + Integer.toString(line));
+        //System.out.println(" at " + name);
+        //System.out.println("row = " + Integer.toString(line));
         file_writer.write("ERROR");
 		file_writer.write("(");
 		file_writer.write(Integer.toString(line));
@@ -96,7 +96,7 @@ public class HelperFunctions{
         while (funcList != null && funcList.head != null){
             funcDec = (TYPE_FUNCTION)funcList.head;
             String funcName = funcDec.name;
-            System.out.println("Entering func " + funcName + " To symbol table");
+            //System.out.println("Entering func " + funcName + " To symbol table");
             SYMBOL_TABLE.getInstance().enter(funcName, funcDec);
             funcList = funcList.tail;
         }
@@ -113,11 +113,11 @@ public class HelperFunctions{
     }
 
     public static boolean isOverloading(TYPE_FUNCTION f, TYPE_FUNCTION fAncestor){
-        System.out.println("isOverloading over function: " + f.name + " with return type: " + f.returnType.name);
-        System.out.println("isOverloading over function: " + fAncestor.name + " with return type: " + fAncestor.returnType.name);
+        //System.out.println("isOverloading over function: " + f.name + " with return type: " + f.returnType.name);
+        //System.out.println("isOverloading over function: " + fAncestor.name + " with return type: " + fAncestor.returnType.name);
         if(!f.returnType.equals(fAncestor.returnType)|| !HelperFunctions.compareTypeLists(f.params, fAncestor.params) )
         {
-            System.out.println("Method overloading");
+            //System.out.println("Method overloading");
             return true;
         }
         return false;
@@ -126,11 +126,11 @@ public class HelperFunctions{
     public static void checkValidMethod(TYPE_FUNCTION function, TYPE funcCheck, TYPE_CLASS_DEC classDec, int line, String className){
         // found symbol with same name
         if (funcCheck != null){
-            System.out.println("funcheck isnt null");
+            //System.out.println("funcheck isnt null");
             // if its a function, make sure its inherited (override, check later for no overload)
             if (funcCheck.isFunction()){
                 TYPE_FUNCTION funcType = (TYPE_FUNCTION)funcCheck;
-                System.out.println("inheritence of funcCheck:" + funcType.isInherited);
+                //System.out.println("inheritence of funcCheck:" + funcType.isInherited);
                 if (!funcType.isInherited){
                     HelperFunctions.printError(line, className);
                 }

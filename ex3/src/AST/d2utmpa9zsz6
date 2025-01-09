@@ -31,7 +31,7 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
     //func declaration inside a class
     if (classDec != null)
     {
-        System.out.println("func in class");
+        //System.out.println("func in class");
         TYPE funcCheck = SYMBOL_TABLE.getInstance().findWithinScope(name);
         HelperFunctions.checkValidMethod(function, funcCheck, classDec, line, this.getClass().getSimpleName());
         SYMBOL_TABLE.getInstance().enter(name, function);
