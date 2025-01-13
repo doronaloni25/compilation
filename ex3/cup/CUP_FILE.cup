@@ -183,17 +183,17 @@ varDec		::=		type:t ID:name ASSIGN exp:e SEMICOLON		{: RESULT = new AST_VAR_DEC_
 					| type:t ID:name ASSIGN newExp:ne SEMICOLON 	{: RESULT =  new AST_VAR_DEC_NEW_EXP(t, name, ne);	:}
 					;
 
-funcDec		::= 	type:t ID:name LPAREN RPAREN LBRACE stmtList:l RBRACE										{: RESULT = new AST_FUNC_DEC_RULE_ONE(t, name, l);		:}
-					| type:t1 ID:name1 LPAREN type:t2 ID:name2 RPAREN LBRACE stmtList:l RBRACE					{: RESULT = new AST_FUNC_DEC_RULE_TWO(t1, name1, t2, name2, l);		:}
-					| type:t1 ID:name1 LPAREN type:t2 ID:name2 commaTypeIdList:l1 RPAREN LBRACE stmtList:l2 RBRACE	{: RESULT = new AST_FUNC_DEC_RULE_THREE(t1, name1, t2, name2, l1, l2);	:}
+funcDec		::= 	type:t ID:name LPAREN RPAREN LBRACE stmtList:l RBRACE										{: RESULT = new AST_FUNC_DEC_RULE_ONE(t, name, l); RESULT.line = nameleft+1;		:}
+					| type:t1 ID:name1 LPAREN type:t2 ID:name2 RPAREN LBRACE stmtList:l RBRACE					{: RESULT = new AST_FUNC_DEC_RULE_TWO(t1, name1, t2, name2, l);	RESULT.line = name1left+1;	:}
+					| type:t1 ID:name1 LPAREN type:t2 ID:name2 commaTypeIdList:l1 RPAREN LBRACE stmtList:l2 RBRACE	{: RESULT = new AST_FUNC_DEC_RULE_THREE(t1, name1, t2, name2, l1, l2);RESULT.line = name1left+1;	:}
 					;
 
 commaTypeIdList ::= COMMA type:t ID:name commaTypeIdList:l	{: RESULT = new AST_COMMA_TYPE_ID_LIST(new AST_COMMA_TYPE_ID(t, name), l);	:}
 					| COMMA type:t ID:name					{: RESULT = new AST_COMMA_TYPE_ID_LIST(new AST_COMMA_TYPE_ID(t, name), null);	:}
 					;
 
-classDec 		::= CLASS ID:name LBRACE cFieldList:l RBRACE					{: RESULT = new AST_CLASS_DEC_ONE(name, l);	:}
-					|CLASS ID:name1 EXTENDS ID:name2 LBRACE cFieldList:l RBRACE	{: RESULT = new AST_CLASS_DEC_TWO(name1, name2, l);	:}
+classDec 		::= CLASS ID:name LBRACE cFieldList:l RBRACE					{: RESULT = new AST_CLASS_DEC_ONE(name, l);	RESULT.line = nameleft+1;:}
+					|CLASS ID:name1 EXTENDS ID:name2 LBRACE cFieldList:l RBRACE	{: RESULT = new AST_CLASS_DEC_TWO(name1, name2, l);	RESULT.line = name1left+1;:}
 					;
 
 
@@ -225,8 +225,8 @@ stmt		::=		varDec:d 													{: RESULT = new AST_STMT_VAR_DEC(d);	:}
 					| var:v ASSIGN newExp:e SEMICOLON							{: RESULT = new AST_STMT_ASSIGN(v,e, true); :}
 					| RETURN exp:e SEMICOLON									{: RESULT = new AST_STMT_RETURN(e); :}
 					| RETURN SEMICOLON											{: RESULT = new AST_STMT_RETURN(null); :}
-					| IF    LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_IF(cond,body); :}
-					| WHILE LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_WHILE(cond,body); :}
+					| IF    LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_IF(cond,body); RESULT.line = condleft+1;:}
+					| WHILE LPAREN exp:cond RPAREN LBRACE stmtList:body RBRACE	{: RESULT = new AST_STMT_WHILE(cond,body); RESULT.line = condleft+1;:}
 					| var:v DOT ID:name LPAREN RPAREN SEMICOLON {: RESULT = new AST_STMT_VAR_DOT(v, name, null, null);	:}
 					| var:v DOT ID:name LPAREN exp:e RPAREN SEMICOLON {: RESULT = new AST_STMT_VAR_DOT(v, name, e, null);	:}
 					| var:v DOT ID:name LPAREN exp:e commaExpList:el RPAREN SEMICOLON {: RESULT = new AST_STMT_VAR_DOT(v, name, e, el);	:}
