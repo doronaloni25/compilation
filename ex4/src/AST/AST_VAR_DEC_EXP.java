@@ -45,6 +45,13 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC
         // unreachable code
         return currType;
     }   
+    public TEMP IRme()
+    {
+        IR.getInstance().Add_IRcommand(new IRcommand_Allocate(name));
+        TEMP t = exp.IRme();
+        IR.getInstance().Add_IRcommand(new IRcommand_Store(name, t));
+        return null;
+    }
 }
 
 

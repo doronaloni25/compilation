@@ -22,5 +22,15 @@ public abstract class AST_LIST extends AST_Node
 
         return new TYPE_LIST(head_type, tail_type);
     }
-    
+    @Override
+    public TEMP IRme()
+    {
+        AST_Node head = getHead();
+        AST_LIST tail = getTail();
+        if(head != null)
+            head.IRme();
+        if(tail != null)
+            tail.IRme();
+        return null;
+    }
 }

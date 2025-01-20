@@ -13,4 +13,9 @@ public class AST_FUNCDEC_DEC extends AST_DEC
     public TYPE SemantMe() {
         return funcDec.SemantMe();
     }
+    public TEMP IRme()
+    {
+        funcDec.IRme();
+        return null;
+    }
 }

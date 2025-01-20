@@ -23,4 +23,8 @@ public abstract class AST_Node
 	{
         return null;
     }
+	public TEMP IRme()
+	{
+		return null;
+	}
 }

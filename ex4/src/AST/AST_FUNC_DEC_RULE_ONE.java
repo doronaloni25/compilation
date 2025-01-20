@@ -69,5 +69,13 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
         return function;
     }
  }
+    public TEMP IRme()
+    {
+        //System.out.println("IRme funcDec");
+        IR.getInstance().Add_IRcommand(new IRcommand_Label("start of func " + name));
+        stmtList.IRme();
+        IR.getInstance().Add_IRcommand(new IRcommand_Label("end of func " + name));
+        return null;
+    }
 
 }

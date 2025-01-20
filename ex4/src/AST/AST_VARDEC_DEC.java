@@ -11,7 +11,13 @@ public class AST_VARDEC_DEC extends AST_DEC
         //System.out.println("====================== DEC -> varDec");
     }
 
-    public TYPE SemantMe() {
+    public TYPE SemantMe() 
+    {
         return varDec.SemantMe();
+    }
+    public TEMP IRme()
+    {
+        varDec.IRme();
+        return null;
     }
 }

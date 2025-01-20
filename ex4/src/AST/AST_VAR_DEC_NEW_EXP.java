@@ -58,6 +58,10 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC
         // unreachable code
         return currType;
     }
+    public TEMP IRme()
+    {
+        //TODO: for next exercise
+    }
 }
 
    

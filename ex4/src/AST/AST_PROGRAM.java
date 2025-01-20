@@ -37,8 +37,11 @@ public class AST_PROGRAM extends AST_Node{
 	{
         return this.dec_list.SemantMe();
     }
-
-
+ 	@Override
+	public TEMP IRme()
+	{
+		return dec_list.IRme();
+	}
 
 }
 
