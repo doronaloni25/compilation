@@ -69,7 +69,7 @@ public class AST_STMT_ID extends AST_STMT
         return found_function.returnType;
     }
     @Override
-    Public TEMP IRme()
+    public TEMP IRme()
     {
         //TODO- implement this for ex5
     }
