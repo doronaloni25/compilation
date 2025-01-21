@@ -21,3 +21,7 @@ tester
 output/
 bin
 ex3/bin/AST/AST_STMT_ID.class
+ex3
+.idea
+
+

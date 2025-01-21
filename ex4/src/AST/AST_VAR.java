@@ -9,4 +9,9 @@ public abstract class AST_VAR extends AST_Node
 		return null;
 
 	}
+
+	public TEMP IRme() {
+	return null;
+	
+	}
 }
