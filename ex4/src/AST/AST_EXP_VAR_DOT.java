@@ -75,4 +75,8 @@ public class AST_EXP_VAR_DOT extends AST_EXP
         }
         return found_function.returnType;
     }
+
+    public TEMP IRme(){
+        // TODO: not a part of this exercise
+    }
 }

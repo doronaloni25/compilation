@@ -25,4 +25,9 @@ public class AST_EXP_SIMPLE extends AST_EXP
 	{
 		return exp.SemantMe();
 	}
+
+	public TEMP IRme()
+	{
+		return exp.IRme();
+	}
 }

@@ -104,4 +104,52 @@ public class AST_EXP_BINOP extends AST_EXP
 		//Unreachable code
 		return TYPE_INT.getInstance();
 	}
+	
+	@Override
+	public TEMP IRme(){
+		// create temp to store result of operation
+		TEMP dest = TEMP_FACTORY.getFreshTEMP();
+		// get temps of left and right
+		TEMP t1 = left.IRme();
+		TEMP t2 = right.IRme();
+
+		// different IR command for every operation
+		// PLUS = 0
+		// MINUS = 1
+		// TIMES = 2
+		// DIVIDE = 3
+		// LT = 4
+		// GT = 5
+		// EQ = 6
+		switch (OP.op){
+			IRcommand cmd = null;
+			case 0:
+				cmd = new IRcommand_Binop_Add_Integers(dest, t1, t2);
+				break;
+			case 1:
+				cmd = new IRcommand_Binop_Sub_Integers(dest, t1, t2);
+				break;
+			case 2:
+				cmd = new IRcommand_Binop_Mul_Integers(dest, t1, t2);
+				break;
+			case 3:
+				cmd = new IRcommand_Binop_Div_Integers(dest, t1, t2);
+				break;
+			case 4:
+				cmd = new IRcommand_Binop_LT_Integers(dest, t1, t2);
+				break;
+			case 5:
+				cmd = new IRcommand_Binop_GT_Integers(dest, t1, t2);
+				break;
+			case 6:
+				cmd = new IRcommand_Binop_EQ_Integers(dest, t1, t2);
+				break;
+		}
+		// add command to IR
+		IR.getInstance().Add_IRcommand(cmd);
+		// return temp that holds the result of the operation
+		return dest;
+	}
+
+
 }
