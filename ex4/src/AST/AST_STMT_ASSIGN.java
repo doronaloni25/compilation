@@ -82,7 +82,7 @@ public class AST_STMT_ASSIGN extends AST_STMT
 
 
 	@Override
-	public TYPE IRme()
+	public TEMP IRme()
 	{
 		//if case 2:
 		if (!isNewExp)

@@ -86,7 +86,7 @@ public class AST_VAR_FIELD extends AST_VAR
 		return null;
 	}
 	@Override
-	public TYPE IRme()
+	public TEMP IRme()
 	{
 		//TODO-implement for ex5
 		return null;
