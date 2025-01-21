@@ -32,4 +32,9 @@ public class AST_EXP_STRING extends AST_EXP
 	{
 		return TYPE_STRING.getInstance();
 	}
+
+	public TEMP IRme(){
+		// TODO: not a part of this exercise
+		return null;
+	}
 }

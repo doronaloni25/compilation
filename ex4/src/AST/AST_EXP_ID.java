@@ -72,4 +72,10 @@ public class AST_EXP_ID extends AST_EXP
         
         return found_function.returnType;
     }
+
+    @Override
+    public TEMP IRme(){
+        // TODO: not needed for this exercise
+        return null;
+    }
 }
