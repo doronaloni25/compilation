@@ -22,4 +22,11 @@ public class IRcommandConstInt extends IRcommand
 		this.t = t;
 		this.value = value;
 	}
+	public String genGen(Set<String> ins)
+	{
+		// check if the left side of assign is correct and return the right side
+		// in this case left side is always correct as it is a constant number
+		int tNum = t.getSerialNumber();
+		return String.valueof(tNum);
+	}
 }
