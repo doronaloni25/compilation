@@ -38,4 +38,10 @@ public class AST_STMT_VAR_DEC extends AST_STMT
 		}
         return type;
     }
+
+	@Override
+	public TYPE IRme()
+	{
+		return varDec.IRme();
+	}
 }

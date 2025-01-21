@@ -57,4 +57,13 @@ public class AST_VAR_SIMPLE extends AST_VAR
 		return type;
 
 	}
+
+	@Override
+	public TYPE IRme()
+	{
+		TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
+		IR.getInstance().Add_IRcommand(new IRcommand_Load(t,name));
+		return t;
+	
+	}
 }

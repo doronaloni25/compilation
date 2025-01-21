@@ -27,11 +27,11 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		/***************************************/
 		if(isNewExp)
 		{
-			System.out.format("====================== stmt -> var ASSIGN newExp SEMICOLON\n");
+			System.out.format("====================== stmt -> var ASSIGN newExp SEMICOLON\n"); //case 1
 		}
 		else
 		{
-			System.out.format("====================== stmt -> var ASSIGN exp SEMICOLON\n");
+			System.out.format("====================== stmt -> var ASSIGN exp SEMICOLON\n"); //case 2
 		}
 
 		/*******************************/
@@ -78,6 +78,24 @@ public class AST_STMT_ASSIGN extends AST_STMT
 			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
 		return t1;
+	}
+
+
+	@Override
+	public TYPE IRme()
+	{
+		//if case 2:
+		if (!isNewExp)
+		{
+			TEMP tExp = exp.IRme()
+			name = ((AST_VAR_SIMPLE) var).name;
+			IR.getInstance().Add_IRcommand(new IRcommand_Store(name, tExp));
+			return null;
+		}
+		else{
+			//TODO- implenemt for ex5 (case1)
+		}
+		 
 	}
 
 	/*********************************************************/
