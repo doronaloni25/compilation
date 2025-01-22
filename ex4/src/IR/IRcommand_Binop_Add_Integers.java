@@ -12,7 +12,7 @@ package IR;
 /*******************/
 import TEMP.*;
 
-public class IRcommand_Binop_Add_Integers extends IRcommand
+public class IRcommand_Binop_Add_Integers extends IRcommand_Binop
 {
 	public TEMP t1;
 	public TEMP t2;
@@ -25,15 +25,5 @@ public class IRcommand_Binop_Add_Integers extends IRcommand
 		this.t2 = t2;
 	}
 
-	@Override
-	public String getGen(Set<String> ins)
-	{
-		int num1 = t1.getSerialNumber();
-		int num2 = t2.getSerialNumber();
-		if(ins.contains(String.valueof(num1)) && ins.contains(String.valueof(num2)))
-		{
-			return String.valueOf(dst.getSerialNumber());
-		}
-		return null;
-	}
+	/*get gen implemented in IR_BINOP*/
 }
