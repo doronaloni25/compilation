@@ -2,6 +2,7 @@
 /* PACKAGE */
 /***********/
 package IR;
+import java.util.*;
 
 /*******************/
 /* GENERAL IMPORTS */

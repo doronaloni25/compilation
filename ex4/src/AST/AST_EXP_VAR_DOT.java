@@ -1,7 +1,9 @@
 package AST;
+import IR.*;
+import TEMP.*;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperFunctions.HelperFunctions;
+import HelperFunctions.*;
 
 public class AST_EXP_VAR_DOT extends AST_EXP
 {
@@ -78,5 +80,6 @@ public class AST_EXP_VAR_DOT extends AST_EXP
 
     public TEMP IRme(){
         // TODO: not a part of this exercise
+        return null;
     }
 }

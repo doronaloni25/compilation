@@ -1,7 +1,9 @@
 package AST;
+import IR.*;
+import TEMP.*;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperFunctions.HelperFunctions;
+import HelperFunctions.*;
 public class AST_STMT_RETURN extends AST_STMT {
     AST_EXP exp;
     public AST_STMT_RETURN(AST_EXP exp)

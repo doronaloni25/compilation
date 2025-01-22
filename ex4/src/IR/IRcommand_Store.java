@@ -2,7 +2,8 @@
 /* PACKAGE */
 /***********/
 package IR;
-
+import java.util.*;
+import java.util.*;
 /*******************/
 /* GENERAL IMPORTS */
 /*******************/
@@ -21,14 +22,14 @@ public class IRcommand_Store extends IRcommand
 	public IRcommand_Store(String var_name,TEMP src)
 	{
 		this.src      = src;
-		this.var_name = HelperFunctions.getVarNameWithDecScope(var_name);
+		this.var_name = var_name;
 	}
 	public String getGen(Set<String> ins)
 	{
 		// check if the left side of assign is correct and return the right side
 		// check if the temp is valid and returns the variable name
 		int srcNum = src.getSerialNumber();
-		if(ins.contains(String.valueof(srcNum)))
+		if(ins.contains(String.valueOf(srcNum)))
 		{
 			return var_name;
 		}

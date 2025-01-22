@@ -1,4 +1,5 @@
 package IR;
+import java.util.*;
 import HelperFunctions.*;
 
 public class ControlFlowGraph
@@ -11,6 +12,7 @@ public class ControlFlowGraph
         initBlocks(irCommands);
         initEdges();
         calcInsAndOuts(this.blocks.get(0));
+        this.printCFG();
     }
 
     public void addBlock(Block block)
@@ -34,7 +36,7 @@ public class ControlFlowGraph
         {
             Block currBlock = this.blocks.get(i);
             // if block is of type label we have label otherwise label is null
-            if(currBlock.label.equals(label))
+            if(currBlock.label != null && currBlock.label.equals(label))
             {
                 return currBlock;
             }
@@ -46,7 +48,7 @@ public class ControlFlowGraph
         for (int i = 0; i < this.blocks.size(); i++)
         {
             Block currBlock = this.blocks.get(i);
-            IRcommand currCmd = currBlock.irCommand;
+            IRcommand currCmd = currBlock.IRCommand;
 
             // If the command is return, continue from end of main
             // TODO: take care of all function returns, not only main
@@ -89,7 +91,7 @@ public class ControlFlowGraph
     private void calcInsAndOuts(Block currBlock)
     {
         List<Block> enterEdges = currBlock.enterEdges;
-        List<Block> updatedIns = new ArrayList<Block>();
+        Set<String> updatedIns = new HashSet<String>();
         Set<String> updatedOuts = new HashSet<String>();
         String kill = null;
         String gen = null;
@@ -112,18 +114,19 @@ public class ControlFlowGraph
         currBlock.alreadyBeenThere = true;
         currBlock.ins = updatedIns;
         // calculate the outs 
-        if(currBlock.IRcommand instanceof IRcommand_Store)
+        if(currBlock.IRCommand instanceof IRcommand_Store)
         {
-            kill = ((IRcommand_Store)currBlock.IRcommand).var_name;
+            kill = ((IRcommand_Store)currBlock.IRCommand).var_name;
         }
-        else if(currBlock.IRcommand instanceof IRcommand_Allocate)
+        else if(currBlock.IRCommand instanceof IRcommand_Allocate)
         {
-            kill = ((IRcommand_Allocate)currBlock.IRcommand).var_name;
+            kill = ((IRcommand_Allocate)currBlock.IRCommand).var_name;
         }
+
         //we dont use kill for load as the temp was just generated, and 
         //has never been used before
         updatedOuts.addAll(currBlock.ins);
-        gen = currBlock.IRcommand.getGen(currBlock.ins);
+        gen = currBlock.IRCommand.getGen(currBlock.ins);
         if(kill!=null)
         {
             updatedOuts.remove(kill);
@@ -132,11 +135,27 @@ public class ControlFlowGraph
         {
             updatedOuts.add(gen);
         }
+        // TODO: DEBUG
+        System.out.println("kill of command: " + currBlock.IRCommand.toString() + " = " + kill);
+        System.out.println("gen of command: " + currBlock.IRCommand.toString() + " = " + gen);
         currBlock.outs = updatedOuts;
         // recursively calculate the ins and outs for all the exit edges
         for (int j = 0; j < currBlock.exitEdges.size(); j++)
         {
             calcInsAndOuts(currBlock.exitEdges.get(j));
+        }
+    }
+
+    public void printCFG()
+    {
+        for (int i = 0; i < this.blocks.size(); i++)
+        {
+            Block currBlock = this.blocks.get(i);
+            System.out.println("Block " + i + ":");
+            System.out.println("ins: " + currBlock.ins);
+            System.out.println("outs: " + currBlock.outs);
+            System.out.println("IRcommand: " + currBlock.IRCommand.toString());
+            System.out.println();
         }
     }
 

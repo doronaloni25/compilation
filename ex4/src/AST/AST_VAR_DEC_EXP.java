@@ -1,7 +1,9 @@
 package AST;
+import IR.*;
+import TEMP.*;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperFunctions.HelperFunctions;
+import HelperFunctions.*;
 public class AST_VAR_DEC_EXP extends AST_VAR_DEC 
 {
     
@@ -36,6 +38,7 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC
         }
         // take care of SemantMe on "type ID", adds it to the symbol table and takes care of class field if relevant 
         TYPE currType = super.SemantMe();
+        // For IRme, super takes care of saving name with scope index    
         if (HelperFunctions.isInhiritedFromOrNil(expType, currType)) {
             return currType;
         }
@@ -47,9 +50,9 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC
     }   
     public TEMP IRme()
     {
-        IR.getInstance().Add_IRcommand(new IRcommand_Allocate(name));
+        IR.getInstance().Add_IRcommand(new IRcommand_Allocate(nameWithVarDecScope));
         TEMP t = exp.IRme();
-        IR.getInstance().Add_IRcommand(new IRcommand_Store(name, t));
+        IR.getInstance().Add_IRcommand(new IRcommand_Store(nameWithVarDecScope, t));
         return null;
     }
 }

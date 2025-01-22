@@ -1,12 +1,13 @@
 package AST;
+import IR.*;
+import TEMP.*;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperFunctions.HelperFunctions;
+import HelperFunctions.*;
 public class AST_VAR_FIELD extends AST_VAR
 {
 	public AST_VAR var;
 	public String fieldName;
-	
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/

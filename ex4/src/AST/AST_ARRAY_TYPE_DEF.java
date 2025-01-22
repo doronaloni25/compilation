@@ -1,7 +1,10 @@
 package AST;
+import IR.*;
+import TEMP.*;
 import TYPES.*;
 import SYMBOL_TABLE.SYMBOL_TABLE;
-import HelperFunctions.HelperFunctions;
+import HelperFunctions.*;
+
 public class AST_ARRAY_TYPE_DEF extends AST_Node{
     public String name;
     public AST_TYPE type;

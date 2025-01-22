@@ -1,7 +1,9 @@
 package AST;
+import IR.*;
+import TEMP.*;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperFunctions.HelperFunctions;
+import HelperFunctions.*;
 public class AST_DEC_LIST extends AST_LIST
 {
 	/****************/

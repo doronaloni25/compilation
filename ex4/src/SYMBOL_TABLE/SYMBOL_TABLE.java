@@ -26,7 +26,8 @@ public class SYMBOL_TABLE
 	private SYMBOL_TABLE_ENTRY[] table = new SYMBOL_TABLE_ENTRY[hashArraySize];
 	private SYMBOL_TABLE_ENTRY top;
 	private int top_index = 0;
-	public int scope_index = 0;
+	private int scope_index = 0;
+	public int scope_serial_number = 0;
 	public TYPE_CLASS_DEC inClass = null;
 	public TYPE_FUNCTION inFunction = null;
 	/**************************************************************/
@@ -64,7 +65,7 @@ public class SYMBOL_TABLE
 		/**************************************************************************/
 		/* [3] Prepare a new symbol table entry with name, type, next and prevtop */
 		/**************************************************************************/
-		SYMBOL_TABLE_ENTRY e = new SYMBOL_TABLE_ENTRY(name,t,hashValue,next,top,top_index++, scope_index);
+		SYMBOL_TABLE_ENTRY e = new SYMBOL_TABLE_ENTRY(name,t,hashValue,next,top,top_index++, scope_serial_number);
 
 		/**********************************************/
 		/* [4] Update the top of the symbol table ... */
@@ -109,7 +110,7 @@ public class SYMBOL_TABLE
 		{
 			if (name.equals(e.name))
 			{
-				return e.scope_index;
+				return e.scope_serial_number;
 			}
 		}
 		
@@ -155,6 +156,7 @@ public class SYMBOL_TABLE
 		/*********************************************/
 		PrintMe();
 		scope_index++;
+		scope_serial_number++;
 	}
 
 	/********************************************************************************/

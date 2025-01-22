@@ -1,7 +1,9 @@
 package AST;
+import IR.*;
+import TEMP.*;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperFunctions.HelperFunctions;
+import HelperFunctions.*;
 
 public class AST_EXP_ID extends AST_EXP
 {
@@ -78,7 +80,7 @@ public class AST_EXP_ID extends AST_EXP
         // only take care of print int in this task
         if (name.equals("PrintInt")){
             TEMP t = exp.IRme();
-            IR.getInstance().Add_IRcommand(new IRcommand_Print_Int(t));
+            IR.getInstance().Add_IRcommand(new IRcommand_PrintInt(t));
             return null;
         }
         // TODO: not needed for this exercise

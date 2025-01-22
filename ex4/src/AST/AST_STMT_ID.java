@@ -1,7 +1,9 @@
 package AST;
+import IR.*;
+import TEMP.*;
 import TYPES.*;
 import SYMBOL_TABLE.SYMBOL_TABLE;
-import HelperFunctions.HelperFunctions;
+import HelperFunctions.*;
 public class AST_STMT_ID extends AST_STMT
 {
     String name;
@@ -72,5 +74,6 @@ public class AST_STMT_ID extends AST_STMT
     public TEMP IRme()
     {
         //TODO- implement this for ex5
+        return null;
     }
 }

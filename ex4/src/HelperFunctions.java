@@ -163,13 +163,7 @@ public class HelperFunctions{
         return varName + "@" + Integer.toString(decScopeNum);
     }
 
-    public static ControlFlowGraph createCFG(){
-        IR instance = IR.getInstance();
-        properCommandList = new IRcommandList(instance.head, instance.tail);
-        return new ControlFlowGraph(properCommandList);
-    }
-
-    public static printInvalidVars(Set<String> invalidVars){
+    public static void printInvalidVars(Set<String> invalidVars){
         if (invalidVars.isEmpty()){
             file_writer.println("!OK");
         }
