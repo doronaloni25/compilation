@@ -26,7 +26,7 @@ public class SYMBOL_TABLE
 	private SYMBOL_TABLE_ENTRY[] table = new SYMBOL_TABLE_ENTRY[hashArraySize];
 	private SYMBOL_TABLE_ENTRY top;
 	private int top_index = 0;
-	private int scope_index = 0;
+	public int scope_index = 0;
 	public TYPE_CLASS_DEC inClass = null;
 	public TYPE_FUNCTION inFunction = null;
 	/**************************************************************/
@@ -64,7 +64,7 @@ public class SYMBOL_TABLE
 		/**************************************************************************/
 		/* [3] Prepare a new symbol table entry with name, type, next and prevtop */
 		/**************************************************************************/
-		SYMBOL_TABLE_ENTRY e = new SYMBOL_TABLE_ENTRY(name,t,hashValue,next,top,top_index++);
+		SYMBOL_TABLE_ENTRY e = new SYMBOL_TABLE_ENTRY(name,t,hashValue,next,top,top_index++, scope_index);
 
 		/**********************************************/
 		/* [4] Update the top of the symbol table ... */
@@ -98,6 +98,22 @@ public class SYMBOL_TABLE
 		}
 		
 		return null;
+	}
+
+	// finds the scope number of the DECLARATION of the variable
+	// i.e. if we declare x in global scope - and i call for x inside an inner scope - i want to know its declaration scope
+	public int findDecScopeNumber(String name){
+		SYMBOL_TABLE_ENTRY e;
+				
+		for (e = table[hash(name)]; e != null; e = e.next)
+		{
+			if (name.equals(e.name))
+			{
+				return e.scope_index;
+			}
+		}
+		
+		return -1;
 	}
 	
 	public TYPE findWithinScope(String name)
