@@ -82,4 +82,11 @@ public class AST_VAR_EXP extends AST_VAR
 		TYPE_ARRAY array = (TYPE_ARRAY) varType;
 		return array.getType();
 	}
+
+	@Override
+	public TEMP IRme()
+	{
+		//TODO-implement for ex5
+		return null;
+	}
 }

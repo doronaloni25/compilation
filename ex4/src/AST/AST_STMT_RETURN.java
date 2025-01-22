@@ -62,4 +62,21 @@ public class AST_STMT_RETURN extends AST_STMT {
 			return currentFunction.returnType;
 		}
 	}
+	@Override
+	public TEMP IRme()
+	/*the IRFuncReturn expets to get the TEMP of the returned exp. if the func return void, then null*/ 
+	{
+		if(exp!=null)
+		{
+			//TODO-check if ok for ex5
+			TEMP tExp = exp.IRme();
+			IR.getInstance().Add_IRcommand(new IRcommand_FuncReturn(tExp));
+		}
+		else
+		{
+			IR.getInstance().Add_IRcommand(new IRcommand_FuncReturn(null));
+		}
+		return null;
+			
+	}
 }
