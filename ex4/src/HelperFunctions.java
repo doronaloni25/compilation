@@ -2,6 +2,7 @@ package HelperFunctions;
 
 import java.io.*;
 import java.io.PrintWriter;
+import java.util.*;
 import java_cup.runtime.Symbol;
 import TYPES.*;
 import AST.*;

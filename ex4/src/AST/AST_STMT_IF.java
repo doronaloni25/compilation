@@ -50,7 +50,7 @@ public class AST_STMT_IF extends AST_STMT
 		/*******************************/
 		/* [1] Allocate fresh label */
 		/*******************************/
-		String label_end   = IRcommand.getFreshLabel("if_end");
+		String label_end = IRcommand.getFreshLabel("if_end");
 
 		/********************/
 		/* [2] cond.IRme(); */

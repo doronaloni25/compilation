@@ -23,4 +23,15 @@ public class IRcommand_Load extends IRcommand
 		this.dst      = dst;
 		this.var_name = HelperFunctions.getVarNameWithDecScope(var_name);
 	}
+	public String getGen(Set<String> ins)
+	{
+		// check if the left side of assign is correct and return the right side
+		// checks if the variable is valid and returns the temp serial number as string
+		int dstNum = dst.getSerialNumber();
+		if(ins.contains(var_name))
+		{
+			return String.valueof(dstNum);
+		}
+		return null;
+	}
 }

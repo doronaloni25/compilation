@@ -12,7 +12,7 @@ package IR;
 /*******************/
 import TEMP.*;
 
-public class IRcommand_Binop_EQ_Integers extends IRcommand
+public class IRcommand_Binop_EQ_Integers extends IRcommand_Binop
 {
 	public TEMP t1;
 	public TEMP t2;
@@ -24,4 +24,5 @@ public class IRcommand_Binop_EQ_Integers extends IRcommand
 		this.t1 = t1;
 		this.t2 = t2;
 	}
+	/*get gen implemented in IR_BINOP*/ 
 }
