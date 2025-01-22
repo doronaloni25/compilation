@@ -139,4 +139,17 @@ public class ControlFlowGraph
             calcInsAndOuts(currBlock.exitEdges.get(j));
         }
     }
+
+    public Set<String> getInvalidVars(){
+        Set<String> invalidVars = new HashSet<String>();
+        for (int i = 0; i < this.blocks.size(); i++)
+        {
+            Block currBlock = this.blocks.get(i);
+            String invalidVar = currBlock.getInvalidVar();
+            if (invalidVar != null){
+                invalidVars.add(invalidVar);
+            }
+        }
+        return invalidVars;
+    }
 }

@@ -29,6 +29,7 @@ public class Block
     {
         this.exitEdges.add(exitEdge);
     }
+    
     private setLabel()
     {
         if(this.IRCommand instanceof IRcommand_Label)
@@ -38,6 +39,20 @@ public class Block
         else
         {
             this.label = null;
+        }
+    }
+
+    public String getInvalidVar(){
+        if(!this.IRCommand instanceof IRcommand_Load)
+        {
+            return null;
+        }
+
+        IRcommand_Load cmd = (IRcommand_Load)this.IRCommand;
+
+        if (!this.ins.containts(cmd.var_name))
+        {
+            return cmd.var_name.split("@")[0];
         }
     }
     

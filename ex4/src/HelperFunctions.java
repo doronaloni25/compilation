@@ -6,6 +6,8 @@ import java.util.*;
 import java_cup.runtime.Symbol;
 import TYPES.*;
 import AST.*;
+import TEMP.*;
+import IR.*;
 import SYMBOL_TABLE.*;
 
 public class HelperFunctions{
@@ -159,6 +161,25 @@ public class HelperFunctions{
             return null;
         }
         return varName + "@" + Integer.toString(decScopeNum);
+    }
+
+    public static ControlFlowGraph createCFG(){
+        IR instance = IR.getInstance();
+        properCommandList = new IRcommandList(instance.head, instance.tail);
+        return new ControlFlowGraph(properCommandList);
+    }
+
+    public static printInvalidVars(Set<String> invalidVars){
+        if (invalidVars.isEmpty()){
+            file_writer.println("!OK");
+        }
+        else{
+            List<String> sortedInvalidVars = new ArrayList<String>(invalidVars);
+            Collections.sort(sortedInvalidVars);
+            for (String var : sortedInvalidVars){
+                file_writer.println(var);
+            }
+        }
     }
    
 }

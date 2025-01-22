@@ -75,6 +75,12 @@ public class AST_EXP_ID extends AST_EXP
 
     @Override
     public TEMP IRme(){
+        // only take care of print int in this task
+        if (name.equals("PrintInt")){
+            TEMP t = exp.IRme();
+            IR.getInstance().Add_IRcommand(new IRcommand_Print_Int(t));
+            return null;
+        }
         // TODO: not needed for this exercise
         return null;
     }

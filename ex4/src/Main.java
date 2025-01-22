@@ -29,7 +29,7 @@ public class Main
 			/* [2] Initialize a file writer */
 			/********************************/
 			file_writer = new PrintWriter(outputFilename);
-			
+			HelperFunctions.setFileWriter(file_writer);
 			/******************************/
 			/* [3] Initialize a new lexer */
 			/******************************/
@@ -59,7 +59,17 @@ public class Main
 			/* [8] IR the AST ... */
 			/**********************/
 			AST.IRme();
-			
+
+			/*************************/
+			/* Create CFG 			 */
+			/*************************/
+			ControlFlowGraph cfg = HelperFunctions.CreateCFG();
+			Set<String> invalidVars = cfg.getInvalidVars();
+
+			/*************************/
+			/* Print out uninitialized vars		 */
+			/*************************/
+			HelperFunctions.printUninitializedVars(invalidVars);
 			/**************************/
 			/* [12] Close output file */
 			/**************************/
