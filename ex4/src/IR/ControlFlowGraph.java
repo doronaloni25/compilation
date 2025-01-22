@@ -116,13 +116,20 @@ public class ControlFlowGraph
         {
             kill = ((IRcommand_Allocate)currBlock.IRcommand).var_name;
         }
-        // we have gen only in the case of store
-        if(currBlock.IRcommand instanceof IRcommand_Store)
+        //we dont use kill for load as the temp was just generated, and 
+        //has never been used before
+        updatedOuts.addAll(currBlock.ins);
+        gen = currBlock.IRcommand.getGen(currBlock.ins);
+        if(kill!=null)
         {
-            x := t
+            updatedOuts.remove(kill);
         }
-        //TODO: remember to remove t serial number when doing the gen??
-
+        if(gen!=null)
+        {
+            updatedOuts.add(gen);
+        }
+        currBlock.outs = updatedOuts;
+        
     }
 
 
