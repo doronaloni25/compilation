@@ -133,8 +133,10 @@ public class ControlFlowGraph
             updatedOuts.add(gen);
         }
         currBlock.outs = updatedOuts;
-        
+        // recursively calculate the ins and outs for all the exit edges
+        for (int j = 0; j < currBlock.exitEdges.size(); j++)
+        {
+            calcInsAndOuts(currBlock.exitEdges.get(j));
+        }
     }
-
-
 }
