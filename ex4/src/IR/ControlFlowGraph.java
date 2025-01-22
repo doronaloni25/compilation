@@ -48,9 +48,13 @@ public class ControlFlowGraph
             Block currBlock = this.blocks.get(i);
             IRcommand currCmd = currBlock.irCommand;
 
-            // If the command is return, has no outer edges (only the end function label will have exit edge)
+            // If the command is return, continue from end of main
+            // TODO: take care of all function returns, not only main
             if(currCmd instanceof IRcommand_FuncReturn)
             {
+                Block destBlock = findBlockByLabel("end of main");
+                currBlock.addExitEdge(destBlock);
+                destBlock.addEnterEdge(currBlock);
                 continue;
             }
             // If the command is jump, add the edge to the label of destination 
