@@ -11,6 +11,7 @@ package IR;
 /* PROJECT IMPORTS */
 /*******************/
 import TEMP.*;
+import HelperFunctions.*;
 
 public class IRcommand_Store extends IRcommand
 {
@@ -20,6 +21,6 @@ public class IRcommand_Store extends IRcommand
 	public IRcommand_Store(String var_name,TEMP src)
 	{
 		this.src      = src;
-		this.var_name = var_name;
+		this.var_name = HelperFunctions.getVarNameWithDecScope(var_name);
 	}
 }

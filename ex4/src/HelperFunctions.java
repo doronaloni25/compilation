@@ -150,5 +150,14 @@ public class HelperFunctions{
             classDec.addFunction(function);
         }
     }
+
+    public static String getVarNameWithDecScope(String varName){
+        int decScopeNum = SYMBOL_TABLE.getInstance().findDecScopeNumber(varName);
+        if (decScopeNum == -1){
+            // cant happen, since this would get taken care in semantme
+            return null;
+        }
+        return varName + "@" + Integer.toString(decScopeNum);
+    }
    
 }

@@ -11,6 +11,7 @@ package IR;
 /* PROJECT IMPORTS */
 /*******************/
 import TEMP.*;
+import HelperFunctions.*;
 
 public class IRcommand_Allocate extends IRcommand
 {
@@ -18,6 +19,6 @@ public class IRcommand_Allocate extends IRcommand
 	
 	public IRcommand_Allocate(String var_name)
 	{
-		this.var_name = var_name;
+		this.var_name = HelperFunctions.getVarNameWithDecScope(var_name);
 	}
 }
