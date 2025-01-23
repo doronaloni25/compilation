@@ -29,7 +29,7 @@ public TYPE SemantMe()
     TYPE t = type.SemantMe();
     if(t == null)
     {
-        //TODO- throw exeption
+        HelperFunctions.printError(line, this.getClass().getSimpleName());
     }
     SYMBOL_TABLE.getInstance().enter(name, t);
     return t;

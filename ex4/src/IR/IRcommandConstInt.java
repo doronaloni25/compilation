@@ -3,7 +3,6 @@
 /***********/
 package IR;
 import java.util.*;
-import java.util.*;
 /*******************/
 /* GENERAL IMPORTS */
 /*******************/
@@ -28,8 +27,6 @@ public class IRcommandConstInt extends IRcommand
 		// check if the right side of assign is correct and return the left side
 		// in this case right side is always correct as it is a constant number
 		int tNum = t.getSerialNumber();
-		// TODO: DEBUG
-		//System.out.println("getGen of ConstInt: " + String.valueOf(tNum));
 		return String.valueOf(tNum);
 	}
 

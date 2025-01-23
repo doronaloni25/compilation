@@ -50,24 +50,20 @@ public class ControlFlowGraph
             Block currBlock = this.blocks.get(i);
             IRcommand currCmd = currBlock.IRCommand;
 
-            // If the command is return, continue from end of main
-            // TODO: take care of all function returns, not only main
+            // If the command is return, the run is finished (no exit edges).
             if(currCmd instanceof IRcommand_FuncReturn)
             {
-                // TODO: maybe return this
-                // Block destBlock = findBlockByLabel("end of func main");
-                // currBlock.addExitEdge(destBlock);
-                // destBlock.addEnterEdge(currBlock);
                 continue;
             }
-            // TODO: look at forum, realise if we should have an edge from start of main to end of main
-            // i.e. a path to skip main
+
+            // at the start of a function, we want to skip the function content (edge to the end label) as well as go inside the function (an edge to the next block)
             if (currCmd instanceof IRcommand_Label && ((IRcommand_Label)currCmd).label_name.equals("start of func main")){
                 Block destBlock = findBlockByLabel("end of func main");
                 currBlock.addExitEdge(destBlock);
                 destBlock.addEnterEdge(currBlock);
-            }  
-            // If the command is jump, add the edge to the label of destination 
+            }
+
+            // If the command is jump, add the edge to the label of destination (and not to the next block)
             if(currCmd instanceof IRcommand_Jump_Label)
             {
                 String label = ((IRcommand_Jump_Label)currCmd).label_name;
@@ -76,8 +72,9 @@ public class ControlFlowGraph
                 currBlock.addExitEdge(destBlock);
                 continue;
             }
+
             // If the command is jump if eq to zero, add the edge to the label of destination,
-            // and add the edge to the next block
+            // and add the edge to the next block (in the case where the condition is false)
             if(currCmd instanceof IRcommand_Jump_If_Eq_To_Zero)
             {
                 String label =((IRcommand_Jump_If_Eq_To_Zero)currCmd).label_name;
@@ -86,11 +83,12 @@ public class ControlFlowGraph
                 currBlock.addExitEdge(destBlock);
                 // we add the edge to the next block anyways later
             }
+
             // in any other case add the edge to the next block
             if(i+1 < this.blocks.size())
             {
                 Block nextBlock = this.blocks.get(i+1);
-                // TODO: check in forum zzzz....
+                // if next block is end of main, same as return - we want to end the run (no exit edges)
                 if (nextBlock.IRCommand instanceof IRcommand_Label && ((IRcommand_Label)nextBlock.IRCommand).label_name.equals("end of func main")){
                     continue;
                 }
@@ -150,8 +148,7 @@ public class ControlFlowGraph
             updatedOuts.add(gen);
         }
         currBlock.outs = updatedOuts;
-        // TODO: DEBUG
-        //printCurrInOutsCalculation(currBlock, kill, gen, updatedOuts);
+
         // recursively calculate the ins and outs for all the exit edges
         for (int j = 0; j < currBlock.exitEdges.size(); j++)
         {
@@ -192,7 +189,7 @@ public class ControlFlowGraph
     }
 
     public void printCurrInOutsCalculation(Block currBlock, String kill, String gen, Set<String> updatedOuts){
-        // TODO: DEBUG
+        // a function used for debugging, prints the current block and the updated ins and outs (should be used inside calcInsAndOuts)
         System.out.println("CalcInsAndOuts of " + currBlock.toString());
         System.out.println("Updated Ins = " + currBlock.ins);
         System.out.println("kill = " + kill);
