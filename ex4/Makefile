@@ -53,7 +53,7 @@ CUP_FLAGS =                                \
 #########################
 # DEFINITIONS :: PARSER #
 #########################
-INPUT    = ${INPUT_DIR}/Input.txt
+INPUT    = ${INPUT_DIR}/TEST_29.txt
 OUTPUT   = ${OUTPUT_DIR}/Output.txt
 
 ##########
@@ -186,3 +186,6 @@ everything:
 	@echo "*****************************"
 	java -jar ANALYZER ${INPUT} ${OUTPUT}
 	@echo "\n"
+
+tests: 
+	./run_all_tests.sh

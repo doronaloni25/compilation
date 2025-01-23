@@ -2,6 +2,7 @@
 /* PACKAGE */
 /***********/
 package IR;
+import java.util.*;
 
 /*******************/
 /* GENERAL IMPORTS */
@@ -20,5 +21,4 @@ public class IRcommand_FuncReturn extends IRcommand
 	{
 		this.tFuncReturn = t;
 	}
-	
 }

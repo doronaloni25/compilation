@@ -1,7 +1,9 @@
 package AST;
+import IR.*;
+import TEMP.*;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperFunctions.HelperFunctions;
+import HelperFunctions.*;
 public class AST_ARRAY_TYPE_DEF_DEC extends AST_DEC 
 {
     AST_ARRAY_TYPE_DEF arrayTypedef;

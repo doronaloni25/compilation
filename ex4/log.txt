@@ -1,0 +1,323 @@
+
+CalcInsAndOuts of Command: IRcommand_Allocate: g0@0
+Updated Ins = []
+kill = g0@0
+gen = null
+
+
+dated outs = []CalcInsAndOuts of Command: IRcommandConstInt , with int = 0
+Updated Ins = []
+kill = null
+gen = 0
+Updated outs = [0]
+
+CalcInsAndOuts of Command: IRcommand_Store: g0@0 = t0
+Updated Ins = [0]
+kill = g0@0
+gen = g0@0
+Updated outs = [0, g0@0]
+
+CalcInsAndOuts of Command: IRcommand_Allocate: g@0
+Updated Ins = [0, g0@0]
+kill = g@0
+gen = null
+Updated outs = [0, g0@0]
+
+CalcInsAndOuts of Command: IRcommand_Load: t2 = g0@0
+
+kill = null= [0, g0@0]
+gen = 2
+Updated outs = [0, 2, g0@0]
+
+
+Updated Ins = [0, 2, g0@0]IRcommandConstInt , with int = 1
+kill = null
+gen = 3
+Updated outs = [0, 2, 3, g0@0]
+
+CalcInsAndOuts of Command: IRcommand_Binop_Add_Integers: t1 = 2 op 3
+Updated Ins = [0, 2, 3, g0@0]
+kill = null
+gen = 1
+Updated outs = [0, 1, 2, 3, g0@0]
+
+CalcInsAndOuts of Command: IRcommand_Store: g@0 = t1
+Updated Ins = [0, 1, 2, 3, g0@0]
+kill = g@0
+gen = g@0
+Updated outs = [0, 1, 2, 3, g0@0, g@0]
+
+CalcInsAndOuts of Command: IRcommand_Label: start of func main
+Updated Ins = [0, 1, 2, 3, g0@0, g@0]
+kill = null
+gen = null
+Updated outs = [0, 1, 2, 3, g0@0, g@0]
+CalcInsAndOuts of Command: IRcommand_Allocate: x@1
+Updated Ins = [0, 1, 2, 3, g0@0, g@0]
+kill = x@1
+gen = null
+Updated outs = [0, 1, 2, 3, g0@0, g@0]
+
+CalcInsAndOuts of Command: IRcommand_Load: t5 = g@0Updated Ins = [0, 1, 2, 3, g0@0, g@0]
+kill = null
+gen = 5
+Updated outs = [0, 1, 2, 3, 5, g0@0, g@0]
+
+CalcInsAndOuts of Command: IRcommandConstInt , with int = 2
+Updated Ins = [0, 1, 2, 3, 5, g0@0, g@0]
+kill = null
+gen = 7
+Updated outs = [0, 1, 2, 3, 5, g0@0, g@0, 7]
+
+CalcInsAndOuts of Command: IRcommandConstInt , with int = 3
+Updated Ins = [0, 1, 2, 3, 5, g0@0, g@0, 7]
+kill = null
+gen = 8
+Updated outs = [0, 1, 2, 3, 5, g0@0, g@0, 7, 8]
+
+CalcInsAndOuts of Command: IRcommand_Binop_Add_Integers: t6 = 7 op 8
+Updated Ins = [0, 1, 2, 3, 5, g0@0, g@0, 7, 8]kill = null
+gen = 6
+Updated outs = [0, 1, 2, 3, 5, g0@0, g@0, 6, 7, 8]
+
+CalcInsAndOuts of Command: IRcommand_Binop_Mul_Integers: t4 = 5 op 6
+Updated Ins = [0, 1, 2, 3, 5, g0@0, g@0, 6, 7, 8]
+kill = null
+gen = 4
+Updated outs = [0, 1, 2, 3, 4, 5, g0@0, g@0, 6, 7, 8]
+
+CalcInsAndOuts of Command: IRcommand_Store: x@1 = t4
+Updated Ins = [0, 1, 2, 3, 4, 5, g0@0, g@0, 6, 7, 8]
+kill = x@1
+gen = x@1Updated outs = [0, 1, 2, 3, 4, 5, g0@0, g@0, 6, 7, 8, x@1]
+
+CalcInsAndOuts of Command: IRcommand_Allocate: y@1
+Updated Ins = [0, 1, 2, 3, 4, 5, g0@0, g@0, 6, 7, 8, x@1]
+kill = y@1
+gen = null
+Updated outs = [0, 1, 2, 3, 4, 5, g0@0, g@0, 6, 7, 8, x@1]
+
+CalcInsAndOuts of Command: IRcommandConstInt , with int = 10
+Updated Ins = [0, 1, 2, 3, 4, 5, g0@0, g@0, 6, 7, 8, x@1]
+kill = null
+gen = 9
+Updated outs = [x@1, 0, 1, 2, 3, 4, 5, g0@0, g@0, 6, 7, 8, 9]
+CalcInsAndOuts of Command: IRcommand_Store: y@1 = t9
+Updated Ins = [x@1, 0, 1, 2, 3, 4, 5, g0@0, g@0, 6, 7, 8, 9]
+kill = y@1
+gen = y@1Updated outs = [x@1, y@1, 0, 1, 2, 3, 4, 5, g0@0, g@0, 6, 7, 8, 9]
+
+CalcInsAndOuts of Command: IRcommand_Allocate: z@1
+Updated Ins = [x@1, y@1, 0, 1, 2, 3, 4, 5, g0@0, g@0, 6, 7, 8, 9]
+kill = z@1
+gen = null
+Updated outs = [x@1, y@1, 0, 1, 2, 3, 4, 5, g0@0, g@0, 6, 7, 8, 9]
+
+CalcInsAndOuts of Command: IRcommand_Allocate: w@1
+Updated Ins = [x@1, y@1, 0, 1, 2, 3, 4, 5, g0@0, g@0, 6, 7, 8, 9]
+kill = w@1
+gen = null
+Updated outs = [x@1, y@1, 0, 1, 2, 3, 4, 5, g0@0, g@0, 6, 7, 8, 9]
+
+CalcInsAndOuts of Command: IRcommand_Label: Label_1_while_start
+Updated Ins = []
+
+gen = null
+Updated outs = []
+
+CalcInsAndOuts of Command: IRcommand_Load: t11 = y@1
+Updated Ins = []
+kill = null
+gen = null
+Updated outs = []
+
+CalcInsAndOuts of Command: IRcommandConstInt , with int = 0
+Updated Ins = []
+kill = null
+gen = 12
+Updated outs = [12]
+
+CalcInsAndOuts of Command: IRcommand_Binop_GT_Integers: t10 = 11 op 12
+
+kill = null
+ [12]gen = null
+Updated outs = [12]
+
+CalcInsAndOuts of Command: IRcommand_Jump_If_Eq_To_Zero: if t10 jump to Label_0_while_end
+Updated Ins = [12]
+kill = null
+gen = nullUpdated outs = [12]
+
+CalcInsAndOuts of Command: IRcommand_Label: Label_0_while_end
+Updated Ins = [12]
+kill = null
+gen = null
+Updated outs = [12]
+CalcInsAndOuts of Command: IRcommand_Label: end of func main
+Updated Ins = [12]
+
+gen = null
+Updated outs = [12]
+
+CalcInsAndOuts of Command: IRcommand_Load: t14 = x@1
+Updated Ins = [12]
+kill = null
+gen = null
+Updated outs = [12]
+
+CalcInsAndOuts of Command: IRcommandConstInt , with int = 1
+Updated Ins = [12]
+kill = null
+gen = 16
+Updated outs = [12, 16]
+
+CalcInsAndOuts of Command: IRcommand_Load: t17 = y@1
+Updated Ins = [12, 16]
+kill = null
+gen = null
+Updated outs = [12, 16]
+
+CalcInsAndOuts of Command: IRcommand_Binop_Add_Integers: t15 = 16 op 17
+Updated Ins = [12, 16]kill = null
+gen = null
+Updated outs = [12, 16]
+CalcInsAndOuts of Command: IRcommand_Binop_Add_Integers: t13 = 14 op 15
+Updated Ins = [12, 16]
+kill = null
+gen = nullUpdated outs = [12, 16]
+
+CalcInsAndOuts of Command: IRcommand_Store: z@1 = t13
+Updated Ins = [12, 16]
+kill = z@1
+gen = null
+Updated outs = [12, 16]
+
+CalcInsAndOuts of Command: IRcommandConstInt , with int = 1
+Updated Ins = [12, 16]
+kill = null
+gen = 18
+Updated outs = [12, 16, 18]
+
+
+Updated Ins = [12, 16, 18]IRcommand_Store: g@0 = t18
+kill = g@0
+gen = g@0
+Updated outs = [12, 16, g@0, 18]
+
+CalcInsAndOuts of Command: IRcommand_Load: t20 = y@1
+Updated Ins = [12, 16, g@0, 18]
+kill = nullgen = null
+Updated outs = [12, 16, g@0, 18]
+
+CalcInsAndOuts of Command: IRcommandConstInt , with int = 1
+Updated Ins = [12, 16, g@0, 18]
+kill = null
+gen = 21
+Updated outs = [12, 16, g@0, 18, 21]
+
+CalcInsAndOuts of Command: IRcommand_Binop_Sub_Integers: t19 = 20 op 21
+Updated Ins = [12, 16, g@0, 18, 21]
+kill = null
+gen = null
+Updated outs = [12, 16, g@0, 18, 21]
+
+CalcInsAndOuts of Command: IRcommand_Store: y@1 = t19
+Updated Ins = [12, 16, g@0, 18, 21]
+kill = y@1
+gen = null
+Updated outs = [12, 16, g@0, 18, 21]
+
+CalcInsAndOuts of Command: IRcommand_Jump_Label: jump to Label_1_while_start
+
+kill = null= [12, 16, g@0, 18, 21]
+gen = null
+Updated outs = [12, 16, g@0, 18, 21]
+
+CalcInsAndOuts of Command: IRcommand_Label: Label_1_while_start
+Updated Ins = [g@0]
+
+gen = nullUpdated outs = [g@0]
+
+CalcInsAndOuts of Command: IRcommand_Load: t11 = y@1
+Updated Ins = [g@0]
+kill = null
+gen = null
+Updated outs = [g@0]
+
+CalcInsAndOuts of Command: IRcommandConstInt , with int = 0
+Updated Ins = [g@0]
+kill = null
+gen = 12
+Updated outs = [12, g@0]
+
+CalcInsAndOuts of Command: IRcommand_Binop_GT_Integers: t10 = 11 op 12
+
+kill = null= [12, g@0]
+gen = null
+Updated outs = [12, g@0]
+
+CalcInsAndOuts of Command: IRcommand_Jump_If_Eq_To_Zero: if t10 jump to Label_0_while_end
+Updated Ins = [12, g@0]
+kill = null
+gen = null
+Updated outs = [12, g@0]
+
+CalcInsAndOuts of Command: IRcommand_Label: Label_0_while_end
+Updated Ins = [12, g@0]
+kill = null
+gen = null
+Updated outs = [12, g@0]
+
+CalcInsAndOuts of Command: IRcommand_Label: end of func main
+Updated Ins = [12, g@0]
+kill = null
+gen = nullUpdated outs = [12, g@0]
+
+CalcInsAndOuts of Command: IRcommand_Load: t14 = x@1
+Updated Ins = [12, g@0]
+kill = null
+gen = null
+Updated outs = [12, g@0]
+
+CalcInsAndOuts of Command: IRcommandConstInt , with int = 1
+Updated Ins = [12, g@0]
+
+gen = 16
+lUpdated outs = [12, 16, g@0]
+CalcInsAndOuts of Command: IRcommand_Load: t17 = y@1
+Updated Ins = [12, 16, g@0]
+kill = null
+gen = null
+Updated outs = [12, 16, g@0]
+
+CalcInsAndOuts of Command: IRcommand_Binop_Add_Integers: t15 = 16 op 17
+Updated Ins = [12, 16, g@0]
+kill = null
+gen = null
+Updated outs = [12, 16, g@0]
+
+CalcInsAndOuts of Command: IRcommand_Binop_Add_Integers: t13 = 14 op 15
+Updated Ins = [12, 16, g@0]
+
+gen = null
+
+
+dated outs = [12, 16, g@0]CalcInsAndOuts of Command: IRcommand_Store: z@1 = t13
+Updated Ins = [12, 16, g@0]
+kill = z@1
+gen = null
+Updated outs = [12, 16, g@0]
+
+CalcInsAndOuts of Command: IRcommandConstInt , with int = 1
+Updated Ins = [12, 16, g@0]
+kill = null
+gen = 18
+Updated outs = [12, 16, g@0, 18]
+
+CalcInsAndOuts of Command: IRcommand_Store: g@0 = t18
+Updated Ins = [12, 16, g@0, 18]kill = g@0
+gen = g@0
+Updated outs = [12, 16, g@0, 18]
+
+
+

@@ -1,14 +1,16 @@
 package AST;
+import IR.*;
+import TEMP.*;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperFunctions.HelperFunctions;
+import HelperFunctions.*;
 public class AST_VAR_SIMPLE extends AST_VAR
 {
 	/************************/
 	/* simple variable name */
 	/************************/
 	public String name;
-	
+	public String nameWithVarDecScope;
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
@@ -50,7 +52,9 @@ public class AST_VAR_SIMPLE extends AST_VAR
 	@Override
 	public TYPE SemantMe() {
 		// Make sure symbol is already defined
-		TYPE type = SYMBOL_TABLE.getInstance().find(name);  
+		TYPE type = SYMBOL_TABLE.getInstance().find(name); 
+		// for IRme
+		nameWithVarDecScope = HelperFunctions.getVarNameWithDecScope(name); 
 		if(type == null) {
 			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
@@ -62,7 +66,7 @@ public class AST_VAR_SIMPLE extends AST_VAR
 	public TEMP IRme()
 	{
 		TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
-		IR.getInstance().Add_IRcommand(new IRcommand_Load(t,name));
+		IR.getInstance().Add_IRcommand(new IRcommand_Load(t,nameWithVarDecScope));
 		return t;
 	
 	}

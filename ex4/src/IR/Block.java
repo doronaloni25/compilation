@@ -1,5 +1,7 @@
 package IR;
+import java.util.*;
 import HelperFunctions.*;
+import java.util.*;
 public class Block
 {
     public String label;
@@ -16,20 +18,21 @@ public class Block
         this.outs = new HashSet<String>();
         this.exitEdges = new ArrayList<Block>();
         this.enterEdges = new ArrayList<Block>();
-        this.alreadyBeenThere = false
+        this.alreadyBeenThere = false;
         setLabel();
     }
 
-    public addEnterEdge(Block enterEdge)
+    public void addEnterEdge(Block enterEdge)
     {
         this.enterEdges.add(enterEdge);
     }
 
-    public addExitEdge(Block exitEdge)
+    public void addExitEdge(Block exitEdge)
     {
         this.exitEdges.add(exitEdge);
     }
-    private setLabel()
+    
+    private void setLabel()
     {
         if(this.IRCommand instanceof IRcommand_Label)
         {
@@ -39,6 +42,25 @@ public class Block
         {
             this.label = null;
         }
+    }
+
+    public String getInvalidVar(){
+        if(!(this.IRCommand instanceof IRcommand_Load))
+        {
+            return null;
+        }
+
+        IRcommand_Load cmd = (IRcommand_Load)this.IRCommand;
+
+        if (!this.ins.contains(cmd.var_name))
+        {
+            return cmd.var_name.split("@")[0];
+        }
+        return null;
+    }
+
+    public String toString(){
+        return this.IRCommand.toString();
     }
     
 }

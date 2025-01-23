@@ -1,7 +1,9 @@
 package AST;
+import IR.*;
+import TEMP.*;
 import TYPES.*;
 import SYMBOL_TABLE.SYMBOL_TABLE;
-import HelperFunctions.HelperFunctions;
+import HelperFunctions.*;
 public class AST_STMT_ID extends AST_STMT
 {
     String name;
@@ -71,6 +73,13 @@ public class AST_STMT_ID extends AST_STMT
     @Override
     public TEMP IRme()
     {
+        // only take care of print int in this task
+        if (name.equals("PrintInt")){
+            TEMP t = exp.IRme();
+            IR.getInstance().Add_IRcommand(new IRcommand_PrintInt(t));
+            return null;
+        }
         //TODO- implement this for ex5
+        return null;
     }
 }

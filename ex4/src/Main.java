@@ -2,6 +2,8 @@
 import java.io.*;
 import java.io.PrintWriter;
 import java_cup.runtime.Symbol;
+import HelperFunctions.*;
+import java.util.*;
 import AST.*;
 import IR.*;
 
@@ -12,7 +14,7 @@ public class Main
 		Lexer l;
 		Parser p;
 		Symbol s;
-		AST_DEC_LIST AST;
+		AST_PROGRAM AST;
 		FileReader file_reader;
 		PrintWriter file_writer;
 		String inputFilename = argv[0];
@@ -29,7 +31,7 @@ public class Main
 			/* [2] Initialize a file writer */
 			/********************************/
 			file_writer = new PrintWriter(outputFilename);
-			
+			HelperFunctions.setFileWriter(file_writer);
 			/******************************/
 			/* [3] Initialize a new lexer */
 			/******************************/
@@ -38,12 +40,12 @@ public class Main
 			/*******************************/
 			/* [4] Initialize a new parser */
 			/*******************************/
-			p = new Parser(l);
+			p = new Parser(l, file_writer);
 
 			/***********************************/
 			/* [5] 3 ... 2 ... 1 ... Parse !!! */
 			/***********************************/
-			AST = (AST_DEC_LIST) p.parse().value;
+			AST = (AST_PROGRAM) p.parse().value;
 			
 			/*************************/
 			/* [6] Print the AST ... */
@@ -59,7 +61,17 @@ public class Main
 			/* [8] IR the AST ... */
 			/**********************/
 			AST.IRme();
-			
+
+			/*************************/
+			/* Create CFG 			 */
+			/*************************/
+			ControlFlowGraph cfg = IR.getInstance().createCFG();
+			Set<String> invalidVars = cfg.getInvalidVars();
+
+			/*************************/
+			/* Print out uninitialized vars		 */
+			/*************************/
+			HelperFunctions.printInvalidVars(invalidVars);
 			/**************************/
 			/* [12] Close output file */
 			/**************************/

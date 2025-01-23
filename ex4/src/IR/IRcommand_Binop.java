@@ -2,6 +2,7 @@
 /* PACKAGE */
 /***********/
 package IR;
+import java.util.*;
 
 /*******************/
 /* GENERAL IMPORTS */
@@ -30,10 +31,16 @@ public class IRcommand_Binop extends IRcommand
 	{
 		int num1 = t1.getSerialNumber();
 		int num2 = t2.getSerialNumber();
-		if(ins.contains(String.valueof(num1)) && ins.contains(String.valueof(num2)))
+		if(ins.contains(String.valueOf(num1)) && ins.contains(String.valueOf(num2)))
 		{
 			return String.valueOf(dst.getSerialNumber());
 		}
 		return null;
+	}
+
+	public String toString()
+	{
+		return "Command: " + this.getClass().getSimpleName() + ": t" 
+		+ this.dst.getSerialNumber() + " = " + this.t1.getSerialNumber() + " op " + this.t2.getSerialNumber();
 	}
 }

@@ -1,7 +1,9 @@
 package AST;
+import IR.*;
+import TEMP.*;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperFunctions.HelperFunctions;
+import HelperFunctions.*;
 
 public class AST_STMT_ASSIGN extends AST_STMT
 {
@@ -11,7 +13,7 @@ public class AST_STMT_ASSIGN extends AST_STMT
 	public AST_VAR var;
 	public AST_EXP exp;
 	public Boolean isNewExp;
-
+	public String nameWithVarDecScope;
 	/*******************/
 	/*  CONSTRUCTOR(S) */
 	/*******************/
@@ -77,6 +79,11 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		{
 			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
+		// for IRme
+		if (!isNewExp)
+		{
+			nameWithVarDecScope = HelperFunctions.getVarNameWithDecScope(((AST_VAR_SIMPLE) var).name);
+		}
 		return t1;
 	}
 
@@ -87,15 +94,12 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		//if case 2:
 		if (!isNewExp)
 		{
-			TEMP tExp = exp.IRme()
-			name = ((AST_VAR_SIMPLE) var).name;
-			IR.getInstance().Add_IRcommand(new IRcommand_Store(name, tExp));
+			TEMP tExp = exp.IRme();
+			IR.getInstance().Add_IRcommand(new IRcommand_Store(nameWithVarDecScope, tExp));
 			return null;
 		}
-		else{
-			//TODO- implenemt for ex5 (case1)
-		}
-		 
+		// TODO: ex5
+		return null;
 	}
 
 	/*********************************************************/

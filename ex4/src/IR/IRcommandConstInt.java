@@ -2,7 +2,8 @@
 /* PACKAGE */
 /***********/
 package IR;
-
+import java.util.*;
+import java.util.*;
 /*******************/
 /* GENERAL IMPORTS */
 /*******************/
@@ -22,11 +23,18 @@ public class IRcommandConstInt extends IRcommand
 		this.t = t;
 		this.value = value;
 	}
-	public String genGen(Set<String> ins)
+	public String getGen(Set<String> ins)
 	{
 		// check if the right side of assign is correct and return the left side
 		// in this case right side is always correct as it is a constant number
 		int tNum = t.getSerialNumber();
-		return String.valueof(tNum);
+		// TODO: DEBUG
+		//System.out.println("getGen of ConstInt: " + String.valueOf(tNum));
+		return String.valueOf(tNum);
+	}
+
+	public String toString()
+	{
+		return "Command: " + this.getClass().getSimpleName() + " , with int = " + this.value;
 	}
 }

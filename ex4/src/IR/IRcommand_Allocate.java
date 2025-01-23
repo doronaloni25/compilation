@@ -2,6 +2,7 @@
 /* PACKAGE */
 /***********/
 package IR;
+import java.util.*;
 
 /*******************/
 /* GENERAL IMPORTS */
@@ -19,6 +20,11 @@ public class IRcommand_Allocate extends IRcommand
 	
 	public IRcommand_Allocate(String var_name)
 	{
-		this.var_name = HelperFunctions.getVarNameWithDecScope(var_name);
+		this.var_name = var_name;
+	}
+
+	public String toString()
+	{
+		return "Command: " + this.getClass().getSimpleName() + ": " + this.var_name;
 	}
 }

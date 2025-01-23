@@ -1,7 +1,9 @@
 package AST;
+import IR.*;
+import TEMP.*;
 import TYPES.*;
 import SYMBOL_TABLE.*;
-import HelperFunctions.HelperFunctions;
+import HelperFunctions.*;
 public class AST_EXP_BINOP extends AST_EXP
 {
 	public AST_BINOP OP;
@@ -108,11 +110,12 @@ public class AST_EXP_BINOP extends AST_EXP
 	@Override
 	public TEMP IRme(){
 		// create temp to store result of operation
-		TEMP dest = TEMP_FACTORY.getFreshTEMP();
+		TEMP dest = TEMP_FACTORY.getInstance().getFreshTEMP();
 		// get temps of left and right
 		TEMP t1 = left.IRme();
 		TEMP t2 = right.IRme();
 
+		IRcommand cmd = null;
 		// different IR command for every operation
 		// PLUS = 0
 		// MINUS = 1
@@ -122,7 +125,6 @@ public class AST_EXP_BINOP extends AST_EXP
 		// GT = 5
 		// EQ = 6
 		switch (OP.op){
-			IRcommand cmd = null;
 			case 0:
 				cmd = new IRcommand_Binop_Add_Integers(dest, t1, t2);
 				break;

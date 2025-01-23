@@ -1,4 +1,6 @@
 package AST;
+import IR.*;
+import TEMP.*;
 
 import java.io.*;
 import java.io.PrintWriter;

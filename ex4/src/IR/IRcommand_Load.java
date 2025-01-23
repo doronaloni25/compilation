@@ -2,7 +2,8 @@
 /* PACKAGE */
 /***********/
 package IR;
-
+import java.util.*;
+import java.util.*;
 /*******************/
 /* GENERAL IMPORTS */
 /*******************/
@@ -21,7 +22,7 @@ public class IRcommand_Load extends IRcommand
 	public IRcommand_Load(TEMP dst,String var_name)
 	{
 		this.dst      = dst;
-		this.var_name = HelperFunctions.getVarNameWithDecScope(var_name);
+		this.var_name = var_name;
 	}
 	public String getGen(Set<String> ins)
 	{
@@ -30,8 +31,13 @@ public class IRcommand_Load extends IRcommand
 		int dstNum = dst.getSerialNumber();
 		if(ins.contains(var_name))
 		{
-			return String.valueof(dstNum);
+			return String.valueOf(dstNum);
 		}
 		return null;
+	}
+	public String toString()
+	{
+		return "Command: " + this.getClass().getSimpleName() + ": t" 
+		+ this.dst.getSerialNumber() + " = " + this.var_name;
 	}
 }
