@@ -21,9 +21,4 @@ public class IRcommand_Label extends IRcommand
 	{
 		this.label_name = label_name;
 	}
-	
-	public String toString()
-	{
-		return "Command: " + this.getClass().getSimpleName() + ": " + this.label_name;
-	}
 }

@@ -35,10 +35,4 @@ public class IRcommand_Store extends IRcommand
 		}
 		return null;
 	}
-	
-	public String toString()
-	{
-		return "Command: " + this.getClass().getSimpleName() + ": " 
-		+ this.var_name + " = t" + this.src.getSerialNumber();
-	}
 }

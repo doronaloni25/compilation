@@ -22,9 +22,4 @@ public class IRcommand_Allocate extends IRcommand
 	{
 		this.var_name = var_name;
 	}
-
-	public String toString()
-	{
-		return "Command: " + this.getClass().getSimpleName() + ": " + this.var_name;
-	}
 }

@@ -32,9 +32,4 @@ public class IRcommandConstInt extends IRcommand
 		System.out.println("getGen of ConstInt: " + String.valueOf(tNum));
 		return String.valueOf(tNum);
 	}
-
-	public String toString()
-	{
-		return "Command: " + this.getClass().getSimpleName() + " , with int = " + this.value;
-	}
 }

@@ -35,9 +35,4 @@ public class IRcommand_Load extends IRcommand
 		}
 		return null;
 	}
-	public String toString()
-	{
-		return "Command: " + this.getClass().getSimpleName() + ": t" 
-		+ this.dst.getSerialNumber() + " = " + this.var_name;
-	}
 }

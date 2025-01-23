@@ -37,10 +37,4 @@ public class IRcommand_Binop extends IRcommand
 		}
 		return null;
 	}
-
-	public String toString()
-	{
-		return "Command: " + this.getClass().getSimpleName() + ": t" 
-		+ this.dst.getSerialNumber() + " = " + this.t1.getSerialNumber() + " op " + this.t2.getSerialNumber();
-	}
 }
