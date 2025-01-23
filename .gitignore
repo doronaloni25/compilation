@@ -23,5 +23,8 @@ bin
 ex3/bin/AST/AST_STMT_ID.class
 ex3
 .idea
+ex4/expected_output
 
-
+/ex4/input
+ex4/results_log.txt
+ex4/run_all_tests.sh

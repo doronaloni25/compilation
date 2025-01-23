@@ -12,7 +12,7 @@ public class ControlFlowGraph
         initBlocks(irCommands);
         initEdges();
         calcInsAndOuts(this.blocks.get(0));
-        //this.printCFG();
+        this.printCFG();
     }
 
     public void addBlock(Block block)
@@ -54,11 +54,19 @@ public class ControlFlowGraph
             // TODO: take care of all function returns, not only main
             if(currCmd instanceof IRcommand_FuncReturn)
             {
-                Block destBlock = findBlockByLabel("end of main");
-                currBlock.addExitEdge(destBlock);
-                destBlock.addEnterEdge(currBlock);
+                // TODO: maybe return this
+                // Block destBlock = findBlockByLabel("end of func main");
+                // currBlock.addExitEdge(destBlock);
+                // destBlock.addEnterEdge(currBlock);
                 continue;
             }
+            // TODO: look at forum, realise if we should have an edge from start of main to end of main
+            // i.e. a path to skip main
+            if (currCmd instanceof IRcommand_Label && ((IRcommand_Label)currCmd).label_name.equals("start of func main")){
+                Block destBlock = findBlockByLabel("end of func main");
+                currBlock.addExitEdge(destBlock);
+                destBlock.addEnterEdge(currBlock);
+            }  
             // If the command is jump, add the edge to the label of destination 
             if(currCmd instanceof IRcommand_Jump_Label)
             {
@@ -82,6 +90,10 @@ public class ControlFlowGraph
             if(i+1 < this.blocks.size())
             {
                 Block nextBlock = this.blocks.get(i+1);
+                // TODO: check in forum zzzz....
+                if (nextBlock.IRCommand instanceof IRcommand_Label && ((IRcommand_Label)nextBlock.IRCommand).label_name.equals("end of func main")){
+                    continue;
+                }
                 nextBlock.addEnterEdge(currBlock);
                 currBlock.addExitEdge(nextBlock);
             }
@@ -137,14 +149,9 @@ public class ControlFlowGraph
         {
             updatedOuts.add(gen);
         }
-        // TODO: DEBUG
-        System.out.println("CalcInsAndOuts of " + currBlock.toString());
-        System.out.println("Updated Ins = " + currBlock.ins);
-        System.out.println("kill = " + kill);
-        System.out.println("gen = " + gen);
-        System.out.println("Updated outs = " + updatedOuts);
-        System.out.println();
         currBlock.outs = updatedOuts;
+        // TODO: DEBUG
+        //printCurrInOutsCalculation(currBlock, kill, gen, updatedOuts);
         // recursively calculate the ins and outs for all the exit edges
         for (int j = 0; j < currBlock.exitEdges.size(); j++)
         {
@@ -172,11 +179,25 @@ public class ControlFlowGraph
         for (int i = 0; i < this.blocks.size(); i++)
         {
             Block currBlock = this.blocks.get(i);
+            // only for reachable blocks
+            if (!currBlock.alreadyBeenThere){
+                continue;   
+            } 
             String invalidVar = currBlock.getInvalidVar();
             if (invalidVar != null){
                 invalidVars.add(invalidVar);
             }
         }
         return invalidVars;
+    }
+
+    public void printCurrInOutsCalculation(Block currBlock, String kill, String gen, Set<String> updatedOuts){
+        // TODO: DEBUG
+        System.out.println("CalcInsAndOuts of " + currBlock.toString());
+        System.out.println("Updated Ins = " + currBlock.ins);
+        System.out.println("kill = " + kill);
+        System.out.println("gen = " + gen);
+        System.out.println("Updated outs = " + updatedOuts);
+        System.out.println();
     }
 }
