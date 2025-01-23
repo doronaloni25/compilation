@@ -29,7 +29,7 @@ public class IRcommandConstInt extends IRcommand
 		// in this case right side is always correct as it is a constant number
 		int tNum = t.getSerialNumber();
 		// TODO: DEBUG
-		System.out.println("getGen of ConstInt: " + String.valueOf(tNum));
+		//System.out.println("getGen of ConstInt: " + String.valueOf(tNum));
 		return String.valueOf(tNum);
 	}
 

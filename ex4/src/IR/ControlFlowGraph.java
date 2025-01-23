@@ -12,7 +12,7 @@ public class ControlFlowGraph
         initBlocks(irCommands);
         initEdges();
         calcInsAndOuts(this.blocks.get(0));
-        this.printCFG();
+        //this.printCFG();
     }
 
     public void addBlock(Block block)
@@ -102,8 +102,10 @@ public class ControlFlowGraph
             updatedIns.addAll(enterEdges.get(0).outs);
             for (int i = 1; i < enterEdges.size(); i++)
             {
-                // do intersection of all the enterEdges
-                updatedIns.retainAll(enterEdges.get(i).outs);
+                // do intersection of all the enterEdges (if they are already initialized)
+                if (enterEdges.get(i).alreadyBeenThere){
+                    updatedIns.retainAll(enterEdges.get(i).outs);
+                }
             }
         }
         // if we didnt change the ins we dont need to continue the recursion
@@ -136,8 +138,12 @@ public class ControlFlowGraph
             updatedOuts.add(gen);
         }
         // TODO: DEBUG
-        System.out.println("kill of command: " + currBlock.IRCommand.toString() + " = " + kill);
-        System.out.println("gen of command: " + currBlock.IRCommand.toString() + " = " + gen);
+        System.out.println("CalcInsAndOuts of " + currBlock.toString());
+        System.out.println("Updated Ins = " + currBlock.ins);
+        System.out.println("kill = " + kill);
+        System.out.println("gen = " + gen);
+        System.out.println("Updated outs = " + updatedOuts);
+        System.out.println();
         currBlock.outs = updatedOuts;
         // recursively calculate the ins and outs for all the exit edges
         for (int j = 0; j < currBlock.exitEdges.size(); j++)
@@ -154,6 +160,8 @@ public class ControlFlowGraph
             System.out.println("Block " + i + ":");
             System.out.println("ins: " + currBlock.ins);
             System.out.println("outs: " + currBlock.outs);
+            System.out.println("enter edges: " + currBlock.enterEdges);
+            System.out.println("exit edges: " + currBlock.exitEdges);
             System.out.println("IRcommand: " + currBlock.IRCommand.toString());
             System.out.println();
         }

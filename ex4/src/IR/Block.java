@@ -58,5 +58,9 @@ public class Block
         }
         return null;
     }
+
+    public String toString(){
+        return this.IRCommand.toString();
+    }
     
 }
