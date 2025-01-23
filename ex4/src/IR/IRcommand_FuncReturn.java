@@ -21,5 +21,4 @@ public class IRcommand_FuncReturn extends IRcommand
 	{
 		this.tFuncReturn = t;
 	}
-	
 }
