@@ -2,6 +2,7 @@
 /* PACKAGE */
 /***********/
 package IR;
+import java.util.*;
 
 /*******************/
 /* GENERAL IMPORTS */
@@ -20,6 +21,15 @@ public abstract class IRcommand
 	public    static String getFreshLabel(String msg)
 	{
 		return String.format("Label_%d_%s",label_counter++,msg);
+	}
+	public String getGen(Set<String> ins)
+	{
+		return null;
+	}
+
+	public String toString()
+	{
+		return this.getClass().getSimpleName();
 	}
 
 	/***************/

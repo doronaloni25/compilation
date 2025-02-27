@@ -2,7 +2,8 @@
 /* PACKAGE */
 /***********/
 package IR;
-
+import java.util.*;
+import java.util.*;
 /*******************/
 /* GENERAL IMPORTS */
 /*******************/
@@ -48,7 +49,7 @@ public class IR
 		if (head != null) head.MIPSme();
 		if (tail != null) tail.MIPSme();
 	}
-
+	
 	/**************************************/
 	/* USUAL SINGLETON IMPLEMENTATION ... */
 	/**************************************/
@@ -73,4 +74,9 @@ public class IR
 		}
 		return instance;
 	}
+
+	public ControlFlowGraph createCFG(){
+        IRcommandList properCommandList = new IRcommandList(this.head, this.tail);
+        return new ControlFlowGraph(properCommandList);
+    }
 }

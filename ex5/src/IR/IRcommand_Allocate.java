@@ -29,4 +29,9 @@ public class IRcommand_Allocate extends IRcommand
 	{
 		MIPSGenerator.getInstance().allocate(var_name);
 	}
+
+	public String toString()
+	{
+		return "Command: " + this.getClass().getSimpleName() + ": " + this.var_name;
+	}
 }

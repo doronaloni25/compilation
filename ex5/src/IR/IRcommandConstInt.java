@@ -2,7 +2,7 @@
 /* PACKAGE */
 /***********/
 package IR;
-
+import java.util.*;
 /*******************/
 /* GENERAL IMPORTS */
 /*******************/
@@ -11,7 +11,6 @@ package IR;
 /* PROJECT IMPORTS */
 /*******************/
 import TEMP.*;
-import MIPS.*;
 
 public class IRcommandConstInt extends IRcommand
 {
@@ -23,7 +22,19 @@ public class IRcommandConstInt extends IRcommand
 		this.t = t;
 		this.value = value;
 	}
-	
+	public String getGen(Set<String> ins)
+	{
+		// check if the right side of assign is correct and return the left side
+		// in this case right side is always correct as it is a constant number
+		int tNum = t.getSerialNumber();
+		return String.valueOf(tNum);
+	}
+
+	public String toString()
+	{
+		return "Command: " + this.getClass().getSimpleName() + " , with int = " + this.value;
+	}
+
 	/***************/
 	/* MIPS me !!! */
 	/***************/

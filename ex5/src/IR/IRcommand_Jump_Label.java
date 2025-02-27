@@ -29,4 +29,9 @@ public class IRcommand_Jump_Label extends IRcommand
 	{
 		MIPSGenerator.getInstance().jump(label_name);
 	}
+	
+	public String toString()
+	{
+		return "Command: " + this.getClass().getSimpleName() + ": jump to " + this.label_name;
+	}
 }

@@ -13,13 +13,13 @@ import java.util.*;
 /*******************/
 import TEMP.*;
 
-public class IRcommand_Binop_Mul_Integers extends IRcommand_Binop
+public class IRcommand_Binop_Div_Integers extends IRcommand_Binop
 {
 	public TEMP t1;
 	public TEMP t2;
 	public TEMP dst;
 	
-	public IRcommand_Binop_Mul_Integers(TEMP dst,TEMP t1,TEMP t2)
+	public IRcommand_Binop_Div_Integers(TEMP dst,TEMP t1,TEMP t2)
 	{
 		super(dst, t1, t2);
 	}
@@ -30,6 +30,8 @@ public class IRcommand_Binop_Mul_Integers extends IRcommand_Binop
 	/***************/
 	public void MIPSme()
 	{
+		// TODO: CHANGE TO DIV!!!!!
 		MIPSGenerator.getInstance().mul(dst,t1,t2);
 	}
+
 }

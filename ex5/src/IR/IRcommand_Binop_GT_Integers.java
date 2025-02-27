@@ -13,36 +13,37 @@ import java.util.*;
 /*******************/
 import TEMP.*;
 
-public class IRcommand_Binop_EQ_Integers extends IRcommand_Binop
+public class IRcommand_Binop_GT_Integers extends IRcommand_Binop
 {
 	public TEMP t1;
 	public TEMP t2;
 	public TEMP dst;
 
-	public IRcommand_Binop_EQ_Integers(TEMP dst,TEMP t1,TEMP t2)
+	public IRcommand_Binop_GT_Integers(TEMP dst,TEMP t1,TEMP t2)
 	{
 		super(dst, t1, t2);
 	}
 	/*get gen implemented in IR_BINOP*/ 
-
+	
+	// TODO: CHANGE THIS FOR GT!!!!
 	/***************/
 	/* MIPS me !!! */
 	/***************/
 	public void MIPSme()
 	{
 		/*******************************/
-		/* [1] Allocate 3 fresh labels */
+		/* [1] Allocate 2 fresh labels */
 		/*******************************/
 		String label_end        = getFreshLabel("end");
 		String label_AssignOne  = getFreshLabel("AssignOne");
 		String label_AssignZero = getFreshLabel("AssignZero");
 		
 		/******************************************/
-		/* [2] if (t1==t2) goto label_AssignOne;  */
-		/*     if (t1!=t2) goto label_AssignZero; */
+		/* [2] if (t1< t2) goto label_AssignOne;  */
+		/*     if (t1>=t2) goto label_AssignZero; */
 		/******************************************/
-		MIPSGenerator.getInstance().beq(t1,t2,label_AssignOne);
-		MIPSGenerator.getInstance().bne(t1,t2,label_AssignZero);
+		MIPSGenerator.getInstance().blt(t1,t2,label_AssignOne);
+		MIPSGenerator.getInstance().bge(t1,t2,label_AssignZero);
 
 		/************************/
 		/* [3] label_AssignOne: */

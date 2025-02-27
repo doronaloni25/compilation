@@ -29,4 +29,10 @@ public class IRcommand_Label extends IRcommand
 	{
 		MIPSGenerator.getInstance().label(label_name);
 	}
+	
+	
+	public String toString()
+	{
+		return "Command: " + this.getClass().getSimpleName() + ": " + this.label_name;
+	}
 }
