@@ -21,4 +21,8 @@ public class AST_CFIELD_VAR_DEC extends AST_CFIELD
     {
         return varDec.SemantMe();
     }
+    public TEMP IRme()
+    {
+        return varDec.IRme();
+    }
 }

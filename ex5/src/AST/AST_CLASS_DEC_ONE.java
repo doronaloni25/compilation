@@ -41,6 +41,12 @@ public class AST_CLASS_DEC_ONE extends AST_DEC
         SYMBOL_TABLE.getInstance().inClass = null;
         return classType;
     }
+    public TEMP IRme()
+    {
+        cFieldList.IRme();
+        //TODO: implement the rest using dispatch vector
+    }
+
 }
 
   

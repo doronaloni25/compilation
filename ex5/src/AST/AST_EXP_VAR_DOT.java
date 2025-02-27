@@ -79,7 +79,20 @@ public class AST_EXP_VAR_DOT extends AST_EXP
     }
 
     public TEMP IRme(){
-        // TODO: not a part of this exercise
-        return null;
+        TEMP dest = TEMP_FACTORY.getInstance().getFreshTEMP();
+        TEMP object = TEMP_FACTORY.getInstance().getFreshTEMP();
+        ArrayList<TEMP> funcArgs = new ArrayList<TEMP>();
+        if(exp != null)
+        {
+            funcArgs.add(exp.IRme());
+            if(expList != null)
+            {
+                expList.IRme(funcArgs);
+            }
+        }
+       //TODO: check if this is correct
+       IR.getInstance().Add_IRcommand(new IRcommand_Load_Object(object));
+       IR.getInstance().Add_IRcommand(new IRcommand_Load_Method(dest, object, name, v, funcArgs));
+       return dest;
     }
 }

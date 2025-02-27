@@ -17,9 +17,11 @@ public class AST_EXP_NIL extends AST_EXP {
     {
         return TYPE_NIL.getInstance();
     }
-
+    //TODO: make sure it's correct???
     public TEMP IRme(){
-        // TODO: not a part of this exercise
-        return null;
+    
+        TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
+        IR.getInstance().Add_IRcommand(new IRcommandConstInt(t,0));
+        return t;
     }
 }

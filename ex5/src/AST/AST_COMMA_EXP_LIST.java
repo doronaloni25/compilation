@@ -6,6 +6,8 @@ import SYMBOL_TABLE.*;
 import HelperFunctions.*;
 public class AST_COMMA_EXP_LIST extends AST_LIST
 {
+	//arguments to a function
+
 	/****************/
 	/* DATA MEMBERS */
 	/****************/
@@ -25,6 +27,7 @@ public class AST_COMMA_EXP_LIST extends AST_LIST
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
+	
 		if (tail != null) System.out.print("====================== AST_COMMA_EXP_LIST -> COMMA exp  AST_COMMA_EXP_LIST\n");
 		if (tail == null) System.out.print("====================== AST_COMMA_EXP_LIST -> COMMA exp      \n");
 
@@ -47,5 +50,16 @@ public class AST_COMMA_EXP_LIST extends AST_LIST
 	{
         return this.tail;
     }
-	
+	//the IRme is implemented in AST_LIST
+	public TEMP IRme(ArrayList<TEMP> funcArgs)	
+	{
+		if(head == null) 
+		{
+			return null;
+		}
+		TEMP t = head.IRme();
+		funcArgs.add(t);
+		if (tail != null) tail.IRme(funcArgs);
+		return null;
+	}
 }

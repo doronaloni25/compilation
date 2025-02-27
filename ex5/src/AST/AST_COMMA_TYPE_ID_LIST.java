@@ -47,4 +47,5 @@ public class AST_COMMA_TYPE_ID_LIST extends AST_LIST
 	{
         return this.tail;
     }
+	//IRme implemented in AST_LIST
 }

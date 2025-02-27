@@ -36,7 +36,8 @@ public class AST_EXP_STRING extends AST_EXP
 	}
 
 	public TEMP IRme(){
-		// TODO: not a part of this exercise
-		return null;
+		TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
+		IR.getInstance().Add_IRcommand(new IRcommandConstString(t,s));
+		return t;
 	}
 }
