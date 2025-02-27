@@ -25,4 +25,11 @@ public class IRcommand_Binop_Add_Integers extends IRcommand_Binop
 	}
 
 	/*get gen implemented in IR_BINOP*/
+	/***************/
+	/* MIPS me !!! */
+	/***************/
+	public void MIPSme()
+	{
+		MIPSGenerator.getInstance().add(dst,t1,t2);
+	}
 }

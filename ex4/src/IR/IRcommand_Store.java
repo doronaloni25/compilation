@@ -41,4 +41,12 @@ public class IRcommand_Store extends IRcommand
 		return "Command: " + this.getClass().getSimpleName() + ": " 
 		+ this.var_name + " = t" + this.src.getSerialNumber();
 	}
+
+	/***************/
+	/* MIPS me !!! */
+	/***************/
+	public void MIPSme()
+	{
+		MIPSGenerator.getInstance().store(var_name,src);
+	}
 }

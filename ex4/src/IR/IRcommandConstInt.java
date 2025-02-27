@@ -34,4 +34,12 @@ public class IRcommandConstInt extends IRcommand
 	{
 		return "Command: " + this.getClass().getSimpleName() + " , with int = " + this.value;
 	}
+
+	/***************/
+	/* MIPS me !!! */
+	/***************/
+	public void MIPSme()
+	{
+		MIPSGenerator.getInstance().li(t,value);
+	}
 }
