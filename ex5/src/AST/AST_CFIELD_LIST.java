@@ -1,0 +1,50 @@
+package AST;
+import IR.*;
+import TEMP.*;
+import TYPES.*;
+import SYMBOL_TABLE.*;
+import HelperFunctions.*;
+public class AST_CFIELD_LIST extends AST_LIST
+{
+	/****************/
+	/* DATA MEMBERS */
+	/****************/
+	public AST_CFIELD head;
+	public AST_CFIELD_LIST tail;
+
+	/******************/
+	/* CONSTRUCTOR(S) */
+	/******************/
+	public AST_CFIELD_LIST(AST_CFIELD head,AST_CFIELD_LIST tail)
+	{
+		/******************************/
+		/* SET A UNIQUE SERIAL NUMBER */
+		/******************************/
+		SerialNumber = AST_Node_Serial_Number.getFresh();
+
+		/***************************************/
+		/* PRINT CORRESPONDING DERIVATION RULE */
+		/***************************************/
+		if (tail != null) System.out.print("====================== cFieldList -> cField cFieldList\n");
+		if (tail == null) System.out.print("====================== cFieldList -> cField      \n");
+
+		/*******************************/
+		/* COPY INPUT DATA NENBERS ... */
+		/*******************************/
+		this.head = head;
+		this.tail = tail;
+	}
+
+	//semant me is implemented in AST_LIST
+	@Override
+    public AST_CFIELD getHead() 
+	{
+        return this.head;
+    }
+
+    @Override
+    public AST_CFIELD_LIST getTail() 
+	{
+        return this.tail;
+    }
+}
