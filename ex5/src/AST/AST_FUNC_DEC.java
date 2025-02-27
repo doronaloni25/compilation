@@ -9,6 +9,7 @@ public class AST_FUNC_DEC extends AST_DEC
 	public AST_TYPE type;
 	public String name;
     public AST_STMT_LIST stmtList;
+    protected int localVarsCount = 0;
 
     public AST_FUNC_DEC (AST_TYPE type, String name, AST_STMT_LIST stmtList) {
 
@@ -20,4 +21,15 @@ public class AST_FUNC_DEC extends AST_DEC
    {
     return null;
    }
+
+   public TEMP IRme()
+    {
+        IR.getInstance().Add_IRcommand(new IRcommand_Label("start of func " + name));
+        //TODO: implemwnt for methods
+        IR.getInstance().Add_IRcommand(new IRcommand_Function_Init(this.localVariablesCount));
+        this.stmtList.IRme();
+        String endLabel = "end of func " + name;
+        IR.getInstance().Add_IRcommand(new IRcommand_Function_Cleanup(this.localVariablesCount,endLabel));
+        return null;
+    }
 }

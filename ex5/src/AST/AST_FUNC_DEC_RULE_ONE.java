@@ -7,6 +7,7 @@ import HelperFunctions.*;
 public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
 { 
     private boolean isMethod = false;
+
     public AST_FUNC_DEC_RULE_ONE (AST_TYPE type,String name, AST_STMT_LIST stmtList) {
         super(type, name, stmtList);
         // Set a unique serial number/*  */
@@ -44,9 +45,8 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
         stmtList.SemantMe();
         SYMBOL_TABLE.getInstance().endScope();
         SYMBOL_TABLE.getInstance().inFunction = null;
+        this.localVariablesCount = function.localVariablesCount;
         return function;
-
-
     }
     //func declaration in a global scope
     else{
@@ -69,19 +69,9 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
         stmtList.SemantMe();
         SYMBOL_TABLE.getInstance().endScope();
         SYMBOL_TABLE.getInstance().inFunction = null;
+        this.localVariablesCount = function.localVariablesCount;
         return function;
     }
  }
-    public TEMP IRme()
-    {
-        //System.out.println("IRme funcDec");
-        IR.getInstance().Add_IRcommand(new IRcommand_Label("start of func " + name));
-        //TODO: implemwnt for methods
-        IR.getInstance().Add_IRcommand(new IRcommand_Function_Init(0));
-        this.stmtList.IRme();
-        String endLabel = "end of func " + name;
-        IR.getInstance().Add_IRcommand(new IRcommand_Function_Cleanup(0,endLabel));
-        return null;
-    }
-
+ // IRme implemented in AST_FUNC_DEC
 }

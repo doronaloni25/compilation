@@ -16,4 +16,11 @@ public class TYPE_LIST extends TYPE
 		this.head = head;
 		this.tail = tail;
 	}
+
+	public int getLength()
+	{
+		if (head == null) return 0;
+		if (tail == null) return 1;
+		return 1 + tail.getLength();
+	}
 }

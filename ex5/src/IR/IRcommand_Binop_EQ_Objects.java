@@ -15,6 +15,7 @@ import TEMP.*;
 
 public class IRcommand_Binop_EQ_Objects extends IRcommand_Binop
 {
+    // TODO: maybe not needed????????? what is this class?
 	public TEMP t1;
 	public TEMP t2;
 	public TEMP dst;

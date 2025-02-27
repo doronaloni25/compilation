@@ -51,7 +51,7 @@ public class AST_FUNC_DEC_RULE_TWO extends AST_FUNC_DEC
         stmtList.SemantMe();
         SYMBOL_TABLE.getInstance().endScope();
         SYMBOL_TABLE.getInstance().inFunction = null;
-       
+        this.localVariablesCount = function.localVariablesCount;
         return function;
     }
     //function declaration in a global scope
@@ -81,7 +81,9 @@ public class AST_FUNC_DEC_RULE_TWO extends AST_FUNC_DEC
         stmtList.SemantMe();
         SYMBOL_TABLE.getInstance().endScope();
         SYMBOL_TABLE.getInstance().inFunction = null;
+        this.localVariablesCount = function.localVariablesCount;
         return function;
         }
     }
+    // IRme implemented at AST_FUNC_DEC
 }

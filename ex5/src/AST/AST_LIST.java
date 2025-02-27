@@ -27,15 +27,12 @@ public abstract class AST_LIST extends AST_Node
     @Override
     public TEMP IRme()
     {
-        TEMP headT = null;
-        TEMP_LIST tailT = null;
         AST_Node head = getHead();
         AST_LIST tail = getTail();
         if(head != null)
-            TEMP headT = head.IRme();
+            head.IRme();
         if(tail != null)
-            TEMP_LIST tailT = tail.IRme();
-        TEMP_LIST list = new TEMP_LIST(headT, tailT);
-        return list;
+            tail.IRme();
+        return null;
     }
 }

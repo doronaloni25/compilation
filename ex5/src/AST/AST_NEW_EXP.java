@@ -9,6 +9,7 @@ public class AST_NEW_EXP extends AST_EXP
 {
     public AST_TYPE type;
     public AST_EXP exp;
+	public TYPE instanceType;
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
@@ -57,8 +58,27 @@ public class AST_NEW_EXP extends AST_EXP
 			if(HelperFunctions.isConstant(exp) && ((AST_EXP_INT)exp).value < 0) {
 				HelperFunctions.printError(line, this.getClass().getSimpleName());
 			}
-			return new TYPE_ARRAY(t, null);
+			this.instanceType = new TYPE_ARRAY(t, null);
+			return this.arrayInstance;
 		}
+		this.instanceType = t;
 		return t;
+	}
+
+	public TEMP IRme(){
+		// new instance of Class or Array
+		TEMP pointer = TEMP_FACTORY.getInstance().getFreshTEMP();
+		IRcommand cmd;
+		if (exp == null){
+			// instance of class
+			// TODO: figure out data members if class
+			cmd = new IRcommand_Class_Instance(pointer, this.instanceType);
+		}
+		else{
+			// instance of array
+			cmd = new IRcommand_Array_Instance(pointer, this.instanceType);
+		}
+		IR.getInstance().Add_IRcommand(cmd);
+		return pointer;
 	}
 }
