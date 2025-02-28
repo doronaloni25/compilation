@@ -77,8 +77,7 @@ public class AST_EXP_ID extends AST_EXP
 
     @Override
     public TEMP IRme(){
-        
-        TEMP  dest = TEMP_FACTORY.getInstance().getFreshTEMP();
+        TEMP dest = TEMP_FACTORY.getInstance().getFreshTEMP();
         ArrayList<TEMP> funcArgs = new ArrayList<TEMP>();
         if(exp != null)
         {
@@ -90,7 +89,5 @@ public class AST_EXP_ID extends AST_EXP
         }
         IR.getInstance().Add_IRcommand(new IRcommand_CallFunc(name, dest, funcArgs));
         return dest;
-
-       
     }
 }

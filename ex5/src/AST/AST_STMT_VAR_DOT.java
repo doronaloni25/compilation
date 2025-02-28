@@ -74,4 +74,35 @@ public class AST_STMT_VAR_DOT extends AST_STMT
         return found_function.returnType;
     }
 	
+    @Override
+    public TEMP IRme()
+    {
+        // TODO: change all of this, copilot generated
+        TEMP t = null;
+        TEMP tExp;
+        TEMP tExpList;
+        // get the address of the class
+        TEMP tClass = v.IRme();
+        // get the address of the function
+        TEMP tFunction = IR.getInstance().getClassFunction(tClass, name);
+        // check if the function has arguments
+        if(exp != null)
+        {
+            tExp = exp.IRme();
+            if(expList != null)
+            {
+                tExpList = expList.IRme();
+                t = IR.getInstance().IRmeClassFunctionWithArgs(tClass, tFunction, tExp, tExpList);
+            }
+            else
+            {
+                t = IR.getInstance().IRmeClassFunctionWithArgs(tClass, tFunction, tExp, null);
+            }
+        }
+        else
+        {
+            t = IR.getInstance().IRmeClassFunctionWithArgs(tClass, tFunction, null, null);
+        }
+        return t;
+    }
 }

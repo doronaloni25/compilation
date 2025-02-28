@@ -77,4 +77,5 @@ public class AST_STMT_LIST extends AST_LIST
 	{
         return this.tail;
     }
+	// IRme implemented in AST_LIST
 }

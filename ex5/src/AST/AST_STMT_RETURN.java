@@ -6,6 +6,7 @@ import SYMBOL_TABLE.*;
 import HelperFunctions.*;
 public class AST_STMT_RETURN extends AST_STMT {
     AST_EXP exp;
+	TYPE_FUNCTION currentFunction;
     public AST_STMT_RETURN(AST_EXP exp)
 	{
 		/******************************/
@@ -22,7 +23,7 @@ public class AST_STMT_RETURN extends AST_STMT {
 		}
 		else
 		{
-			System.out.format("====================== stmt -> RETURN exp  SEMICOLON\n");
+			System.out.format("====================== stmt -> RETURN exp SEMICOLON\n");
 
 		}
 
@@ -36,6 +37,8 @@ public class AST_STMT_RETURN extends AST_STMT {
     {
 		//this can be called only from a function
 		TYPE_FUNCTION currentFunction = SYMBOL_TABLE.getInstance().inFunction;
+		// Save for IRme()
+		this.currentFunction = currentFunction;
 		if(currentFunction == null)
 		{
 			HelperFunctions.printError(line, this.getClass().getSimpleName());
@@ -64,21 +67,19 @@ public class AST_STMT_RETURN extends AST_STMT {
 			return currentFunction.returnType;
 		}
 	}
+
 	@Override
 	public TEMP IRme()
-	/*the IRFuncReturn expets to get the TEMP of the returned exp. if the func return void, then null*/ 
+	/*the IRFuncReturn expects to get the TEMP of the returned exp. if the func return void, then null*/ 
 	{
-		if(exp!=null)
-		{
-			//TODO-check if ok for ex5
-			TEMP tExp = exp.IRme();
-			IR.getInstance().Add_IRcommand(new IRcommand_FuncReturn(tExp));
+		TEMP tExp;
+		if (exp != null){
+			tExp = exp.IRme();
 		}
-		else
-		{
-			IR.getInstance().Add_IRcommand(new IRcommand_FuncReturn(null));
-		}
-		return null;
-			
+		else{
+			tExp = null;
+		} 
+		String exitLabel = HelperFunctions.formatExitLabel(currentFunction.name);
+		IR.getInstance().Add_IRcommand(new IRcommand_FuncReturn(tExp, exitLabel));
 	}
 }

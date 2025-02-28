@@ -70,16 +70,34 @@ public class AST_STMT_ID extends AST_STMT
         
         return found_function.returnType;
     }
+
     @Override
     public TEMP IRme()
     {
-        // only take care of print int in this task
+        // Take care of special cases, PrintInt and PrintString
         if (name.equals("PrintInt")){
             TEMP t = exp.IRme();
             IR.getInstance().Add_IRcommand(new IRcommand_PrintInt(t));
             return null;
         }
-        //TODO- implement this for ex5
+        else if (name.equals("PrintString")){
+            TEMP t = exp.IRme();
+            IR.getInstance().Add_IRcommand(new IRcommand_PrintString(t));
+            return null;
+        }
+        // any other function call
+        else{
+            ArrayList<TEMP> funcArgs = new ArrayList<TEMP>();
+            if(exp != null)
+            {
+                funcArgs.add(exp.IRme());
+                if(expList != null)
+                {
+                    expList.IRme(funcArgs);
+                }
+            }
+            IR.getInstance().Add_IRcommand(new IRcommand_CallFunc(name, null, funcArgs));
+        }
         return null;
     }
 }

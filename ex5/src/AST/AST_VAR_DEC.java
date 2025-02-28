@@ -57,6 +57,7 @@ public class AST_VAR_DEC extends AST_DEC
     @Override
     public TEMP IRme()
     {
+        // TODO: check about global variables
         IR.getInstance().Add_IRcommand(new IRcommand_Allocate(nameWithVarDecScope));
 		return null;
     }

@@ -91,14 +91,36 @@ public class AST_STMT_ASSIGN extends AST_STMT
 	@Override
 	public TEMP IRme()
 	{
-		//if case 2:
-		if (!isNewExp)
-		{
-			TEMP tExp = exp.IRme();
-			IR.getInstance().Add_IRcommand(new IRcommand_Store(nameWithVarDecScope, tExp));
-			return null;
+		IRcommand cmd;
+		switch (var instanceof){
+			case AST_VAR_SIMPLE:
+				TEMP tExp = exp.IRme();
+				cmd = new IRcommand_Store(nameWithVarDecScope, tExp);
+				break;
+			case AST_VAR_FIELD:
+				AST_VAR_FIELD varField = (AST_VAR_FIELD) var;
+				// Get temp of class instance!
+				TEMP tVar = varField.var.IRme();
+				String name = varField.fieldName;
+				// get class type
+				TYPE_CLASS_DEC classType = ((TYPE_CLASS)varField).myClassInstance.classDec;
+				// get the field offset
+				int offset = classType.getFieldOffset(name);
+				TEMP tExp = exp.IRme();
+				// TODO: check if name is needed
+				cmd = new IRcommand_Store_Into_Field(tVar, tExp, offset, name);
+				break;
+			case AST_VAR_EXP:
+				AST_VAR_EXP varExp = (AST_VAR_EXP) var;
+				// get temp of array instance
+				TEMP tVarExp = varExp.var.IRme();
+				// get temp of array index
+				TEMP tIndex = varExp.exp.IRme();
+				TEMP tExp = exp.IRme();
+				cmd = new IRcommand_Store_Into_Array(tVarExp, tIndex, tExp);
+				break;
 		}
-		// TODO: ex5
+		IR.getInstance().Add_IRcommand(cmd);
 		return null;
 	}
 

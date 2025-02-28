@@ -45,6 +45,7 @@ public class TYPE_CLASS_DEC extends TYPE
 		}
 		return null;
 	}
+
 	//check if a field is in the class and return its type
 	public TYPE_CLASS_VAR_DEC fieldInClass(String name)
 	{
@@ -61,6 +62,24 @@ public class TYPE_CLASS_DEC extends TYPE
 			currField = currField.tail;
 		}
 		return null;
+	}
+
+	public int getFieldOffset(String fieldName){
+		TYPE_CLASS_VAR_DEC_LIST currField = data_members;
+		int offset = 1;
+		while(currField != null)
+		{
+			if(currField.head == null){
+				return -1;
+			}
+			if(currField.head.name.equals(fieldName))
+			{
+				return offset;
+			}
+			offset++;
+			currField = currField.tail;
+		}
+		return -1;																														 
 	}
 
 

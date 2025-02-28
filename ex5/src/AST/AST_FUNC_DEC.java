@@ -24,12 +24,12 @@ public class AST_FUNC_DEC extends AST_DEC
 
    public TEMP IRme()
     {
-        IR.getInstance().Add_IRcommand(new IRcommand_Label("start of func " + name));
-        //TODO: implemwnt for methods
+        IR.getInstance().Add_IRcommand(new IRcommand_Label(HelperFunctions.formatEntryLabel(name)));
+        //TODO: implement for methods
         IR.getInstance().Add_IRcommand(new IRcommand_Function_Init(this.localVariablesCount));
         this.stmtList.IRme();
-        String endLabel = "end of func " + name;
-        IR.getInstance().Add_IRcommand(new IRcommand_Function_Cleanup(this.localVariablesCount,endLabel));
+        String endLabel = HelperFunctions.formatExitLabel(name);
+        IR.getInstance().Add_IRcommand(new IRcommand_Function_Cleanup(this.localVariablesCount, endLabel));
         return null;
     }
 }
