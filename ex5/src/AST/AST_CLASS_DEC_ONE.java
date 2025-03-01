@@ -9,7 +9,7 @@ public class AST_CLASS_DEC_ONE extends AST_DEC
     
 	public String name;
     public AST_CFIELD_LIST cFieldList;
-
+    public TYPE_CLASS_DEC classType;
 
     public AST_CLASS_DEC_ONE ( String name, AST_CFIELD_LIST cFieldList) 
     {
@@ -39,8 +39,11 @@ public class AST_CLASS_DEC_ONE extends AST_DEC
         cFieldList.SemantMe();
         SYMBOL_TABLE.getInstance().endScope();
         SYMBOL_TABLE.getInstance().inClass = null;
+        //for IRme
+        this.classType = classType;
         return classType;
     }
+    @Override
     public TEMP IRme()
     {
         cFieldList.IRme();
