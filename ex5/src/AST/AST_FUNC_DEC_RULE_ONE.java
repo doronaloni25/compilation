@@ -33,6 +33,7 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
     //func declaration inside a class
     if (classDec != null)
     {
+        this.classDec = classDec;
         //System.out.println("func in class");
         TYPE funcCheck = SYMBOL_TABLE.getInstance().findWithinScope(name);
         HelperFunctions.checkValidMethod(function, funcCheck, classDec, line, this.getClass().getSimpleName());
@@ -43,9 +44,8 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
         stmtList.SemantMe();
         SYMBOL_TABLE.getInstance().endScope();
         SYMBOL_TABLE.getInstance().inFunction = null;
+        this.localVariablesCount = function.localVariablesCount;
         return function;
-
-
     }
     //func declaration in a global scope
     else{
@@ -68,16 +68,8 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
         stmtList.SemantMe();
         SYMBOL_TABLE.getInstance().endScope();
         SYMBOL_TABLE.getInstance().inFunction = null;
+        this.localVariablesCount = function.localVariablesCount;
         return function;
     }
  }
-    public TEMP IRme()
-    {
-        //System.out.println("IRme funcDec");
-        IR.getInstance().Add_IRcommand(new IRcommand_Label("start of func " + name));
-        stmtList.IRme();
-        IR.getInstance().Add_IRcommand(new IRcommand_Label("end of func " + name));
-        return null;
-    }
-
 }

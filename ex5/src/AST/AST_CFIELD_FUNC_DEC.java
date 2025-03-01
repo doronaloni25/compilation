@@ -21,5 +21,9 @@ public class AST_CFIELD_FUNC_DEC extends AST_CFIELD
     {
         return funcDec.SemantMe();
     }
+    public TEMP IRme()
+    {
+        return funcDec.IRme();
+    }
 
 }

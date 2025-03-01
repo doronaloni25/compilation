@@ -40,6 +40,11 @@ public class AST_VAR_DEC extends AST_DEC
         // check if im in class scope (but not in func), and if so add to the class fields
         TYPE_CLASS_DEC classType = SYMBOL_TABLE.getInstance().inClass;
         TYPE_FUNCTION funcType = SYMBOL_TABLE.getInstance().inFunction;
+        // update the function local variables count for IRme later...
+        if(funcType != null)
+        {
+            funcType.localVariablesCount++;
+        }
         // This basically means we are inside a class, but in its "main" scope - 
         // - not inside any funcs, if's, and while - since they are all inside funcdec
         if(classType != null && funcType == null)
@@ -52,6 +57,7 @@ public class AST_VAR_DEC extends AST_DEC
     @Override
     public TEMP IRme()
     {
+        // TODO: check about global variables
         IR.getInstance().Add_IRcommand(new IRcommand_Allocate(nameWithVarDecScope));
 		return null;
     }

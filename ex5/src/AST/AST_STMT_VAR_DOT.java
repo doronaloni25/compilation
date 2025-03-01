@@ -74,4 +74,23 @@ public class AST_STMT_VAR_DOT extends AST_STMT
         return found_function.returnType;
     }
 	
+    @Override
+        public TEMP IRme(){
+        //object is the class instance
+        TEMP object = var.IRme();
+        ArrayList<TEMP> funcArgs = new ArrayList<TEMP>();
+        if(exp != null)
+        {
+            funcArgs.add(exp.IRme());
+            if(expList != null)
+            {
+                expList.IRme(funcArgs);
+            }
+        }
+        // object is the class instance, name is the function name,
+        // funcArgs is the arguments and offset in class methods table
+        // null means that we dont use the return value
+        IR.getInstance().Add_IRcommand(new IRcommand_Call_Method(null, object, name, funcArgs, this.classDec.getMethodOffset(name)));
+        return null;
+    }
 }

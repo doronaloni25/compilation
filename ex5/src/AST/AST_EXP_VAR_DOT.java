@@ -11,6 +11,7 @@ public class AST_EXP_VAR_DOT extends AST_EXP
     String name;
     AST_EXP exp;
     AST_COMMA_EXP_LIST expList;
+    TYPE_CLASS_DEC classDec; 
     public AST_EXP_VAR_DOT(AST_VAR v,String name,  AST_EXP exp, AST_COMMA_EXP_LIST expList)
     {
         SerialNumber = AST_Node_Serial_Number.getFresh();
@@ -54,6 +55,8 @@ public class AST_EXP_VAR_DOT extends AST_EXP
         }
         // cast to type class
         TYPE_CLASS varType = (TYPE_CLASS)varTypeT;
+        //for IRme
+        this.classDec = varType.classDec;
         //check if the class has a method with the given name
         TYPE_FUNCTION found_function = varType.classDec.functionInClass(name);
         if(found_function == null)
@@ -79,7 +82,22 @@ public class AST_EXP_VAR_DOT extends AST_EXP
     }
 
     public TEMP IRme(){
-        // TODO: not a part of this exercise
-        return null;
+        //dest is the return value of the function
+        TEMP dest = TEMP_FACTORY.getInstance().getFreshTEMP();
+        //object is the class instance
+        TEMP object = var.IRme();
+        ArrayList<TEMP> funcArgs = new ArrayList<TEMP>();
+        if(exp != null)
+        {
+            funcArgs.add(exp.IRme());
+            if(expList != null)
+            {
+                expList.IRme(funcArgs);
+            }
+        }
+        // dest is the return value, object is the class instance, name is the function name,
+        // funcArgs is the arguments and offset in class methods table
+        IR.getInstance().Add_IRcommand(new IRcommand_Call_Method(dest, object, name, funcArgs, this.classDec.getMethodOffset(name)));
+        return dest;
     }
 }

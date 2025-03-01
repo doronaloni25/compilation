@@ -6,7 +6,7 @@ import SYMBOL_TABLE.*;
 import HelperFunctions.*;
 
 public class AST_EXP_ID extends AST_EXP
-{
+{   //calling a function
     String name;
     AST_EXP exp;
     AST_COMMA_EXP_LIST expList;
@@ -77,13 +77,17 @@ public class AST_EXP_ID extends AST_EXP
 
     @Override
     public TEMP IRme(){
-        // only take care of print int in this task
-        if (name.equals("PrintInt")){
-            TEMP t = exp.IRme();
-            IR.getInstance().Add_IRcommand(new IRcommand_PrintInt(t));
-            return null;
+        TEMP dest = TEMP_FACTORY.getInstance().getFreshTEMP();
+        ArrayList<TEMP> funcArgs = new ArrayList<TEMP>();
+        if(exp != null)
+        {
+            funcArgs.add(exp.IRme());
+            if(expList != null)
+            {
+                expList.IRme(funcArgs);
+            }
         }
-        // TODO: not needed for this exercise
-        return null;
+        IR.getInstance().Add_IRcommand(new IRcommand_CallFunc(name, dest, funcArgs));
+        return dest;
     }
 }

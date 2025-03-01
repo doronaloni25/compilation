@@ -42,7 +42,9 @@ public class AST_PROGRAM extends AST_Node{
  	@Override
 	public TEMP IRme()
 	{
-		return dec_list.IRme();
+		dec_list.IRme();
+		IR.getInstance().Add_IRcommand(new IRcommand_End_Program());
+		return null;
 	}
 
 }

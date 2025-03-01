@@ -47,4 +47,6 @@ public class AST_CFIELD_LIST extends AST_LIST
 	{
         return this.tail;
     }
+	//the IRme is implemented in AST_LIST
+
 }

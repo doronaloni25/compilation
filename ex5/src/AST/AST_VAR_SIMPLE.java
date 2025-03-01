@@ -68,6 +68,5 @@ public class AST_VAR_SIMPLE extends AST_VAR
 		TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
 		IR.getInstance().Add_IRcommand(new IRcommand_Load(t,nameWithVarDecScope));
 		return t;
-	
 	}
 }

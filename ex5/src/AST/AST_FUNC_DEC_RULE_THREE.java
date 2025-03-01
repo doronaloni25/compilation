@@ -43,6 +43,7 @@ public class AST_FUNC_DEC_RULE_THREE extends AST_FUNC_DEC
         //function declaration inside a class
         if(classDec!=null)
         {
+            this.classDec = classDec;
             TYPE funcCheck = SYMBOL_TABLE.getInstance().findWithinScope(name);
             SYMBOL_TABLE.getInstance().enter(name, function);
             SYMBOL_TABLE.getInstance().beginScope();
@@ -57,6 +58,7 @@ public class AST_FUNC_DEC_RULE_THREE extends AST_FUNC_DEC
             stmtList.SemantMe();
             SYMBOL_TABLE.getInstance().endScope();
             SYMBOL_TABLE.getInstance().inFunction = null;
+            this.localVariablesCount = function.localVariablesCount;
             return function;
         }
         //function declaration in a global scope
@@ -89,7 +91,9 @@ public class AST_FUNC_DEC_RULE_THREE extends AST_FUNC_DEC
             SYMBOL_TABLE.getInstance().endScope();
             SYMBOL_TABLE.getInstance().inFunction = null;
             //System.out.println("rule 3 done");
+            this.localVariablesCount = function.localVariablesCount;
             return function;
         }
     }
+     // IRme implemented in AST_FUNC_DEC
 }

@@ -76,5 +76,6 @@ public class AST_DEC_LIST extends AST_LIST
 		if (head != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,head.SerialNumber);
 		if (tail != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,tail.SerialNumber);
 	}
+	//IRme implemented in AST_LIST
 	
 }

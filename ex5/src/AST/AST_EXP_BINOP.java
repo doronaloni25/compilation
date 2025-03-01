@@ -9,7 +9,8 @@ public class AST_EXP_BINOP extends AST_EXP
 	public AST_BINOP OP;
 	public AST_EXP left;
 	public AST_EXP right;
-	
+	private TYPE expType;
+
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
@@ -35,6 +36,7 @@ public class AST_EXP_BINOP extends AST_EXP
 
 	public TYPE SemantMe(){
 		TYPE leftType = left.SemantMe();
+		this.expType = leftType;
 		TYPE rightType = right.SemantMe();
 		if (leftType == null || rightType == null){
 			HelperFunctions.printError(line, this.getClass().getSimpleName());
@@ -126,7 +128,15 @@ public class AST_EXP_BINOP extends AST_EXP
 		// EQ = 6
 		switch (OP.op){
 			case 0:
-				cmd = new IRcommand_Binop_Add_Integers(dest, t1, t2);
+				//check if its string or int
+				if(expType == TYPE_STRING.getInstance())
+				{
+					cmd = new IRcommand_Binop_Add_Strings(dest, t1, t2);
+				}
+				else
+				{
+					cmd = new IRcommand_Binop_Add_Integers(dest, t1, t2);
+				}	
 				break;
 			case 1:
 				cmd = new IRcommand_Binop_Sub_Integers(dest, t1, t2);
@@ -144,7 +154,23 @@ public class AST_EXP_BINOP extends AST_EXP
 				cmd = new IRcommand_Binop_GT_Integers(dest, t1, t2);
 				break;
 			case 6:
-				cmd = new IRcommand_Binop_EQ_Integers(dest, t1, t2);
+				if(expType == TYPE_INT.getInstance())
+				{
+					cmd = new IRcommand_Binop_EQ_Integers(dest, t1, t2);
+				}
+				else if(expType == TYPE_STRING.getInstance())
+				{
+					cmd = new IRcommand_Binop_EQ_Strings(dest, t1, t2);
+				}
+				else if(expType.isArray())
+				{
+					cmd = new IRcommand_Binop_EQ_Arrays(dest, t1, t2);
+				}
+				else
+				{
+					cmd = new IRcommand_Binop_EQ_Objects(dest, t1, t2);
+				}
+				
 				break;
 		}
 		// add command to IR

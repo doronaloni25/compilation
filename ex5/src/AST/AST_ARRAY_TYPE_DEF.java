@@ -39,4 +39,8 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node{
         SYMBOL_TABLE.getInstance().enter(name, newArray);
         return newArray;
     }
+    public TEMP IRme()
+    {
+        return null;
+    }
 }

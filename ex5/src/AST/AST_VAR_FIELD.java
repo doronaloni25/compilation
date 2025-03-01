@@ -8,6 +8,7 @@ public class AST_VAR_FIELD extends AST_VAR
 {
 	public AST_VAR var;
 	public String fieldName;
+	public TYPE_CLASS myClassInstance = null;
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
@@ -73,6 +74,7 @@ public class AST_VAR_FIELD extends AST_VAR
 			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
 		TYPE_CLASS classType = (TYPE_CLASS)varType;
+		this.myClassInstance = classType;
 		//check if the field is defined in the class, and if it is, return its type
 		TYPE_CLASS_VAR_DEC fieldType = classType.classDec.fieldInClass(fieldName);
 		//System.out.println("fieldName = " + fieldName);
@@ -86,11 +88,18 @@ public class AST_VAR_FIELD extends AST_VAR
 		}
 		return null;
 	}
+
 	@Override
 	public TEMP IRme()
 	{
-		//TODO-implement for ex5
-		return null;
+		TEMP dest = TEMP_FACTORY.getInstance().getFreshTEMP();
+		TEMP tClass = var.IRme();
+		// get class type
+		TYPE_CLASS_DEC classType = this.myClassInstance.classDec;
+		// get the field offset
+		int offset = classType.getFieldOffset(this.fieldName);
+		IR.getInstance().Add_IRcommand(new IRcommand_Load_From_Field(dest, tClass, offset, fieldName));
+		return dest;
 	}
 }
 

@@ -44,6 +44,4 @@ public class AST_CLASS_DEC_TWO extends AST_CLASS_DEC_ONE
         SYMBOL_TABLE.getInstance().inClass = null;
         return classType;
      }
-
-    // IRme is the same as the one in AST_CLASS_DEC_ONE
-}
+     //IRme is implemnte in the father class

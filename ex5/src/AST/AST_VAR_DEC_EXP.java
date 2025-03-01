@@ -50,9 +50,10 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC
     }   
     public TEMP IRme()
     {
-        IR.getInstance().Add_IRcommand(new IRcommand_Allocate(nameWithVarDecScope));
-        TEMP t = exp.IRme();
-        IR.getInstance().Add_IRcommand(new IRcommand_Store(nameWithVarDecScope, t));
+        // TODO: check about global variables
+        IR.getInstance().Add_IRcommand(new IRcommand_Allocate(nameWithVarDecScope)); 
+        TEMP t = exp.IRme(); 
+        IR.getInstance().Add_IRcommand(new IRcommand_Store(nameWithVarDecScope, t)); 
         return null;
     }
 }

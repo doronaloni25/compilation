@@ -88,7 +88,10 @@ public class AST_VAR_EXP extends AST_VAR
 	@Override
 	public TEMP IRme()
 	{
-		//TODO-implement for ex5
-		return null;
+		TEMP dst = TEMP_FACTORY.getInstance().getFreshTEMP();
+		TEMP tArray = var.IRme();
+		TEMP tIndex = exp.IRme();
+		IR.getInstance().Add_IRcommand(new IRcommand_Load_From_Array(dst, tArray, tIndex));
+		return dst;
 	}
 }

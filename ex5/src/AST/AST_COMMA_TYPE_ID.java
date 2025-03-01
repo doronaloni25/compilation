@@ -8,7 +8,7 @@ public class AST_COMMA_TYPE_ID extends AST_Node {
     
     public AST_TYPE type; 
     public String name;
-
+    //list of arguments in the function declaration
     /******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
@@ -34,4 +34,5 @@ public TYPE SemantMe()
     SYMBOL_TABLE.getInstance().enter(name, t);
     return t;
 }
+//IRme is implemented in AST_Node
 }
