@@ -80,7 +80,8 @@ public class AST_STMT_ID extends AST_STMT
             IR.getInstance().Add_IRcommand(new IRcommand_PrintInt(t));
             return null;
         }
-        else if (name.equals("PrintString")){
+        else if (name.equals("PrintString"))
+        {
             TEMP t = exp.IRme();
             IR.getInstance().Add_IRcommand(new IRcommand_PrintString(t));
             return null;
@@ -96,7 +97,7 @@ public class AST_STMT_ID extends AST_STMT
                     expList.IRme(funcArgs);
                 }
             }
-            IR.getInstance().Add_IRcommand(new IRcommand_CallFunc(name, null, funcArgs));
+            IR.getInstance().Add_IRcommand(new IRcommand_Call_Func(name, null, funcArgs));
         }
         return null;
     }

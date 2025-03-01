@@ -97,26 +97,28 @@ public class AST_STMT_ASSIGN extends AST_STMT
 				TEMP tExp = exp.IRme();
 				cmd = new IRcommand_Store(nameWithVarDecScope, tExp);
 				break;
+			//class field case
 			case AST_VAR_FIELD:
 				AST_VAR_FIELD varField = (AST_VAR_FIELD) var;
 				// Get temp of class instance!
-				TEMP tVar = varField.var.IRme();
-				String name = varField.fieldName;
+				TEMP tClass = varField.var.IRme();
+				String fieldName = varField.fieldName;
 				// get class type
 				TYPE_CLASS_DEC classType = ((TYPE_CLASS)varField).myClassInstance.classDec;
 				// get the field offset
-				int offset = classType.getFieldOffset(name);
-				TEMP tExp = exp.IRme();
-				cmd = new IRcommand_Store_Into_Field(tVar, tExp, offset, name);
+				int offset = classType.getFieldOffset(fieldName);
+				TEMP tValue = exp.IRme();
+				cmd = new IRcommand_Store_Into_Field(tClass, tValue, offset, fieldName);
 				break;
+			//Array case
 			case AST_VAR_EXP:
 				AST_VAR_EXP varExp = (AST_VAR_EXP) var;
 				// get temp of array instance
-				TEMP tVarExp = varExp.var.IRme();
+				TEMP tArray = varExp.var.IRme();
 				// get temp of array index
 				TEMP tIndex = varExp.exp.IRme();
-				TEMP tExp = exp.IRme();
-				cmd = new IRcommand_Store_Into_Array(tVarExp, tIndex, tExp);
+				TEMP tValue= exp.IRme();
+				cmd = new IRcommand_Store_Into_Array(tArray, tIndex, tValue);
 				break;
 		}
 		IR.getInstance().Add_IRcommand(cmd);

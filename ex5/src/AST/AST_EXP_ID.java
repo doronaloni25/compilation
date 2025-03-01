@@ -87,7 +87,7 @@ public class AST_EXP_ID extends AST_EXP
                 expList.IRme(funcArgs);
             }
         }
-        IR.getInstance().Add_IRcommand(new IRcommand_CallFunc(name, dest, funcArgs));
+        IR.getInstance().Add_IRcommand(new IRcommand_Call_Func(name, dest, funcArgs));
         return dest;
     }
 }

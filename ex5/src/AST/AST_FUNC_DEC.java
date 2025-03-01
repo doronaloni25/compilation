@@ -33,7 +33,7 @@ public class AST_FUNC_DEC extends AST_DEC
         {
             IR.getInstance().Add_IRcommand(new IRcommand_Label(HelperFunctions.formatMethodLabel(this.classDec.name, name)));
         }
-        IR.getInstance().Add_IRcommand(new IRcommand_Function_Init(this.localVariablesCount));
+        IR.getInstance().Add_IRcommand(new IRcommand_Func_Init(this.localVariablesCount));
         this.stmtList.IRme();
         if(this.classDec == null)
         {
@@ -43,7 +43,7 @@ public class AST_FUNC_DEC extends AST_DEC
         {
             String endLabel = HelperFunctions.formatMethodExitLabel(this.classDec.name, name);
         }
-        IR.getInstance().Add_IRcommand(new IRcommand_Function_Cleanup(this.localVariablesCount, endLabel));
+        IR.getInstance().Add_IRcommand(new IRcommand_Func_Cleanup(this.localVariablesCount, endLabel));
         return null;
     }
 }
