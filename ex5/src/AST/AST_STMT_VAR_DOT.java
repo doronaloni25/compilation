@@ -75,34 +75,22 @@ public class AST_STMT_VAR_DOT extends AST_STMT
     }
 	
     @Override
-    public TEMP IRme()
-    {
-        // TODO: change all of this, copilot generated
-        TEMP t = null;
-        TEMP tExp;
-        TEMP tExpList;
-        // get the address of the class
-        TEMP tClass = v.IRme();
-        // get the address of the function
-        TEMP tFunction = IR.getInstance().getClassFunction(tClass, name);
-        // check if the function has arguments
+        public TEMP IRme(){
+        //object is the class instance
+        TEMP object = var.IRme();
+        ArrayList<TEMP> funcArgs = new ArrayList<TEMP>();
         if(exp != null)
         {
-            tExp = exp.IRme();
+            funcArgs.add(exp.IRme());
             if(expList != null)
             {
-                tExpList = expList.IRme();
-                t = IR.getInstance().IRmeClassFunctionWithArgs(tClass, tFunction, tExp, tExpList);
-            }
-            else
-            {
-                t = IR.getInstance().IRmeClassFunctionWithArgs(tClass, tFunction, tExp, null);
+                expList.IRme(funcArgs);
             }
         }
-        else
-        {
-            t = IR.getInstance().IRmeClassFunctionWithArgs(tClass, tFunction, null, null);
-        }
-        return t;
+        // object is the class instance, name is the function name,
+        // funcArgs is the arguments and offset in class methods table
+        // null means that we dont use the return value
+        IR.getInstance().Add_IRcommand(new IRcommand_Call_Method(null, object, name, funcArgs, this.classDec.getMethodOffset(name)));
+        return null;
     }
 }

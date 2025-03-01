@@ -6,7 +6,6 @@ import SYMBOL_TABLE.*;
 import HelperFunctions.*;
 public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
 { 
-    private boolean isMethod = false;
 
     public AST_FUNC_DEC_RULE_ONE (AST_TYPE type,String name, AST_STMT_LIST stmtList) {
         super(type, name, stmtList);
@@ -34,7 +33,7 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
     //func declaration inside a class
     if (classDec != null)
     {
-        isMethod = true;
+        this.classDec = classDec;
         //System.out.println("func in class");
         TYPE funcCheck = SYMBOL_TABLE.getInstance().findWithinScope(name);
         HelperFunctions.checkValidMethod(function, funcCheck, classDec, line, this.getClass().getSimpleName());
@@ -73,5 +72,4 @@ public class AST_FUNC_DEC_RULE_ONE extends AST_FUNC_DEC
         return function;
     }
  }
- // IRme implemented in AST_FUNC_DEC
 }

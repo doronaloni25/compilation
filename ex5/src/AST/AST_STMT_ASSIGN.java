@@ -107,7 +107,6 @@ public class AST_STMT_ASSIGN extends AST_STMT
 				// get the field offset
 				int offset = classType.getFieldOffset(name);
 				TEMP tExp = exp.IRme();
-				// TODO: check if name is needed
 				cmd = new IRcommand_Store_Into_Field(tVar, tExp, offset, name);
 				break;
 			case AST_VAR_EXP:

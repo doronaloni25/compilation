@@ -176,12 +176,17 @@ public class HelperFunctions{
         }
     }
 
-    public static void formatExitLabel(String label){
+    public static String formatExitLabel(String label){
         return "end of func " + label;
     }
 
-    public static void formatEntryLabel(String label){
+    public static String formatEntryLabel(String label){
         return "start of func " + label;
     }
-   
+    public static String formatMethodLabel(String classDecName, String label){
+        return "start of method " + label + " in class " + classDecName;
+    }
+    public static String formatMethodExitLabel(String classDecName, String label){
+        return "end of method " + label + " in class " + classDecName;
+    }
 }

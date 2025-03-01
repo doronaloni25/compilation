@@ -21,7 +21,6 @@ public class AST_ARRAY_TYPE_DEF_DEC extends AST_DEC
     public TYPE SemantMe() {
         return arrayTypedef.SemantMe();
     }
-    //TODO: check if this is correct
     public TEMP IRme()
     {
         arrayTypedef.IRme();

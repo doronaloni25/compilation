@@ -101,4 +101,22 @@ public class TYPE_CLASS_DEC extends TYPE
 	{
 		this.function_list = new TYPE_LIST(f, this.function_list);
 	}
+
+	public int getMethodOffset(String methodName){
+		TYPE_LIST currFunction = function_list;
+		int offset = 1;
+		while(currFunction != null)
+		{
+			if(currFunction.head == null){
+				return -1;
+			}
+			if(currFunction.head.name.equals(methodName))
+			{
+				return offset;
+			}
+			offset++;
+			currFunction = currFunction.tail;
+		}
+		return -1;																														 
+	}
 }

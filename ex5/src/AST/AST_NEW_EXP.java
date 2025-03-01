@@ -70,11 +70,11 @@ public class AST_NEW_EXP extends AST_EXP
 		TEMP pointer = TEMP_FACTORY.getInstance().getFreshTEMP();
 		IRcommand cmd;
 		if (exp == null){
-			// instance of class
-			// TODO: figure out data members if class
-			cmd = new IRcommand_Class_Instance(pointer, this.instanceType);
+			// instance of class with name of class and data members
+			cmd = new IRcommand_Class_Instance(((TYPE_CLASS_DEC)this.instanceType).data_members, ((TYPE_CLASS_DEC)this.instanceType).name, pointer);
 		}
-		else{
+		else
+		{
 			// instance of array
 			cmd = new IRcommand_Array_Instance(pointer, this.instanceType);
 		}

@@ -15,7 +15,6 @@ public class AST_CLASSDEC_DEC extends AST_DEC
     public TYPE SemantMe() {
         return classDec.SemantMe();
     }
-    
     public TEMP IRme()
     {
         classDec.IRme();

@@ -44,9 +44,9 @@ public class AST_CLASS_DEC_ONE extends AST_DEC
     public TEMP IRme()
     {
         cFieldList.IRme();
-        //TODO: implement the rest using dispatch vector
+        IR.getInstance().Add_IRcommand(new IRcommand_Create_Dispatch_Vector(this.name, this.classType.function_list));
+        return null;
     }
-
 }
 
   

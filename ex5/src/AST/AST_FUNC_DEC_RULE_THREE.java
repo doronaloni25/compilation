@@ -43,6 +43,7 @@ public class AST_FUNC_DEC_RULE_THREE extends AST_FUNC_DEC
         //function declaration inside a class
         if(classDec!=null)
         {
+            this.classDec = classDec;
             TYPE funcCheck = SYMBOL_TABLE.getInstance().findWithinScope(name);
             SYMBOL_TABLE.getInstance().enter(name, function);
             SYMBOL_TABLE.getInstance().beginScope();
