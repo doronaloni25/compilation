@@ -16,10 +16,22 @@ import MIPS.*;
 public class IRcommand_Label extends IRcommand
 {
 	String label_name;
+	/*
+	 * POSSIBLE LABEL TYPES:
+	 *  FUNC_START,
+	 *	FUNC_END,
+	 *	METHOD_START,
+	 *	METHOD_END,
+	 *	WHILE_START,
+	 *	WHILE_END,
+	 *	IF
+	 */
+	Label_Type label_type;
 	
-	public IRcommand_Label(String label_name)
+	public IRcommand_Label(String label_name, Label_Type label_type)
 	{
 		this.label_name = label_name;
+		this.label_type = label_type;
 	}
 	
 	/***************/

@@ -12,6 +12,7 @@ import java.util.*;
 /* PROJECT IMPORTS */
 /*******************/
 import TEMP.*;
+import TYPES.*;
 
 public class IRcommand_Class_Instance extends IRcommand
 {

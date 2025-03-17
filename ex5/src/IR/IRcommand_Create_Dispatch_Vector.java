@@ -12,6 +12,7 @@ import java.util.*;
 /* PROJECT IMPORTS */
 /*******************/
 import TEMP.*;
+import TYPES.*;
 
 public class IRcommand_Create_Dispatch_Vector extends IRcommand
 {

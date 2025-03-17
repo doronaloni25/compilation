@@ -42,12 +42,6 @@ public class AST_VAR_SIMPLE extends AST_VAR
 		/**********************************/
 		System.out.format("AST NODE SIMPLE VAR( %s )\n",name);
 
-		/*********************************/
-		/* Print to AST GRAPHIZ DOT file */
-		/*********************************/
-		AST_GRAPHVIZ.getInstance().logNode(
-			SerialNumber,
-			String.format("SIMPLE\nVAR\n(%s)",name));
 	}
 	@Override
 	public TYPE SemantMe() {

@@ -189,4 +189,19 @@ public class HelperFunctions{
     public static String formatMethodExitLabel(String classDecName, String label){
         return "end of method " + label + " in class " + classDecName;
     }
+
+    public static String getEndLabelFromStartLabel(String label, Label_Type label_type){
+        switch(label_type){
+            case FUNC_START:
+                String labelOnly = label.replaceFirst("start of func ", "");
+                return formatExitLabel(labelOnly);
+            case METHOD_START:
+                String[] parts = label.split(" in class ");
+                String methodLabel = parts[0].replaceFirst("start of method ", "").trim();
+                String className = parts[1].trim();
+                return formatMethodExitLabel(className, methodLabel);
+            default:
+                return "";
+        }
+    }
 }

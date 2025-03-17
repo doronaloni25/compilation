@@ -4,6 +4,7 @@ import TEMP.*;
 import TYPES.*;
 import SYMBOL_TABLE.SYMBOL_TABLE;
 import HelperFunctions.*;
+import java.util.ArrayList;
 public class AST_STMT_ID extends AST_STMT
 {
     String name;

@@ -4,6 +4,7 @@ import TEMP.*;
 import TYPES.*;
 import SYMBOL_TABLE.*;
 import HelperFunctions.*;
+import java.util.ArrayList;
 
 public class AST_EXP_VAR_DOT extends AST_EXP
 {
@@ -85,7 +86,7 @@ public class AST_EXP_VAR_DOT extends AST_EXP
         //dest is the return value of the function
         TEMP dest = TEMP_FACTORY.getInstance().getFreshTEMP();
         //object is the class instance
-        TEMP object = var.IRme();
+        TEMP object = v.IRme();
         ArrayList<TEMP> funcArgs = new ArrayList<TEMP>();
         if(exp != null)
         {

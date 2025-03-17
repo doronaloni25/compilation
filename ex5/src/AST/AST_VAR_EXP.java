@@ -46,19 +46,7 @@ public class AST_VAR_EXP extends AST_VAR
 		/****************************************/
 		if (var != null) var.PrintMe();
 		if (exp != null) exp.PrintMe();
-		
-		/***************************************/
-		/* PRINT Node to AST GRAPHVIZ DOT file */
-		/***************************************/
-		AST_GRAPHVIZ.getInstance().logNode(
-			SerialNumber,
-			"EXP\nVAR\n...[...]");
-		
-		/****************************************/
-		/* PRINT Edges to AST GRAPHVIZ DOT file */
-		/****************************************/
-		if (var       != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,var.SerialNumber);
-		if (exp != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,exp.SerialNumber);
+
 	}
 	@Override
 	public TYPE SemantMe() {

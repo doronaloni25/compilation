@@ -2,6 +2,14 @@ package IR;
 
 import REG.*;
 import MIPS.*;
+//import REG.*;
+//import MIPS.*;
+
+/*******************/
+/* PROJECT IMPORTS */
+/*******************/
+import TEMP.*;
+import HelperFunctions.*;
 
 public class IRcommand_Load_From_Array extends IRcommand 
 {

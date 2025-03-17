@@ -25,6 +25,7 @@ public class IRcommandConstString extends IRcommand
 	public String getGen(Set<String> ins)
 	{
         //TODO: DO!
+		return "";
 	}
 
 	public String toString()

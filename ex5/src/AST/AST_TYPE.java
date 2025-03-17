@@ -59,16 +59,6 @@ public class AST_TYPE extends AST_Node {
             System.out.format("AST_TYPE %s \n", type);
         }
 
-        // Print to AST GRAPHVIZ DOT file
-        if (id) {
-            AST_GRAPHVIZ.getInstance().logNode(
-                    SerialNumber,
-                    String.format("TYPE ID(%s)", type));
-        } else {
-            AST_GRAPHVIZ.getInstance().logNode(
-                    SerialNumber,
-                    String.format("TYPE %s", type));
-        }
 
     }
 

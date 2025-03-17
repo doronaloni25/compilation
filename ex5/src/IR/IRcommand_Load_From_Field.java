@@ -2,6 +2,15 @@ package IR;
 
 import REG.*;
 import MIPS.*;
+//import REG.*;
+//import MIPS.*;
+
+/*******************/
+/* PROJECT IMPORTS */
+/*******************/
+import TEMP.*;
+import HelperFunctions.*;
+import TYPES.*;
 
 public class IRcommand_Load_From_Field extends IRcommand 
 {

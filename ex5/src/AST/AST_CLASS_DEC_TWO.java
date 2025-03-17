@@ -45,3 +45,4 @@ public class AST_CLASS_DEC_TWO extends AST_CLASS_DEC_ONE
         return classType;
      }
      //IRme is implemnte in the father class
+}

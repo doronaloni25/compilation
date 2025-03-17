@@ -3,6 +3,7 @@ import IR.*;
 import TEMP.*;
 import TYPES.*;
 import SYMBOL_TABLE.*;
+import java.util.ArrayList;
 import HelperFunctions.*;
 public class AST_STMT_VAR_DOT extends AST_STMT
 {
@@ -10,6 +11,7 @@ public class AST_STMT_VAR_DOT extends AST_STMT
     String name;
     AST_EXP exp;
     AST_COMMA_EXP_LIST expList;
+    TYPE_CLASS_DEC classDec;
     public AST_STMT_VAR_DOT(AST_VAR v,String name,  AST_EXP exp, AST_COMMA_EXP_LIST expList)
     {
         SerialNumber = AST_Node_Serial_Number.getFresh();
@@ -51,6 +53,8 @@ public class AST_STMT_VAR_DOT extends AST_STMT
         }
         // cast to type class
         TYPE_CLASS varType = (TYPE_CLASS)varTypeT;
+        // save class dec for IRME
+        this.classDec = varType.classDec;
         //check if the class has a method with the given name
         TYPE_FUNCTION found_function = varType.classDec.functionInClass(name);
         if(found_function == null)
@@ -77,7 +81,7 @@ public class AST_STMT_VAR_DOT extends AST_STMT
     @Override
         public TEMP IRme(){
         //object is the class instance
-        TEMP object = var.IRme();
+        TEMP object = v.IRme();
         ArrayList<TEMP> funcArgs = new ArrayList<TEMP>();
         if(exp != null)
         {

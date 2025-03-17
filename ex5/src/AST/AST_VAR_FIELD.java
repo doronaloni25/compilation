@@ -46,18 +46,6 @@ public class AST_VAR_FIELD extends AST_VAR
 		/**********************************************/
 		if (var != null) var.PrintMe();
 		System.out.format("FIELD NAME( %s )\n",fieldName);
-
-		/***************************************/
-		/* PRINT Node to AST GRAPHVIZ DOT file */
-		/***************************************/
-		AST_GRAPHVIZ.getInstance().logNode(
-			SerialNumber,
-			String.format("FIELD\nVAR\n...->%s",fieldName));
-		
-		/****************************************/
-		/* PRINT Edges to AST GRAPHVIZ DOT file */
-		/****************************************/
-		if (var != null) AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,var.SerialNumber);
 	}
 	@Override
 	public TYPE SemantMe() {
@@ -98,7 +86,7 @@ public class AST_VAR_FIELD extends AST_VAR
 		TYPE_CLASS_DEC classType = this.myClassInstance.classDec;
 		// get the field offset
 		int offset = classType.getFieldOffset(this.fieldName);
-		IR.getInstance().Add_IRcommand(new IRcommand_Load_From_Field(dest, tClass, offset, fieldName));
+		IR.getInstance().Add_IRcommand(new IRcommand_Load_From_Field(dest, classType, offset, fieldName));
 		return dest;
 	}
 }

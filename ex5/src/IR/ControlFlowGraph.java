@@ -55,15 +55,18 @@ public class ControlFlowGraph
             {
                 continue;
             }
-
+            
+            // In case of Func or Method
             // at the start of a function, we want to skip the function content (edge to the end label) as well as go inside the function (an edge to the next block)
-            if (currCmd instanceof IRcommand_Label && ((IRcommand_Label)currCmd).label_name.equals("start of func main")){
-                Block destBlock = findBlockByLabel("end of func main");
+            if (currCmd instanceof IRcommand_Label && (((IRcommand_Label)currCmd).label_type == Label_Type.FUNC_START || ((IRcommand_Label)currCmd).label_type == Label_Type.METHOD_START)){
+                String endLabel = HelperFunctions.getEndLabelFromStartLabel(((IRcommand_Label)currCmd).label_name ,((IRcommand_Label)currCmd).label_type);
+                Block destBlock = findBlockByLabel(endLabel);
                 currBlock.addExitEdge(destBlock);
                 destBlock.addEnterEdge(currBlock);
             }
 
             // If the command is jump, add the edge to the label of destination (and not to the next block)
+            // This is only for while (going from the end of the while loop to the start)
             if(currCmd instanceof IRcommand_Jump_Label)
             {
                 String label = ((IRcommand_Jump_Label)currCmd).label_name;
@@ -75,6 +78,7 @@ public class ControlFlowGraph
 
             // If the command is jump if eq to zero, add the edge to the label of destination,
             // and add the edge to the next block (in the case where the condition is false)
+            // We are here in if or while (when checking the condition)
             if(currCmd instanceof IRcommand_Jump_If_Eq_To_Zero)
             {
                 String label =((IRcommand_Jump_If_Eq_To_Zero)currCmd).label_name;

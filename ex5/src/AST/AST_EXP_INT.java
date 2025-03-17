@@ -48,13 +48,6 @@ public class AST_EXP_INT extends AST_EXP
 		/* AST NODE TYPE = AST INT EXP */
 		/*******************************/
 		System.out.format("AST NODE INT( %d )\n",value);
-
-		/*********************************/
-		/* Print to AST GRAPHIZ DOT file */
-		/*********************************/
-		AST_GRAPHVIZ.getInstance().logNode(
-			SerialNumber,
-			String.format("INT(%d)",value));
 	}
 
 	public TYPE SemantMe()

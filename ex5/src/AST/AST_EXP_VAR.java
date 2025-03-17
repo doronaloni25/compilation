@@ -43,18 +43,6 @@ public class AST_EXP_VAR extends AST_EXP
 		/* RECURSIVELY PRINT var ... */
 		/*****************************/
 		if (var != null) var.PrintMe();
-		
-		/*********************************/
-		/* Print to AST GRAPHIZ DOT file */
-		/*********************************/
-		AST_GRAPHVIZ.getInstance().logNode(
-			SerialNumber,
-			"EXP\nVAR");
-
-		/****************************************/
-		/* PRINT Edges to AST GRAPHVIZ DOT file */
-		/****************************************/
-		AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,var.SerialNumber);
 			
 	}
 

@@ -91,36 +91,35 @@ public class AST_STMT_ASSIGN extends AST_STMT
 	@Override
 	public TEMP IRme()
 	{
-		IRcommand cmd;
-		switch (var instanceof){
-			case AST_VAR_SIMPLE:
-				TEMP tExp = exp.IRme();
-				cmd = new IRcommand_Store(nameWithVarDecScope, tExp);
-				break;
-			//class field case
-			case AST_VAR_FIELD:
-				AST_VAR_FIELD varField = (AST_VAR_FIELD) var;
-				// Get temp of class instance!
-				TEMP tClass = varField.var.IRme();
-				String fieldName = varField.fieldName;
-				// get class type
-				TYPE_CLASS_DEC classType = ((TYPE_CLASS)varField).myClassInstance.classDec;
-				// get the field offset
-				int offset = classType.getFieldOffset(fieldName);
-				TEMP tValue = exp.IRme();
-				cmd = new IRcommand_Store_Into_Field(tClass, tValue, offset, fieldName);
-				break;
-			//Array case
-			case AST_VAR_EXP:
-				AST_VAR_EXP varExp = (AST_VAR_EXP) var;
-				// get temp of array instance
-				TEMP tArray = varExp.var.IRme();
-				// get temp of array index
-				TEMP tIndex = varExp.exp.IRme();
-				TEMP tValue= exp.IRme();
-				cmd = new IRcommand_Store_Into_Array(tArray, tIndex, tValue);
-				break;
+		IRcommand cmd = null;
+		if (var instanceof AST_VAR_SIMPLE){
+			TEMP tExp = exp.IRme();
+			cmd = new IRcommand_Store(nameWithVarDecScope, tExp);
 		}
+		//class field case
+		else if(var instanceof AST_VAR_FIELD){
+			AST_VAR_FIELD varField = (AST_VAR_FIELD) var;
+			// Get temp of class instance!
+			TEMP tClass = varField.var.IRme();
+			String fieldName = varField.fieldName;
+			// get class type
+			TYPE_CLASS_DEC classType = ((TYPE_CLASS)varField.myClassInstance).classDec;
+			// get the field offset
+			int offset = classType.getFieldOffset(fieldName);
+			TEMP tValue = exp.IRme();
+			cmd = new IRcommand_Store_Into_Field(tClass, tValue, offset, fieldName);
+		}
+		//Array case
+		else if(var instanceof AST_VAR_EXP)
+		{
+			AST_VAR_EXP varExp = (AST_VAR_EXP) var;
+			// get temp of array instance
+			TEMP tArray = varExp.var.IRme();
+			// get temp of array index
+			TEMP tIndex = varExp.exp.IRme();
+			TEMP tValue= exp.IRme();
+			cmd = new IRcommand_Store_Into_Array(tArray, tIndex, tValue);
+		}	
 		IR.getInstance().Add_IRcommand(cmd);
 		return null;
 	}
@@ -141,17 +140,5 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		if (var != null) var.PrintMe();
 		if (exp != null) exp.PrintMe();
 
-		/***************************************/
-		/* PRINT Node to AST GRAPHVIZ DOT file */
-		/***************************************/
-		AST_GRAPHVIZ.getInstance().logNode(
-			SerialNumber,
-			"ASSIGN\nleft := right\n");
-		
-		/****************************************/
-		/* PRINT Edges to AST GRAPHVIZ DOT file */
-		/****************************************/
-		AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,var.SerialNumber);
-		AST_GRAPHVIZ.getInstance().logEdge(SerialNumber,exp.SerialNumber);
 	}
 }

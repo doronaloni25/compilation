@@ -59,7 +59,7 @@ public class AST_NEW_EXP extends AST_EXP
 				HelperFunctions.printError(line, this.getClass().getSimpleName());
 			}
 			this.instanceType = new TYPE_ARRAY(t, null);
-			return this.arrayInstance;
+			return this.instanceType;
 		}
 		this.instanceType = t;
 		return t;

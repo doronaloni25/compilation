@@ -13,14 +13,19 @@ import java.util.*;
 /*******************/
 import TEMP.*;
 
-public class IRcommand_Func_Cleanup extends IRcommand
+public class IRcommand_Func_Cleanup extends IRcommand_Label
 {
 	public int localVariablesCount;
-    public String endLabel;
 	
 	public IRcommand_Func_Cleanup(int localVariablesCount, String endLabel)
 	{
+		super(endLabel, Label_Type.FUNC_END);
 		this.localVariablesCount = localVariablesCount;
-        this.endLabel = endLabel;
+	}
+
+	public IRcommand_Func_Cleanup(int localVariablesCount, String endLabel, boolean isMethod)
+	{
+		super(endLabel, Label_Type.METHOD_END);
+		this.localVariablesCount = localVariablesCount;
 	}
 }

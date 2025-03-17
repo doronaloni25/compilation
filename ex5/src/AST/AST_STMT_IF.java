@@ -72,7 +72,7 @@ public class AST_STMT_IF extends AST_STMT
 		/*************************************/
 		/* [5] exit label for the if loop */
 		/*************************************/
-		IR.getInstance().Add_IRcommand(new IRcommand_Label(label_end));
+		IR.getInstance().Add_IRcommand(new IRcommand_Label(label_end, Label_Type.IF));
 
 		/******************/
 		/* [6] return null */

@@ -81,5 +81,6 @@ public class AST_STMT_RETURN extends AST_STMT {
 		} 
 		String exitLabel = HelperFunctions.formatExitLabel(currentFunction.name);
 		IR.getInstance().Add_IRcommand(new IRcommand_FuncReturn(tExp, exitLabel));
+		return tExp;
 	}
 }

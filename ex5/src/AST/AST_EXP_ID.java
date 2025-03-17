@@ -4,6 +4,7 @@ import TEMP.*;
 import TYPES.*;
 import SYMBOL_TABLE.*;
 import HelperFunctions.*;
+import java.util.ArrayList;
 
 public class AST_EXP_ID extends AST_EXP
 {   //calling a function

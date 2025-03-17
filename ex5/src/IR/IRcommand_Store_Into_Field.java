@@ -3,17 +3,25 @@ package IR;
 
 import REG.*;
 import MIPS.*;
+//import REG.*;
+//import MIPS.*;
+
+/*******************/
+/* PROJECT IMPORTS */
+/*******************/
+import TEMP.*;
+import HelperFunctions.*;
 
 public class IRcommand_Store_Into_Field extends IRcommand 
 {
-    public TEMP class;
+    public TEMP classT;
     public TEMP value; 
     public int offset;
     public String fieldName;
 
-    public IRcommand_Store_Into_Field(TEMP class,TEMP value, int offset, String fieldName)
+    public IRcommand_Store_Into_Field(TEMP classT,TEMP value, int offset, String fieldName)
     {
-        this.class = class;
+        this.classT = classT;
         this.value = value;
         this.offset = offset;
         this.fieldName = fieldName;

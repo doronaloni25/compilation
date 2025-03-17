@@ -12,13 +12,14 @@ import java.util.*;
 /* PROJECT IMPORTS */
 /*******************/
 import TEMP.*;
+import TYPES.*;
 
 public class IRcommand_Array_Instance extends IRcommand
 {
     TEMP pointer;
-    TEMP instanceType;
+    TYPE instanceType;
 	
-	public IRcommand_Array_Instance(TEMP pointer, TEMP instanceType)
+	public IRcommand_Array_Instance(TEMP pointer, TYPE instanceType)
     {
         this.pointer = pointer;
         this.instanceType = instanceType;

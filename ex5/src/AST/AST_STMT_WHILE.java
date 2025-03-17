@@ -50,7 +50,7 @@ public class AST_STMT_WHILE extends AST_STMT
 		/*********************************/
 		/* [2] entry label for the while */
 		/*********************************/
-		IR.getInstance().Add_IRcommand(new IRcommand_Label(label_start));
+		IR.getInstance().Add_IRcommand(new IRcommand_Label(label_start, Label_Type.WHILE_START));
 
 		/********************/
 		/* [3] cond.IRme(); */
@@ -75,7 +75,7 @@ public class AST_STMT_WHILE extends AST_STMT
 		/**********************/
 		/* [7] Loop end label */
 		/**********************/
-		IR.getInstance().Add_IRcommand(new IRcommand_Label(label_end));
+		IR.getInstance().Add_IRcommand(new IRcommand_Label(label_end, Label_Type.WHILE_END));
 
 		/*******************/
 		/* [8] return null */
