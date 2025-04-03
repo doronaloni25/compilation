@@ -25,6 +25,22 @@ public class IRcommand_Call_Func extends IRcommand
         this.dest = dest;
         this.funcArgs = funcArgs;
     }
+
+    @Override
+    public Set<String> getLiveGen()
+	{
+        Set<String> genSet = new HashSet<String>;
+		for (TEMP tArg : this.funcArgs){
+            genSet.add(String.valueOf(tArg.getSerialNumber()));
+        }
+        return genSet;
+	}
+
+    @Override
+    public String getLiveKill()
+	{
+        return (this.dest != null) ? String.valueOf(this.dest.getSerialNumber()) : null;
+	}
 }
 
 

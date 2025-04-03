@@ -187,19 +187,24 @@ public class ControlFlowGraph
         // indeed we visted the block! horray
         currBlock.alreadyBeenThereLive = true;
         currBlock.liveIns = updatedIns;
+        
         // calculate the outs (which will be the enterEdges)
         updatedOuts.addAll(currBlock.liveIns);
         gen = currBlock.IRCommand.getGen(currBlock.liveIns);
-        updatedOuts.addAll(gen);
+
+        // add all the temp numbers (as strings) to the graphNodesNumbers
+        // we add all temp used in this block which is the gen and kill
+        if (gen != null){
+            graphNodesNumbers.addAll(gen);
+            updatedOuts.addAll(gen);
+        }
         kill = currBlock.IRCommand.getLiveKill();
         if(kill!=null)
         {
             updatedOuts.remove(kill);
+            graphNodesNumbers.add(kill);
         }
-        // add all the temp numbers (as strings) to the graphNodesNumbers
-        // we add all temp used in this line which is the gen and kill
-        graphNodesNumbers.addAll(gen);
-        graphNodesNumbers.addALL(kill);
+
         // recursively calculate the ins and outs for all the exit edges (see remarks at the start of function)
         for (int j = 0; j < currBlock.enterEdges.size(); j++)
         {

@@ -12,7 +12,7 @@ package IR;
 /*******************/
 import TEMP.*;
 import MIPS.*;
-
+// ALLOCATE = declaration :)
 public class IRcommand_Allocate extends IRcommand
 {
 	String var_name;
@@ -29,6 +29,8 @@ public class IRcommand_Allocate extends IRcommand
 	{
 		MIPSGenerator.getInstance().allocate(var_name);
 	}
+
+	// Gen and Kill implemented in IRcommand
 
 	public String toString()
 	{
