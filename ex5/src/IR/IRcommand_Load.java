@@ -40,6 +40,19 @@ public class IRcommand_Load extends IRcommand
 		return "Command: " + this.getClass().getSimpleName() + ": t" 
 		+ this.dst.getSerialNumber() + " = " + this.var_name;
 	}
+
+	@Override
+	public Set<String> getLiveGen()
+	{
+		return null;
+	}
+
+	@Override
+	public String getLiveKill()
+	{
+		return (String.valueOf(this.dst.getSerialNumber()));
+	}
+
 	/***************/
 	/* MIPS me !!! */
 	/***************/

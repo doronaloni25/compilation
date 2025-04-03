@@ -24,3 +24,16 @@ public class IRcommand_FuncReturn extends IRcommand
 		this.exitLabel = exitLabel;
 	}
 }
+@Override
+public Set<String> getLiveGen()
+	{
+		if(this.tFuncReturn != null)
+		{
+			Set<String> liveGen = new HashSet<String>();
+			liveGen.add(String.valueOf(this.tFuncReturn.getSerialNumber()));
+			return liveGen;
+		}
+		return null;
+	}
+
+//kill is not needed here, implemented in IRcommand

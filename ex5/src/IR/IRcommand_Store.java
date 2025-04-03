@@ -41,6 +41,15 @@ public class IRcommand_Store extends IRcommand
 		return "Command: " + this.getClass().getSimpleName() + ": " 
 		+ this.var_name + " = t" + this.src.getSerialNumber();
 	}
+	@Override
+
+	public Set<String> getLiveGen()
+	{
+		Set<String> liveGen = new HashSet<String>();
+		liveGen.add(String.valueOf(this.src.getSerialNumber()));
+		return liveGen;
+	}
+	//kill is not needed here, implemented IRcommand
 
 	/***************/
 	/* MIPS me !!! */

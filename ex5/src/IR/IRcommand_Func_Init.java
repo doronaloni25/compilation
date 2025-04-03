@@ -22,3 +22,4 @@ public class IRcommand_Func_Init extends IRcommand
 		this.localVariablesCount = localVariablesCount;
 	}
 }
+//kill and gen are not needed here, implemented in IRcommand
