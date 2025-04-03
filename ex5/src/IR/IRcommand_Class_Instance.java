@@ -30,7 +30,7 @@ public class IRcommand_Class_Instance extends IRcommand
     @Override
     public String getLiveKill()
 	{
-		return String.valueOf(object.getSerialNumber());
+		return String.valueOf(this.pointer.getSerialNumber());
 	}
 
 }

@@ -30,7 +30,7 @@ public class IRcommand_Call_Func extends IRcommand
     public Set<String> getLiveGen()
 	{
         Set<String> genSet = new HashSet<String>;
-		for (TEMP tArg : funcArgs){
+		for (TEMP tArg : this.funcArgs){
             genSet.add(String.valueOf(tArg.getSerialNumber()));
         }
         return genSet;
@@ -39,7 +39,7 @@ public class IRcommand_Call_Func extends IRcommand
     @Override
     public String getLiveKill()
 	{
-        return (dst != null) ? String.valueOf(dst.getSerialNumber()) : null;
+        return (this.dest != null) ? String.valueOf(this.dest.getSerialNumber()) : null;
 	}
 }
 
