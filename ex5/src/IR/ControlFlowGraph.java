@@ -102,6 +102,7 @@ public class ControlFlowGraph
         }    
     }
 
+    // chaotic iterations for the USED-BEFORE-INITIALIZED analysis (ex 4)
     private void calcInsAndOuts(Block currBlock)
     {
         List<Block> enterEdges = currBlock.enterEdges;
@@ -157,6 +158,52 @@ public class ControlFlowGraph
         for (int j = 0; j < currBlock.exitEdges.size(); j++)
         {
             calcInsAndOuts(currBlock.exitEdges.get(j));
+        }
+    }
+
+    //TODO: when calling this function remember to initialize the graphNodeNumbers
+    private void livelinessAnalysis(Block currBlock, HashSet<String> graphNodesNumbers)
+    {
+        // The direction of edges is reversed as we go from the end to the beginning
+        // so enter edge will actually be exit edge now and vise-versa
+        List<Block> enterEdges = currBlock.exitEdges;
+        Set<String> updatedIns = new HashSet<String>();
+        Set<String> updatedOuts = new HashSet<String>();
+        String kill = null;
+        Set<String> gen = null;
+        if(enterEdges.size() != 0)
+        {
+            // according to live analysis rule we take the union of all the enterEdges
+            for (int i = 1; i < enterEdges.size(); i++)
+            {
+                updatedIns.addAll(enterEdges.get(i).liveIns);
+            }
+        }
+        // if we didnt change the ins we dont need to continue the recursion
+        if(currBlock.alreadyBeenThereLive && updatedIns.equals(currBlock.liveIns))
+        {
+            return;
+        }
+        // indeed we visted the block! horray
+        currBlock.alreadyBeenThereLive = true;
+        currBlock.liveIns = updatedIns;
+        // calculate the outs (which will be the enterEdges)
+        updatedOuts.addAll(currBlock.liveIns);
+        gen = currBlock.IRCommand.getGen(currBlock.liveIns);
+        updatedOuts.addAll(gen);
+        kill = currBlock.IRCommand.getLiveKill();
+        if(kill!=null)
+        {
+            updatedOuts.remove(kill);
+        }
+        // add all the temp numbers (as strings) to the graphNodesNumbers
+        // we add all temp used in this line which is the gen and kill
+        graphNodesNumbers.addAll(gen);
+        graphNodesNumbers.addALL(kill);
+        // recursively calculate the ins and outs for all the exit edges (see remarks at the start of function)
+        for (int j = 0; j < currBlock.enterEdges.size(); j++)
+        {
+            livelinessAnalysis(currBlock.enterEdges.get(j));
         }
     }
 

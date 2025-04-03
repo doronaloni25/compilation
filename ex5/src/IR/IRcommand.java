@@ -31,7 +31,14 @@ public abstract class IRcommand
 	{
 		return this.getClass().getSimpleName();
 	}
-
+	public Set<String> getLiveGen()
+	{
+		return null;
+	}
+	public String getLiveKill()
+	{
+		return null;
+	}
 	/***************/
 	/* MIPS me !!! */
 	/***************/

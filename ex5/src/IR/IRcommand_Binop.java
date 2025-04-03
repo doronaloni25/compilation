@@ -37,7 +37,19 @@ public class IRcommand_Binop extends IRcommand
 		}
 		return null;
 	}
+	@Override
+	public String getLiveKill(){
+		return String.valueOf(dst.getSerialNumber());
+	}
 
+	@Override
+	public Set<String> getLiveGen()
+	{
+		Set<String> liveGen = new HashSet<String>();
+		liveGen.add(String.valueOf(t1.getSerialNumber()));
+		liveGen.add(String.valueOf(t2.getSerialNumber()));
+		return liveGen;
+	}
 	public String toString()
 	{
 		return "Command: " + this.getClass().getSimpleName() + ": t" 

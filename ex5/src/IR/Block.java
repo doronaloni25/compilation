@@ -8,9 +8,13 @@ public class Block
     public IRcommand IRCommand;
     public Set<String> ins;
     public Set<String> outs;
+    public Set<String> liveIns;
+    public Set<String> liveOuts;
     public List<Block> exitEdges;
     public List<Block> enterEdges;
     public boolean alreadyBeenThere;
+    public boolean alreadyBeenThereLive;
+
     public Block(IRcommand IRCommand)
     {
         this.IRCommand = IRCommand;
@@ -19,6 +23,9 @@ public class Block
         this.exitEdges = new ArrayList<Block>();
         this.enterEdges = new ArrayList<Block>();
         this.alreadyBeenThere = false;
+        this.alreadyBeenThereLive = false;
+        this.liveIns = new HashSet<String>();
+        this.liveOuts = new HashSet<String>();
         setLabel();
     }
 
