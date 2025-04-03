@@ -75,8 +75,9 @@ public class AST_NEW_EXP extends AST_EXP
 		}
 		else
 		{
-			// instance of array
-			cmd = new IRcommand_Array_Instance(pointer, this.instanceType);
+			// instance of array, need to get temp of exp
+			TEMP tExp = exp.IRme();
+			cmd = new IRcommand_Array_Instance(pointer, this.instanceType, tExp);
 		}
 		IR.getInstance().Add_IRcommand(cmd);
 		return pointer;

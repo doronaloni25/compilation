@@ -13,7 +13,7 @@ import java.util.*;
 /*******************/
 import TEMP.*;
 import TYPES.*;
-
+// Creates a new instance of a class.
 public class IRcommand_Class_Instance extends IRcommand
 {
     TYPE_CLASS_VAR_DEC_LIST data_members;
@@ -26,6 +26,12 @@ public class IRcommand_Class_Instance extends IRcommand
         this.name = name;
         this.pointer = pointer;
     }
+
+    @Override
+    public String getLiveKill()
+	{
+		return String.valueOf(object.getSerialNumber());
+	}
 
 }
 			
