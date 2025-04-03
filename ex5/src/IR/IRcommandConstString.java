@@ -33,6 +33,10 @@ public class IRcommandConstString extends IRcommand
 		return "Command: " + this.getClass().getSimpleName() + " , with string = " + this.value;
 	}
 
+	public String getLiveKill()
+	{
+		return (String.valueOf(this.t.getSerialNumber()));
+	}
 	/***************/
 	/* MIPS me !!! */
 	/***************/
@@ -40,4 +44,5 @@ public class IRcommandConstString extends IRcommand
 	{
 		//TODO: DO!
 	}
+
 }

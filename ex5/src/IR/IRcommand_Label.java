@@ -47,4 +47,7 @@ public class IRcommand_Label extends IRcommand
 	{
 		return "Command: " + this.getClass().getSimpleName() + ": " + this.label_name;
 	}
+
+//kill and gen are not needed here, implemented in IRcommand
+
 }

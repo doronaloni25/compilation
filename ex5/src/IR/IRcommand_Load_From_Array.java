@@ -23,5 +23,17 @@ public class IRcommand_Load_From_Array extends IRcommand
         this.array = array;
         this.index = index;
     }
-
+    @Override
+    public Set<String> getLiveGen()
+    {
+        Set<String> liveGen = new HashSet<String>();
+        liveGen.add(String.valueOf(this.array.getSerialNumber()));
+        liveGen.add(String.valueOf(this.index.getSerialNumber()));
+        return liveGen;
+    }
+    @Override
+    public String getLiveKill()
+    {
+        return String.valueOf(this.dst.getSerialNumber());
+    }
 }

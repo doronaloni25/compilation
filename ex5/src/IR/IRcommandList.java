@@ -30,4 +30,5 @@ public class IRcommandList
 		if (head != null) head.MIPSme();
 		if (tail != null) tail.MIPSme();
 	}
+	//kill and gen are not needed here, implemented IRcommand
 }

@@ -22,5 +22,15 @@ public class IRcommand_Store_Into_Array extends IRcommand
         this.index = index;
         this.value = value;
     }
+    @Override
+   public Set<String> getLiveGen()
+   {
+       Set<String> liveGen = new HashSet<String>();
+       liveGen.add(String.valueOf(this.array.getSerialNumber()));
+       liveGen.add(String.valueOf(this.index.getSerialNumber()));
+       liveGen.add(String.valueOf(this.value.getSerialNumber()));
+       return liveGen;
+   }
+    //kill is not needed here, implemented IRcommand
 
 }

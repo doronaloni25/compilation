@@ -21,7 +21,15 @@ public class IRcommand_PrintInt extends IRcommand
 	{
 		this.t = t;
 	}
-	
+
+	public Set<String> getLiveGen()
+	{
+		Set<String> liveGen = new HashSet<String>();
+		liveGen.add(String.valueOf(this.t.getSerialNumber()));
+		return liveGen;
+	}
+	//kill is not needed here, implemented IRcommand
+
 	/***************/
 	/* MIPS me !!! */
 	/***************/

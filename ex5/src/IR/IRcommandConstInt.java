@@ -35,6 +35,11 @@ public class IRcommandConstInt extends IRcommand
 		return "Command: " + this.getClass().getSimpleName() + " , with int = " + this.value;
 	}
 
+	public String getLiveKill()
+	{
+		return (String.valueOf(this.t.getSerialNumber()));
+	}
+
 	/***************/
 	/* MIPS me !!! */
 	/***************/
@@ -42,4 +47,5 @@ public class IRcommandConstInt extends IRcommand
 	{
 		MIPSGenerator.getInstance().li(t,value);
 	}
+	/
 }

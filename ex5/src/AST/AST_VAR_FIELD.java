@@ -81,12 +81,12 @@ public class AST_VAR_FIELD extends AST_VAR
 	public TEMP IRme()
 	{
 		TEMP dest = TEMP_FACTORY.getInstance().getFreshTEMP();
-		TEMP tClass = var.IRme();
+		TEMP tClassInstance = var.IRme();
 		// get class type
 		TYPE_CLASS_DEC classType = this.myClassInstance.classDec;
 		// get the field offset
 		int offset = classType.getFieldOffset(this.fieldName);
-		IR.getInstance().Add_IRcommand(new IRcommand_Load_From_Field(dest, classType, offset, fieldName));
+		IR.getInstance().Add_IRcommand(new IRcommand_Load_From_Field(dest, tClassInstance,  classType, offset, fieldName));
 		return dest;
 	}
 }

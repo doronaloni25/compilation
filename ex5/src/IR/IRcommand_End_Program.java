@@ -20,3 +20,5 @@ public class IRcommand_End_Program extends IRcommand
 	{
 	}
 }
+
+//kill and gen are not needed here, implemented in IRcommand

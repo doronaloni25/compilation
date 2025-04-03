@@ -36,4 +36,12 @@ public class IRcommand_Jump_If_Eq_To_Zero extends IRcommand
 	{
 		return "Command: " + this.getClass().getSimpleName() + ": if t" + t.getSerialNumber() + " jump to " + this.label_name;
 	}
+	@Override
+	public Set<String> getLiveGen()
+	{
+		Set<String> liveGen = new HashSet<String>();
+		liveGen.add(String.valueOf(this.t.getSerialNumber()));
+		return liveGen;
+	}
+	//kill is not needed here, implemented in IRcommand
 }
