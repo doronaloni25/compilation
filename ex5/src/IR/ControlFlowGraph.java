@@ -5,6 +5,7 @@ import HelperFunctions.*;
 public class ControlFlowGraph
 {
     public List<Block> blocks;
+    public Map<String, InterferenceGraphNode> interference_graph_map;
     public Set<String> graphNodesNumbers;
 
     public ControlFlowGraph(IRcommandList irCommands)
