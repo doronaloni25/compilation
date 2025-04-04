@@ -53,6 +53,7 @@ public class IRcommand_Call_Method extends IRcommand
 		for (TEMP tArg : this.funcArgs){
             tArg.setRegisterNumber(interference_graph_map);
         }
+        this.object.setRegisterNumber(interference_graph_map);
         if (this.dest != null){
             this.dest.setRegisterNumber(interference_graph_map);
         }

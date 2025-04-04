@@ -45,8 +45,8 @@ public class IRcommand_Array_Instance extends IRcommand
 
     @Override
     public void assignRegisters(Map<String, InterferenceGraphNode> interference_graph_map){
-		pointer.setRegisterNumber(interference_graph_map);
-        tExp.setRegisterNumber(interference_graph_map);
+		this.pointer.setRegisterNumber(interference_graph_map);
+        this.tExp.setRegisterNumber(interference_graph_map);
 	}
 
 }
