@@ -23,14 +23,21 @@ public class IRcommand_Store_Into_Array extends IRcommand
         this.value = value;
     }
     @Override
-   public Set<String> getLiveGen()
-   {
-       Set<String> liveGen = new HashSet<String>();
-       liveGen.add(String.valueOf(this.array.getSerialNumber()));
-       liveGen.add(String.valueOf(this.index.getSerialNumber()));
-       liveGen.add(String.valueOf(this.value.getSerialNumber()));
-       return liveGen;
-   }
+    public Set<String> getLiveGen()
+    {
+        Set<String> liveGen = new HashSet<String>();
+        liveGen.add(String.valueOf(this.array.getSerialNumber()));
+        liveGen.add(String.valueOf(this.index.getSerialNumber()));
+        liveGen.add(String.valueOf(this.value.getSerialNumber()));
+        return liveGen;
+    }
     //kill is not needed here, implemented IRcommand
+
+    @Override
+    public void assignRegisters(Map<String, InterferenceGraphNode> interference_graph_map){
+		this.array.setRegisterNumber(interference_graph_map);
+        this.index.setRegisterNumber(interference_graph_map);
+		this.value.setRegisterNumber(interference_graph_map);
+	}
 
 }

@@ -40,6 +40,11 @@ public class IRcommandConstInt extends IRcommand
 		return (String.valueOf(this.t.getSerialNumber()));
 	}
 
+	@Override
+    public void assignRegisters(Map<String, InterferenceGraphNode> interference_graph_map){
+		this.t.setRegisterNumber(interference_graph_map);;
+	}
+
 	/***************/
 	/* MIPS me !!! */
 	/***************/
@@ -47,5 +52,5 @@ public class IRcommandConstInt extends IRcommand
 	{
 		MIPSGenerator.getInstance().li(t,value);
 	}
-	/
+	
 }

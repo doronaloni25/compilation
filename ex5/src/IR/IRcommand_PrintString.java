@@ -38,4 +38,9 @@ public class IRcommand_PrintString extends IRcommand
         //TODO: check if correct
 		MIPSGenerator.getInstance().print_string(t);
 	}
+
+	@Override
+    public void assignRegisters(Map<String, InterferenceGraphNode> interference_graph_map){
+		this.t.setRegisterNumber(interference_graph_map);
+	}
 }
