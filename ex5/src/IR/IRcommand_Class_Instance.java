@@ -33,5 +33,10 @@ public class IRcommand_Class_Instance extends IRcommand
 		return String.valueOf(this.pointer.getSerialNumber());
 	}
 
+    @Override
+    public void assignRegisters(Map<String, InterferenceGraphNode> interference_graph_map){
+		this.pointer.setRegisterNumber(interference_graph_map);
+	}
+
 }
 			

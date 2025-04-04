@@ -51,6 +51,10 @@ public class IRcommand_Store extends IRcommand
 	}
 	//kill is not needed here, implemented IRcommand
 
+	@Override
+    public void assignRegisters(Map<String, InterferenceGraphNode> interference_graph_map){
+		this.src.setRegisterNumber(interference_graph_map);;
+	}
 	/***************/
 	/* MIPS me !!! */
 	/***************/

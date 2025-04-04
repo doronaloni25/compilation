@@ -26,13 +26,19 @@ public class IRcommand_Store_Into_Field extends IRcommand
         this.offset = offset;
         this.fieldName = fieldName;
     }
-   public Set<String> getLiveGen()
-   {
-       Set<String> liveGen = new HashSet<String>();
-       liveGen.add(String.valueOf(this.classT.getSerialNumber()));
-       liveGen.add(String.valueOf(this.value.getSerialNumber()));
-       return liveGen;
-   }
-   //kill is not needed here, implemented IRcommand
+    public Set<String> getLiveGen()
+    {
+        Set<String> liveGen = new HashSet<String>();
+        liveGen.add(String.valueOf(this.classT.getSerialNumber()));
+        liveGen.add(String.valueOf(this.value.getSerialNumber()));
+        return liveGen;
+    }
+    //kill is not needed here, implemented IRcommand
+
+    @Override
+    public void assignRegisters(Map<String, InterferenceGraphNode> interference_graph_map){
+		this.classT.setRegisterNumber(interference_graph_map);
+        this.value.setRegisterNumber(interference_graph_map);
+	}
 }
             

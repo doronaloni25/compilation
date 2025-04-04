@@ -55,4 +55,11 @@ public class IRcommand_Binop extends IRcommand
 		return "Command: " + this.getClass().getSimpleName() + ": t" 
 		+ this.dst.getSerialNumber() + " = " + this.t1.getSerialNumber() + " op " + this.t2.getSerialNumber();
 	}
+
+	@Override
+    public void assignRegisters(Map<String, InterferenceGraphNode> interference_graph_map){
+		this.t1.setRegisterNumber(interference_graph_map);
+        this.t2.setRegisterNumber(interference_graph_map);
+		this.dst.setRegisterNumber(interference_graph_map);
+	}
 }
