@@ -15,9 +15,18 @@ public class TEMP
 {
 	private int serial = 0;
 	private int register_number = -1;
+
+	// can be t, s, a, v. - default is t
+	public String register_type = "t";
+
 	public TEMP(int serial)
 	{
 		this.serial = serial;
+	}
+
+	public TEMP(String register_type, int register_number){
+		this.register_type = register_type;
+		this.register_number = register_number;
 	}
 	
 	public int getSerialNumber()
@@ -28,5 +37,9 @@ public class TEMP
 	public setRegisterNumber(Map<String, InterferenceGraphNode> interference_graph_map){
 		String name = String.valueOf(this.serial);
 		this.register_number = interference_graph_map.get(name).color;
+	}
+
+	public String getRegisterName(){
+		return "$" + register_type + register_number;
 	}
 }

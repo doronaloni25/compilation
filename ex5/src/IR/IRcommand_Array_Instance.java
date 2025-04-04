@@ -49,6 +49,16 @@ public class IRcommand_Array_Instance extends IRcommand
         this.tExp.setRegisterNumber(interference_graph_map);
 	}
 
+    @Override
+    public void MIPSme(){
+        TEMP s0 = new TEMP("s", 0);
+        TEMP s1 = new TEMP("s", 1);
+        TEMP s2 = new TEMP("s", 2);
+        // save size
+        MIPSGenerator.getInstance().move(s0, this.tExp);
+        MIPSGenerator.getInstance().move(s1, this.tExp);
+        
+    }
 }
 
 			

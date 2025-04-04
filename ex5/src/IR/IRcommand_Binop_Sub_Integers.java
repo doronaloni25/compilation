@@ -15,10 +15,6 @@ import TEMP.*;
 
 public class IRcommand_Binop_Sub_Integers extends IRcommand_Binop
 {
-	public TEMP t1;
-	public TEMP t2;
-	public TEMP dst;
-	
 	public IRcommand_Binop_Sub_Integers(TEMP dst,TEMP t1,TEMP t2)
 	{
 		super(dst, t1, t2);
@@ -32,6 +28,6 @@ public class IRcommand_Binop_Sub_Integers extends IRcommand_Binop
 	public void MIPSme()
 	{
 		// TODO: CHANGE TO SUB!!!!
-		MIPSGenerator.getInstance().add(dst,t1,t2);
+		MIPSGenerator.getInstance().sub(dst,t1,t2);
 	}
 }

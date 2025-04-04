@@ -137,6 +137,19 @@ public class MIPSGenerator
 		fileWriter.format("\tbeq Temp_%d,$zero,%s\n",i1,label);				
 	}
 	
+	public void move(TEMP src, TEMP dest){
+		String src_reg = src.getRegisterName();
+		String dest_reg = dest.getRegisterName();
+		fileWriter.format("\tmove %s,%s\n", dest_reg, src_reg);
+	}
+
+	// allocated address is returned in $v0
+	public void malloc(TEMP size){
+		move(new TEMP("a", 0), size);
+		fileWriter.format("\tli $v0,9\n");
+		fileWriter.format("\tsyscall\n");
+	}
+	
 	/**************************************/
 	/* USUAL SINGLETON IMPLEMENTATION ... */
 	/**************************************/
