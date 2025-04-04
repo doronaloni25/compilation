@@ -35,5 +35,13 @@ public Set<String> getLiveGen()
 		}
 		return null;
 	}
+@Override
+	public void assignRegisters(Map<String, InterferenceGraphNode> interference_graph_map){
+		if(this.tFuncReturn != null)
+		{
+			this.tFuncReturn.setRegisterNumber(interference_graph_map);
+		}
+	}
+
 
 //kill is not needed here, implemented in IRcommand

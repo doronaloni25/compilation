@@ -44,4 +44,10 @@ public class IRcommand_Jump_If_Eq_To_Zero extends IRcommand
 		return liveGen;
 	}
 	//kill is not needed here, implemented in IRcommand
+	@Override
+	public void assignRegisters(Map<String, InterferenceGraphNode> interference_graph_map){
+		
+		this.t.setRegisterNumber(interference_graph_map);
+		
+	}
 }
