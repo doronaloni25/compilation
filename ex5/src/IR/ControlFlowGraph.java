@@ -5,13 +5,23 @@ import HelperFunctions.*;
 public class ControlFlowGraph
 {
     public List<Block> blocks;
+    public Set<String> graphNodesNumbers;
 
     public ControlFlowGraph(IRcommandList irCommands)
     {
         this.blocks = new ArrayList<Block>();
+        this.interference_graph_map = new HashSet<InterferenceGraphNode>();
+        this.graphNodesNumbers = new HashSet<String>();
         initBlocks(irCommands);
         initEdges();
         calcInsAndOuts(this.blocks.get(0));
+        livelinessAnalysis(this.blocks.get(this.blocks.size - 1));
+        addAllNodesToInterferenceGraph(this.graphNodesNumbers);
+        addInterferenceEdges();
+        boolean colorable = colorGraph(this.interference_graph_map);
+        if (!colorable){
+            // TODO: ERROR
+        }
         this.printCFG();
     }
 
@@ -161,8 +171,8 @@ public class ControlFlowGraph
         }
     }
 
-    //TODO: when calling this function remember to initialize the graphNodeNumbers
-    private void livelinessAnalysis(Block currBlock, HashSet<String> graphNodesNumbers)
+    //TODO: when calling this function remember to initialize the graphNodesNumbers
+    private void livelinessAnalysis(Block currBlock)
     {
         // The direction of edges is reversed as we go from the end to the beginning
         // so enter edge will actually be exit edge now and vise-versa
@@ -195,14 +205,14 @@ public class ControlFlowGraph
         // add all the temp numbers (as strings) to the graphNodesNumbers
         // we add all temp used in this block which is the gen and kill
         if (gen != null){
-            graphNodesNumbers.addAll(gen);
+            this.graphNodesNumbers.addAll(gen);
             updatedOuts.addAll(gen);
         }
         kill = currBlock.IRCommand.getLiveKill();
         if(kill!=null)
         {
             updatedOuts.remove(kill);
-            graphNodesNumbers.add(kill);
+            this.graphNodesNumbers.add(kill);
         }
 
         // recursively calculate the ins and outs for all the exit edges (see remarks at the start of function)
@@ -253,4 +263,77 @@ public class ControlFlowGraph
         System.out.println("Updated outs = " + updatedOuts);
         System.out.println();
     }
+
+    private void addAllNodesToInterferenceGraph(Set<String> names){
+        for (String name : names){
+            InterferenceGraphNode node = new InterferenceGraphNode(name);
+            this.interference_graph_map.put((name, node));
+        }
+    }
+
+    private void addInterferenceEdges(){
+        for (Block block : this.blocks){
+            for (String out1 : block.liveOuts){
+                for (String out2: block.liveOuts){
+                    if (!out1.equals(out2)){
+                        InterferenceGraphNode node1 = interference_graph_map.get(out1);
+                        InterferenceGraphNode node2 = interference_graph_map.get(out2);
+                        // undirected graph
+                        node1.addNeighbor(node2);
+                        node2.addNeighbor(node1);
+                    }
+                }
+            }
+        }
+    }
+
+    private boolean colorGraph(Map<String, InterferenceGraphNode> graph) {
+        Stack<InterferenceGraphNode> stack = new Stack<>();
+        Set<InterferenceGraphNode> remainingNodes = new HashSet<>(graph.values());
+        int K = 10;
+
+        // Simplify phase: remove nodes with < K neighbors
+        while (!remainingNodes.isEmpty()) {
+            boolean removed = false;
+            Iterator<InterferenceGraphNode> iter = remainingNodes.iterator();
+            while (iter.hasNext()) {
+                InterferenceGraphNode node = iter.next();
+                if (node.neighbors.size() < K) {
+                    iter.remove();
+                    stack.push(node);
+                    for (InterferenceGraphNode neighbor : node.neighbors) {
+                        neighbor.neighbors.remove(node);
+                    }
+                    removed = true;
+                }
+            }
+            if (!removed) return false; // Graph is not k-colorable
+        }
+
+        // Coloring phase: assign colors while popping from the stack
+        while (!stack.isEmpty()) {
+            InterferenceGraphNode node = stack.pop();
+            Set<Integer> usedColors = new HashSet<>();
+            for (InterferenceGraphNode neighbor : node.neighbors) {
+                if (neighbor.color != -1) usedColors.add(neighbor.color);
+            }
+            // Assign the lowest available color
+            for (int c = 0; c < K; c++) {
+                if (!usedColors.contains(c)) {
+                    node.color = c;
+                    break;
+                }
+            }
+            graph.put(node.name, node);
+        }
+        return true;
+    }
+
+    private void assignRegisters(){
+        for (Block block : this.blocks){
+            block.IRcommand.assignRegisters(this.interference_graph_map);
+        }
+    }
+
+
 }

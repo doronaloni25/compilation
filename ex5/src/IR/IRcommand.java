@@ -39,6 +39,9 @@ public abstract class IRcommand
 	{
 		return null;
 	}
+	public void assignRegisters(Map<String, InterferenceGraphNode> interference_graph_map){
+		return null;
+	}
 	/***************/
 	/* MIPS me !!! */
 	/***************/
