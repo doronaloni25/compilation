@@ -35,5 +35,6 @@ public class IRcommand_Jump_Label extends IRcommand
 		return "Command: " + this.getClass().getSimpleName() + ": jump to " + this.label_name;
 	}
 //kill and gen are not needed here, implemented in IRcommand
+//assined registers is not needed here, implemented in IRcommand
 	}
 

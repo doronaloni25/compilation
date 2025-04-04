@@ -36,4 +36,12 @@ public class IRcommand_Load_From_Array extends IRcommand
     {
         return String.valueOf(this.dst.getSerialNumber());
     }
+    @Override
+    public void assignRegisters(Map<String, InterferenceGraphNode> interference_graph_map){
+		
+		this.dst.setRegisterNumber(interference_graph_map);
+        this.array.setRegisterNumber(interference_graph_map);
+        this.index.setRegisterNumber(interference_graph_map);
+		
+	}
 }

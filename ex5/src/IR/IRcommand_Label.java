@@ -49,5 +49,6 @@ public class IRcommand_Label extends IRcommand
 	}
 
 //kill and gen are not needed here, implemented in IRcommand
+//assign registers is not needed here, implemented in IRcommand
 
 }

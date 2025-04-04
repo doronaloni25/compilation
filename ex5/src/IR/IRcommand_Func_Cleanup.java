@@ -30,3 +30,4 @@ public class IRcommand_Func_Cleanup extends IRcommand_Label
 	}
 }
 //kill and gen are not needed here, implemented in IRcommand
+//assign registers is not needed here, implemented in IRcommand
