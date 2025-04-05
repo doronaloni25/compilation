@@ -28,7 +28,7 @@ public class IRcommand_Binop_EQ_Strings extends IRcommand_Binop
 	{
 		// s0 will hold current char adress in t1
 		TEMP s0 = new TEMP("s", 0);
-		// s1 will hold current char adrees in t2
+		// s1 will hold current char adress in t2
 		TEMP s1 = new TEMP("s", 1);
 		// s2 will hold current char in t1
 		TEMP s2 = new TEMP("s", 2);
@@ -46,8 +46,8 @@ public class IRcommand_Binop_EQ_Strings extends IRcommand_Binop
 		MIPSGenerator.getInstance().move(s1, t2);
 
 		label(loop_string_start);
-		MIPSGenerator.getInstance().lb(s2, 0, t1);
-		MIPSGenerator.getInstance().lb(s3, 0, t2);
+		MIPSGenerator.getInstance().lb(s2, 0, s0);
+		MIPSGenerator.getInstance().lb(s3, 0, s1);
 
 		// if chars aren't matching - not equal
 		MIPSGenerator.getInstance().bne(s2, s3, end_label);
