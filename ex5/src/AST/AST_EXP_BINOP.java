@@ -164,11 +164,11 @@ public class AST_EXP_BINOP extends AST_EXP
 				}
 				else if(expType.isArray())
 				{
-					cmd = new IRcommand_Binop_EQ_Arrays(dest, t1, t2);
+					cmd = new IRcommand_Binop_EQ_Integers(dest, t1, t2);
 				}
 				else
 				{
-					cmd = new IRcommand_Binop_EQ_Objects(dest, t1, t2);
+					cmd = new IRcommand_Binop_EQ_Integers(dest, t1, t2);
 				}
 				
 				break;

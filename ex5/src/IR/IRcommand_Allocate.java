@@ -27,6 +27,7 @@ public class IRcommand_Allocate extends IRcommand
 	/***************/
 	public void MIPSme()
 	{
+		//TODO: implement correctly
 		MIPSGenerator.getInstance().allocate(var_name);
 	}
 

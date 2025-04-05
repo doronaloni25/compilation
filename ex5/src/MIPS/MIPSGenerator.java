@@ -74,11 +74,19 @@ public class MIPSGenerator
 	}
 	public void add(TEMP dst,TEMP oprnd1,TEMP oprnd2)
 	{
-		int i1 =oprnd1.getSerialNumber();
-		int i2 =oprnd2.getSerialNumber();
-		int dstidx=dst.getSerialNumber();
-
-		fileWriter.format("\tadd Temp_%d,Temp_%d,Temp_%d\n",dstidx,i1,i2);
+		String oprnd1_reg =oprnd1.getRegisterName();
+		String oprnd2_reg =oprnd2.getRegisterName();
+		String dst_reg=dst.getRegisterName();
+		fileWriter.format("\tadd %s,%s,%sd\n",dst_reg,oprnd1_reg,oprnd2_reg);
+		this.isInBounds(dst);
+	}
+	public void sub(TEMP dst,TEMP oprnd1,TEMP oprnd2)
+	{
+		String dst_reg = dst.getRegisterName();
+		String oprnd1_reg = oprnd1.getRegisterName();
+		String oprnd2_reg = oprnd2.getRegisterName();
+		fileWriter.format("\tsub %s,%s,%s\n",dst_reg,oprnd1_reg,oprnd2_reg);
+		this.isInBounds(dst);
 	}
 	public void mul(TEMP dst,TEMP oprnd1,TEMP oprnd2)
 	{
@@ -105,38 +113,50 @@ public class MIPSGenerator
 	}	
 	public void blt(TEMP oprnd1,TEMP oprnd2,String label)
 	{
-		int i1 =oprnd1.getSerialNumber();
-		int i2 =oprnd2.getSerialNumber();
+		String opernd1_reg =oprnd1.getRegisterName();
+		String opernd2_reg =oprnd2.getRegisterName();
 		
-		fileWriter.format("\tblt Temp_%d,Temp_%d,%s\n",i1,i2,label);				
+		fileWriter.format("\tblt %s,%s,%s\n",opernd1_reg,opernd2_reg,label);				
+	}
+	public void bgt(TEMP oprnd1,TEMP oprnd2,String label)
+	{
+		String opernd1_reg =oprnd1.getRegisterName();
+		String opernd2_reg =oprnd2.getRegisterName();
+		
+		fileWriter.format("\tbgt %s,%s,%s\n",opernd1_reg,opernd2_reg,label);				
 	}
 	public void bge(TEMP oprnd1,TEMP oprnd2,String label)
 	{
-		int i1 =oprnd1.getSerialNumber();
-		int i2 =oprnd2.getSerialNumber();
+		String opernd1_reg =oprnd1.getRegisterName();
+		String opernd2_reg =oprnd2.getRegisterName();
 		
-		fileWriter.format("\tbge Temp_%d,Temp_%d,%s\n",i1,i2,label);				
+		fileWriter.format("\tbge %s,%s,%s\n",oprnd1_reg,opernd2_reg,label);				
+	}
+	public void ble(TEMP oprnd1,TEMP oprnd2,String label)
+	{
+		String opernd1_reg =oprnd1.getRegisterName();
+		String opernd2_reg =oprnd2.getRegisterName();
+		
+		fileWriter.format("\tble %s,%s,%s\n",opernd1_reg,opernd2_reg,label);				
 	}
 	public void bne(TEMP oprnd1,TEMP oprnd2,String label)
 	{
-		int i1 =oprnd1.getSerialNumber();
-		int i2 =oprnd2.getSerialNumber();
+		String opernd1_reg =oprnd1.getRegisterName();
+		String opernd2_reg =oprnd2.getRegisterName();
 		
-		fileWriter.format("\tbne Temp_%d,Temp_%d,%s\n",i1,i2,label);				
+		fileWriter.format("\tbne %s,%s,%s\n",opernd1_reg,opernd2_reg,label);				
 	}
 	public void beq(TEMP oprnd1,TEMP oprnd2,String label)
 	{
-		int i1 =oprnd1.getSerialNumber();
-		int i2 =oprnd2.getSerialNumber();
+		String opernd1_reg =oprnd1.getRegisterName();
+		String opernd2_reg =oprnd2.getRegisterName();
 		
-		fileWriter.format("\tbeq Temp_%d,Temp_%d,%s\n",i1,i2,label);				
+		fileWriter.format("\tbeq %s,%s,%s\n",opernd1_reg,opernd2_reg,label);				
 	}
 	public void beqz(TEMP oprnd1,String label)
 	{
-		//TODO: fix
-		int i1 =oprnd1.getSerialNumber();
-				
-		fileWriter.format("\tbeq Temp_%d,$zero,%s\n",i1,label);				
+		String opernd =oprnd1.getRegisterName();
+		fileWriter.format("\tbeq %s,$zero,%s\n",opernd,label);				
 	}
 	
 	public void move(TEMP dest, TEMP src){
@@ -327,6 +347,33 @@ public class MIPSGenerator
 	public void la(TEMP dst, String label){
 		dst_reg = dst.getRegisterName();
 		fileWriter.format("\tla %s,%s\n", dst_reg, label);
+	}
+	
+	public void isInBounds(TEMP dst)
+	{
+		String handle_overflow_label = IRcommand.getInstance().getFreshLabel("handle_overflow");
+		String handle_underfloew_label = IRcommand.getInstance().getFreshLabel("handle_underflow");
+		String valid_label = IRcommand.getInstance().getFreshLabel("valid");
+		TEMP s8  = new TEMP("s", 8);
+		TEMP s9 = new TEMP("s", 9);
+		
+		this.li(s8, 32767);
+		this.li(s9, -32767);
+		//check if is bigger than 2^15
+		this.bge(dst, s8, handle_overflow_label);
+		//check if smaller than -2^15
+		this.ble(dst, s9, handle_underfloew_label);
+		//handling overflow
+		this.label(handle_overflow_label);
+		this.li(dst,32767);
+		this.jump(valid_label);
+		//handling underflow
+		this.label(handle_underfloew_label);
+		this.li(dst,-32767);
+		//finished
+		this.label(valid_label);
+
+
 	}
 	/**************************************/
 	/* USUAL SINGLETON IMPLEMENTATION ... */
