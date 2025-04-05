@@ -40,6 +40,11 @@ public class TEMP
 	}
 
 	public String getRegisterName(){
+		if(this.register_number == -1)
+		{
+			return "$" + register_type;
+		}
 		return "$" + register_type + register_number;
+
 	}
 }

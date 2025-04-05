@@ -159,12 +159,55 @@ public class MIPSGenerator
 		fileWriter.format("\taddiu %s,%s,%d\n", dest_reg, src_reg, unsinged_value);
 	}
 
+	
+
 	public void sw(TEMP src, int offset, TEMP address){
 		String src_reg = src.getRegisterName();
 		String address_reg = address.getRegisterName();
 		fileWriter.format("\tsw %s,%d(%s)\n", src_reg, offset, address_reg);
 	}
-	
+
+	public void lw(TEMP dest,  int offset, TEMP address){
+		String dest_reg = dest.getRegisterName();
+		String address_reg = address.getRegisterName();
+		fileWriter.format("\tlw %s,%d(%s)\n", dest_reg, offset, address_reg);
+	}
+	public void jr(TEMP address){
+		String address_reg = address.getRegisterName();
+		fileWriter.format("\tjr %s\n", address_reg);
+	}
+	public void addToStack(int offset, TEMP sp){
+		if(offset>0)
+		{
+			String sp_reg = sp.getRegisterName();
+			fileWriter.format("\taddiu %s,%s,%d\n", sp_reg, sp_reg, offset);
+		}
+	}
+	public void subFromStack(int offset, TEMP sp){
+		if(offset>0)
+		{
+			String sp_reg = sp.getRegisterName();
+			fileWriter.format("\tsubu %s,%s,%d\n", sp_reg, sp_reg, offset);
+		}
+		
+	}
+	public void PushRegistersToStack(int numOfVarsToPush, TEMP sp){
+		for (int i = 0; i <numOfVarsToPush; i++)
+		{
+			//TODO: make sure that the add and sub are correct
+			TEMP tempReg = new TEMP("t", i);
+			this.addToStack(4, sp);
+			this.sw(tempReg, 0, sp);
+		}
+	}
+	public void PopRegistersFromStack(int numOfVarsToPop, TEMP sp){
+		for (int i = 0; i <numOfVarsToPop; i++)
+		{
+			TEMP tempReg = new TEMP("t", i);
+			this.lw(tempReg, 0, sp);
+			this.addToStack(4, sp);
+		}
+	}
 	/**************************************/
 	/* USUAL SINGLETON IMPLEMENTATION ... */
 	/**************************************/
