@@ -26,45 +26,43 @@ public class IRcommand_Binop_EQ_Strings extends IRcommand_Binop
 	/***************/
 	public void MIPSme()
 	{
-		/*******************************/
-		/* [1] Allocate 3 fresh labels */
-		/*******************************/
-		String label_end        = getFreshLabel("end");
-		String label_AssignOne  = getFreshLabel("AssignOne");
-		String label_AssignZero = getFreshLabel("AssignZero");
+		// s0 will hold current char adress in t1
+		TEMP s0 = new TEMP("s", 0);
+		// s1 will hold current char adress in t2
+		TEMP s1 = new TEMP("s", 1);
+		// s2 will hold current char in t1
+		TEMP s2 = new TEMP("s", 2);
+		// s3 will hold current char in t2
+		TEMP s3 = new TEMP("s", 3);
 		
-		/******************************************/
-		/* [2] if (t1==t2) goto label_AssignOne;  */
-		/*     if (t1!=t2) goto label_AssignZero; */
-		/******************************************/
-		MIPSGenerator.getInstance().beq(t1,t2,label_AssignOne);
-		MIPSGenerator.getInstance().bne(t1,t2,label_AssignZero);
+		// init dest to 0
+		MIPSGenerator.getInstance().move(dst, new TEMP("zero", -1));
 
-		/************************/
-		/* [3] label_AssignOne: */
-		/*                      */
-		/*         t3 := 1      */
-		/*         goto end;    */
-		/*                      */
-		/************************/
-		MIPSGenerator.getInstance().label(label_AssignOne);
-		MIPSGenerator.getInstance().li(dst,1);
-		MIPSGenerator.getInstance().jump(label_end);
+		String loop_string_start = IRcommand.getFreshLabel("loop_string_start");
+		String equal_label = IRcommand.getFreshLabel("equal");
+		String end_label = IRcommand.getFreshLabel("end");
 
-		/*************************/
-		/* [4] label_AssignZero: */
-		/*                       */
-		/*         t3 := 1       */
-		/*         goto end;     */
-		/*                       */
-		/*************************/
-		MIPSGenerator.getInstance().label(label_AssignZero);
-		MIPSGenerator.getInstance().li(dst,0);
-		MIPSGenerator.getInstance().jump(label_end);
+		MIPSGenerator.getInstance().move(s0, t1);
+		MIPSGenerator.getInstance().move(s1, t2);
 
-		/******************/
-		/* [5] label_end: */
-		/******************/
-		MIPSGenerator.getInstance().label(label_end);
+		label(loop_string_start);
+		MIPSGenerator.getInstance().lb(s2, 0, s0);
+		MIPSGenerator.getInstance().lb(s3, 0, s1);
+
+		// if chars aren't matching - not equal
+		MIPSGenerator.getInstance().bne(s2, s3, end_label);
+		// if both end with 0 - equal
+		MIPSGenerator.getInstance().beqz(s2, equal_label);
+
+		// increment pointers
+		MIPSGenerator.getInstance().addiu(s0, s0, 1);
+		MIPSGenerator.getInstance().addiu(s1, s1, 1);
+
+		MIPSGenerator.getInstance().jump(loop_string_start);
+
+		label(equal_label);
+		MIPSGenerator.getInstance().addiu(dst, 1);
+
+		label(end);
 	}
 }

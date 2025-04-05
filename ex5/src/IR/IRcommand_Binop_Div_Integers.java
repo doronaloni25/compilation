@@ -27,8 +27,7 @@ public class IRcommand_Binop_Div_Integers extends IRcommand_Binop
 	/***************/
 	public void MIPSme()
 	{
-		// TODO: CHANGE TO DIV!!!!!
-		MIPSGenerator.getInstance().mul(dst,t1,t2);
+		MIPSGenerator.getInstance().div(dst,t1,t2);
 	}
 
 }

@@ -94,6 +94,7 @@ public class MIPSGenerator
 		String oprnd1_reg = oprnd1.getRegisterName();
 		String oprnd2_reg = oprnd2.getRegisterName();
 		fileWriter.format("\tmul %s,%s,%s\n",dst_reg,oprnd1_reg,oprnd2_reg);
+		isInBounds(dst);
 	}
 	public void label(String inlabel)
 	{
@@ -303,6 +304,50 @@ public class MIPSGenerator
 			this.lw(tempReg, 0, sp);
 			this.addToStack(4, sp);
 		}
+	}
+
+	public void div(TEMP dst,TEMP oprnd1,TEMP oprnd2){
+		String div_by_zero_label = IRcommand.getFreshLabel("handle_div_by_zero");
+		String no_div_by_zero_label = IRcommand.getFreshLabel("skip_div_by_zero");
+		String oprnd1_reg = oprnd1.getRegisterName();
+		String oprnd2_reg = oprnd2.getRegisterName();
+		String dst_reg = dst.getRegisterName();
+		// if second operand is 0, jump to div by zero handler.
+		beqz(oprnd2, div_by_zero_label);
+		// else, skip it
+		jump(no_div_by_zero_label);
+
+		label(div_by_zero_label);
+		// print string with the illegal div label as defined in constructor
+		// and exit - as defined in exercise.
+		printString("string_illegal_div_by_0");
+		exit();
+		
+		// divide oprnd1/oprnd2
+		label(no_div_by_zero_label);
+		fileWriter.format("\tdiv %s,%s\n", oprnd1_reg, oprnd2_reg);
+		// get quotient (special SPIM register)
+		fileWriter.format("\tmflo %s\n",dst_reg);
+		isInBounds(dst);
+	}
+
+	public void exit(){
+		li(new TEMP("v", 0), 10);
+		fileWriter.format("\tsyscall\n");
+	}
+
+	public void printString(String label){
+		TEMP v0 = new TEMP("v", 0);
+		TEMP a0 = new TEMP("a", 0);
+		// load string label
+		la(a0, label);
+		li(v0, 4);
+		fileWriter.format("\tsyscall\n");
+	}
+
+	public void la(TEMP dst, String label){
+		dst_reg = dst.getRegisterName();
+		fileWriter.format("\tla %s,%s\n", dst_reg, label);
 	}
 
 	public void isInBounds(TEMP dst)
