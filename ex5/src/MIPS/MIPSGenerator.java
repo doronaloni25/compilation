@@ -94,6 +94,7 @@ public class MIPSGenerator
 		String oprnd1_reg = oprnd1.getRegisterName();
 		String oprnd2_reg = oprnd2.getRegisterName();
 		fileWriter.format("\tmul %s,%s,%s\n",dst_reg,oprnd1_reg,oprnd2_reg);
+		isInBounds(dst);
 	}
 	public void label(String inlabel)
 	{
@@ -327,7 +328,7 @@ public class MIPSGenerator
 		fileWriter.format("\tdiv %s,%s\n", oprnd1_reg, oprnd2_reg);
 		// get quotient (special SPIM register)
 		fileWriter.format("\tmflo %s\n",dst_reg);
-		// TODO: check overflow...
+		isInBounds(dst);
 	}
 
 	public void exit(){
@@ -348,7 +349,7 @@ public class MIPSGenerator
 		dst_reg = dst.getRegisterName();
 		fileWriter.format("\tla %s,%s\n", dst_reg, label);
 	}
-	
+
 	public void isInBounds(TEMP dst)
 	{
 		String handle_overflow_label = IRcommand.getInstance().getFreshLabel("handle_overflow");
