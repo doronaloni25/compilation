@@ -32,7 +32,7 @@ public class IRcommand_Func_Cleanup extends IRcommand_Label
 	public void MIPSme()
 	{
 		//add the label to the mips code, according to the label+ type of label
-		MIPSGenerator.getInstance().label(this.toString());
+		MIPSGenerator.getInstance().label(this.label_name);
 		TEMP ra = new TEMP("ra", -1);
 		TEMP sp = new TEMP("sp", -1);
 		TEMP fp = new TEMP("fp", -1);

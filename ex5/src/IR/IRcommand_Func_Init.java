@@ -29,18 +29,16 @@ public class IRcommand_Func_Init extends IRcommand
 		TEMP fp = new TEMP("fp", -1);
 
 		//allocate space to save returns address, and save it
-		 MIPSGenerator.getInstance().subFromStack(4, sp);
+		MIPSGenerator.getInstance().subu(sp, sp, 4);
         MIPSGenerator.getInstance().sw(ra, 0, sp);
 		//allocate space for frame pointer, and save it
-		MIPSGenerator.getInstance().subFromStack(4, sp);
+		MIPSGenerator.getInstance().subu(sp, sp, 4);
 		MIPSGenerator.getInstance().sw(fp, 0, sp);
 		//initialize frame pointer to point to the top of the stack
 		MIPSGenerator.getInstance().move(fp, sp);
 		//allocate space for local variables, and save them
-		MIPSGenerator.getInstance().subFromStack(localVariablesCount * 4, sp);
-		MIPSGenerator.getInstance().pushRegistersToStack(localVariablesCount, sp);
-		//TODO: make sure the sub and add are correct
-		//TODO: check if need to initialize the local vars
+		MIPSGenerator.getInstance().subu(sp, sp, localVariablesCount * 4);
+		//TODO: check if need to initialize the local vars to 0?
 
 	}
 }

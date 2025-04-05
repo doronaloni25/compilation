@@ -183,25 +183,24 @@ public class MIPSGenerator
 			fileWriter.format("\taddiu %s,%s,%d\n", sp_reg, sp_reg, offset);
 		}
 	}
-	public void subFromStack(int offset, TEMP sp){
-		if(offset>0)
+	public void subu(TEMP dest, TEMP src, int offset){
 		{
 			String sp_reg = sp.getRegisterName();
 			fileWriter.format("\tsubu %s,%s,%d\n", sp_reg, sp_reg, offset);
 		}
 		
 	}
-	public void PushRegistersToStack(int numOfVarsToPush, TEMP sp){
-		for (int i = 0; i <numOfVarsToPush; i++)
+	public void pushRegistersToStack(TEMP sp){
+		for (int i = 0; i <10; i++)
 		{
 			//TODO: make sure that the add and sub are correct
 			TEMP tempReg = new TEMP("t", i);
-			this.addToStack(4, sp);
+			this.subu(sp, sp, 4);
 			this.sw(tempReg, 0, sp);
 		}
 	}
-	public void PopRegistersFromStack(int numOfVarsToPop, TEMP sp){
-		for (int i = 0; i <numOfVarsToPop; i++)
+	public void popRegistersFromStack(TEMP sp){
+		for (int i = 0; i <10; i++)
 		{
 			TEMP tempReg = new TEMP("t", i);
 			this.lw(tempReg, 0, sp);
