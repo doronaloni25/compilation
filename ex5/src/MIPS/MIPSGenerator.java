@@ -183,7 +183,7 @@ public class MIPSGenerator
 
 		// start the loop
 		label(start_of_loop); 
-		lb(s8, 0, s7); // TODO: add lb
+		lb(s8, 0, s7); 
 		// if curr char is terminating (0), exit loop.
 		beqz(s8, end_of_loop);
 		// else, add 1 to length and to adress(point to next char in string)
@@ -223,7 +223,7 @@ public class MIPSGenerator
 		// if curr char is terminating (0), exit loop.
 		beqz(s8, end_of_loop);
 		// else, write curr char to curr char address in dest (s9)
-		sb(s8, 0, s9); // TODO: add sb
+		sb(s8, 0, s9); 
 		// increment both pointers, and continue the loop
 		addiu(s7, s7, 1);
 		addiu(s9, s9, 1);
