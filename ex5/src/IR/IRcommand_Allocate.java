@@ -36,4 +36,6 @@ public class IRcommand_Allocate extends IRcommand
 	{
 		return "Command: " + this.getClass().getSimpleName() + ": " + this.var_name;
 	}
+
+	
 }
