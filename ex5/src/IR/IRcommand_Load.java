@@ -58,10 +58,12 @@ public class IRcommand_Load extends IRcommand
 	/***************/
 	public void MIPSme()
 	{
+		//TODO- MIPSme, fix this?
 		MIPSGenerator.getInstance().load(dst,var_name);
 	}
 	  public void assignRegisters(Map<String, InterferenceGraphNode> interference_graph_map){
 		
 		this.dst.setRegisterNumber(interference_graph_map);
 	}
+
 }

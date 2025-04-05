@@ -50,4 +50,8 @@ public class IRcommand_Jump_If_Eq_To_Zero extends IRcommand
 		this.t.setRegisterNumber(interference_graph_map);
 		
 	}
+	public void MIPSme()
+	{
+		MIPSGenerator.getInstance().beqz(t,label_name);
+	}
 }

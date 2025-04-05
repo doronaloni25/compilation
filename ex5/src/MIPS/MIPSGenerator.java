@@ -32,9 +32,8 @@ public class MIPSGenerator
 	}
 	public void print_int(TEMP t)
 	{
-		int idx=t.getSerialNumber();
-		// fileWriter.format("\taddi $a0,Temp_%d,0\n",idx);
-		fileWriter.format("\tmove $a0,Temp_%d\n",idx);
+		int register_name=t.getRegisterName();
+		fileWriter.format("\tmove $a0,%s\n", register_name);
 		fileWriter.format("\tli $v0,1\n");
 		fileWriter.format("\tsyscall\n");
 		fileWriter.format("\tli $a0,32\n");
@@ -376,6 +375,14 @@ public class MIPSGenerator
 
 
 	}
+
+	public void constString(String label, String text)
+	{
+		fileWriter.format(".data\n");
+		fileWriter.format("\t%s: .asciiz \"%s\"\n", label, text);
+		fileWriter.format(".text\n");
+	}
+
 	/**************************************/
 	/* USUAL SINGLETON IMPLEMENTATION ... */
 	/**************************************/

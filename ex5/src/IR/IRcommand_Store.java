@@ -60,6 +60,7 @@ public class IRcommand_Store extends IRcommand
 	/***************/
 	public void MIPSme()
 	{
+		//TODO: Do!
 		MIPSGenerator.getInstance().store(var_name,src);
 	}
 }

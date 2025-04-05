@@ -47,7 +47,8 @@ public class IRcommandConstString extends IRcommand
 	/***************/
 	public void MIPSme()
 	{
-		//TODO: DO!
+		//TODO: fix this
+		MIPSGenerator.getInstance().constString(t,value);
 	}
 
 }
