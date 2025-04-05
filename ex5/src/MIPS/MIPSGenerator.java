@@ -7,7 +7,7 @@ package MIPS;
 /* GENERAL IMPORTS */
 /*******************/
 import java.io.PrintWriter;
-
+import HelperFunctions.*;
 /*******************/
 /* PROJECT IMPORTS */
 /*******************/
@@ -164,7 +164,83 @@ public class MIPSGenerator
 		String address_reg = address.getRegisterName();
 		fileWriter.format("\tsw %s,%d(%s)\n", src_reg, offset, address_reg);
 	}
-	
+
+	public TEMP calcStringLen(TEMP str){
+		// We create MIPS code that loops over the string in order to calculate its length
+		TEMP s7 = new TEMP("s", 7);
+		TEMP s8 = new TEMP("s", 8);
+		TEMP s9 = new TEMP("s", 9);
+		String start_of_loop = IRcommand.getFreshLabel("loop_string_start");
+		String end_of_loop = IRcommand.getFreshLabel("loop_string_end");
+
+		// S7 will hold the address of curr char (in order to progress along the string)
+		// S8 will hold current char - init with the first byte from the pointer (each char is one byte).
+		// S9 will hold length so far - init with 0.
+		move(s7, str);
+		li(s9, 0);
+
+		// start the loop
+		label(start_of_loop); 
+		lb(s8, 0, s7); // TODO: add lb
+		// if curr char is terminating (0), exit loop.
+		beqz(s8, end_of_loop);
+		// else, add 1 to length and to adress(point to next char in string)
+		addiu(s9, s9, 1);
+		addiu(s7, s7, 1);
+		jump(start_of_loop);
+		label(end_of_loop);
+		// when done - return temp that holds the current length
+		return s9;
+	}
+
+	public void label(String label_name){
+		if (label_name.equals(HelperFunctions.formatEntryLabel("main"))){
+			fileWriter.format(".globl %s\n%s:\n", label_name, label_name);
+		}
+		else{
+			fileWriter.format("%s:\n", label_name);
+		}
+	}
+
+	public void strcpy(TEMP dest, TEMP src){
+		// we assume len(dest) >= len(src)
+		TEMP s7 = new TEMP("s", 7);
+		TEMP s8 = new TEMP("s", 8);
+		TEMP s9 = new TEMP("s", 9);
+		String start_of_loop = IRcommand.getFreshLabel("loop_string_start");
+		String end_of_loop = IRcommand.getFreshLabel("loop_string_end");
+
+		// S7 will hold curr char adress for src
+		// S8 will hold curr char for src
+		// S9 will hold curr char adress for dest
+		move(s7, src);
+		move(s9, dest);
+
+		label(start_of_loop);
+		lb(s8, 0, s7);
+		// if curr char is terminating (0), exit loop.
+		beqz(s8, end_of_loop);
+		// else, write curr char to curr char address in dest (s9)
+		sb(s8, 0, s9); // TODO: add sb
+		// increment both pointers, and continue the loop
+		addiu(s7, s7, 1);
+		addiu(s9, s9, 1);
+		jump(start_of_loop);
+		label(end_of_loop);
+	}
+
+	public void lb(TEMP dest, int offset, TEMP src){
+		String dest_reg = dest.getRegisterName();
+		String src_reg = src.getRegisterName();
+		fileWriter.format("\tlb %s,%d(%s)\n", dest_reg, offset, src_reg);
+	}
+
+	public void sb(TEMP src, int offset, TEMP dest){
+		String dest_reg = dest.getRegisterName();	
+		String src_reg = src.getRegisterName();
+		fileWriter.format("\tsb %s,%d(%s)\n", src_reg, offset, dest_reg);
+	}
+
 	/**************************************/
 	/* USUAL SINGLETON IMPLEMENTATION ... */
 	/**************************************/
