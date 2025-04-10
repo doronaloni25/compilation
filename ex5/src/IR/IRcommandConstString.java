@@ -16,12 +16,14 @@ public class IRcommandConstString extends IRcommand
 {
 	TEMP t;
 	String value;
-	
-	public IRcommandConstString(TEMP t,String value)
+	Strint label;
+	public IRcommandConstString(TEMP t,String value, String label)
 	{
 		this.t = t;
 		this.value = value;
+		this.label = label;
 	}
+	
 	public String getGen(Set<String> ins)
 	{
         //TODO: DO!
@@ -47,8 +49,11 @@ public class IRcommandConstString extends IRcommand
 	/***************/
 	public void MIPSme()
 	{
-		//TODO: fix this
-		MIPSGenerator.getInstance().constString(t,value);
+		MIPSGenerator.getInstance().constString(this.label, this.value);
+		if(this.t!=null)
+		{
+			MIPSGenerator.getInstance().la(this.t, this.label);
+		}
 	}
 
 }

@@ -28,6 +28,7 @@ public class AST_EXP_STRING extends AST_EXP
 		/* COPY INPUT DATA NENBERS ... */
 		/*******************************/
 		this.s = s;
+		this.stringLabel = IRCommand.getFreshLabel(s);
 	}
 
 	public TYPE SemantMe()
@@ -37,7 +38,7 @@ public class AST_EXP_STRING extends AST_EXP
 
 	public TEMP IRme(){
 		TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
-		IR.getInstance().Add_IRcommand(new IRcommandConstString(t,s));
+		IR.getInstance().Add_IRcommand(new IRcommandConstString(t,s, this.stringLabel));
 		return t;
 	}
 }

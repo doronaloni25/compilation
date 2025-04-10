@@ -24,5 +24,12 @@ public class IRcommand_Create_Dispatch_Vector extends IRcommand
         this.name = name;
         this.function_list = function_list;
     }
-
+    @Override
+    public void MIPSme()
+    {
+        // Create the dispatch vector
+        MIPSGenerator.getInstance().allocateDispatchVector(this.name, this.function_list);
+        
+      
+    }
 }

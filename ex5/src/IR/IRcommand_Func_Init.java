@@ -37,6 +37,7 @@ public class IRcommand_Func_Init extends IRcommand
 		//initialize frame pointer to point to the top of the stack
 		MIPSGenerator.getInstance().move(fp, sp);
 		//allocate space for local variables, and save them
+		MIPSGenerator.getInstance().storeTempsToStack();
 		MIPSGenerator.getInstance().subu(sp, sp, localVariablesCount * 4);
 		//TODO: check if need to initialize the local vars to 0?
 

@@ -18,7 +18,7 @@ public abstract class IRcommand
 	/* Label Factory */
 	/*****************/
 	protected static int label_counter=0;
-	public    static String getFreshLabel(String msg)
+	public static String getFreshLabel(String msg)
 	{
 		return String.format("Label_%d_%s",label_counter++,msg);
 	}
@@ -42,6 +42,7 @@ public abstract class IRcommand
 	public void assignRegisters(Map<String, InterferenceGraphNode> interference_graph_map){
 		return null;
 	}
+	
 	/***************/
 	/* MIPS me !!! */
 	/***************/

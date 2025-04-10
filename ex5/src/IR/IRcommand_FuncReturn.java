@@ -43,5 +43,13 @@ public Set<String> getLiveGen()
 		}
 	}
 
-
+@Override
+	public void MIPSme()
+	{
+		if(this.tFuncReturn != null)
+		{
+			MIPSGenerator.getInstance().move(new TEMP("v", 0), this.tFuncReturn);
+		}
+		MIPSGenerator.getInstance().jump(this.exitLabel);
+	}
 //kill is not needed here, implemented in IRcommand

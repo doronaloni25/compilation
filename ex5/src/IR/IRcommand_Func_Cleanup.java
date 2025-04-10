@@ -40,7 +40,7 @@ public class IRcommand_Func_Cleanup extends IRcommand_Label
 
 		//pop local variables from the stack, save them in t0-ti registers
 		MIPSGenerator.getInstance().addToStack(4 * this.localVariablesCount, sp);
-		MIPSGenerator.getInstance().popRegistersFromStack(this.localVariablesCount,sp);
+		MIPSGenerator.getInstance().popRegistersFromStack(sp);
 		//pop callee activation record
 		MIPSGenerator.getInstance().lw(fp, sp, 0);
 		//pop the return addresss

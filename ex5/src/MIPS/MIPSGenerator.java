@@ -36,6 +36,10 @@ public class MIPSGenerator
 		fileWriter.format("\tmove $a0,%s\n", register_name);
 		fileWriter.format("\tli $v0,1\n");
 		fileWriter.format("\tsyscall\n");
+		//print space character
+		fileWriter.format("\tli $a0,32\n");
+		fileWriter.format("\tli $v0,11\n");
+		fileWriter.format("\tsyscall\n");
 	}
 	//public TEMP addressLocalVar(int serialLocalVarNum)
 	//{
@@ -373,13 +377,34 @@ public class MIPSGenerator
 
 	}
 
+	public void storeTempsToStack()
+	{
+		TEMP sp = new TEMP("sp", -1);
+		for (int i = 0; i < 10; i++)
+		{
+			TEMP tempReg = new TEMP("t", i);
+			this.subu(sp, sp, 4);
+			this.sw(tempReg, 0, sp);
+		}
+	}
+
 	public void constString(String label, String text)
 	{
 		fileWriter.format(".data\n");
 		fileWriter.format("\t%s: .asciiz \"%s\"\n", label, text);
 		fileWriter.format(".text\n");
 	}
-
+	public void allocateDispatchVector(String name, TYPE_LIST function_list)
+	{
+		String name_dispatch_vector = String.format("%s_dispatch_vector", name);
+		fileWriter.format(".data\n");
+		fileWriter.format("\t%s:\n", name_dispatch_vector);
+		for(TYPE_LIST curr = function_list; curr != null; curr = curr.tail)
+		{
+			fileWriter.format("\t.word %s\n", curr.head.name);
+		}
+		fileWriter.format(".text\n");
+	}
 	/**************************************/
 	/* USUAL SINGLETON IMPLEMENTATION ... */
 	/**************************************/
