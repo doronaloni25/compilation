@@ -96,6 +96,19 @@ public class TYPE_CLASS_DEC extends TYPE
 			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
 	}
+	// if field has default value, we should save the value
+	public void addField(String name, TYPE t, int line, AST_EXP exp){
+		if(fieldInClass(name) == null)
+		{
+			TYPE_CLASS_VAR_DEC newField = new TYPE_CLASS_VAR_DEC(t, name, exp);
+			data_members = new TYPE_CLASS_VAR_DEC_LIST(newField, data_members);
+		}
+		//cant add the same field twice
+		else
+		{
+			HelperFunctions.printError(line, this.getClass().getSimpleName());
+		}
+	}
 	// add the function to the class function list
 	public void addFunction(TYPE_FUNCTION f)
 	{

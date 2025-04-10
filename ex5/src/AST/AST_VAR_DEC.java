@@ -50,7 +50,13 @@ public class AST_VAR_DEC extends AST_DEC
         if(classType != null && funcType == null)
         {
             // This also checks that the field was not declared before (in any ancestor of the class)
-            classType.addField(name, t, line);
+            // if the field has a default value, we should save it
+            if (this instanceof AST_VAR_DEC_EXP){
+                classType.addField(name, t, line, ((AST_VAR_DEC_EXP)this).exp);
+            }
+            else{
+                classType.addField(name, t, line);
+            }
         }
         return t;
     }

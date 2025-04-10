@@ -8,7 +8,7 @@ import HelperFunctions.*;
 public class AST_EXP_STRING extends AST_EXP
 {
 	public String s;
-
+	public String stringLabel;
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
