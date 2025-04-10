@@ -11,6 +11,7 @@ public class AST_FUNC_DEC extends AST_DEC
     public AST_STMT_LIST stmtList;
     protected int localVariablesCount = 0;
     public TYPE_CLASS_DEC classDec = null;
+    public String funcLabel = null;
 
     public AST_FUNC_DEC (AST_TYPE type, String name, AST_STMT_LIST stmtList) 
     {
@@ -18,6 +19,8 @@ public class AST_FUNC_DEC extends AST_DEC
         this.type = type;
         this.name = name;
         this.stmtList = stmtList;
+    
+
     }
     public TYPE SemantMe ()
     {

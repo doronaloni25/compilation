@@ -55,6 +55,7 @@ public class IRcommand_Call_Func extends IRcommand
         @Override
         public void MIPSme()
         {
+            String funcLabel = HelperFunctions.formatEntryLabel(this.name);
           //store the arguments of the called function to the stack
            int numOfArgs = this.funcArgs.size();
            MIPSGenerator.getInstance().subu(sp, sp, 4 * numOfArgs);
@@ -63,12 +64,13 @@ public class IRcommand_Call_Func extends IRcommand
                 MIPSGenerator.getInstance().sw(arg ,sp, 4 * i);
            }
         //jump to the function
-        MIPSGenerator.getInstance().jal(this.name);
+        MIPSGenerator.getInstance().jal(funcLabel);
         //go back to prev sp (before storing the args, we discard them)
         MIPSGenerator.getInstance().addiu(sp, sp, 4 * numOfArgs);
         //store the return value in the destination register (if it exists)
         if (this.dest != null){
             MIPSGenerator.getInstance().move(this.dest, v0);
+        }
         }
 }
 
