@@ -353,7 +353,7 @@ public class MIPSGenerator
 	public void isInBounds(TEMP dst)
 	{
 		String handle_overflow_label = IRcommand.getInstance().getFreshLabel("handle_overflow");
-		String handle_underfloew_label = IRcommand.getInstance().getFreshLabel("handle_underflow");
+		String handle_underflow_label = IRcommand.getInstance().getFreshLabel("handle_underflow");
 		String valid_label = IRcommand.getInstance().getFreshLabel("valid");
 		TEMP s8  = new TEMP("s", 8);
 		TEMP s9 = new TEMP("s", 9);
@@ -404,6 +404,24 @@ public class MIPSGenerator
 			fileWriter.format("\t.word %s\n", HelperFunctions.formatEntryLabel(curr.head.name));
 		}
 		fileWriter.format(".text\n");
+	}
+
+	public void jalr(TEMP dst){
+		file_writer.format("\tjalr %s\n", dst.getRegisterName());
+	}
+
+	public void checkNullPointer(TEMP pointer){
+		String handle_null_pointer = IRcommand.getFreshLabel("null_pointer");
+		String valid_pointer = IRcommand.getFreshLabel("valid_pointer");
+
+		beqz(pointer, handle_null_pointer);
+		jump(valid_pointer);
+
+		label(handle_null_pointer);
+		printString("string_invalid_ptr_dref");
+		exit();
+
+		label(valid_pointer);
 	}
 	/**************************************/
 	/* USUAL SINGLETON IMPLEMENTATION ... */
