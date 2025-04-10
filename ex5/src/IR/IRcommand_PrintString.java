@@ -35,12 +35,12 @@ public class IRcommand_PrintString extends IRcommand
 	/***************/
 	public void MIPSme()
 	{
-        //TODO: check if correct
-		MIPSGenerator.getInstance().print_string(t);
+		MIPSGenerator.getInstance().printString(t);
 	}
 
 	@Override
     public void assignRegisters(Map<String, InterferenceGraphNode> interference_graph_map){
 		this.t.setRegisterNumber(interference_graph_map);
 	}
+
 }

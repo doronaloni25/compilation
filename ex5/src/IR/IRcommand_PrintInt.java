@@ -42,4 +42,8 @@ public class IRcommand_PrintInt extends IRcommand
 		
 		this.t.setRegisterNumber(interference_graph_map);	
 	}
+	public void MIPSme()
+	{
+		MIPSGenerator.getInstance().print_int(t);
+	}
 }

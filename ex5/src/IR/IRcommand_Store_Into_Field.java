@@ -40,5 +40,6 @@ public class IRcommand_Store_Into_Field extends IRcommand
 		this.classT.setRegisterNumber(interference_graph_map);
         this.value.setRegisterNumber(interference_graph_map);
 	}
+    //TODO- MIPSme
 }
             
