@@ -47,5 +47,12 @@ public class IRcommand_Load_From_Field extends IRcommand
 		this.dst.setRegisterNumber(interference_graph_map);
         this.instance.setRegisterNumber(interference_graph_map);	
 	}
-    //TODO- MIPSme
+    
+    public void MIPSme(){
+        // check null dereference
+        MIPSGenerator.getInstance().checkNullPointer(this.instance);
+        // get byte offset and store into the instance (add one since first item is vtable address)
+        int byte_offset = (this.offset + 1) * 4;
+        MIPSGenerator.getInstance().lw(this.dst, offset, this.instance);
+    }
 }

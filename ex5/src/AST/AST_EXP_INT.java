@@ -60,7 +60,7 @@ public class AST_EXP_INT extends AST_EXP
 		TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
 		if(isMinus)
 		{
-			IR.getInstance().Add_IRcommand(new IRcommandConstInt(t, -value));
+			IR.getInstance().Add_IRcommand(new IRcommandConstInt(t, (-1) * value));
 		}
 		else{
 			IR.getInstance().Add_IRcommand(new IRcommandConstInt(t, value));

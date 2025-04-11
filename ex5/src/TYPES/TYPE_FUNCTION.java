@@ -21,8 +21,6 @@ public class TYPE_FUNCTION extends TYPE
 		this.name = name;
 		this.returnType = returnType;
 		this.params = params;
-		// TODO: Check if this is necessary, or params get saved in other way
-		if (params != null) this.localVariablesCount = params.getLength();
 		this.isInherited = false;
 	}
 
