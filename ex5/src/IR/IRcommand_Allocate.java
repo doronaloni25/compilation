@@ -16,10 +16,11 @@ import MIPS.*;
 public class IRcommand_Allocate extends IRcommand
 {
 	String var_name;
-	
-	public IRcommand_Allocate(String var_name)
+	boolean isGlobal;
+	public IRcommand_Allocate(String var_name, boolean isGlobal)
 	{
 		this.var_name = var_name;
+		this.isGlobal = isGlobal;
 	}
 	
 	/***************/
@@ -27,8 +28,12 @@ public class IRcommand_Allocate extends IRcommand
 	/***************/
 	public void MIPSme()
 	{
-		//TODO: implement correctly
-		MIPSGenerator.getInstance().allocate(var_name);
+		// this IR command actually does something only if global variable
+		// however, still needed for non-global declaration since our used-before-init
+		// analysis uses this IRcommand to kill variables.
+		if (this.isGlobal){
+			MIPSGenerator.getInstance().allocate(var_name);
+		}
 	}
 
 	// Gen and Kill implemented in IRcommand
@@ -36,11 +41,6 @@ public class IRcommand_Allocate extends IRcommand
 	public String toString()
 	{
 		return "Command: " + this.getClass().getSimpleName() + ": " + this.var_name;
-	}
-
-	public void MIPSme()
-	{
-		MIPSGenerator.getInstance().allocate(String label, AST_EXP exp);
 	}
 	
 }

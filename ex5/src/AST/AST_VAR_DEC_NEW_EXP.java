@@ -62,10 +62,7 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC
     }
     public TEMP IRme()
     {
-        if(this.isGlobal)
-        {
-            IR.getInstance().Add_IRcommand(new IRcommand_Allocate(nameWithVarDecScope)); 
-        }
+        IR.getInstance().Add_IRcommand(new IRcommand_Allocate(this.name, this.isGlobal)); 
         TEMP t = neExp.IRme(); 
         IR.getInstance().Add_IRcommand(new IRcommand_Store(nameWithVarDecScope, t)); 
         return null;
