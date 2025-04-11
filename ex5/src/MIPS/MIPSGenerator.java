@@ -423,6 +423,28 @@ public class MIPSGenerator
 
 		label(valid_pointer);
 	}
+
+	public void checkIndexInBounds(TEMP arr, TEMP index)
+	{
+		TEMP zero = new TEMP("zero", -1);
+		TEMP s9 = new TEMP("s", 9);
+		String error = IRcommand.getFreshLabel("index_out_of_bounds");
+		String all_good = IRcommand.getFreshLabel("all_good");
+		// first check if index is negative
+		blt(index, zero, error);
+		// get array size into s9
+		lw(s9, 0, arr);
+		//check if index is bigger than array size
+		bge(index, s1, error);
+		// if we reached here all is good
+		jump(all_good);
+		// Take care of invalid index
+		label(error);
+		printString("string_access_violation");
+		exit();
+		label(all_good);
+	}
+
 	/**************************************/
 	/* USUAL SINGLETON IMPLEMENTATION ... */
 	/**************************************/
