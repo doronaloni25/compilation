@@ -10,6 +10,7 @@ public class AST_VAR_DEC extends AST_DEC
 	public AST_TYPE type;
 	public String name;
     public String nameWithVarDecScope;
+    public boolean isGlobal = false;
 
     public AST_VAR_DEC (AST_TYPE type, String name) 
     {
@@ -35,6 +36,8 @@ public class AST_VAR_DEC extends AST_DEC
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         SYMBOL_TABLE.getInstance().enter(name, t);
+        //get global for ex5
+        this.isGlobal = SYMBOL_TABLE.getInstance().isGlobalScope();
         // for IRme - it will return my scope, as we just inserted it to the symbol table
 		nameWithVarDecScope = HelperFunctions.getVarNameWithDecScope(name);
         // check if im in class scope (but not in func), and if so add to the class fields
@@ -63,8 +66,10 @@ public class AST_VAR_DEC extends AST_DEC
     @Override
     public TEMP IRme()
     {
-        // TODO: check about global variables
-        IR.getInstance().Add_IRcommand(new IRcommand_Allocate(nameWithVarDecScope));
+        if(this.isGlobal)
+        {
+            IR.getInstance().Add_IRcommand(new IRcommand_Allocate(nameWithVarDecScope, null));
+        }
 		return null;
     }
 }
