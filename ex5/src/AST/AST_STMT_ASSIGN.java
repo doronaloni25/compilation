@@ -87,12 +87,6 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		return t1;
 	}
 
-func(x)
-{
-	int y;
-	gmgasga
-	x= 4;
-}
 	@Override
 	public TEMP IRme()
 	{
