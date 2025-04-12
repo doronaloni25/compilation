@@ -163,6 +163,19 @@ public class HelperFunctions{
         return varName + "@" + Integer.toString(decScopeNum);
     }
 
+    public static int getScopeNumFromVarWithScopeName(String varWithScopeNum)
+    {
+        String[] parts = input.split("@");
+        if (parts.length == 2) 
+        {
+            return Integer.parseInt(parts[1]);
+        }
+        else
+        {
+            return -1;
+        }
+    }
+
     public static void printInvalidVars(Set<String> invalidVars){
         if (invalidVars.isEmpty()){
             file_writer.println("!OK");

@@ -39,7 +39,7 @@ public class AST_VAR_DEC extends AST_DEC
         //get global for ex5
         this.isGlobal = SYMBOL_TABLE.getInstance().isGlobalScope();
         // for IRme - it will return my scope, as we just inserted it to the symbol table
-		nameWithVarDecScope = HelperFunctions.getVarNameWithDecScope(name);
+		this.nameWithVarDecScope = HelperFunctions.getVarNameWithDecScope(name);
         // check if im in class scope (but not in func), and if so add to the class fields
         TYPE_CLASS_DEC classType = SYMBOL_TABLE.getInstance().inClass;
         TYPE_FUNCTION funcType = SYMBOL_TABLE.getInstance().inFunction;

@@ -189,6 +189,18 @@ public class MIPSGenerator
 		fileWriter.format("\tsw %s,%d(%s)\n", src_reg, offset, address_reg);
 	}
 
+	public void storeGlobal(String var_name, TEMP val)
+	{
+		//for String the val is the address where the String is saved,
+		// for Int val is the actual value we want to store.
+		global_var_label = "global_" + var_name;
+		TEMP s9 = new TEMP("s", 9);
+		// put into s9 the global_var_label address
+		this.la(s9, global_var_label);
+		// write the val into the global_var_label address
+		this.sw(val, 0, s9);
+	}
+
 	public TEMP calcStringLen(TEMP str){
 		// We create MIPS code that loops over the string in order to calculate its length
 		TEMP s7 = new TEMP("s", 7);

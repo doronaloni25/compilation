@@ -18,11 +18,14 @@ public class IRcommand_Store extends IRcommand
 {
 	String var_name;
 	TEMP src;
-	
-	public IRcommand_Store(String var_name,TEMP src)
+	boolean isString;
+	boolean isGlobal;
+	public IRcommand_Store(String var_name, TEMP src, boolean isString)
 	{
 		this.src      = src;
 		this.var_name = var_name;
+		this.isString = isString;
+		this.isGlobal =  (0 == HelperFunctions.getScopeNumFromVarWithScopeName(var_name));
 	}
 	public String getGen(Set<String> ins)
 	{
@@ -60,7 +63,22 @@ public class IRcommand_Store extends IRcommand
 	/***************/
 	public void MIPSme()
 	{
-		//TODO: Do!
+		/*
+		#string
+		allocate(string) : global_s = 0
+		label address = ir("abc") : label_1 = "abc"
+		store(global_s, value in label_address)
+
+		#allovate(x) : global_x = 0
+		store(x,4) : global_x = 4
+		*/
+
+		if(isGlobal)
+		{
+			//store global : same for string and int
+			MIPSGenerator.getInstance.storeGlobal(var_name, src);
+		}
+		
 		MIPSGenerator.getInstance().store(var_name,src);
 	}
 }

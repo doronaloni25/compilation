@@ -82,19 +82,33 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		// for IRme
 		if (!isNewExp)
 		{
-			nameWithVarDecScope = HelperFunctions.getVarNameWithDecScope(((AST_VAR_SIMPLE) var).name);
+			this.nameWithVarDecScope = HelperFunctions.getVarNameWithDecScope(((AST_VAR_SIMPLE) var).name);
 		}
 		return t1;
 	}
 
-
+func(x)
+{
+	int y;
+	gmgasga
+	x= 4;
+}
 	@Override
 	public TEMP IRme()
 	{
 		IRcommand cmd = null;
 		if (var instanceof AST_VAR_SIMPLE){
 			TEMP tExp = exp.IRme();
-			cmd = new IRcommand_Store(nameWithVarDecScope, tExp);
+			if( exp instanceof AST_EXP_STRING)
+			{
+				cmd = new IRcommand_Store(nameWithVarDecScope, tExp,  true);
+			}
+			//here we are int
+			else
+			{
+				cmd = new IRcommand_Store(nameWithVarDecScope, tExp, false);
+			}
+			
 		}
 		//class field case
 		else if(var instanceof AST_VAR_FIELD){
