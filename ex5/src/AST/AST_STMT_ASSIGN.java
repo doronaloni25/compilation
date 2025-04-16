@@ -14,6 +14,8 @@ public class AST_STMT_ASSIGN extends AST_STMT
 	public AST_EXP exp;
 	public Boolean isNewExp;
 	public String nameWithVarDecScope;
+	public ArrayList<Object> data = new ArrayList<Object>();
+
 	/*******************/
 	/*  CONSTRUCTOR(S) */
 	/*******************/
@@ -50,6 +52,10 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		TYPE t1 = var.SemantMe();
 		if (t1 == null){
 			HelperFunctions.printError(line, this.getClass().getSimpleName());
+		}
+		if (var instanceof AST_VAR_SIMPLE)
+		{
+			HelperFunctions.copy_type_data(t1, this.data);
 		}
 		TYPE t2 = exp.SemantMe();
 		if (t2 == null){

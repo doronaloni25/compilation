@@ -53,6 +53,7 @@ public class AST_FUNC_DEC_RULE_THREE extends AST_FUNC_DEC
             //asume SemantMe on commaTypeidList returns TYPE_LIST contains only the types, and doesnt check if they are already in the symbol table
             TYPE_LIST paramList = commaTypeIdListFunc.SemantMe();
             function.params = paramList;
+                HelperFunctions.set_func_or_method_argument_list_data(function.params,false, true);
             HelperFunctions.checkValidMethod(function, funcCheck, classDec, line, this.getClass().getSimpleName());
             // will take care of return type matching
             stmtList.SemantMe();
@@ -86,6 +87,7 @@ public class AST_FUNC_DEC_RULE_THREE extends AST_FUNC_DEC
             //asume SemantMe on commaTypeidList returns TYPE_LIST contains only the types, and doesnt check if they are already in the symbol table
             TYPE_LIST paramList = commaTypeIdListFunc.SemantMe();
             function.params = paramList;
+              HelperFunctions.set_func_or_method_argument_list_data(function.params,true, false);
             // will take care of return type matching
             stmtList.SemantMe();
             SYMBOL_TABLE.getInstance().endScope();

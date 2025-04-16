@@ -38,6 +38,7 @@ public class AST_PROGRAM extends AST_Node{
     public TYPE SemantMe() 
 	{
         return this.dec_list.SemantMe();
+		//TODO: implement IRme, to call main? 
     }
  	@Override
 	public TEMP IRme()

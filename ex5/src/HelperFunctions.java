@@ -217,4 +217,41 @@ public class HelperFunctions{
                 return "";
         }
     }
+
+
+
+    public void set_type_data(TYPE type, boolean isGlobal, boolean is_func_param, boolean is_method_param, boolean is_local_varibale, boolean is_class_field) {
+        type.isGlobal = isGlobal;
+        type.is_func_param = is_func_param;
+        type.is_method_param = is_method_param;
+        type.is_local_varibale = is_local_varibale;
+        type.is_class_field = is_class_field;
+    }
+     public void set_type_data(TYPE type, boolean isGlobal, boolean is_func_param, boolean is_method_param, boolean is_local_varibale, boolean is_class_field, int offset) {
+        type.isGlobal = isGlobal;
+        type.is_func_param = is_func_param;
+        type.is_method_param = is_method_param;
+        type.is_local_varibale = is_local_varibale;
+        type.is_class_field = is_class_field;
+        type.offset = offset;   
+    }
+    public void set_func_or_method_argument_list_data(TYPE_LIST func_args, boolean isFunc, boolean isMethod)
+     {
+        int cnt = 0;
+        while (func_args != null && func_args.head != null) {
+            TYPE arg =  func_args.head;
+            set_type_data(arg, false, isFunc, isMethod, false, false, cnt);
+            cnt++;
+            func_args = func_args.tail;
+        }
+    }
+    public void copy_type_data(TYPE t, ArrayList<Object> data)
+    {
+        data.add(t.isGlobal);
+        data.add(t.is_func_param);
+        data.add(t.is_method_param);
+        data.add(t.is_local_varibale);
+        data.add(t.is_class_field);
+        data.add(t.offset);
+    }
 }
