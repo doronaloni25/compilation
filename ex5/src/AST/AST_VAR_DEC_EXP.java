@@ -10,7 +10,7 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC
 	public AST_TYPE type;
 	public String name;
     public AST_EXP exp;
-
+    public boolean isString = false;
 
     public AST_VAR_DEC_EXP (AST_TYPE type, String name, AST_EXP exp) {
         super(type, name);
@@ -31,13 +31,19 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC
                 HelperFunctions.printError(line, this.getClass().getSimpleName());
             }
         }
-        TYPE expType = exp.SemantMe();
+        TYPE expType = exp.SemantMe(); 
         if (expType == null)
         {
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
+        if(this.type instanceof AST_TYPE_STRING)
+        {
+            isString = true;
+        }
         // take care of SemantMe on "type ID", adds it to the symbol table and takes care of class field if relevant 
         TYPE currType = super.SemantMe();
+        //updatew data for IRme
+        this.data = SYMBOL_TABLE.getInstance().find_data_by_name(this.name);
         // For IRme, super takes care of saving name with scope index    
         if (HelperFunctions.isInhiritedFromOrNil(expType, currType)) {
             return currType;
@@ -52,7 +58,7 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC
     {
         IR.getInstance().Add_IRcommand(new IRcommand_Allocate(this.name, this.isGlobal)); 
         TEMP t = exp.IRme(); 
-        IR.getInstance().Add_IRcommand(new IRcommand_Store(nameWithVarDecScope, t)); 
+        IR.getInstance().Add_IRcommand(new IRcommand_Store(this.name, t,this.isString, this.data)); 
         return null;
     }
 }
