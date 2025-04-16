@@ -18,12 +18,29 @@ public class IRcommand_Load extends IRcommand
 {
 	TEMP dst;
 	String var_name;
-	
-	public IRcommand_Load(TEMP dst,String var_name)
+	ArrayList<Object> data;
+	boolean is_global;
+	boolean is_func_param = false;
+	boolean is_method_param = false;
+	boolean is_local_variable = false;
+	int offset = -1;
+
+	public IRcommand_Load(String var_name, TEMP dst, ArrayList<Object> data)
 	{
 		this.dst      = dst;
 		this.var_name = var_name;
+
+		if(data!=null)
+		{
+			this.data = data;
+			this.is_global =  data.get(0);
+			this.is_func_param = data.get(1);
+			this.is_method_param = data.get(2);
+			this.is_local_variable = data.get(3);		
+			this.offset = data.get(5);
+		}
 	}
+	
 	public String getGen(Set<String> ins)
 	{
 		// check if the left side of assign is correct and return the right side
@@ -58,9 +75,24 @@ public class IRcommand_Load extends IRcommand
 	/***************/
 	public void MIPSme()
 	{
-		//TODO- MIPSme, fix this?
-		MIPSGenerator.getInstance().load(dst,var_name);
+		if(this.is_global)
+		{
+			MIPSGenerator.getInstance.loadGlobal(this.var_name, this.dst);
+		}
+		else if(this.is_func_param)
+		{
+			MIPSGenerator.getInstance.loadFuncParam(this.offset ,this.dst);
+		}
+		else if(this.is_method_param)
+		{
+			MIPSGenerator.getInstance.loadMethodParam(this.offset, this.dst);
+		}
+		else if(this.is_local_variable)
+		{
+			MIPSGenerator.getInstance.loadLocalVar(this.offset, this.dst);
+		}
 	}
+		
 	  public void assignRegisters(Map<String, InterferenceGraphNode> interference_graph_map){
 		
 		this.dst.setRegisterNumber(interference_graph_map);

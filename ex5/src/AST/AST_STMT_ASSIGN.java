@@ -101,12 +101,12 @@ public class AST_STMT_ASSIGN extends AST_STMT
 			TEMP tExp = exp.IRme();
 			if( exp instanceof AST_EXP_STRING)
 			{
-				cmd = new IRcommand_Store(nameWithVarDecScope, tExp,  true);
+				cmd = new IRcommand_Store(name, tExp,  true, this.data);
 			}
 			//here we are int
 			else
 			{
-				cmd = new IRcommand_Store(nameWithVarDecScope, tExp, false);
+				cmd = new IRcommand_Store(name, tExp, false, this.data);
 			}
 			
 		}
