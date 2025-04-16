@@ -10,8 +10,7 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC
 	public AST_TYPE type;
 	public String name;
     public AST_NEW_EXP neExp;
-
-
+ 
     public AST_VAR_DEC_NEW_EXP (AST_TYPE type, String name, AST_NEW_EXP neExp) {
         super(type, name);
         
@@ -34,6 +33,8 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         TYPE currType = super.SemantMe();
+        // update data for IRme
+        this.data = SYMBOL_TABLE.getInstance().find_data_by_name(this.name);
         // if one of them is an array, both should be
         if (currType.isArray() || newExpType.isArray()){
             if (!(currType.isArray() && newExpType.isArray())){
@@ -64,10 +65,8 @@ public class AST_VAR_DEC_NEW_EXP extends AST_VAR_DEC
     {
         IR.getInstance().Add_IRcommand(new IRcommand_Allocate(this.name, this.isGlobal)); 
         TEMP t = neExp.IRme(); 
-        // TODO: change from false to is string..
-        IR.getInstance().Add_IRcommand(new IRcommand_Store(nameWithVarDecScope, t, false)); 
+        IR.getInstance().Add_IRcommand(new IRcommand_Store(name,t, false ,this.data)); 
         return null;
     }
 }
 
-   

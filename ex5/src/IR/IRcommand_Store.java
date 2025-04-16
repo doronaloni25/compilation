@@ -20,13 +20,28 @@ public class IRcommand_Store extends IRcommand
 	String var_name;
 	TEMP src;
 	boolean isString;
-	boolean isGlobal;
-	public IRcommand_Store(String var_name, TEMP src, boolean isString)
+	ArrayList<Object> data;
+	boolean is_global;
+	boolean is_func_param = false;
+	boolean is_method_param = false;
+	boolean is_local_variable = false;
+	boolean is_class_field = false;
+	int offset = -1;
+	public IRcommand_Store(String var_name, TEMP src, boolean isString, ArrayList<Object> data)
 	{
 		this.src      = src;
 		this.var_name = var_name;
 		this.isString = isString;
-		this.isGlobal =  (0 == HelperFunctions.getScopeNumFromVarWithScopeName(var_name));
+		this.data     = data;
+		if(data!=null)
+		{
+			this.is_global =  data.get(0);
+			this.is_func_param = data.get(1);
+			this.is_method_param = data.get(2);
+			this.is_local_variable = data.get(3);		
+			this.offset = data.get(5);
+		}
+		
 	}
 	public String getGen(Set<String> ins)
 	{
@@ -57,7 +72,7 @@ public class IRcommand_Store extends IRcommand
 
 	@Override
     public void assignRegisters(Map<String, InterferenceGraphNode> interference_graph_map){
-		this.src.setRegisterNumber(interference_graph_map);;
+		this.src.setRegisterNumber(interference_graph_map);
 	}
 	/***************/
 	/* MIPS me !!! */
@@ -74,12 +89,22 @@ public class IRcommand_Store extends IRcommand
 		store(x,4) : global_x = 4
 		*/
 
-		if(isGlobal)
+		if(this.is_global)
 		{
-			//store global : same for string and int
-			MIPSGenerator.getInstance().storeGlobal(var_name, src);
+			MIPSGenerator.getInstance.storeGlobal(this.var_name, this.src);
 		}
-		
-		MIPSGenerator.getInstance().store(var_name,src);
+		else if(this.is_func_param)
+		{
+			MIPSGenerator.getInstance.storeFuncParam(this.offset ,this.src);
+		}
+		else if(this.is_method_param)
+		{
+			MIPSGenerator.getInstance.storeMethodParam(this.offset, this.src);
+		}
+		else if(this.is_local_variable)
+		{
+			MIPSGenerator.getInstance.storeLocalVar(this.offset, this.src);
+		}
+			
 	}
 }

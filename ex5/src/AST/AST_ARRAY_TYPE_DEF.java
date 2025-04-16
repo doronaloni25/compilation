@@ -36,7 +36,8 @@ public class AST_ARRAY_TYPE_DEF extends AST_Node{
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         TYPE_ARRAY newArray = new TYPE_ARRAY(t, name); 
-        SYMBOL_TABLE.getInstance().enter(name, newArray);
+        HelperFunctions.set_data(this.data, true, false, false, false, false);
+        SYMBOL_TABLE.getInstance().enter(name, newArray, this.data);
         return newArray;
     }
     public TEMP IRme()
