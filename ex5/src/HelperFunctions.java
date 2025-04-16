@@ -218,18 +218,18 @@ public class HelperFunctions{
         }
     }
     
-    public void set_func_or_method_argument_list_data(AST_LIST func_args, boolean isFunc, boolean isMethod)
+    public static void set_func_or_method_argument_list_data(AST_LIST func_args, boolean isFunc, boolean isMethod)
      {
         int cnt = 0;
-        while (func_args != null && func_args.head != null) {
-            AST_NODE arg =  func_args.head;
+        while (func_args != null && func_args.getHead() != null) {
+            AST_Node arg =  func_args.getHead();
             set_data(arg.data, false, isFunc, isMethod, false, false, cnt);
             cnt++;
-            func_args = func_args.tail;
+            func_args = func_args.getTail();
         }
     }
   
-   public void set_data(ArrayList<Object> data, boolean isGlobal, boolean is_func_param, boolean is_method_param, boolean is_local_varibale, boolean is_class_field, int offset) {
+   public static void set_data(ArrayList<Object> data, boolean isGlobal, boolean is_func_param, boolean is_method_param, boolean is_local_varibale, boolean is_class_field, int offset) {
         data.add(isGlobal);
         data.add(is_func_param);
         data.add(is_method_param);
@@ -237,7 +237,7 @@ public class HelperFunctions{
         data.add(is_class_field);
         data.add(offset);
     }
-       public void set_data(ArrayList<Object> data, boolean isGlobal, boolean is_func_param, boolean is_method_param, boolean is_local_varibale, boolean is_class_field) {
+    public static  void set_data(ArrayList<Object> data, boolean isGlobal, boolean is_func_param, boolean is_method_param, boolean is_local_varibale, boolean is_class_field) {
         data.add(isGlobal);
         data.add(is_func_param);
         data.add(is_method_param);

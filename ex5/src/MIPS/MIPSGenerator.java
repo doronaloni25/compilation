@@ -12,6 +12,8 @@ import HelperFunctions.*;
 /* PROJECT IMPORTS */
 /*******************/
 import TEMP.*;
+import IR.*;
+import TYPES.*;
 
 public class MIPSGenerator
 {
@@ -32,7 +34,7 @@ public class MIPSGenerator
 	}
 	public void print_int(TEMP t)
 	{
-		int register_name=t.getRegisterName();
+		String register_name=t.getRegisterName();
 		fileWriter.format("\tmove $a0,%s\n", register_name);
 		fileWriter.format("\tli $v0,1\n");
 		fileWriter.format("\tsyscall\n");
@@ -105,7 +107,7 @@ public class MIPSGenerator
 		String oprnd1_reg =oprnd1.getRegisterName();
 		String oprnd2_reg =oprnd2.getRegisterName();
 		String dst_reg=dst.getRegisterName();
-		fileWriter.format("\tadd %s,%s,%sd\n",dst_reg,oprnd1_reg,oprnd2_reg);
+		fileWriter.format("\tadd %s,%s,%s\n",dst_reg,oprnd1_reg,oprnd2_reg);
 		this.isInBounds(dst);
 	}
 	public void sub(TEMP dst,TEMP oprnd1,TEMP oprnd2)
@@ -124,22 +126,12 @@ public class MIPSGenerator
 		fileWriter.format("\tmul %s,%s,%s\n",dst_reg,oprnd1_reg,oprnd2_reg);
 		isInBounds(dst);
 	}
-	public void label(String inlabel)
-	{
-		if (inlabel.equals("main"))
-		{
-			fileWriter.format(".text\n");
-			fileWriter.format("%s:\n",inlabel);
-		}
-		else
-		{
-			fileWriter.format("%s:\n",inlabel);
-		}
-	}	
+
 	public void jump(String inlabel)
 	{
 		fileWriter.format("\tj %s\n",inlabel);
-	}	
+	}
+
 	public void blt(TEMP oprnd1,TEMP oprnd2,String label)
 	{
 		String opernd1_reg =oprnd1.getRegisterName();
@@ -159,7 +151,7 @@ public class MIPSGenerator
 		String opernd1_reg =oprnd1.getRegisterName();
 		String opernd2_reg =oprnd2.getRegisterName();
 		
-		fileWriter.format("\tbge %s,%s,%s\n",oprnd1_reg,opernd2_reg,label);				
+		fileWriter.format("\tbge %s,%s,%s\n",opernd1_reg,opernd2_reg,label);				
 	}
 	public void ble(TEMP oprnd1,TEMP oprnd2,String label)
 	{
@@ -221,7 +213,7 @@ public class MIPSGenerator
 	{
 		//for String the val is the address where the String is saved,
 		// for Int val is the actual value we want to store.
-		global_var_label = "global_" + var_name;
+		String global_var_label = "global_" + var_name;
 		TEMP s9 = new TEMP("s", 9);
 		// put into s9 the global_var_label address
 		this.la(s9, global_var_label);
@@ -346,8 +338,9 @@ public class MIPSGenerator
 	}
 	public void subu(TEMP dest, TEMP src, int offset){
 		{
-			String sp_reg = sp.getRegisterName();
-			fileWriter.format("\tsubu %s,%s,%d\n", sp_reg, sp_reg, offset);
+			String dst_reg = dest.getRegisterName();
+			String src_reg = src.getRegisterName();
+			fileWriter.format("\tsubu %s,%s,%d\n", dst_reg, src_reg, offset);
 		}
 		
 	}
@@ -408,16 +401,25 @@ public class MIPSGenerator
 		fileWriter.format("\tsyscall\n");
 	}
 
+	public void printString(TEMP string_adress){
+		TEMP v0 = new TEMP("v", 0);
+		TEMP a0 = new TEMP("a", 0);
+		// move adress as an argument
+		move(a0, string_adress);
+		li(v0, 4);
+		fileWriter.format("\tsyscall\n");
+	}
+
 	public void la(TEMP dst, String label){
-		dst_reg = dst.getRegisterName();
+		String dst_reg = dst.getRegisterName();
 		fileWriter.format("\tla %s,%s\n", dst_reg, label);
 	}
 
 	public void isInBounds(TEMP dst)
 	{
-		String handle_overflow_label = IRcommand.getInstance().getFreshLabel("handle_overflow");
-		String handle_underflow_label = IRcommand.getInstance().getFreshLabel("handle_underflow");
-		String valid_label = IRcommand.getInstance().getFreshLabel("valid");
+		String handle_overflow_label = IRcommand.getFreshLabel("handle_overflow");
+		String handle_underflow_label = IRcommand.getFreshLabel("handle_underflow");
+		String valid_label = IRcommand.getFreshLabel("valid");
 		TEMP s8  = new TEMP("s", 8);
 		TEMP s9 = new TEMP("s", 9);
 		
@@ -426,13 +428,13 @@ public class MIPSGenerator
 		//check if is bigger than 2^15
 		this.bge(dst, s8, handle_overflow_label);
 		//check if smaller than -2^15
-		this.ble(dst, s9, handle_underfloew_label);
+		this.ble(dst, s9, handle_underflow_label);
 		//handling overflow
 		this.label(handle_overflow_label);
 		this.li(dst,32767);
 		this.jump(valid_label);
 		//handling underflow
-		this.label(handle_underfloew_label);
+		this.label(handle_underflow_label);
 		this.li(dst,-32767);
 		//finished
 		this.label(valid_label);
@@ -470,7 +472,11 @@ public class MIPSGenerator
 	}
 
 	public void jalr(TEMP dst){
-		file_writer.format("\tjalr %s\n", dst.getRegisterName());
+		fileWriter.format("\tjalr %s\n", dst.getRegisterName());
+	}
+
+	public void jal(String label){
+		fileWriter.format("\tjal %s\n", label);
 	}
 
 	public void checkNullPointer(TEMP pointer){
@@ -498,7 +504,7 @@ public class MIPSGenerator
 		// get array size into s9
 		lw(s9, 0, arr);
 		//check if index is bigger than array size
-		bge(index, s1, error);
+		bge(index, s9, error);
 		// if we reached here all is good
 		jump(all_good);
 		// Take care of invalid index

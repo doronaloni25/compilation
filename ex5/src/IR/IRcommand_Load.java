@@ -34,11 +34,11 @@ public class IRcommand_Load extends IRcommand
 		if(data!=null)
 		{
 			this.data = data;
-			this.is_global =  data.get(0);
-			this.is_func_param = data.get(1);
-			this.is_method_param = data.get(2);
-			this.is_local_variable = data.get(3);		
-			this.offset = data.get(5);
+			this.is_global =  (boolean)data.get(0);
+			this.is_func_param = (boolean)data.get(1);
+			this.is_method_param = (boolean)data.get(2);
+			this.is_local_variable = (boolean)data.get(3);		
+			this.offset = (int)data.get(5);
 		}
 	}
 	
@@ -78,19 +78,19 @@ public class IRcommand_Load extends IRcommand
 	{
 		if(this.is_global)
 		{
-			MIPSGenerator.getInstance.loadGlobal(this.var_name, this.dst);
+			MIPSGenerator.getInstance().loadGlobal(this.var_name, this.dst);
 		}
 		else if(this.is_func_param)
 		{
-			MIPSGenerator.getInstance.loadFuncParam(this.offset ,this.dst);
+			MIPSGenerator.getInstance().loadFuncParam(this.offset ,this.dst);
 		}
 		else if(this.is_method_param)
 		{
-			MIPSGenerator.getInstance.loadMethodParam(this.offset, this.dst);
+			MIPSGenerator.getInstance().loadMethodParam(this.offset, this.dst);
 		}
 		else if(this.is_local_variable)
 		{
-			MIPSGenerator.getInstance.loadLocalVar(this.offset, this.dst);
+			MIPSGenerator.getInstance().loadLocalVar(this.offset, this.dst);
 		}
 	}
 		

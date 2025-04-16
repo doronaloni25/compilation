@@ -24,8 +24,8 @@ public class AST_VAR_DEC extends AST_DEC
     @Override
     public TYPE SemantMe() 
     {
-        //System.out.println("name vardec: " + name);
         TYPE currType = SYMBOL_TABLE.getInstance().findWithinScope(name);
+
         if(currType != null)
         {
             HelperFunctions.printError(line, this.getClass().getSimpleName());
@@ -35,12 +35,13 @@ public class AST_VAR_DEC extends AST_DEC
         {
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
-        
+
+        SYMBOL_TABLE.getInstance().enter(name, t, this.data);
         //get global for ex5
         this.isGlobal = SYMBOL_TABLE.getInstance().isGlobalScope();
         if(this.isGlobal)
         {
-            HelperFunctions.set_data(this.data,true, false, false, false, false); 
+            HelperFunctions.set_data(this.data,true, false, false, false, false);
         }
         // for IRme - it will return my scope, as we just inserted it to the symbol table
 		this.nameWithVarDecScope = HelperFunctions.getVarNameWithDecScope(name);
@@ -71,13 +72,14 @@ public class AST_VAR_DEC extends AST_DEC
             //t is a field in the class
             HelperFunctions.set_data(this.data,false, false, false, false, true); 
         }
-        SYMBOL_TABLE.getInstance().enter(name, t, this.data);
+       
         return t;
     }
     @Override
     public TEMP IRme()
     {
         IR.getInstance().Add_IRcommand(new IRcommand_Allocate(this.name, this.isGlobal));
+        return null;
     }
 }
 

@@ -35,11 +35,11 @@ public class IRcommand_Store extends IRcommand
 		this.data     = data;
 		if(data!=null)
 		{
-			this.is_global =  data.get(0);
-			this.is_func_param = data.get(1);
-			this.is_method_param = data.get(2);
-			this.is_local_variable = data.get(3);		
-			this.offset = data.get(5);
+			this.is_global =  (boolean)data.get(0);
+			this.is_func_param = (boolean)data.get(1);
+			this.is_method_param = (boolean)data.get(2);
+			this.is_local_variable = (boolean)data.get(3);		
+			this.offset = (int)data.get(5);
 		}
 		
 	}
@@ -91,19 +91,19 @@ public class IRcommand_Store extends IRcommand
 
 		if(this.is_global)
 		{
-			MIPSGenerator.getInstance.storeGlobal(this.var_name, this.src);
+			MIPSGenerator.getInstance().storeGlobal(this.var_name, this.src);
 		}
 		else if(this.is_func_param)
 		{
-			MIPSGenerator.getInstance.storeFuncParam(this.offset ,this.src);
+			MIPSGenerator.getInstance().storeFuncParam(this.offset ,this.src);
 		}
 		else if(this.is_method_param)
 		{
-			MIPSGenerator.getInstance.storeMethodParam(this.offset, this.src);
+			MIPSGenerator.getInstance().storeMethodParam(this.offset, this.src);
 		}
 		else if(this.is_local_variable)
 		{
-			MIPSGenerator.getInstance.storeLocalVar(this.offset, this.src);
+			MIPSGenerator.getInstance().storeLocalVar(this.offset, this.src);
 		}
 			
 	}
