@@ -82,8 +82,40 @@ public class SYMBOL_TABLE
 		/**************************/
 		//PrintMe();
 	}
-	
+	//Enter function with AST_Node, for ex5
+	public void enter(String name,TYPE t, ArrayList<Object> data)
+	{
+		/*************************************************/
+		/* [1] Compute the hash value for this new entry */
+		/*************************************************/
+		int hashValue = hash(name);
 
+		/******************************************************************************/
+		/* [2] Extract what will eventually be the next entry in the hashed position  */
+		/*     NOTE: this entry can very well be null, but the behaviour is identical */
+		/******************************************************************************/
+		SYMBOL_TABLE_ENTRY next = table[hashValue];
+	
+		/**************************************************************************/
+		/* [3] Prepare a new symbol table entry with name, type, next and prevtop */
+		/**************************************************************************/
+		SYMBOL_TABLE_ENTRY e = new SYMBOL_TABLE_ENTRY(name,t,hashValue,next,top,top_index++, scope_serial_number, data);
+
+		/**********************************************/
+		/* [4] Update the top of the symbol table ... */
+		/**********************************************/
+		top = e;
+		
+		/****************************************/
+		/* [5] Enter the new entry to the table */
+		/****************************************/
+		table[hashValue] = e;
+		
+		/**************************/
+		/* [6] Print Symbol Table */
+		/**************************/
+		//PrintMe();
+	}
 
 
 	/***********************************************/
@@ -98,6 +130,21 @@ public class SYMBOL_TABLE
 			if (name.equals(e.name))
 			{
 				return e.type;
+			}
+		}
+		
+		return null;
+	}
+
+	public ArrayList<Object> find_data_by_name(String name)
+	{
+		SYMBOL_TABLE_ENTRY e;
+				
+		for (e = table[hash(name)]; e != null; e = e.next)
+		{
+			if (name.equals(e.name))
+			{
+				return e.data;
 			}
 		}
 		

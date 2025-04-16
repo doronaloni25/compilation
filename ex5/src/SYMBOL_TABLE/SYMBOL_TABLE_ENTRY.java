@@ -43,7 +43,7 @@ public class SYMBOL_TABLE_ENTRY
 	// i.e. if i have a usage of "x" - which has been declared in more then one scope -
 	// i want to know which declaration of "x" is the one that is being used
 	public int scope_serial_number;
-	
+	public ArrayList<Object> data; // the AST node that this entry is related to
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
@@ -63,5 +63,24 @@ public class SYMBOL_TABLE_ENTRY
 		this.prevtop = prevtop;
 		this.prevtop_index = prevtop_index;
 		this.scope_serial_number = scope_serial_number;
+		this.data = new ArrayList<Object>();
+	}
+	public SYMBOL_TABLE_ENTRY(
+		String name,
+		TYPE type,
+		int index,
+		SYMBOL_TABLE_ENTRY next,
+		SYMBOL_TABLE_ENTRY prevtop,
+		int prevtop_index,
+		int scope_serial_number, ArrayList<Object> data)
+	{
+		this.index = index;
+		this.name = name;
+		this.type = type;
+		this.next = next;
+		this.prevtop = prevtop;
+		this.prevtop_index = prevtop_index;
+		this.scope_serial_number = scope_serial_number;
+		this.data = data; 
 	}
 }

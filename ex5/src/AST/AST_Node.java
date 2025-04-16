@@ -14,6 +14,8 @@ public abstract class AST_Node
 	public int SerialNumber;
 	public static int generalLine = 0;
 	public int line = generalLine;
+	public ArrayList<Objectt> data = new ArrayList<Objectt>();
+
 	/***********************************************/
 	/* The default message for an unknown AST node */
 	/***********************************************/
@@ -29,4 +31,5 @@ public abstract class AST_Node
 	{
 		return null;
 	}
+	
 }
