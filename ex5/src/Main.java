@@ -66,22 +66,17 @@ public class Main
 			ControlFlowGraph cfg = IR.getInstance().createCFG();
 			Set<String> invalidVars = cfg.getInvalidVars();
 			//	TODO: change this to ex5!
-			HelperFunctions.printInvalidVars(invalidVars);
+			//HelperFunctions.printInvalidVars(invalidVars);
 			
 			/***********************/
 			/* [9] MIPS the IR ... */
 			/***********************/
-			//IR.getInstance().MIPSme();
-
-			/**************************************/
-			/* [10] Finalize AST GRAPHIZ DOT file */
-			/**************************************/
-			////AST_GRAPHVIZ.getInstance().finalizeFile();			
+			IR.getInstance().MIPSme();			
 
 			/***************************/
 			/* [11] Finalize MIPS file */
 			/***************************/
-			////MIPSGenerator.getInstance().finalizeFile();			
+			MIPSGenerator.getInstance().finalizeFile();			
 
 			/**************************/
 			/* [12] Close output file */

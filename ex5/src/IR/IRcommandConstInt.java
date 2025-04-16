@@ -43,7 +43,8 @@ public class IRcommandConstInt extends IRcommand
 
 	@Override
     public void assignRegisters(Map<String, InterferenceGraphNode> interference_graph_map){
-		this.t.setRegisterNumber(interference_graph_map);;
+		System.out.println("setting registers on constint...");
+		this.t.setRegisterNumber(interference_graph_map);
 	}
 
 	/***************/
@@ -51,6 +52,7 @@ public class IRcommandConstInt extends IRcommand
 	/***************/
 	public void MIPSme()
 	{
+		System.out.println("temps reg is: " + t.register_number);
 		MIPSGenerator.getInstance().li(t,value);
 	}
 	

@@ -32,3 +32,4 @@ ex5/COMPILER
 ex5/src/Parser.java
 ex5/src/Lexer.java
 ex5/src/TokenNames.java
+ex5/input/test.txt

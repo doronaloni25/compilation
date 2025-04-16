@@ -23,7 +23,9 @@ public class ControlFlowGraph
         if (!colorable){
             // TODO: ERROR
         }
-        this.printCFG();
+        this.printIRs();
+        this.printLivenessCFG();
+        assignRegisters();
     }
 
     public void addBlock(Block block)
@@ -185,9 +187,9 @@ public class ControlFlowGraph
         if(enterEdges.size() != 0)
         {
             // according to live analysis rule we take the union of all the enterEdges
-            for (int i = 1; i < enterEdges.size(); i++)
+            for (int i = 0; i < enterEdges.size(); i++)
             {
-                updatedIns.addAll(enterEdges.get(i).liveIns);
+                updatedIns.addAll(enterEdges.get(i).liveOuts);
             }
         }
         // if we didnt change the ins we dont need to continue the recursion
@@ -216,6 +218,8 @@ public class ControlFlowGraph
             this.graphNodesNumbers.add(kill);
         }
 
+        currBlock.liveOuts = updatedOuts;
+
         // recursively calculate the ins and outs for all the exit edges (see remarks at the start of function)
         for (int j = 0; j < currBlock.enterEdges.size(); j++)
         {
@@ -231,6 +235,21 @@ public class ControlFlowGraph
             System.out.println("Block " + i + ":");
             System.out.println("ins: " + currBlock.ins);
             System.out.println("outs: " + currBlock.outs);
+            System.out.println("enter edges: " + currBlock.enterEdges);
+            System.out.println("exit edges: " + currBlock.exitEdges);
+            System.out.println("IRcommand: " + currBlock.IRCommand.toString());
+            System.out.println();
+        }
+    }
+
+    public void printLivenessCFG()
+    {
+        for (int i = 0; i < this.blocks.size(); i++)
+        {
+            Block currBlock = this.blocks.get(i);
+            System.out.println("Block " + i + ":");
+            System.out.println("ins: " + currBlock.liveIns);
+            System.out.println("outs: " + currBlock.liveOuts);
             System.out.println("enter edges: " + currBlock.enterEdges);
             System.out.println("exit edges: " + currBlock.exitEdges);
             System.out.println("IRcommand: " + currBlock.IRCommand.toString());
@@ -332,8 +351,17 @@ public class ControlFlowGraph
 
     private void assignRegisters(){
         for (Block block : this.blocks){
+            System.out.println("assigning registers to block: " + block.IRCommand.toString());
             block.IRCommand.assignRegisters(this.interference_graph_map);
         }
+    }
+
+    private void printIRs(){
+        System.out.println("\n************************ PRINTING IRS ********************\n");
+        for (Block block : this.blocks){
+            System.out.println(block.toString());
+        }
+        System.out.println("\n************************ DONE PRINTING IRS ********************\n");
     }
 
 

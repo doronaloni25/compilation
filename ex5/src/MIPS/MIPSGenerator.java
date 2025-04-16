@@ -61,7 +61,7 @@ public class MIPSGenerator
 	{
 		// TODO: check if necessary
 		String dst_reg=dst.getRegisterName();
-		fileWriter.format("\tlw $%d,global_%s\n",dst_reg,var_name);
+		fileWriter.format("\tlw %s,global_%s\n",dst_reg,var_name);
 	}
 	public void store(String var_name,TEMP src)
 	{
@@ -79,7 +79,7 @@ public class MIPSGenerator
 		String oprnd1_reg =oprnd1.getRegisterName();
 		String oprnd2_reg =oprnd2.getRegisterName();
 		String dst_reg=dst.getRegisterName();
-		fileWriter.format("\tadd %s,%s,%sd\n",dst_reg,oprnd1_reg,oprnd2_reg);
+		fileWriter.format("\tadd %s,%s,%s\n",dst_reg,oprnd1_reg,oprnd2_reg);
 		this.isInBounds(dst);
 	}
 	public void sub(TEMP dst,TEMP oprnd1,TEMP oprnd2)
@@ -495,6 +495,7 @@ public class MIPSGenerator
 				/***************************************/
 				/* [2] Open MIPS text file for writing */
 				/***************************************/
+				System.out.println("i created another writer..");
 				instance.fileWriter = new PrintWriter(dirname+filename);
 			}
 			catch (Exception e)

@@ -15,7 +15,7 @@ import IR.*;
 public class TEMP
 {
 	private int serial = 0;
-	private int register_number = -1;
+	public int register_number = -1;
 
 	// can be t, s, a, v. - default is t
 	public String register_type = "t";
