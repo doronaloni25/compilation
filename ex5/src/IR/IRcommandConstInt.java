@@ -11,6 +11,7 @@ import java.util.*;
 /* PROJECT IMPORTS */
 /*******************/
 import TEMP.*;
+import MIPS.*;
 
 public class IRcommandConstInt extends IRcommand
 {

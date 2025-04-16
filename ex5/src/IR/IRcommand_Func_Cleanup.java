@@ -12,6 +12,7 @@ import java.util.*;
 /* PROJECT IMPORTS */
 /*******************/
 import TEMP.*;
+import MIPS.*;
 
 public class IRcommand_Func_Cleanup extends IRcommand_Label
 {
@@ -42,9 +43,9 @@ public class IRcommand_Func_Cleanup extends IRcommand_Label
 		MIPSGenerator.getInstance().addToStack(4 * this.localVariablesCount, sp);
 		MIPSGenerator.getInstance().popRegistersFromStack(sp);
 		//pop callee activation record
-		MIPSGenerator.getInstance().lw(fp, sp, 0);
+		MIPSGenerator.getInstance().lw(fp, 0, sp);
 		//pop the return addresss
-        MIPSGenerator.getInstance().lw(ra, sp, 4);
+        MIPSGenerator.getInstance().lw(ra, 4, sp);
 		// add 8 to the stack, because we popped the ra and fp from the stack
         MIPSGenerator.getInstance().addToStack(8, sp);
 		//jump to the return adress

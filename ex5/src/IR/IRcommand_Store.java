@@ -13,6 +13,7 @@ import java.util.*;
 /*******************/
 import TEMP.*;
 import HelperFunctions.*;
+import MIPS.*;
 
 public class IRcommand_Store extends IRcommand
 {
@@ -76,7 +77,7 @@ public class IRcommand_Store extends IRcommand
 		if(isGlobal)
 		{
 			//store global : same for string and int
-			MIPSGenerator.getInstance.storeGlobal(var_name, src);
+			MIPSGenerator.getInstance().storeGlobal(var_name, src);
 		}
 		
 		MIPSGenerator.getInstance().store(var_name,src);

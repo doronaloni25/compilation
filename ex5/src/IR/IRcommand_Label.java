@@ -48,12 +48,6 @@ public class IRcommand_Label extends IRcommand
 		return "Command: " + this.getClass().getSimpleName() + ": " + this.label_name;
 	}
 
-	public void MIPSme()
-	{
-		MIPSGenerator.getInstance().label(label_name);
-	}
-
-//kill and gen are not needed here, implemented in IRcommand
-//assign registers is not needed here, implemented in IRcommand
-
+	//kill and gen are not needed here, implemented in IRcommand
+	//assign registers is not needed here, implemented in IRcommand
 }

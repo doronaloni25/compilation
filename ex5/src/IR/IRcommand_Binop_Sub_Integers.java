@@ -12,6 +12,7 @@ import java.util.*;
 /* PROJECT IMPORTS */
 /*******************/
 import TEMP.*;
+import MIPS.*;
 
 public class IRcommand_Binop_Sub_Integers extends IRcommand_Binop
 {

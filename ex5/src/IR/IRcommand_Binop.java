@@ -62,4 +62,9 @@ public class IRcommand_Binop extends IRcommand
         this.t2.setRegisterNumber(interference_graph_map);
 		this.dst.setRegisterNumber(interference_graph_map);
 	}
+
+	public void MIPSme(){
+		// this is here because a class that extends IRcommand must have this
+		// gets implemented in all of its inherited classes
+	}
 }

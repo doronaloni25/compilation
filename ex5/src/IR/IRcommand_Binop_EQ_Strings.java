@@ -12,6 +12,7 @@ import java.util.*;
 /* PROJECT IMPORTS */
 /*******************/
 import TEMP.*;
+import MIPS.*;
 
 public class IRcommand_Binop_EQ_Strings extends IRcommand_Binop
 {
@@ -45,7 +46,7 @@ public class IRcommand_Binop_EQ_Strings extends IRcommand_Binop
 		MIPSGenerator.getInstance().move(s0, t1);
 		MIPSGenerator.getInstance().move(s1, t2);
 
-		label(loop_string_start);
+		MIPSGenerator.getInstance().label(loop_string_start);
 		MIPSGenerator.getInstance().lb(s2, 0, s0);
 		MIPSGenerator.getInstance().lb(s3, 0, s1);
 
@@ -60,9 +61,9 @@ public class IRcommand_Binop_EQ_Strings extends IRcommand_Binop
 
 		MIPSGenerator.getInstance().jump(loop_string_start);
 
-		label(equal_label);
-		MIPSGenerator.getInstance().addiu(dst, 1);
+		MIPSGenerator.getInstance().label(equal_label);
+		MIPSGenerator.getInstance().addiu(dst, dst, 1);
 
-		label(end);
+		MIPSGenerator.getInstance().label(end_label);
 	}
 }

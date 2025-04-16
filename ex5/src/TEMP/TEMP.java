@@ -10,6 +10,7 @@ import java.util.*;
 /*******************/
 /* PROJECT IMPORTS */
 /*******************/
+import IR.*;
 
 public class TEMP
 {
@@ -34,7 +35,7 @@ public class TEMP
 		return serial;
 	}
 
-	public setRegisterNumber(Map<String, InterferenceGraphNode> interference_graph_map){
+	public void setRegisterNumber(Map<String, InterferenceGraphNode> interference_graph_map){
 		String name = String.valueOf(this.serial);
 		this.register_number = interference_graph_map.get(name).color;
 	}

@@ -165,7 +165,7 @@ public class HelperFunctions{
 
     public static int getScopeNumFromVarWithScopeName(String varWithScopeNum)
     {
-        String[] parts = input.split("@");
+        String[] parts = varWithScopeNum.split("@");
         if (parts.length == 2) 
         {
             return Integer.parseInt(parts[1]);

@@ -20,6 +20,9 @@ public class IRcommand_End_Program extends IRcommand
 	{
 	}
 	//TODO: implement MIPSme? is it needed here?
+	public void MIPSme(){
+		// this is here because we have to implement mipsme (its abstract)
+	}
 }
 
 //kill and gen are not needed here, implemented in IRcommand

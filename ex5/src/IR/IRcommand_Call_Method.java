@@ -12,6 +12,7 @@ import java.util.*;
 /* PROJECT IMPORTS */
 /*******************/
 import TEMP.*;
+import MIPS.*;
 
 public class IRcommand_Call_Method extends IRcommand
 {

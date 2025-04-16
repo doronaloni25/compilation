@@ -28,3 +28,7 @@ ex4/expected_output
 /ex4/input
 ex4/results_log.txt
 ex4/run_all_tests.sh
+ex5/COMPILER
+ex5/src/Parser.java
+ex5/src/Lexer.java
+ex5/src/TokenNames.java

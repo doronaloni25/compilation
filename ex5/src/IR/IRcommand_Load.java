@@ -13,6 +13,7 @@ import java.util.*;
 /*******************/
 import TEMP.*;
 import HelperFunctions.*;
+import MIPS.*;
 
 public class IRcommand_Load extends IRcommand
 {

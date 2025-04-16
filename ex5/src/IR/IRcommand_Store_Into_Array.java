@@ -1,9 +1,7 @@
 package IR;
 
-import REG.*;
 import MIPS.*;
-//import REG.*;
-//import MIPS.*;
+import java.util.*;
 /*******************/
 /* PROJECT IMPORTS */
 /*******************/
@@ -60,6 +58,6 @@ public class IRcommand_Store_Into_Array extends IRcommand
         // the arr[index] is now at address: arr + s0, we will save this adress at s0
         MIPSGenerator.getInstance().add(s0, this.array, s0);
         // store the item
-        MIPSGenerator.getInstance().sw(this.dst, 0, s0);
+        MIPSGenerator.getInstance().sw(this.value, 0, s0);
     }
 }

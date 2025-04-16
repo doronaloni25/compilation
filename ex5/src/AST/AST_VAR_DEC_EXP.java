@@ -52,7 +52,8 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC
     {
         IR.getInstance().Add_IRcommand(new IRcommand_Allocate(this.name, this.isGlobal)); 
         TEMP t = exp.IRme(); 
-        IR.getInstance().Add_IRcommand(new IRcommand_Store(nameWithVarDecScope, t)); 
+        // TODO: change from false to if string...
+        IR.getInstance().Add_IRcommand(new IRcommand_Store(nameWithVarDecScope, t, false)); 
         return null;
     }
 }

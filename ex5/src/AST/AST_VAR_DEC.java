@@ -67,6 +67,7 @@ public class AST_VAR_DEC extends AST_DEC
     public TEMP IRme()
     {
         IR.getInstance().Add_IRcommand(new IRcommand_Allocate(this.name, this.isGlobal));
+        return null;
     }
 }
 

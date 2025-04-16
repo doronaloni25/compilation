@@ -6,7 +6,7 @@ package IR;
 /*******************/
 /* GENERAL IMPORTS */
 /*******************/
-
+import java.util.*;
 /*******************/
 /* PROJECT IMPORTS */
 /*******************/

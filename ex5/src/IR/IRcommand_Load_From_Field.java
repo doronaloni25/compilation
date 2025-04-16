@@ -1,9 +1,7 @@
 package IR;
 
-import REG.*;
 import MIPS.*;
-//import REG.*;
-//import MIPS.*;
+import java.util.*;
 
 /*******************/
 /* PROJECT IMPORTS */

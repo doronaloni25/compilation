@@ -11,12 +11,13 @@ import java.util.*;
 /* PROJECT IMPORTS */
 /*******************/
 import TEMP.*;
+import MIPS.*;
 
 public class IRcommandConstString extends IRcommand
 {
 	TEMP t;
 	String value;
-	Strint label;
+	String label;
 	public IRcommandConstString(TEMP t,String value, String label)
 	{
 		this.t = t;
@@ -51,7 +52,6 @@ public class IRcommandConstString extends IRcommand
 	{
 		MIPSGenerator.getInstance().constString(this.label, this.value);
 		MIPSGenerator.getInstance().la(this.t, this.label);
-		
 	}
 
 }
