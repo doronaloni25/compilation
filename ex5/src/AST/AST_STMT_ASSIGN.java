@@ -14,6 +14,8 @@ public class AST_STMT_ASSIGN extends AST_STMT
 	public AST_EXP exp;
 	public Boolean isNewExp;
 	public String nameWithVarDecScope;
+	
+
 	/*******************/
 	/*  CONSTRUCTOR(S) */
 	/*******************/
@@ -50,6 +52,10 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		TYPE t1 = var.SemantMe();
 		if (t1 == null){
 			HelperFunctions.printError(line, this.getClass().getSimpleName());
+		}
+		if (var instanceof AST_VAR_SIMPLE)
+		{
+			this.data = SYMBOL_TABLE.getInstance().find_data_by_name(var.name);
 		}
 		TYPE t2 = exp.SemantMe();
 		if (t2 == null){
@@ -95,12 +101,12 @@ public class AST_STMT_ASSIGN extends AST_STMT
 			TEMP tExp = exp.IRme();
 			if( exp instanceof AST_EXP_STRING)
 			{
-				cmd = new IRcommand_Store(nameWithVarDecScope, tExp,  true);
+				cmd = new IRcommand_Store(name, tExp,  true, this.data);
 			}
 			//here we are int
 			else
 			{
-				cmd = new IRcommand_Store(nameWithVarDecScope, tExp, false);
+				cmd = new IRcommand_Store(name, tExp, false, this.data);
 			}
 			
 		}

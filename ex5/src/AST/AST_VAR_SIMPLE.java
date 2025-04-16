@@ -11,6 +11,7 @@ public class AST_VAR_SIMPLE extends AST_VAR
 	/************************/
 	public String name;
 	public String nameWithVarDecScope;
+	public ArrayList<Object> data = new ArrayList<Object>();
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/
@@ -52,6 +53,7 @@ public class AST_VAR_SIMPLE extends AST_VAR
 		if(type == null) {
 			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
+		this.data = SYMBOL_TABLE.getInstance().find_data_by_name(name);
 		return type;
 
 	}
@@ -60,7 +62,7 @@ public class AST_VAR_SIMPLE extends AST_VAR
 	public TEMP IRme()
 	{
 		TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
-		IR.getInstance().Add_IRcommand(new IRcommand_Load(t,nameWithVarDecScope));
+		IR.getInstance().Add_IRcommand(new IRcommand_Load(name, t, this.data));
 		return t;
 	}
 }

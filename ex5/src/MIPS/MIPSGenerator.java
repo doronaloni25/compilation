@@ -55,11 +55,39 @@ public class MIPSGenerator
 		fileWriter.format(".data\n");
 		fileWriter.format("\tglobal_%s: .word 0\n",var_name);
 	}
-	public void load(TEMP dst,String var_name)
+	public void loadGlobal(String var_name, TEMP dst)
+	{	
+		//for String the val is the address where the String is saved,
+		// for Int val is the actual value we want to store.
+		String global_var_label = "global_" + var_name;
+		TEMP s9 = new TEMP("s", 9);
+		// put into s9 the global_var_label address
+		this.la(s9, global_var_label);
+		// write the val into the global_var_label address
+		this.lw(dst, 0, s9);
+	}
+
+	public void loadFuncParam(int offset, TEMP dst)
 	{
-		// TODO: check if necessary
-		int dst_reg=dst.getRegisterName();
-		fileWriter.format("\tlw $%d,global_%s\n",dst_reg,var_name);
+		int function_offset = (offset + 1) * 4;
+		TEMP fp = new TEMP("fp", -1);
+		this.lw(dst, function_offset, fp);
+	}
+
+	public void loadMethodParam(int offset, TEMP dst)
+	{
+		// first place is dispatch vector
+		int method_offset = (offset + 2) * 4;
+		TEMP fp = new TEMP("fp", -1);
+		this.lw(dst, method_offset, fp);
+	}
+
+	public void loadLocalVar(int offset, TEMP dst)
+	{
+		// make space for args
+		int local_offset = (-offset - 11) * 4;
+		TEMP fp = new TEMP("fp", -1);
+		this.lw(dst, local_offset, fp);
 	}
 	public void store(String var_name,TEMP src)
 	{
@@ -199,6 +227,29 @@ public class MIPSGenerator
 		this.la(s9, global_var_label);
 		// write the val into the global_var_label address
 		this.sw(val, 0, s9);
+	}
+
+	public void storeFuncParam(int offset, TEMP val)
+	{
+		int function_offset = (offset + 1) * 4;
+		TEMP fp = new TEMP("fp", -1);
+		this.sw(val, function_offset, fp);
+	}
+
+	public void storeMethodParam(int offset, TEMP val)
+	{
+		// first place is dispatch vector
+		int method_offset = (offset + 2) * 4;
+		TEMP fp = new TEMP("fp", -1);
+		this.sw(val, method_offset, fp);
+	}
+
+	public void storeLocalVar(int offset, TEMP val)
+	{
+		// make space for args
+		int local_offset = (-offset - 11) * 4;
+		TEMP fp = new TEMP("fp", -1);
+		this.sw(val, local_offset, fp);
 	}
 
 	public TEMP calcStringLen(TEMP str){

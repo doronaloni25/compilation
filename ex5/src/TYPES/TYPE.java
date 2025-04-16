@@ -3,9 +3,10 @@ package TYPES;
 public abstract class TYPE
 {
 	/******************************/
-	/*  Every type has a name ... */
+	/*  Every type has a name and other fields ... */
 	/******************************/
 	public String name;
+	
 
 	/*************/
 	/* isClass() */
@@ -18,4 +19,6 @@ public abstract class TYPE
 	public boolean isArray(){ return false;}
 	public boolean isFunction(){ return false;}
 	public boolean isClassDec(){ return false;}
+
+
 }

@@ -35,9 +35,13 @@ public class AST_VAR_DEC extends AST_DEC
         {
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
-        SYMBOL_TABLE.getInstance().enter(name, t);
+        
         //get global for ex5
         this.isGlobal = SYMBOL_TABLE.getInstance().isGlobalScope();
+        if(this.isGlobal)
+        {
+            HelperFunctions.set_data(this.data,true, false, false, false, false); 
+        }
         // for IRme - it will return my scope, as we just inserted it to the symbol table
 		this.nameWithVarDecScope = HelperFunctions.getVarNameWithDecScope(name);
         // check if im in class scope (but not in func), and if so add to the class fields
@@ -46,7 +50,11 @@ public class AST_VAR_DEC extends AST_DEC
         // update the function local variables count for IRme later...
         if(funcType != null)
         {
+            //take care of both methods and functions
+          
+            HelperFunctions.set_data(this.data, false, false, false, true, false, funcType.localVariablesCount);  
             funcType.localVariablesCount++;
+            
         }
         // This basically means we are inside a class, but in its "main" scope - 
         // - not inside any funcs, if's, and while - since they are all inside funcdec
@@ -60,7 +68,10 @@ public class AST_VAR_DEC extends AST_DEC
             else{
                 classType.addField(name, t, line);
             }
+            //t is a field in the class
+            HelperFunctions.set_data(this.data,false, false, false, false, true); 
         }
+        SYMBOL_TABLE.getInstance().enter(name, t, this.data);
         return t;
     }
     @Override

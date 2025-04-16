@@ -217,4 +217,35 @@ public class HelperFunctions{
                 return "";
         }
     }
+
+
+
+    
+    public void set_func_or_method_argument_list_data(AST_LIST func_args, boolean isFunc, boolean isMethod)
+     {
+        int cnt = 0;
+        while (func_args != null && func_args.head != null) {
+            AST_NODE arg =  func_args.head;
+            set_data(arg.data, false, isFunc, isMethod, false, false, cnt);
+            cnt++;
+            func_args = func_args.tail;
+        }
+    }
+  
+   public void set_data(ArrayList<Object> data, boolean isGlobal, boolean is_func_param, boolean is_method_param, boolean is_local_varibale, boolean is_class_field, int offset) {
+        data.add(isGlobal);
+        data.add(is_func_param);
+        data.add(is_method_param);
+        data.add(is_local_varibale);
+        data.add(is_class_field);
+        data.add(offset);
+    }
+       public void set_data(ArrayList<Object> data, boolean isGlobal, boolean is_func_param, boolean is_method_param, boolean is_local_varibale, boolean is_class_field) {
+        data.add(isGlobal);
+        data.add(is_func_param);
+        data.add(is_method_param);
+        data.add(is_local_varibale);
+        data.add(is_class_field);
+        data.add(-1);
+    }
 }

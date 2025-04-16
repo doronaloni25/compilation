@@ -27,7 +27,7 @@ public class AST_COMMA_TYPE_ID extends AST_Node {
 public TYPE SemantMe()
 {
     TYPE t = type.SemantMe();
-    if(t == null)
+   if(t == null || t == TYPE_VOID.getInstance())
     {
         HelperFunctions.printError(line, this.getClass().getSimpleName());
     }
