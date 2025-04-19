@@ -71,7 +71,8 @@ public class AST_NEW_EXP extends AST_EXP
 		IRcommand cmd;
 		if (exp == null){
 			// instance of class with name of class and data members
-			cmd = new IRcommand_Class_Instance(((TYPE_CLASS_DEC)this.instanceType).data_members, ((TYPE_CLASS_DEC)this.instanceType).name, pointer);
+			// TODO: check if name is correct (classdec or instance)
+			cmd = new IRcommand_Class_Instance(((TYPE_CLASS)this.instanceType).classDec.data_members, ((TYPE_CLASS)this.instanceType).name, pointer);
 		}
 		else
 		{

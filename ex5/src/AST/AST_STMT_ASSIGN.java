@@ -13,7 +13,6 @@ public class AST_STMT_ASSIGN extends AST_STMT
 	public AST_VAR var;
 	public AST_EXP exp;
 	public Boolean isNewExp;
-	public String nameWithVarDecScope;
 	
 
 	/*******************/
@@ -84,11 +83,6 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		if(!HelperFunctions.isInhiritedFromOrNil(t2, t1))
 		{
 			HelperFunctions.printError(line, this.getClass().getSimpleName());
-		}
-		// for IRme
-		if (!isNewExp)
-		{
-			this.nameWithVarDecScope = HelperFunctions.getVarNameWithDecScope(((AST_VAR_SIMPLE) var).name);
 		}
 		return t1;
 	}

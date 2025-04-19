@@ -112,6 +112,13 @@ public class MIPSGenerator
 		fileWriter.format("\tadd %s,%s,%s\n",dst_reg,oprnd1_reg,oprnd2_reg);
 		this.isInBounds(dst);
 	}
+	public void addNoBoundsCheck(TEMP dst,TEMP oprnd1,TEMP oprnd2)
+	{
+		String oprnd1_reg =oprnd1.getRegisterName();
+		String oprnd2_reg =oprnd2.getRegisterName();
+		String dst_reg=dst.getRegisterName();
+		fileWriter.format("\tadd %s,%s,%s\n",dst_reg,oprnd1_reg,oprnd2_reg);
+	}
 	public void sub(TEMP dst,TEMP oprnd1,TEMP oprnd2)
 	{
 		String dst_reg = dst.getRegisterName();
@@ -127,6 +134,13 @@ public class MIPSGenerator
 		String oprnd2_reg = oprnd2.getRegisterName();
 		fileWriter.format("\tmul %s,%s,%s\n",dst_reg,oprnd1_reg,oprnd2_reg);
 		isInBounds(dst);
+	}
+	public void mulNoBoundsCheck(TEMP dst,TEMP oprnd1,TEMP oprnd2)
+	{
+		String dst_reg = dst.getRegisterName();
+		String oprnd1_reg = oprnd1.getRegisterName();
+		String oprnd2_reg = oprnd2.getRegisterName();
+		fileWriter.format("\tmul %s,%s,%s\n",dst_reg,oprnd1_reg,oprnd2_reg);
 	}
 
 	public void jump(String inlabel)

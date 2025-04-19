@@ -63,7 +63,7 @@ public class IRcommand_Array_Instance extends IRcommand
         MIPSGenerator.getInstance().addiu(s0, s0, 1);
         MIPSGenerator.getInstance().li(s2, 4);
         // array size in bytes s1*4 + 4
-        MIPSGenerator.getInstance().mul(s0, s0, s2);
+        MIPSGenerator.getInstance().mulNoBoundsCheck(s0, s0, s2);
         TEMP v0 = MIPSGenerator.getInstance().malloc(s0);
         // allocated address is at v0 - move to the pointer
         MIPSGenerator.getInstance().move(this.pointer, v0);
