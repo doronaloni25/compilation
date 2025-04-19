@@ -1,10 +1,8 @@
 				
 package IR;
 
-import REG.*;
 import MIPS.*;
-//import REG.*;
-//import MIPS.*;
+import java.util.*;
 
 /*******************/
 /* PROJECT IMPORTS */
@@ -44,10 +42,10 @@ public class IRcommand_Store_Into_Field extends IRcommand
     public void MIPSme(){
         // same process as load into field, except sw instead.
         // check null dereference
-        MIPSGenerator.getInstance().checkNullPointer(this.instance);
+        MIPSGenerator.getInstance().checkNullPointer(this.classT);
         // get byte offset and store into the instance (add one since first item is vtable address)
         int byte_offset = (this.offset + 1) * 4;
-        MIPSGenerator.getInstance().sw(this.dst, offset, this.instance);
+        MIPSGenerator.getInstance().sw(this.value, offset, this.classT);
     }
 }
             

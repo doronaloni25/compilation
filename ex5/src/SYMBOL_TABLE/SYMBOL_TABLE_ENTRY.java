@@ -8,6 +8,7 @@ package SYMBOL_TABLE;
 /*******************/
 import TYPES.*;
 
+import java.util.*;
 /**********************/
 /* SYMBOL TABLE ENTRY */
 /**********************/

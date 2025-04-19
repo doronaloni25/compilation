@@ -12,6 +12,7 @@ import java.util.*;
 /* PROJECT IMPORTS */
 /*******************/
 import TEMP.*;
+import MIPS.*;
 import HelperFunctions.*;
 
 public class IRcommand_Load extends IRcommand
@@ -30,14 +31,14 @@ public class IRcommand_Load extends IRcommand
 		this.dst      = dst;
 		this.var_name = var_name;
 
-		if(data!=null)
+		if(data!=null && data.size() != 0)
 		{
 			this.data = data;
-			this.is_global =  data.get(0);
-			this.is_func_param = data.get(1);
-			this.is_method_param = data.get(2);
-			this.is_local_variable = data.get(3);		
-			this.offset = data.get(5);
+			this.is_global =  (boolean)data.get(0);
+			this.is_func_param = (boolean)data.get(1);
+			this.is_method_param = (boolean)data.get(2);
+			this.is_local_variable = (boolean)data.get(3);		
+			this.offset = (int)data.get(5);
 		}
 	}
 	
@@ -77,19 +78,22 @@ public class IRcommand_Load extends IRcommand
 	{
 		if(this.is_global)
 		{
-			MIPSGenerator.getInstance.loadGlobal(this.var_name, this.dst);
+			MIPSGenerator.getInstance().loadGlobal(this.var_name, this.dst);
 		}
 		else if(this.is_func_param)
 		{
-			MIPSGenerator.getInstance.loadFuncParam(this.offset ,this.dst);
+			MIPSGenerator.getInstance().loadFuncParam(this.offset ,this.dst);
 		}
 		else if(this.is_method_param)
 		{
-			MIPSGenerator.getInstance.loadMethodParam(this.offset, this.dst);
+			MIPSGenerator.getInstance().loadMethodParam(this.offset, this.dst);
 		}
 		else if(this.is_local_variable)
 		{
-			MIPSGenerator.getInstance.loadLocalVar(this.offset, this.dst);
+			MIPSGenerator.getInstance().loadLocalVar(this.offset, this.dst);
+		}
+		else{
+			System.out.println("I shouldn't be here... - not a local/argument/global ");
 		}
 	}
 		

@@ -165,7 +165,7 @@ public class HelperFunctions{
 
     public static int getScopeNumFromVarWithScopeName(String varWithScopeNum)
     {
-        String[] parts = input.split("@");
+        String[] parts = varWithScopeNum.split("@");
         if (parts.length == 2) 
         {
             return Integer.parseInt(parts[1]);
@@ -190,49 +190,46 @@ public class HelperFunctions{
     }
 
     public static String formatExitLabel(String label){
-        return "end of func " + label;
+        return "end_of_func_" + label;
     }
 
     public static String formatEntryLabel(String label){
-        return "start of func " + label;
+        return "start_of_func_" + label;
     }
     public static String formatMethodLabel(String classDecName, String label){
-        return "start of method " + label + " in class " + classDecName;
+        return "start_of_method_" + label + "_in_class_" + classDecName;
     }
     public static String formatMethodExitLabel(String classDecName, String label){
-        return "end of method " + label + " in class " + classDecName;
+        return "end_of_method_" + label + "_in_class_" + classDecName;
     }
 
     public static String getEndLabelFromStartLabel(String label, Label_Type label_type){
         switch(label_type){
             case FUNC_START:
-                String labelOnly = label.replaceFirst("start of func ", "");
+                String labelOnly = label.replaceFirst("start_of_func_", "");
                 return formatExitLabel(labelOnly);
             case METHOD_START:
-                String[] parts = label.split(" in class ");
-                String methodLabel = parts[0].replaceFirst("start of method ", "").trim();
+                String[] parts = label.split("_in_class_");
+                String methodLabel = parts[0].replaceFirst("start_of_method_", "").trim();
                 String className = parts[1].trim();
                 return formatMethodExitLabel(className, methodLabel);
             default:
                 return "";
         }
     }
-
-
-
     
-    public void set_func_or_method_argument_list_data(AST_LIST func_args, boolean isFunc, boolean isMethod)
+    public static void set_func_or_method_argument_list_data(AST_LIST func_args, boolean isFunc, boolean isMethod)
      {
         int cnt = 0;
-        while (func_args != null && func_args.head != null) {
-            AST_NODE arg =  func_args.head;
+        while (func_args != null && func_args.getHead() != null) {
+            AST_Node arg =  func_args.getHead();
             set_data(arg.data, false, isFunc, isMethod, false, false, cnt);
             cnt++;
-            func_args = func_args.tail;
+            func_args = func_args.getTail();
         }
     }
   
-   public void set_data(ArrayList<Object> data, boolean isGlobal, boolean is_func_param, boolean is_method_param, boolean is_local_varibale, boolean is_class_field, int offset) {
+   public static void set_data(ArrayList<Object> data, boolean isGlobal, boolean is_func_param, boolean is_method_param, boolean is_local_varibale, boolean is_class_field, int offset) {
         data.add(isGlobal);
         data.add(is_func_param);
         data.add(is_method_param);
@@ -240,7 +237,7 @@ public class HelperFunctions{
         data.add(is_class_field);
         data.add(offset);
     }
-       public void set_data(ArrayList<Object> data, boolean isGlobal, boolean is_func_param, boolean is_method_param, boolean is_local_varibale, boolean is_class_field) {
+    public static  void set_data(ArrayList<Object> data, boolean isGlobal, boolean is_func_param, boolean is_method_param, boolean is_local_varibale, boolean is_class_field) {
         data.add(isGlobal);
         data.add(is_func_param);
         data.add(is_method_param);

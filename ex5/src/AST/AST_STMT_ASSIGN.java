@@ -55,7 +55,7 @@ public class AST_STMT_ASSIGN extends AST_STMT
 		}
 		if (var instanceof AST_VAR_SIMPLE)
 		{
-			this.data = SYMBOL_TABLE.getInstance().find_data_by_name(var.name);
+			this.data = SYMBOL_TABLE.getInstance().find_data_by_name(((AST_VAR_SIMPLE)var).name);
 		}
 		TYPE t2 = exp.SemantMe();
 		if (t2 == null){
@@ -101,12 +101,12 @@ public class AST_STMT_ASSIGN extends AST_STMT
 			TEMP tExp = exp.IRme();
 			if( exp instanceof AST_EXP_STRING)
 			{
-				cmd = new IRcommand_Store(name, tExp,  true, this.data);
+				cmd = new IRcommand_Store(((AST_VAR_SIMPLE)var).name, tExp,  true, this.data);
 			}
 			//here we are int
 			else
 			{
-				cmd = new IRcommand_Store(name, tExp, false, this.data);
+				cmd = new IRcommand_Store(((AST_VAR_SIMPLE)var).name, tExp, false, this.data);
 			}
 			
 		}

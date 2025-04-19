@@ -7,7 +7,7 @@ public class InterferenceGraphNode
 {
     String unique_id;
     Set<InterferenceGraphNode> neighbors;
-    int color;
+    public int color;
 
     public InterferenceGraphNode(String unique_id){
         this.unique_id = unique_id;
@@ -15,7 +15,7 @@ public class InterferenceGraphNode
         this.color = -1;
     }
 
-    public addNeighbor(InterferenceGraphNode neighbor){
+    public void addNeighbor(InterferenceGraphNode neighbor){
         this.neighbors.add(neighbor);
     }
 

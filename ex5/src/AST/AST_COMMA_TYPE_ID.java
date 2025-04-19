@@ -31,7 +31,7 @@ public TYPE SemantMe()
     {
         HelperFunctions.printError(line, this.getClass().getSimpleName());
     }
-    SYMBOL_TABLE.getInstance().enter(name, t);
+    SYMBOL_TABLE.getInstance().enter(name, t, this.data);
     return t;
 }
 //IRme is implemented in AST_Node

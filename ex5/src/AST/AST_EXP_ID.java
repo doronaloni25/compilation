@@ -58,11 +58,17 @@ public class AST_EXP_ID extends AST_EXP
         if(exp != null)
         {
             function_arguments_list.head = exp.SemantMe();
+            if(exp.data == null)
+            {
+              
+                HelperFunctions.set_data(exp.data, false, true, false, false, false, 0);
+            }
+            
             //System.out.println("exp in func type: " + function_arguments_list.head.name);
             if(expList != null)
             {
-
                 function_arguments_list.tail = expList.SemantMe();
+                HelperFunctions.set_func_or_method_argument_list_data(expList, true, false);
             }
         }
         //System.out.println("function_arguments_list1 " +function_arguments_list.head.name);

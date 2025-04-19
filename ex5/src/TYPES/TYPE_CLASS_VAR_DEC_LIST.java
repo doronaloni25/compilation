@@ -10,4 +10,11 @@ public class TYPE_CLASS_VAR_DEC_LIST
 		this.head = head;
 		this.tail = tail;
 	}	
+
+	public int getLength()
+	{
+		if (head == null) return 0;
+		if (tail == null) return 1;
+		return 1 + tail.getLength();
+	}
 }

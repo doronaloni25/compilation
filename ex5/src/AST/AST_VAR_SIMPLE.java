@@ -4,6 +4,8 @@ import TEMP.*;
 import TYPES.*;
 import SYMBOL_TABLE.*;
 import HelperFunctions.*;
+import java.util.*;
+
 public class AST_VAR_SIMPLE extends AST_VAR
 {
 	/************************/
@@ -11,7 +13,6 @@ public class AST_VAR_SIMPLE extends AST_VAR
 	/************************/
 	public String name;
 	public String nameWithVarDecScope;
-	public ArrayList<Object> data = new ArrayList<Object>();
 	/******************/
 	/* CONSTRUCTOR(S) */
 	/******************/

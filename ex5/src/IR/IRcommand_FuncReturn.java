@@ -12,6 +12,7 @@ import java.util.*;
 /* PROJECT IMPORTS */
 /*******************/
 import TEMP.*;
+import MIPS.*;
 
 public class IRcommand_FuncReturn extends IRcommand
 {
@@ -23,7 +24,7 @@ public class IRcommand_FuncReturn extends IRcommand
 		this.tFuncReturn = t;
 		this.exitLabel = exitLabel;
 	}
-}
+
 @Override
 public Set<String> getLiveGen()
 	{
@@ -52,4 +53,6 @@ public Set<String> getLiveGen()
 		}
 		MIPSGenerator.getInstance().jump(this.exitLabel);
 	}
+	
 //kill is not needed here, implemented in IRcommand
+}

@@ -11,6 +11,7 @@ import java.util.*;
 /* PROJECT IMPORTS */
 /*******************/
 import TEMP.*;
+import MIPS.*;
 
 public class IRcommandConstInt extends IRcommand
 {
@@ -32,7 +33,7 @@ public class IRcommandConstInt extends IRcommand
 
 	public String toString()
 	{
-		return "Command: " + this.getClass().getSimpleName() + " , with int = " + this.value;
+		return "Command: " + this.getClass().getSimpleName() + ": t" + String.valueOf(this.t.getSerialNumber()) + ", with int = " + this.value;
 	}
 
 	public String getLiveKill()
@@ -42,7 +43,7 @@ public class IRcommandConstInt extends IRcommand
 
 	@Override
     public void assignRegisters(Map<String, InterferenceGraphNode> interference_graph_map){
-		this.t.setRegisterNumber(interference_graph_map);;
+		this.t.setRegisterNumber(interference_graph_map);
 	}
 
 	/***************/

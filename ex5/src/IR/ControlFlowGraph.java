@@ -11,19 +11,24 @@ public class ControlFlowGraph
     public ControlFlowGraph(IRcommandList irCommands)
     {
         this.blocks = new ArrayList<Block>();
-        this.interference_graph_map = new HashSet<InterferenceGraphNode>();
+        this.interference_graph_map = new HashMap<>();
         this.graphNodesNumbers = new HashSet<String>();
         initBlocks(irCommands);
         initEdges();
         calcInsAndOuts(this.blocks.get(0));
-        livelinessAnalysis(this.blocks.get(this.blocks.size - 1));
+        for (Block block : blocks){
+            livelinessAnalysis(block);
+        }
+        //livelinessAnalysis(this.blocks.get(this.blocks.size() - 1));
         addAllNodesToInterferenceGraph(this.graphNodesNumbers);
         addInterferenceEdges();
         boolean colorable = colorGraph(this.interference_graph_map);
         if (!colorable){
             // TODO: ERROR
         }
-        this.printCFG();
+        this.printIRs();
+        //this.printLivenessCFG();
+        assignRegisters();
     }
 
     public void addBlock(Block block)
@@ -185,9 +190,9 @@ public class ControlFlowGraph
         if(enterEdges.size() != 0)
         {
             // according to live analysis rule we take the union of all the enterEdges
-            for (int i = 1; i < enterEdges.size(); i++)
+            for (int i = 0; i < enterEdges.size(); i++)
             {
-                updatedIns.addAll(enterEdges.get(i).liveIns);
+                updatedIns.addAll(enterEdges.get(i).liveOuts);
             }
         }
         // if we didnt change the ins we dont need to continue the recursion
@@ -201,20 +206,24 @@ public class ControlFlowGraph
         
         // calculate the outs (which will be the enterEdges)
         updatedOuts.addAll(currBlock.liveIns);
-        gen = currBlock.IRCommand.getGen(currBlock.liveIns);
+        gen = currBlock.IRCommand.getLiveGen();
 
         // add all the temp numbers (as strings) to the graphNodesNumbers
         // we add all temp used in this block which is the gen and kill
         if (gen != null){
+
             this.graphNodesNumbers.addAll(gen);
             updatedOuts.addAll(gen);
         }
         kill = currBlock.IRCommand.getLiveKill();
+        
         if(kill!=null)
         {
             updatedOuts.remove(kill);
             this.graphNodesNumbers.add(kill);
         }
+
+        currBlock.liveOuts = updatedOuts;
 
         // recursively calculate the ins and outs for all the exit edges (see remarks at the start of function)
         for (int j = 0; j < currBlock.enterEdges.size(); j++)
@@ -231,6 +240,21 @@ public class ControlFlowGraph
             System.out.println("Block " + i + ":");
             System.out.println("ins: " + currBlock.ins);
             System.out.println("outs: " + currBlock.outs);
+            System.out.println("enter edges: " + currBlock.enterEdges);
+            System.out.println("exit edges: " + currBlock.exitEdges);
+            System.out.println("IRcommand: " + currBlock.IRCommand.toString());
+            System.out.println();
+        }
+    }
+
+    public void printLivenessCFG()
+    {
+        for (int i = 0; i < this.blocks.size(); i++)
+        {
+            Block currBlock = this.blocks.get(i);
+            System.out.println("Block " + i + ":");
+            System.out.println("ins: " + currBlock.liveIns);
+            System.out.println("outs: " + currBlock.liveOuts);
             System.out.println("enter edges: " + currBlock.enterEdges);
             System.out.println("exit edges: " + currBlock.exitEdges);
             System.out.println("IRcommand: " + currBlock.IRCommand.toString());
@@ -267,8 +291,9 @@ public class ControlFlowGraph
 
     private void addAllNodesToInterferenceGraph(Set<String> names){
         for (String name : names){
+            System.out.println("inserting node " + name + " into graph");
             InterferenceGraphNode node = new InterferenceGraphNode(name);
-            this.interference_graph_map.put((name, node));
+            this.interference_graph_map.put(name, node);
         }
     }
 
@@ -289,6 +314,9 @@ public class ControlFlowGraph
     }
 
     private boolean colorGraph(Map<String, InterferenceGraphNode> graph) {
+        for (String key : graph.keySet()){
+			System.out.println("key: " + key);
+		}
         Stack<InterferenceGraphNode> stack = new Stack<>();
         Set<InterferenceGraphNode> remainingNodes = new HashSet<>(graph.values());
         int K = 10;
@@ -325,15 +353,24 @@ public class ControlFlowGraph
                     break;
                 }
             }
-            graph.put(node.name, node);
+            graph.put(node.unique_id, node);
         }
         return true;
     }
 
     private void assignRegisters(){
         for (Block block : this.blocks){
-            block.IRcommand.assignRegisters(this.interference_graph_map);
+            System.out.println("assigning registers to block: " + block.IRCommand.toString());
+            block.IRCommand.assignRegisters(this.interference_graph_map);
         }
+    }
+
+    private void printIRs(){
+        System.out.println("\n************************ PRINTING IRS ********************\n");
+        for (Block block : this.blocks){
+            System.out.println(block.toString());
+        }
+        System.out.println("\n************************ DONE PRINTING IRS ********************\n");
     }
 
 

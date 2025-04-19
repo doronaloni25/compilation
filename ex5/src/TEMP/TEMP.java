@@ -10,11 +10,12 @@ import java.util.*;
 /*******************/
 /* PROJECT IMPORTS */
 /*******************/
+import IR.*;
 
 public class TEMP
 {
 	private int serial = 0;
-	private int register_number = -1;
+	public int register_number = -1;
 
 	// can be t, s, a, v. - default is t
 	public String register_type = "t";
@@ -34,8 +35,9 @@ public class TEMP
 		return serial;
 	}
 
-	public setRegisterNumber(Map<String, InterferenceGraphNode> interference_graph_map){
+	public void setRegisterNumber(Map<String, InterferenceGraphNode> interference_graph_map){
 		String name = String.valueOf(this.serial);
+		System.out.println("Setting register number for: " + name);
 		this.register_number = interference_graph_map.get(name).color;
 	}
 

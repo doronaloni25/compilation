@@ -28,7 +28,7 @@ public class AST_EXP_STRING extends AST_EXP
 		/* COPY INPUT DATA NENBERS ... */
 		/*******************************/
 		this.s = s;
-		this.stringLabel = IRCommand.getFreshLabel(s);
+		this.stringLabel = IRcommand.getFreshLabel(s);
 	}
 
 	public TYPE SemantMe()

@@ -3,7 +3,6 @@
 /***********/
 package IR;
 import java.util.*;
-
 /*******************/
 /* GENERAL IMPORTS */
 /*******************/
@@ -12,6 +11,7 @@ import java.util.*;
 /* PROJECT IMPORTS */
 /*******************/
 import TEMP.*;
+import MIPS.*;
 
 public class IRcommand_Binop_Add_Integers extends IRcommand_Binop
 {

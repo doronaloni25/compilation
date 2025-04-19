@@ -13,6 +13,8 @@ import java.util.*;
 /*******************/
 import TEMP.*;
 import TYPES.*;
+import MIPS.*;
+
 // Create new Array: new <type> arr[exp] where exp is integer
 public class IRcommand_Array_Instance extends IRcommand
 {

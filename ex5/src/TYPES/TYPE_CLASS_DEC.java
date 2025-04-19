@@ -1,5 +1,7 @@
 package TYPES;
 import HelperFunctions.*;
+import AST.*;
+import TYPES.*;
 public class TYPE_CLASS_DEC extends TYPE
 {
 	// THIS CLASS REPRESENTS A CLASS DECLARATION IN THE LANGUAGE

@@ -1,4 +1,5 @@
 package TYPES;
+import AST.*;
 
 public class TYPE_CLASS_VAR_DEC
 {
@@ -20,7 +21,7 @@ public class TYPE_CLASS_VAR_DEC
 		getDefaultValue(exp);
 	}
 
-	private getDefaultValue(AST_EXP exp){
+	private void getDefaultValue(AST_EXP exp){
 		if (t instanceof TYPE_INT){
 			AST_EXP_INT exp_int = (AST_EXP_INT)exp;
 			if (exp_int.isMinus){
@@ -31,7 +32,7 @@ public class TYPE_CLASS_VAR_DEC
 			}
 		}
 		else if(t instanceof TYPE_STRING){
-			this.defaultStringLabel = (AST_EXP_STRING)exp.stringLabel;
+			this.defaultStringLabel = ((AST_EXP_STRING)exp).stringLabel;
 		}
 		else if(t instanceof TYPE_NIL){
 			this.defaultIntValue = 0;	

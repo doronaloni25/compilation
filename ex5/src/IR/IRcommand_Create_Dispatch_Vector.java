@@ -13,6 +13,7 @@ import java.util.*;
 /*******************/
 import TEMP.*;
 import TYPES.*;
+import MIPS.*;
 
 public class IRcommand_Create_Dispatch_Vector extends IRcommand
 {
@@ -29,7 +30,5 @@ public class IRcommand_Create_Dispatch_Vector extends IRcommand
     {
         // Create the dispatch vector
         MIPSGenerator.getInstance().allocateDispatchVector(this.name, this.function_list);
-        
-      
     }
 }

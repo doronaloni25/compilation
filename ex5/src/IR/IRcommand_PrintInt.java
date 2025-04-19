@@ -6,7 +6,7 @@ package IR;
 /*******************/
 /* GENERAL IMPORTS */
 /*******************/
-
+import java.util.*;
 /*******************/
 /* PROJECT IMPORTS */
 /*******************/
@@ -41,9 +41,5 @@ public class IRcommand_PrintInt extends IRcommand
 	public void assignRegisters(Map<String, InterferenceGraphNode> interference_graph_map){
 		
 		this.t.setRegisterNumber(interference_graph_map);	
-	}
-	public void MIPSme()
-	{
-		MIPSGenerator.getInstance().print_int(t);
 	}
 }
