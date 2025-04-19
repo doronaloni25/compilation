@@ -55,7 +55,7 @@ public class AST_STMT_WHILE extends AST_STMT
 		/********************/
 		/* [3] cond.IRme(); */
 		/********************/
-		TEMP cond_temp = cond.IRme();
+		TEMP cond_temp = cond.IRme(); // 1 if true 0 if false
 
 		/******************************************/
 		/* [4] Jump conditionally to the loop end */

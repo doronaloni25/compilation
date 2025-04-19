@@ -45,9 +45,10 @@ public class AST_FUNC_DEC_RULE_TWO extends AST_FUNC_DEC
         AST_COMMA_TYPE_ID commaTypeId  = new AST_COMMA_TYPE_ID(typeTwo, nameTwo);
         AST_COMMA_TYPE_ID_LIST commaTypeIdList = new AST_COMMA_TYPE_ID_LIST(commaTypeId, null);
         //asume SemantMe on commaTypeidList returns TYPE_LIST contains only the types, and doesnt check if they are already in the symbol table
+        HelperFunctions.set_func_or_method_argument_list_data(commaTypeIdList,false, true);
         TYPE_LIST paramList = commaTypeIdList.SemantMe();
         function.params = paramList;
-        HelperFunctions.set_func_or_method_argument_list_data(commaTypeIdList,false, true);
+        
         HelperFunctions.checkValidMethod(function, funcCheck, classDec, line, this.getClass().getSimpleName());
         // will take care of return type matching
         stmtList.SemantMe();
@@ -77,9 +78,9 @@ public class AST_FUNC_DEC_RULE_TWO extends AST_FUNC_DEC
         AST_COMMA_TYPE_ID commaTypeId  = new AST_COMMA_TYPE_ID(typeTwo, nameTwo);
         AST_COMMA_TYPE_ID_LIST commaTypeIdList = new AST_COMMA_TYPE_ID_LIST(commaTypeId, null);
         //asume SemantMe on commaTypeidList returns TYPE_LIST contains only the types, and doesnt check if they are already in the symbol table
+        HelperFunctions.set_func_or_method_argument_list_data(commaTypeIdList,true, false);
         TYPE_LIST paramList = commaTypeIdList.SemantMe();
         function.params = paramList;
-        HelperFunctions.set_func_or_method_argument_list_data(commaTypeIdList,true, false);
         // will take care of return type matching
         stmtList.SemantMe();
         SYMBOL_TABLE.getInstance().endScope();

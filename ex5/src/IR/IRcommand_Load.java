@@ -31,7 +31,7 @@ public class IRcommand_Load extends IRcommand
 		this.dst      = dst;
 		this.var_name = var_name;
 
-		if(data!=null)
+		if(data!=null && data.size() != 0)
 		{
 			this.data = data;
 			this.is_global =  (boolean)data.get(0);
@@ -91,6 +91,9 @@ public class IRcommand_Load extends IRcommand
 		else if(this.is_local_variable)
 		{
 			MIPSGenerator.getInstance().loadLocalVar(this.offset, this.dst);
+		}
+		else{
+			System.out.println("I shouldn't be here... - not a local/argument/global ");
 		}
 	}
 		

@@ -56,17 +56,18 @@ public class MIPSGenerator
 	{
 		fileWriter.format(".data\n");
 		fileWriter.format("\tglobal_%s: .word 0\n",var_name);
+		fileWriter.format(".text\n");
 	}
 	public void loadGlobal(String var_name, TEMP dst)
 	{	
 		//for String the val is the address where the String is saved,
 		// for Int val is the actual value we want to store.
 		String global_var_label = "global_" + var_name;
-		TEMP s9 = new TEMP("s", 9);
-		// put into s9 the global_var_label address
-		this.la(s9, global_var_label);
+		TEMP s7 = new TEMP("s", 7);
+		// put into s7 the global_var_label address
+		this.la(s7, global_var_label);
 		// write the val into the global_var_label address
-		this.lw(dst, 0, s9);
+		this.lw(dst, 0, s7);
 	}
 
 	public void loadFuncParam(int offset, TEMP dst)
@@ -214,11 +215,11 @@ public class MIPSGenerator
 		//for String the val is the address where the String is saved,
 		// for Int val is the actual value we want to store.
 		String global_var_label = "global_" + var_name;
-		TEMP s9 = new TEMP("s", 9);
-		// put into s9 the global_var_label address
-		this.la(s9, global_var_label);
+		TEMP s7 = new TEMP("s", 7);
+		// put into s7 the global_var_label address
+		this.la(s7, global_var_label);
 		// write the val into the global_var_label address
-		this.sw(val, 0, s9);
+		this.sw(val, 0, s7);
 	}
 
 	public void storeFuncParam(int offset, TEMP val)
@@ -246,34 +247,34 @@ public class MIPSGenerator
 
 	public TEMP calcStringLen(TEMP str){
 		// We create MIPS code that loops over the string in order to calculate its length
+		TEMP s5 = new TEMP("s", 5);
+		TEMP s6 = new TEMP("s", 6);
 		TEMP s7 = new TEMP("s", 7);
-		TEMP s8 = new TEMP("s", 8);
-		TEMP s9 = new TEMP("s", 9);
 		String start_of_loop = IRcommand.getFreshLabel("loop_string_start");
 		String end_of_loop = IRcommand.getFreshLabel("loop_string_end");
 
-		// S7 will hold the address of curr char (in order to progress along the string)
-		// S8 will hold current char - init with the first byte from the pointer (each char is one byte).
-		// S9 will hold length so far - init with 0.
-		move(s7, str);
-		li(s9, 0);
+		// s5 will hold the address of curr char (in order to progress along the string)
+		// s6 will hold current char - init with the first byte from the pointer (each char is one byte).
+		// s7 will hold length so far - init with 0.
+		move(s5, str);
+		li(s7, 0);
 
 		// start the loop
 		label(start_of_loop); 
-		lb(s8, 0, s7); 
+		lb(s6, 0, s5); 
 		// if curr char is terminating (0), exit loop.
-		beqz(s8, end_of_loop);
+		beqz(s6, end_of_loop);
 		// else, add 1 to length and to adress(point to next char in string)
-		addiu(s9, s9, 1);
 		addiu(s7, s7, 1);
+		addiu(s5, s5, 1);
 		jump(start_of_loop);
 		label(end_of_loop);
 		// when done - return temp that holds the current length
-		return s9;
+		return s7;
 	}
 
 	public void label(String label_name){
-		if (label_name.equals(HelperFunctions.formatEntryLabel("main"))){
+		if (label_name.equals("main")){
 			fileWriter.format(".globl %s\n%s:\n", label_name, label_name);
 		}
 		else{
@@ -283,27 +284,27 @@ public class MIPSGenerator
 
 	public void strcpy(TEMP dest, TEMP src){
 		// we assume len(dest) >= len(src)
+		TEMP s5 = new TEMP("s",5);
+		TEMP s6 = new TEMP("s", 6);
 		TEMP s7 = new TEMP("s", 7);
-		TEMP s8 = new TEMP("s", 8);
-		TEMP s9 = new TEMP("s", 9);
 		String start_of_loop = IRcommand.getFreshLabel("loop_string_start");
 		String end_of_loop = IRcommand.getFreshLabel("loop_string_end");
 
-		// S7 will hold curr char adress for src
-		// S8 will hold curr char for src
-		// S9 will hold curr char adress for dest
-		move(s7, src);
-		move(s9, dest);
+		// s5 will hold curr char adress for src
+		// s6 will hold curr char for src
+		// s7 will hold curr char adress for dest
+		move(s5, src);
+		move(s7, dest);
 
 		label(start_of_loop);
-		lb(s8, 0, s7);
+		lb(s6, 0, s5);
 		// if curr char is terminating (0), exit loop.
-		beqz(s8, end_of_loop);
-		// else, write curr char to curr char address in dest (s9)
-		sb(s8, 0, s9); 
+		beqz(s6, end_of_loop);
+		// else, write curr char to curr char address in dest (s7)
+		sb(s6, 0, s7); 
 		// increment both pointers, and continue the loop
+		addiu(s5, s5, 1);
 		addiu(s7, s7, 1);
-		addiu(s9, s9, 1);
 		jump(start_of_loop);
 		label(end_of_loop);
 	}
@@ -420,15 +421,17 @@ public class MIPSGenerator
 		String handle_overflow_label = IRcommand.getFreshLabel("handle_overflow");
 		String handle_underflow_label = IRcommand.getFreshLabel("handle_underflow");
 		String valid_label = IRcommand.getFreshLabel("valid");
-		TEMP s8  = new TEMP("s", 8);
-		TEMP s9 = new TEMP("s", 9);
+		TEMP s6  = new TEMP("s", 6);
+		TEMP s7 = new TEMP("s", 7);
 		
-		this.li(s8, 32767);
-		this.li(s9, -32767);
+		this.li(s6, 32767);
+		this.li(s7, -32767);
 		//check if is bigger than 2^15
-		this.bge(dst, s8, handle_overflow_label);
+		this.bge(dst, s6, handle_overflow_label);
 		//check if smaller than -2^15
-		this.ble(dst, s9, handle_underflow_label);
+		this.ble(dst, s7, handle_underflow_label);
+		// if all is good, valid.
+		this.jump(valid_label);
 		//handling overflow
 		this.label(handle_overflow_label);
 		this.li(dst,32767);
@@ -496,15 +499,15 @@ public class MIPSGenerator
 	public void checkIndexInBounds(TEMP arr, TEMP index)
 	{
 		TEMP zero = new TEMP("zero", -1);
-		TEMP s9 = new TEMP("s", 9);
+		TEMP s7 = new TEMP("s", 7);
 		String error = IRcommand.getFreshLabel("index_out_of_bounds");
 		String all_good = IRcommand.getFreshLabel("all_good");
 		// first check if index is negative
 		blt(index, zero, error);
-		// get array size into s9
-		lw(s9, 0, arr);
+		// get array size into s7
+		lw(s7, 0, arr);
 		//check if index is bigger than array size
-		bge(index, s9, error);
+		bge(index, s7, error);
 		// if we reached here all is good
 		jump(all_good);
 		// Take care of invalid index
@@ -561,6 +564,7 @@ public class MIPSGenerator
 			instance.fileWriter.print("string_access_violation: .asciiz \"Access Violation\"\n");
 			instance.fileWriter.print("string_illegal_div_by_0: .asciiz \"Illegal Division By Zero\"\n");
 			instance.fileWriter.print("string_invalid_ptr_dref: .asciiz \"Invalid Pointer Dereference\"\n");
+			instance.fileWriter.print(".text\n");
 		}
 		return instance;
 	}

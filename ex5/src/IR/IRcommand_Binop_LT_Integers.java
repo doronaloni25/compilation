@@ -54,7 +54,7 @@ public class IRcommand_Binop_LT_Integers extends IRcommand_Binop
 		/*************************/
 		/* [4] label_AssignZero: */
 		/*                       */
-		/*         t3 := 1       */
+		/*         t3 := 0       */
 		/*         goto end;     */
 		/*                       */
 		/*************************/

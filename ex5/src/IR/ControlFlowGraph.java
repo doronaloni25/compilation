@@ -16,7 +16,10 @@ public class ControlFlowGraph
         initBlocks(irCommands);
         initEdges();
         calcInsAndOuts(this.blocks.get(0));
-        livelinessAnalysis(this.blocks.get(this.blocks.size() - 1));
+        for (Block block : blocks){
+            livelinessAnalysis(block);
+        }
+        //livelinessAnalysis(this.blocks.get(this.blocks.size() - 1));
         addAllNodesToInterferenceGraph(this.graphNodesNumbers);
         addInterferenceEdges();
         boolean colorable = colorGraph(this.interference_graph_map);
@@ -24,7 +27,7 @@ public class ControlFlowGraph
             // TODO: ERROR
         }
         this.printIRs();
-        this.printLivenessCFG();
+        //this.printLivenessCFG();
         assignRegisters();
     }
 
@@ -208,10 +211,12 @@ public class ControlFlowGraph
         // add all the temp numbers (as strings) to the graphNodesNumbers
         // we add all temp used in this block which is the gen and kill
         if (gen != null){
+
             this.graphNodesNumbers.addAll(gen);
             updatedOuts.addAll(gen);
         }
         kill = currBlock.IRCommand.getLiveKill();
+        
         if(kill!=null)
         {
             updatedOuts.remove(kill);
@@ -286,6 +291,7 @@ public class ControlFlowGraph
 
     private void addAllNodesToInterferenceGraph(Set<String> names){
         for (String name : names){
+            System.out.println("inserting node " + name + " into graph");
             InterferenceGraphNode node = new InterferenceGraphNode(name);
             this.interference_graph_map.put(name, node);
         }
@@ -308,6 +314,9 @@ public class ControlFlowGraph
     }
 
     private boolean colorGraph(Map<String, InterferenceGraphNode> graph) {
+        for (String key : graph.keySet()){
+			System.out.println("key: " + key);
+		}
         Stack<InterferenceGraphNode> stack = new Stack<>();
         Set<InterferenceGraphNode> remainingNodes = new HashSet<>(graph.values());
         int K = 10;

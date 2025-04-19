@@ -29,6 +29,11 @@ public class IRcommand_Call_Func extends IRcommand
     }
 
     @Override
+    public String toString(){
+        return "Command: call func on function: " + this.name;
+    }
+
+    @Override
     public Set<String> getLiveGen()
 	{
         Set<String> genSet = new HashSet<String>();

@@ -37,6 +37,7 @@ public class TEMP
 
 	public void setRegisterNumber(Map<String, InterferenceGraphNode> interference_graph_map){
 		String name = String.valueOf(this.serial);
+		System.out.println("Setting register number for: " + name);
 		this.register_number = interference_graph_map.get(name).color;
 	}
 
