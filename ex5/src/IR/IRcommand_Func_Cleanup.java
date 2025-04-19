@@ -50,7 +50,6 @@ public class IRcommand_Func_Cleanup extends IRcommand_Label
         MIPSGenerator.getInstance().addToStack(8, sp);
 		//jump to the return adress
         MIPSGenerator.getInstance().jr(ra);
-
 	}
 }
 //kill and gen are not needed here, implemented in IRcommand

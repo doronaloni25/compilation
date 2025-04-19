@@ -70,9 +70,14 @@ public class AST_EXP_VAR_DOT extends AST_EXP
         if(exp != null)
         {
             function_arguments_list.head = exp.SemantMe();
+            if(exp.data == null)
+            {
+                HelperFunctions.set_data(exp.data, false, false, true, false, false, 0);
+            }
             if(expList != null)
             {
                 function_arguments_list.tail = expList.SemantMe();
+                HelperFunctions.set_func_or_method_argument_list_data(expList, false, true);
             }
         }
         if(!HelperFunctions.compareTypeLists(function_arguments_list, found_function.params))

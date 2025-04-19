@@ -24,7 +24,7 @@ public class AST_EXP_BINOP extends AST_EXP
 		/***************************************/
 		/* PRINT CORRESPONDING DERIVATION RULE */
 		/***************************************/
-		System.out.format("====================== exp -> exp BINOP exp\n");
+		System.out.format("====================== exp -> exp %d exp\n", OP.op);
 
 		/*******************************/
 		/* COPY INPUT DATA NENBERS ... */
@@ -35,9 +35,11 @@ public class AST_EXP_BINOP extends AST_EXP
 	}
 
 	public TYPE SemantMe(){
+		System.out.format("Currently semanting %d, found in line: %d\n", OP.op, line);
 		TYPE leftType = left.SemantMe();
 		this.expType = leftType;
 		TYPE rightType = right.SemantMe();
+		System.out.format("finished semanting my child exps (my op is %d)\n", OP.op);
 		if (leftType == null || rightType == null){
 			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}

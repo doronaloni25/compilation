@@ -72,13 +72,14 @@ public class MIPSGenerator
 
 	public void loadFuncParam(int offset, TEMP dst)
 	{
-		int function_offset = (offset + 1) * 4;
+		int function_offset = (offset + 2) * 4;
 		TEMP fp = new TEMP("fp", -1);
 		this.lw(dst, function_offset, fp);
 	}
 
 	public void loadMethodParam(int offset, TEMP dst)
 	{
+		// TODO: figure out offset
 		// first place is dispatch vector
 		int method_offset = (offset + 2) * 4;
 		TEMP fp = new TEMP("fp", -1);
@@ -355,7 +356,7 @@ public class MIPSGenerator
 		}
 	}
 	public void popRegistersFromStack(TEMP sp){
-		for (int i = 0; i <10; i++)
+		for (int i = 9; i >= 0; i--)
 		{
 			TEMP tempReg = new TEMP("t", i);
 			this.lw(tempReg, 0, sp);

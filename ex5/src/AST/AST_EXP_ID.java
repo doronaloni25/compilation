@@ -60,7 +60,6 @@ public class AST_EXP_ID extends AST_EXP
             function_arguments_list.head = exp.SemantMe();
             if(exp.data == null)
             {
-              
                 HelperFunctions.set_data(exp.data, false, true, false, false, false, 0);
             }
             

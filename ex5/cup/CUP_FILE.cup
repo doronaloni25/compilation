@@ -202,7 +202,13 @@ arrayTypedef	::=		ARRAY ID:name EQ type:t	LBRACK RBRACK SEMICOLON {: RESULT = ne
 
 exp			::=		var:v								{: RESULT = new AST_EXP_VAR(v);          	:}
 					| LPAREN exp:e RPAREN				{: RESULT = new AST_EXP_SIMPLE(e);			:}
-					| exp:e1 BINOP:bop exp:e2			{: RESULT = new AST_EXP_BINOP(e1, e2, bop);	:}
+					| exp:e1 PLUS exp:e2			{: RESULT = new AST_EXP_BINOP(e1, e2, new AST_BINOP(0));	:}
+					| exp:e1 MINUS exp:e2			{: RESULT = new AST_EXP_BINOP(e1, e2, new AST_BINOP(1));	:}
+					| exp:e1 TIMES exp:e2			{: RESULT = new AST_EXP_BINOP(e1, e2, new AST_BINOP(2));	:}
+					| exp:e1 DIVIDE exp:e2			{: RESULT = new AST_EXP_BINOP(e1, e2, new AST_BINOP(3));	:}
+					| exp:e1 LT exp:e2			{: RESULT = new AST_EXP_BINOP(e1, e2, new AST_BINOP(4));	:}
+					| exp:e1 GT exp:e2			{: RESULT = new AST_EXP_BINOP(e1, e2, new AST_BINOP(5));	:}
+					| exp:e1 EQ exp:e2			{: RESULT = new AST_EXP_BINOP(e1, e2, new AST_BINOP(6));	:}
 					| var:v DOT ID:name LPAREN RPAREN {: RESULT = new AST_EXP_VAR_DOT(v, name, null, null);		:}
 					| var:v DOT ID:name LPAREN exp:e RPAREN {: RESULT = new AST_EXP_VAR_DOT(v, name, e, null);	:}
 					| var:v DOT ID:name LPAREN exp:e commaExpList:el RPAREN {: RESULT = new AST_EXP_VAR_DOT(v, name, e, el);	:}
@@ -250,14 +256,3 @@ cField		::=		varDec:d {:RESULT = new AST_CFIELD_VAR_DEC(d);		:}
 cFieldList  ::=		cField:cf cFieldList:l			{: RESULT = new AST_CFIELD_LIST(cf, l);		:}
 					| cField:cf						{: RESULT = new AST_CFIELD_LIST(cf, null);	:}
 					;
-
-BINOP		::=		PLUS {:RESULT = new AST_BINOP(0);	:}
-					| MINUS {:RESULT = new AST_BINOP(1);	:}
-					| TIMES {:RESULT = new AST_BINOP(2);	:}
-					| DIVIDE {:RESULT = new AST_BINOP(3);	:}
-					| LT {:RESULT = new AST_BINOP(4);	:}
-					| GT {:RESULT = new AST_BINOP(5);	:}
-					| EQ {:RESULT = new AST_BINOP(6);	:}
-					;
-
-

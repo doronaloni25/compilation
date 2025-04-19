@@ -85,6 +85,7 @@ public class AST_FUNC_DEC_RULE_THREE extends AST_FUNC_DEC
             SYMBOL_TABLE.getInstance().inFunction = function;
             AST_COMMA_TYPE_ID commaTypeId  = new AST_COMMA_TYPE_ID(typeTwo, nameTwo);
             AST_COMMA_TYPE_ID_LIST commaTypeIdListFunc = new AST_COMMA_TYPE_ID_LIST(commaTypeId, commaTypeIdList);
+            // TODO: make sure the following line is/isn't necessary
             HelperFunctions.set_func_or_method_argument_list_data(commaTypeIdListFunc,true, false);
             //asume SemantMe on commaTypeidList returns TYPE_LIST contains only the types, and doesnt check if they are already in the symbol table
             TYPE_LIST paramList = commaTypeIdListFunc.SemantMe();
