@@ -74,6 +74,7 @@ public class TYPE_CLASS_DEC extends TYPE
 			if(currField.head == null){
 				return -1;
 			}
+			System.out.println(currField.head);
 			if(currField.head.name.equals(fieldName))
 			{
 				return offset;

@@ -86,7 +86,7 @@ public class AST_VAR_FIELD extends AST_VAR
 		TYPE_CLASS_DEC classType = this.myClassInstance.classDec;
 		// get the field offset
 		int offset = classType.getFieldOffset(this.fieldName);
-		IR.getInstance().Add_IRcommand(new IRcommand_Load_From_Field(dest, tClassInstance,  classType, offset, fieldName));
+		IR.getInstance().Add_IRcommand(new IRcommand_Load_From_Field(dest, tClassInstance, offset, fieldName));
 		return dest;
 	}
 }

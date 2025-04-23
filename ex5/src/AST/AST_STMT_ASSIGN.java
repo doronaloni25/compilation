@@ -114,6 +114,7 @@ public class AST_STMT_ASSIGN extends AST_STMT
 			TYPE_CLASS_DEC classType = ((TYPE_CLASS)varField.myClassInstance).classDec;
 			// get the field offset
 			int offset = classType.getFieldOffset(fieldName);
+			System.out.println("offset of field " +fieldName +" is: "+ offset );
 			TEMP tValue = exp.IRme();
 			cmd = new IRcommand_Store_Into_Field(tClass, tValue, offset, fieldName);
 		}

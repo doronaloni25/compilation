@@ -24,6 +24,7 @@ public class IRcommand_Load extends IRcommand
 	boolean is_func_param = false;
 	boolean is_method_param = false;
 	boolean is_local_variable = false;
+	boolean is_field = false;
 	int offset = -1;
 
 	public IRcommand_Load(String var_name, TEMP dst, ArrayList<Object> data)
@@ -38,6 +39,7 @@ public class IRcommand_Load extends IRcommand
 			this.is_func_param = (boolean)data.get(1);
 			this.is_method_param = (boolean)data.get(2);
 			this.is_local_variable = (boolean)data.get(3);		
+			this.is_field = (boolean)data.get(4);
 			this.offset = (int)data.get(5);
 		}
 	}
@@ -92,8 +94,9 @@ public class IRcommand_Load extends IRcommand
 		{
 			MIPSGenerator.getInstance().loadLocalVar(this.offset, this.dst);
 		}
-		else{
-			System.out.println("I shouldn't be here... - not a local/argument/global ");
+		else if(this.is_field)
+		{
+			MIPSGenerator.getInstance().loadField(this.offset, this.dst);
 		}
 	}
 		

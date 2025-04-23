@@ -93,6 +93,15 @@ public class MIPSGenerator
 		TEMP fp = new TEMP("fp", -1);
 		this.lw(dst, local_offset, fp);
 	}
+
+	public void loadField(int offset, TEMP dst)
+	{
+		TEMP obj = new TEMP("s", 7);
+		TEMP fp = new TEMP("fp", -1);
+		this.lw(obj, 8, fp );
+		this.lw(dst, offset *4, obj );
+	}
+
 	public void store(String var_name,TEMP src)
 	{
 		// TODO: check if necessary
@@ -482,7 +491,7 @@ public class MIPSGenerator
 		String name_dispatch_vector = String.format("%s_dispatch_vector", name);
 		fileWriter.format(".data\n");
 		fileWriter.format("\t%s:\n", name_dispatch_vector);
-		for(TYPE_LIST curr = function_list; curr != null; curr = curr.tail)
+		for(TYPE_LIST curr = function_list; curr != null && curr.head != null; curr = curr.tail)
 		{
 			fileWriter.format("\t.word %s\n", HelperFunctions.formatEntryLabel(curr.head.name));
 		}

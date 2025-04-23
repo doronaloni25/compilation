@@ -44,8 +44,8 @@ public class IRcommand_Store_Into_Field extends IRcommand
         // check null dereference
         MIPSGenerator.getInstance().checkNullPointer(this.classT);
         // get byte offset and store into the instance (add one since first item is vtable address)
-        int byte_offset = (this.offset + 1) * 4;
-        MIPSGenerator.getInstance().sw(this.value, offset, this.classT);
+        int byte_offset = this.offset * 4;
+        MIPSGenerator.getInstance().sw(this.value, byte_offset, this.classT);
     }
 }
             

@@ -42,4 +42,8 @@ public class TYPE_CLASS_VAR_DEC
 			System.out.println("wtf... var dec is wrong type for some reason unlucky, the name is: " + name);
 		}
 	}
+	public String toString()
+	{
+		return "my field name is: " + this.name;
+	}
 }

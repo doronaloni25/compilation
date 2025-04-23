@@ -68,7 +68,7 @@ public class AST_VAR_DEC extends AST_DEC
                 classType.addField(name, t, line);
             }
             //t is a field in the class
-            HelperFunctions.set_data(this.data,false, false, false, false, true); 
+            HelperFunctions.set_data(this.data,false, false, false, false, true, classType.getFieldOffset(this.name)); 
         }
         SYMBOL_TABLE.getInstance().enter(name, t, this.data);
        

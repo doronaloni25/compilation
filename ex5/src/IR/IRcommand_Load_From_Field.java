@@ -18,7 +18,7 @@ public class IRcommand_Load_From_Field extends IRcommand
     public int offset;
     public String fieldName;
 
-    public IRcommand_Load_From_Field(TEMP dst, TEMP instance,TYPE_CLASS_DEC tClass, int offset, String fieldName)
+    public IRcommand_Load_From_Field(TEMP dst, TEMP instance, int offset, String fieldName)
     {
         this.dst = dst;
         this.instance = instance;
@@ -50,7 +50,7 @@ public class IRcommand_Load_From_Field extends IRcommand
         // check null dereference
         MIPSGenerator.getInstance().checkNullPointer(this.instance);
         // get byte offset and store into the instance (add one since first item is vtable address)
-        int byte_offset = (this.offset + 1) * 4;
-        MIPSGenerator.getInstance().lw(this.dst, offset, this.instance);
+        int byte_offset = this.offset  * 4;
+        MIPSGenerator.getInstance().lw(this.dst, byte_offset, this.instance);
     }
 }

@@ -57,19 +57,19 @@ public class IRcommand_Class_Instance extends IRcommand
         MIPSGenerator.getInstance().sw(s0, 0, this.pointer);
         //now fill default values for each 
         int i = 0;
-        for(TYPE_CLASS_VAR_DEC_LIST curr_node = data_members; curr_node != null; curr_node=curr_node.tail)
+        for(TYPE_CLASS_VAR_DEC_LIST curr_node = data_members; curr_node != null && curr_node.head != null; curr_node=curr_node.tail)
         {
             TYPE_CLASS_VAR_DEC curr_var = curr_node.head;
             if(curr_var.t instanceof TYPE_STRING)
             {
                 MIPSGenerator.getInstance().la(s0, curr_var.defaultStringLabel);
-                MIPSGenerator.getInstance().sw(s0, 4*(i+4), this.pointer);
+                MIPSGenerator.getInstance().sw(s0, 4*(i+1), this.pointer);
             }
             // we are here if we are INT or NIL
             else
             {
                 MIPSGenerator.getInstance().li(s0, curr_var.defaultIntValue);
-                MIPSGenerator.getInstance().sw(s0, 4*(i+4), this.pointer);
+                MIPSGenerator.getInstance().sw(s0, 4*(i+1), this.pointer);
             }
             i++;
         }
