@@ -145,9 +145,12 @@ public class HelperFunctions{
                 }
                 else{
                     // take care of overloading
-                    if (HelperFunctions.isOverloading(function, funcType)){
+                    if (HelperFunctions.isOverloading(function, funcType))
+                    {
                         HelperFunctions.printError(line, className);
                     }
+                    function.classDecName = classDec.name;
+                    classDec.overideAdd(function);
                 }
             }
             else{

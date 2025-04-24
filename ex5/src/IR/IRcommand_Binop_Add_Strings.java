@@ -45,7 +45,7 @@ public class IRcommand_Binop_Add_Strings extends IRcommand_Binop
 		MIPSGenerator.getInstance().move(s1, len);
 		
 		// add lengths of both strings and save into s2 for new string length - add 1 for terminating char
-		MIPSGenerator.getInstance().add(s2, s0, s1);
+		MIPSGenerator.getInstance().addNoBoundsCheck(s2, s0, s1);
 		MIPSGenerator.getInstance().addiu(s2, s2, 1);
 
 		// allocate memory for new string
@@ -57,10 +57,10 @@ public class IRcommand_Binop_Add_Strings extends IRcommand_Binop
 		// copy string 1 into start of new string
 		MIPSGenerator.getInstance().strcpy(s3, this.t1);
 		// move new string pointer (with the length of the 1st string) and copy 2nd string
-		MIPSGenerator.getInstance().add(s3, s3, s0);
+		MIPSGenerator.getInstance().addNoBoundsCheck(s3, s3, s0);
 		MIPSGenerator.getInstance().strcpy(s3, this.t2);
 		// move new string pointer (with the length of the 2nd string) and add terminating char
-		MIPSGenerator.getInstance().add(s3, s3, s1);
+		MIPSGenerator.getInstance().addNoBoundsCheck(s3, s3, s1);
 		TEMP zero = new TEMP("zero", -1);
 		MIPSGenerator.getInstance().sb(zero, 0, s3);
 

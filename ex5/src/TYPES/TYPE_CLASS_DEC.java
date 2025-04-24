@@ -113,9 +113,48 @@ public class TYPE_CLASS_DEC extends TYPE
 		}
 	}
 	// add the function to the class function list
-	public void addFunction(TYPE_FUNCTION f)
+	public void addFunction(TYPE_FUNCTION node)
 	{
-		this.function_list = new TYPE_LIST(f, this.function_list);
+		TYPE_LIST funcList = this.function_list;
+		TYPE_FUNCTION head = (TYPE_FUNCTION)funcList.head;
+		if (head == null){
+			head = node;
+			this.function_list.tail = null;
+			this.function_list.last = funcList;
+			this.function_list.head = node;
+			return;
+		}
+		TYPE_LIST newTail = new TYPE_LIST(node, null);
+		this.function_list.last.tail = newTail;
+		this.function_list.last = newTail; 
+	}
+
+	public void overideAdd(TYPE_FUNCTION f)
+	{
+		TYPE_LIST currFunction = function_list;
+		TYPE_LIST prev = null;
+		while(currFunction != null)
+		{
+			if(currFunction.head == null)
+			{
+				//TODO:error
+				return;
+			}
+			if(currFunction.head.name.equals(f.name))
+			{
+				if(prev == null)
+				{
+					this.function_list = new TYPE_LIST(f, currFunction.tail);
+				}
+				else
+				{
+					prev.tail = new TYPE_LIST(f, currFunction.tail);
+				}
+				return;
+			}
+			prev = currFunction;
+			currFunction = currFunction.tail;
+		}
 	}
 
 	public int getMethodOffset(String methodName){

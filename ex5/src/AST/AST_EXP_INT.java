@@ -35,7 +35,15 @@ public class AST_EXP_INT extends AST_EXP
 		/*******************************/
 		/* COPY INPUT DATA NENBERS ... */
 		/*******************************/
-		this.value = value;
+		if(isMinus)
+		{
+			this.value = (-1) * value;
+		}
+		else
+		{
+			this.value = value;
+		}
+		
 		this.isMinus = isMinus;
 	}
 
@@ -58,13 +66,7 @@ public class AST_EXP_INT extends AST_EXP
 	public TEMP IRme(){
 		// create new temp and store the value in it
 		TEMP t = TEMP_FACTORY.getInstance().getFreshTEMP();
-		if(isMinus)
-		{
-			IR.getInstance().Add_IRcommand(new IRcommandConstInt(t, (-1) * value));
-		}
-		else{
-			IR.getInstance().Add_IRcommand(new IRcommandConstInt(t, value));
-		}
+		IR.getInstance().Add_IRcommand(new IRcommandConstInt(t, value));
 		return t;
 	}
 }

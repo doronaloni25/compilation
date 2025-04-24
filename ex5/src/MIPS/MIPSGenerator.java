@@ -14,7 +14,7 @@ import HelperFunctions.*;
 import TEMP.*;
 import IR.*;
 import TYPES.*;
-
+import AST.*;
 public class MIPSGenerator
 {
 	private int WORD_SIZE=4;
@@ -54,10 +54,26 @@ public class MIPSGenerator
 	//}
 	public void allocate(String var_name)
 	{
-		fileWriter.format(".data\n");
-		fileWriter.format("\tglobal_%s: .word 0\n",var_name);
 		fileWriter.format(".text\n");
+		fileWriter.format("\tglobal_%s: .word 0\n", var_name);
 	}
+
+	public void allocateGlobalInt(String var_name, AST_EXP exp)
+	{
+		fileWriter.format(".text\n");
+		fileWriter.format("\tglobal_%s: .word %d\n", var_name, ((AST_EXP_INT)exp).value);
+	}
+
+	public void allocateGlobalString(String var_name, AST_EXP exp)
+	{
+		String global_string_label = ((AST_EXP_STRING)exp).stringLabel;
+		String string_value = ((AST_EXP_STRING)exp).s;
+		fileWriter.format(".data\n");
+		fileWriter.format("\t%s: .asciiz \"%s\"\n", global_string_label, string_value);
+		fileWriter.format(".text\n");
+		fileWriter.format("\tglobal_%s: .word %s\n", var_name, global_string_label);
+	}
+
 	public void loadGlobal(String var_name, TEMP dst)
 	{	
 		//for String the val is the address where the String is saved,

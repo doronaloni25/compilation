@@ -61,7 +61,8 @@ public class IRcommandConstString extends IRcommand
 	public void MIPSme()
 	{
 		MIPSGenerator.getInstance().constString(this.label, this.value);
-		if (t != null){
+		if (t != null)
+		{
 			MIPSGenerator.getInstance().la(this.t, this.label);
 		}
 	}
