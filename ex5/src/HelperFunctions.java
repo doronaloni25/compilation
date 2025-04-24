@@ -111,7 +111,8 @@ public class HelperFunctions{
     }
 
     // set function list as inherited (inplace) 
-    public static void setFunctionListInherited(TYPE_LIST funcList){
+    public static void setFunctionListInherited(TYPE_LIST funcList)
+    {
         TYPE_FUNCTION funcDec;
         while (funcList != null && funcList.head != null){
             funcDec = (TYPE_FUNCTION)funcList.head;
@@ -155,6 +156,7 @@ public class HelperFunctions{
         }
         else{
             // need to insert to class function list
+            function.classDecName = classDec.name;
             classDec.addFunction(function);
         }
     }

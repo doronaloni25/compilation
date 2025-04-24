@@ -12,7 +12,7 @@ public class TYPE_FUNCTION extends TYPE
 	/*************************/
 	public TYPE_LIST params;
 	public int localVariablesCount = 0;
-	
+	public String classDecName;
 	/****************/
 	/* CTROR(S) ... */
 	/****************/
@@ -22,6 +22,7 @@ public class TYPE_FUNCTION extends TYPE
 		this.returnType = returnType;
 		this.params = params;
 		this.isInherited = false;
+		this.classDecName = null;
 	}
 
 	@Override
