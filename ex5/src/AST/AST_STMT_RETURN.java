@@ -7,6 +7,7 @@ import HelperFunctions.*;
 public class AST_STMT_RETURN extends AST_STMT {
     AST_EXP exp;
 	TYPE_FUNCTION currentFunction;
+	TYPE_CLASS_DEC classDec;
     public AST_STMT_RETURN(AST_EXP exp)
 	{
 		/******************************/
@@ -43,6 +44,9 @@ public class AST_STMT_RETURN extends AST_STMT {
 		{
 			HelperFunctions.printError(line, this.getClass().getSimpleName());
 		}
+		TYPE_CLASS_DEC classDec = SYMBOL_TABLE.getInstance().inClass;
+		// save for IRme()
+		this.classDec = classDec;
 		// if the expression is null, the return type should be void
 		if(exp == null)
 		{
@@ -73,14 +77,20 @@ public class AST_STMT_RETURN extends AST_STMT {
 	/*the IRFuncReturn expects to get the TEMP of the returned exp. if the func return void, then null*/ 
 	{
 		TEMP tExp;
+		String endLabel;
 		if (exp != null){
 			tExp = exp.IRme();
 		}
 		else{
 			tExp = null;
+		}
+		if (this.classDec != null){
+			endLabel = HelperFunctions.formatMethodExitLabel(this.classDec.name, currentFunction.name);
 		} 
-		String exitLabel = HelperFunctions.formatExitLabel(currentFunction.name);
-		IR.getInstance().Add_IRcommand(new IRcommand_FuncReturn(tExp, exitLabel));
+		else{
+			endLabel = HelperFunctions.formatExitLabel(currentFunction.name);
+		}
+		IR.getInstance().Add_IRcommand(new IRcommand_FuncReturn(tExp, endLabel));
 		return tExp;
 	}
 }
