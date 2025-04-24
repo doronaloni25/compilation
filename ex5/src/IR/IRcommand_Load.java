@@ -98,6 +98,9 @@ public class IRcommand_Load extends IRcommand
 		{
 			MIPSGenerator.getInstance().loadField(this.offset, this.dst);
 		}
+		else{
+			System.out.println("unfortunate situation");
+		}
 	}
 		
 	  public void assignRegisters(Map<String, InterferenceGraphNode> interference_graph_map){
