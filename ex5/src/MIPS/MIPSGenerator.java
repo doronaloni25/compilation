@@ -274,7 +274,7 @@ public class MIPSGenerator
 		TEMP fp = new TEMP("fp", -1);
 		this.lw(instance, 8, fp);
 		int byteOffset = offset * 4;
-		this.sw(instance, byteOffset, instance);
+		this.sw(val, byteOffset, instance);
 	}
 
 	public TEMP calcStringLen(TEMP str){
