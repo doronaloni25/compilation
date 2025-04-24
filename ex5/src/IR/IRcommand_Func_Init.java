@@ -40,8 +40,10 @@ public class IRcommand_Func_Init extends IRcommand
 		MIPSGenerator.getInstance().move(fp, sp);
 		//allocate space for local variables, and save them
 		MIPSGenerator.getInstance().storeTempsToStack();
-		MIPSGenerator.getInstance().subu(sp, sp, localVariablesCount * 4);
-		//TODO: check if need to initialize the local vars to 0?
+		if(localVariablesCount != 0)
+		{
+			MIPSGenerator.getInstance().subu(sp, sp, localVariablesCount * 4);
+		}
 
 	}
 }

@@ -88,12 +88,17 @@ public class HelperFunctions{
         TYPE_FUNCTION funcDec;
 
         // Enter var decs to the symbol table
-        while (varDecs != null && varDecs.head != null){
+        int offset = 1;
+        while (varDecs != null && varDecs.head != null)
+        {
             varDec = varDecs.head;
             TYPE varType = varDec.t;
             String varName = varDec.name;
-            SYMBOL_TABLE.getInstance().enter(varName, varType);
+            ArrayList<Object> data = new ArrayList<Object>();
+            set_data(data, false, false,false,false,true, offset);
+            SYMBOL_TABLE.getInstance().enter(varName, varType, data);
             varDecs = varDecs.tail;
+            offset++;
         }
         // Enter func decs to the symbol table
         while (funcList != null && funcList.head != null){
