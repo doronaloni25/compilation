@@ -23,6 +23,15 @@ public class AST_CFIELD_VAR_DEC extends AST_CFIELD
     }
     public TEMP IRme()
     {
-        return varDec.IRme();
+        if (varDec instanceof AST_VAR_DEC_EXP){
+            if (((AST_VAR_DEC_EXP)varDec).exp instanceof AST_EXP_STRING){
+                AST_EXP_STRING strExp = (AST_EXP_STRING)((AST_VAR_DEC_EXP)varDec).exp;
+                IR.getInstance().Add_IRcommand(new IRcommandConstString(strExp.s, strExp.stringLabel));
+            }
+        }
+        else{
+            return varDec.IRme();
+        }
+        return null;
     }
 }

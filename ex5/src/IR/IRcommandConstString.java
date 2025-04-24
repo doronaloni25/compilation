@@ -24,6 +24,11 @@ public class IRcommandConstString extends IRcommand
 		this.value = value;
 		this.label = label;
 	}
+	public IRcommandConstString(String value, String label){
+		this.value = value;
+		this.label = label;
+		this.t = null;
+	}
 	
 	public String getGen(Set<String> ins)
 	{
@@ -38,12 +43,17 @@ public class IRcommandConstString extends IRcommand
 
 	public String getLiveKill()
 	{
+		if (t == null){
+			return null;
+		}
 		return (String.valueOf(this.t.getSerialNumber()));
 	}
 
 	@Override
     public void assignRegisters(Map<String, InterferenceGraphNode> interference_graph_map){
-		this.t.setRegisterNumber(interference_graph_map);;
+		if (t != null){
+			this.t.setRegisterNumber(interference_graph_map);
+		}
 	}
 	/***************/
 	/* MIPS me !!! */
@@ -51,7 +61,9 @@ public class IRcommandConstString extends IRcommand
 	public void MIPSme()
 	{
 		MIPSGenerator.getInstance().constString(this.label, this.value);
-		MIPSGenerator.getInstance().la(this.t, this.label);
+		if (t != null){
+			MIPSGenerator.getInstance().la(this.t, this.label);
+		}
 	}
 
 }

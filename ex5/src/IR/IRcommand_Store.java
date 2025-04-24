@@ -38,7 +38,8 @@ public class IRcommand_Store extends IRcommand
 			this.is_global =  (boolean)data.get(0);
 			this.is_func_param = (boolean)data.get(1);
 			this.is_method_param = (boolean)data.get(2);
-			this.is_local_variable = (boolean)data.get(3);		
+			this.is_local_variable = (boolean)data.get(3);
+			this.is_class_field = (boolean)data.get(4);		
 			this.offset = (int)data.get(5);
 		}
 		
@@ -105,6 +106,8 @@ public class IRcommand_Store extends IRcommand
 		{
 			MIPSGenerator.getInstance().storeLocalVar(this.offset, this.src);
 		}
-			
+		else if(this.is_class_field){
+			MIPSGenerator.getInstance().storeClassField(this.offset, this.src);
+		}
 	}
 }

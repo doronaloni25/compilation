@@ -269,6 +269,14 @@ public class MIPSGenerator
 		this.sw(val, local_offset, fp);
 	}
 
+	public void storeClassField(int offset, TEMP val){
+		TEMP instance = new TEMP("s", 7);
+		TEMP fp = new TEMP("fp", -1);
+		this.lw(instance, 8, fp);
+		int byteOffset = offset * 4;
+		this.sw(instance, byteOffset, instance);
+	}
+
 	public TEMP calcStringLen(TEMP str){
 		// We create MIPS code that loops over the string in order to calculate its length
 		TEMP s5 = new TEMP("s", 5);
