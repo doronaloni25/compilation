@@ -501,7 +501,7 @@ public class MIPSGenerator
 		fileWriter.format("\t%s:\n", name_dispatch_vector);
 		for(TYPE_LIST curr = function_list; curr != null && curr.head != null; curr = curr.tail)
 		{
-			fileWriter.format("\t.word %s\n", HelperFunctions.formatMethodLabel(name, curr.head.name));
+			fileWriter.format("\t.word %s\n", HelperFunctions.formatMethodLabel(((TYPE_FUNCTION)curr.head).classDecName, curr.head.name));
 		}
 		fileWriter.format(".text\n");
 	}

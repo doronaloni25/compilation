@@ -91,7 +91,7 @@ public class TYPE_CLASS_DEC extends TYPE
 		if(fieldInClass(name) == null)
 		{
 			TYPE_CLASS_VAR_DEC newField = new TYPE_CLASS_VAR_DEC(t, name);
-			data_members = new TYPE_CLASS_VAR_DEC_LIST(newField, data_members);
+			data_members.insert(newField);
 		}
 		//cant add the same field twice
 		else
@@ -104,7 +104,7 @@ public class TYPE_CLASS_DEC extends TYPE
 		if(fieldInClass(name) == null)
 		{
 			TYPE_CLASS_VAR_DEC newField = new TYPE_CLASS_VAR_DEC(t, name, exp);
-			data_members = new TYPE_CLASS_VAR_DEC_LIST(newField, data_members);
+			data_members.insert(newField);
 		}
 		//cant add the same field twice
 		else
