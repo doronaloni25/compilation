@@ -120,7 +120,7 @@ public class TYPE_CLASS_DEC extends TYPE
 
 	public int getMethodOffset(String methodName){
 		TYPE_LIST currFunction = function_list;
-		int offset = 1;
+		int offset = 0;
 		while(currFunction != null)
 		{
 			if(currFunction.head == null){

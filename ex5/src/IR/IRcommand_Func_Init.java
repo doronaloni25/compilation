@@ -21,6 +21,7 @@ public class IRcommand_Func_Init extends IRcommand
 	public IRcommand_Func_Init(int localVariablesCount)
 	{
 		this.localVariablesCount = localVariablesCount;
+		System.out.println("Local variable count of func init: " + localVariablesCount);
 	}
 
 	public void MIPSme()

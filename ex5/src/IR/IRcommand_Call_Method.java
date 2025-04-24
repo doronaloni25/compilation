@@ -85,7 +85,7 @@ public class IRcommand_Call_Method extends IRcommand
         //jump to the mehod(using the adress in the register)
         MIPSGenerator.getInstance().jalr(s1);
         //discard the arguments from the stack
-        MIPSGenerator.getInstance().addToStack(4*this.funcArgs.size(),sp);
+        MIPSGenerator.getInstance().addToStack(4*(this.funcArgs.size()+1),sp);
         //load the return value to the destination register
         if(this.dest != null)
         {
