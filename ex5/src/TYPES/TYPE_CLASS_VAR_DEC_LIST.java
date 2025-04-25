@@ -30,4 +30,14 @@ public class TYPE_CLASS_VAR_DEC_LIST
 		last.tail = newTail;
 		last = newTail; 
 	}
+
+	public TYPE_CLASS_VAR_DEC_LIST copy(){
+		TYPE_CLASS_VAR_DEC_LIST currHead = this;
+		TYPE_CLASS_VAR_DEC_LIST copied = new TYPE_CLASS_VAR_DEC_LIST(null, null);
+		while (currHead != null && currHead.head != null){
+			copied.insert(currHead.head.copy());
+			currHead = currHead.tail;
+		}
+		return copied;
+	}
 }

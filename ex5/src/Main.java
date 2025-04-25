@@ -71,6 +71,8 @@ public class Main
 			/***********************/
 			/* [9] MIPS the IR ... */
 			/***********************/
+			// TODO: remove this line (probably?)
+			MIPSGenerator.createMipsOutputfile(outputFilename);
 			IR.getInstance().MIPSme();			
 
 			/***************************/

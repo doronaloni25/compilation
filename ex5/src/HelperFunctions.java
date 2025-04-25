@@ -73,8 +73,8 @@ public class HelperFunctions{
     {
         SYMBOL_TABLE.getInstance().PrintMe();
         System.out.print("Error");
-        //System.out.println(" at " + name);
-        //System.out.println("row = " + Integer.toString(line));
+        System.out.println(" at " + name);
+        System.out.println("row = " + Integer.toString(line));
         file_writer.write("ERROR");
 		file_writer.write("(");
 		file_writer.write(Integer.toString(line));

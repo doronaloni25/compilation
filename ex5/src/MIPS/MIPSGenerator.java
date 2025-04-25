@@ -473,7 +473,7 @@ public class MIPSGenerator
 		TEMP s7 = new TEMP("s", 7);
 		
 		this.li(s6, 32767);
-		this.li(s7, -32767);
+		this.li(s7, -32768);
 		//check if is bigger than 2^15
 		this.bge(dst, s6, handle_overflow_label);
 		//check if smaller than -2^15
@@ -486,7 +486,7 @@ public class MIPSGenerator
 		this.jump(valid_label);
 		//handling underflow
 		this.label(handle_underflow_label);
-		this.li(dst,-32767);
+		this.li(dst,-32768);
 		//finished
 		this.label(valid_label);
 
@@ -615,5 +615,26 @@ public class MIPSGenerator
 			instance.fileWriter.print(".text\n");
 		}
 		return instance;
+	}
+	
+	public static void createMipsOutputfile(String outputFilename)
+	{
+		instance = new MIPSGenerator();
+		try
+		{
+			// Open text file for writing 
+			instance.fileWriter = new PrintWriter(outputFilename);
+		}
+		catch (Exception e)
+		{
+			e.printStackTrace();
+		}
+
+		// Print data section with error message strings
+		instance.fileWriter.print(".data\n");
+		instance.fileWriter.print("string_access_violation: .asciiz \"Access Violation\"\n");
+		instance.fileWriter.print("string_illegal_div_by_0: .asciiz \"Illegal Division By Zero\"\n");
+		instance.fileWriter.print("string_invalid_ptr_dref: .asciiz \"Invalid Pointer Dereference\"\n");
+		instance.fileWriter.format(".text\n");
 	}
 }

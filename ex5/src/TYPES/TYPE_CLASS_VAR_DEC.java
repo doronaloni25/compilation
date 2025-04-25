@@ -22,19 +22,14 @@ public class TYPE_CLASS_VAR_DEC
 	}
 
 	private void getDefaultValue(AST_EXP exp){
-		if (t instanceof TYPE_INT){
+		if (exp instanceof AST_EXP_INT){
 			AST_EXP_INT exp_int = (AST_EXP_INT)exp;
-			if (exp_int.isMinus){
-				this.defaultIntValue = (-1) * exp_int.value;
-			}
-			else{
-				this.defaultIntValue = exp_int.value;
-			}
+			this.defaultIntValue = exp_int.value;
 		}
-		else if(t instanceof TYPE_STRING){
+		else if(exp instanceof AST_EXP_STRING){
 			this.defaultStringLabel = ((AST_EXP_STRING)exp).stringLabel;
 		}
-		else if(t instanceof TYPE_NIL){
+		else if(exp instanceof AST_EXP_NIL){
 			this.defaultIntValue = 0;	
 		}
 		// TODO: remove..
@@ -45,5 +40,12 @@ public class TYPE_CLASS_VAR_DEC
 	public String toString()
 	{
 		return "my field name is: " + this.name;
+	}
+
+	public TYPE_CLASS_VAR_DEC copy(){
+		TYPE_CLASS_VAR_DEC copied = new TYPE_CLASS_VAR_DEC(this.t, this.name);
+		copied.defaultIntValue = this.defaultIntValue;
+		copied.defaultStringLabel = this.defaultStringLabel;
+		return copied;
 	}
 }

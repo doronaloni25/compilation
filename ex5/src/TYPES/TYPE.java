@@ -20,5 +20,5 @@ public abstract class TYPE
 	public boolean isFunction(){ return false;}
 	public boolean isClassDec(){ return false;}
 
-
+	public TYPE copy(){ return null;};
 }

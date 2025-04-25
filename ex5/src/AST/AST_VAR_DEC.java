@@ -28,11 +28,13 @@ public class AST_VAR_DEC extends AST_DEC
 
         if(currType != null)
         {
+            System.out.println("check if currtype null error with name: " + name + " with type: " + currType.name);
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         TYPE t = type.SemantMe();
         if (t == null)
         {
+            System.out.println("check if type null error");
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         //get global for ex5

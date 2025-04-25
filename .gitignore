@@ -33,3 +33,4 @@ ex5/src/Parser.java
 ex5/src/Lexer.java
 ex5/src/TokenNames.java
 ex5/input/test.txt
+ex5/run_all_tests.sh

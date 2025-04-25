@@ -31,9 +31,9 @@ public class AST_CLASS_DEC_TWO extends AST_CLASS_DEC_ONE
         //give the son all father parameters
         TYPE_CLASS_DEC classType = new TYPE_CLASS_DEC(fatherType, name);
         SYMBOL_TABLE.getInstance().inClass = classType;
-        classType.function_list = fatherType.function_list;
+        classType.function_list = fatherType.function_list.copy();
         HelperFunctions.setFunctionListInherited(classType.function_list);
-        classType.data_members = fatherType.data_members;
+        classType.data_members = fatherType.data_members.copy();
         SYMBOL_TABLE.getInstance().enter(name, classType);
         SYMBOL_TABLE.getInstance().beginScope();
         // After opening the scope, add ancestor's fields to symbol table

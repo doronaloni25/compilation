@@ -29,5 +29,13 @@ public class TYPE_FUNCTION extends TYPE
 	public boolean isFunction() {
 		return true;
 	}
+
+	public TYPE copy(){
+		TYPE_FUNCTION copied = new TYPE_FUNCTION(this.returnType, this.name, this.params);
+		copied.classDecName = this.classDecName;
+		copied.isInherited = this.isInherited;
+		copied.localVariablesCount = this. localVariablesCount;
+		return copied;
+	}
 	
 }

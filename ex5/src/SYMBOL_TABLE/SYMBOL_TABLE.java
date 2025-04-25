@@ -66,7 +66,7 @@ public class SYMBOL_TABLE
 		/* [3] Prepare a new symbol table entry with name, type, next and prevtop */
 		/**************************************************************************/
 		SYMBOL_TABLE_ENTRY e = new SYMBOL_TABLE_ENTRY(name,t,hashValue,next,top,top_index++, scope_serial_number);
-
+		System.out.println("Entering " + name + " with type " + t.name + " to symbol table at scope: " + scope_index);
 		/**********************************************/
 		/* [4] Update the top of the symbol table ... */
 		/**********************************************/
@@ -105,7 +105,7 @@ public class SYMBOL_TABLE
 		/* [4] Update the top of the symbol table ... */
 		/**********************************************/
 		top = e;
-		
+		System.out.println("Entering " + name + " with type " + t.name + " to symbol table at scope: " + scope_index);
 		/****************************************/
 		/* [5] Enter the new entry to the table */
 		/****************************************/
@@ -204,7 +204,7 @@ public class SYMBOL_TABLE
 		/*********************************************/
 		/* Print the symbol table after every change */
 		/*********************************************/
-		PrintMe();
+		//PrintMe();
 		scope_index++;
 		scope_serial_number++;
 	}
@@ -234,7 +234,8 @@ public class SYMBOL_TABLE
 		/*********************************************/
 		/* Print the symbol table after every change */		
 		/*********************************************/
-		PrintMe();
+		//PrintMe();
+		System.out.println("END SCOPE with scope index " + scope_index);
 		scope_index--;
 	}
 

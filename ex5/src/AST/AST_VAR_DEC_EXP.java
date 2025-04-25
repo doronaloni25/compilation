@@ -21,16 +21,19 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC
     {
         // check if we are inside class, since we cant assign non-constants to variables inside of a class declaration
         TYPE_CLASS_DEC classType = SYMBOL_TABLE.getInstance().inClass;
-        if(classType != null)
+        TYPE_FUNCTION funcType = SYMBOL_TABLE.getInstance().inFunction;
+        if(classType != null && funcType == null)
         {
             // check if exp is constant:
             if (!HelperFunctions.isConstant(exp)) {
+                System.out.println("check if exp is constant error");
                 HelperFunctions.printError(line, this.getClass().getSimpleName());
             }
         }
         TYPE expType = exp.SemantMe(); 
         if (expType == null)
         {
+            System.out.println("check if exptype is null error");
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         if(expType instanceof TYPE_STRING)
@@ -44,6 +47,7 @@ public class AST_VAR_DEC_EXP extends AST_VAR_DEC
             return currType;
         }
         else {
+            System.out.println("check if inherited or nil error");
             HelperFunctions.printError(line, this.getClass().getSimpleName());
         }
         // unreachable code
