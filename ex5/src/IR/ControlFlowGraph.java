@@ -24,7 +24,7 @@ public class ControlFlowGraph
         addInterferenceEdges();
         boolean colorable = colorGraph(this.interference_graph_map);
         if (!colorable){
-            // TODO: ERROR
+            HelperFunctions.printError("Register Allocation Failed");
         }
         this.printIRs();
         //this.printLivenessCFG();

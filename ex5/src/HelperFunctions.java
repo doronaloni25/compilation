@@ -83,6 +83,13 @@ public class HelperFunctions{
 		System.exit(0);
     }
 
+    public static void printError(String msg)
+    {
+        file_writer.println(msg);
+		file_writer.close();
+		System.exit(0);
+    }
+
     public static void addInheritedVarsToSymbolTable(TYPE_CLASS_VAR_DEC_LIST varDecs, TYPE_LIST funcList){
         TYPE_CLASS_VAR_DEC varDec;
         TYPE_FUNCTION funcDec;

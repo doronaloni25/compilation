@@ -11,6 +11,9 @@ public class AST_EXP_ID extends AST_EXP
     String name;
     AST_EXP exp;
     AST_COMMA_EXP_LIST expList;
+    boolean isMethod = false;
+    TYPE_CLASS_DEC classDec;
+
     public AST_EXP_ID(String name,  AST_EXP exp, AST_COMMA_EXP_LIST expList)
     {
         SerialNumber = AST_Node_Serial_Number.getFresh();
@@ -52,6 +55,8 @@ public class AST_EXP_ID extends AST_EXP
         }
         // cast to type function
         TYPE_FUNCTION found_function = (TYPE_FUNCTION)found_functionT;
+        this.isMethod = (found_function.classDecName != null);
+        this.classDec = SYMBOL_TABLE.getInstance().inClass;
         //check if the function has the right number of arguments
         TYPE_LIST function_arguments_list = new TYPE_LIST(null, null); 
         //System.out.println("before exp != null");
@@ -93,7 +98,14 @@ public class AST_EXP_ID extends AST_EXP
                 expList.IRme(funcArgs);
             }
         }
-        IR.getInstance().Add_IRcommand(new IRcommand_Call_Func(name, dest, funcArgs));
+        if (this.isMethod){
+            System.out.println("exp id called for a method inside a class");
+            IR.getInstance().Add_IRcommand(new IRcommand_Call_Func(name, dest, funcArgs, isMethod, classDec.name));
+        }
+        else{
+            System.out.println("exp id called for a normal func call");
+            IR.getInstance().Add_IRcommand(new IRcommand_Call_Func(name, dest, funcArgs));
+        }
         return dest;
     }
 }

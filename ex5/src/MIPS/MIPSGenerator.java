@@ -97,7 +97,7 @@ public class MIPSGenerator
 	{
 		// TODO: figure out offset
 		// first place is dispatch vector
-		int method_offset = (offset + 2) * 4;
+		int method_offset = (offset + 3) * 4;
 		TEMP fp = new TEMP("fp", -1);
 		this.lw(dst, method_offset, fp);
 	}

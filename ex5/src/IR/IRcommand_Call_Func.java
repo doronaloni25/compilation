@@ -20,12 +20,23 @@ public class IRcommand_Call_Func extends IRcommand
 	String name;
     TEMP dest;
     ArrayList<TEMP> funcArgs;
+    boolean calledFuncInsideClass = false;
+    String className;
 	
 	public IRcommand_Call_Func(String name, TEMP dest, ArrayList<TEMP> funcArgs)
     {
         this.name = name;
         this.dest = dest;
         this.funcArgs = funcArgs;
+    }
+
+    public IRcommand_Call_Func(String name, TEMP dest, ArrayList<TEMP> funcArgs, boolean calledFuncInsideClass, String className)
+    {
+        this.name = name;
+        this.dest = dest;
+        this.funcArgs = funcArgs;
+        this.calledFuncInsideClass = calledFuncInsideClass;
+        this.className = className;
     }
 
     @Override
@@ -62,8 +73,14 @@ public class IRcommand_Call_Func extends IRcommand
     @Override
     public void MIPSme()
     {
+        String funcLabel;
         TEMP sp = new TEMP("sp", -1);
-        String funcLabel = HelperFunctions.formatEntryLabel(this.name);
+        if (this.calledFuncInsideClass){
+            funcLabel = HelperFunctions.formatMethodLabel(this.className, this.name);
+        }
+        else{
+            funcLabel = HelperFunctions.formatEntryLabel(this.name);
+        }
         //store the arguments of the called function to the stack
         int numOfArgs = this.funcArgs.size();
         MIPSGenerator.getInstance().subu(sp, sp, 4 * numOfArgs);
