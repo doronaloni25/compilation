@@ -88,10 +88,25 @@ public class IRcommand_Call_Func extends IRcommand
             TEMP arg = this.funcArgs.get(i);
             MIPSGenerator.getInstance().sw(arg , 4 * i, sp);
         }
+
+        // incase we are in a method and we call another method:
+        if (this.calledFuncInsideClass){
+            TEMP fp = new TEMP("fp", -1);
+            TEMP object = new TEMP("s", 0);
+            MIPSGenerator.getInstance().lw(object, 8, fp);
+            MIPSGenerator.getInstance().subu(sp,sp,4);
+            MIPSGenerator.getInstance().sw(object, 0, sp);
+        }
+        
         //jump to the function
         MIPSGenerator.getInstance().jal(funcLabel);
         //go back to prev sp (before storing the args, we discard them)
-        MIPSGenerator.getInstance().addiu(sp, sp, 4 * numOfArgs);
+        if (this.calledFuncInsideClass){
+            MIPSGenerator.getInstance().addiu(sp, sp, 4 * (numOfArgs+1));
+        }
+        else{
+            MIPSGenerator.getInstance().addiu(sp, sp, 4 * numOfArgs);
+        }
         //store the return value in the destination register (if it exists)
         if (this.dest != null){
             TEMP v0 = new TEMP("v", 0);

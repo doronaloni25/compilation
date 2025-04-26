@@ -36,8 +36,6 @@ public class IRcommand_Binop_EQ_Strings extends IRcommand_Binop
 		// s3 will hold current char in t2
 		TEMP s3 = new TEMP("s", 3);
 		
-		// init dest to 0
-		MIPSGenerator.getInstance().move(dst, new TEMP("zero", -1));
 
 		String loop_string_start = IRcommand.getFreshLabel("loop_string_start");
 		String equal_label = IRcommand.getFreshLabel("equal");
@@ -45,7 +43,9 @@ public class IRcommand_Binop_EQ_Strings extends IRcommand_Binop
 
 		MIPSGenerator.getInstance().move(s0, t1);
 		MIPSGenerator.getInstance().move(s1, t2);
-
+		// init dest to 0
+		MIPSGenerator.getInstance().move(dst, new TEMP("zero", -1));
+		
 		MIPSGenerator.getInstance().label(loop_string_start);
 		MIPSGenerator.getInstance().lb(s2, 0, s0);
 		MIPSGenerator.getInstance().lb(s3, 0, s1);

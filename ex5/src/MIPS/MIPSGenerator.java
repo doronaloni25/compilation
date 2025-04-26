@@ -264,7 +264,7 @@ public class MIPSGenerator
 
 	public void storeFuncParam(int offset, TEMP val)
 	{
-		int function_offset = (offset + 1) * 4;
+		int function_offset = (offset + 2) * 4;
 		TEMP fp = new TEMP("fp", -1);
 		this.sw(val, function_offset, fp);
 	}
@@ -272,7 +272,7 @@ public class MIPSGenerator
 	public void storeMethodParam(int offset, TEMP val)
 	{
 		// first place is dispatch vector
-		int method_offset = (offset + 2) * 4;
+		int method_offset = (offset + 3) * 4;
 		TEMP fp = new TEMP("fp", -1);
 		this.sw(val, method_offset, fp);
 	}
