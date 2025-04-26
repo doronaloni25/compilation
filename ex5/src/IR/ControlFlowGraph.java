@@ -25,7 +25,7 @@ public class ControlFlowGraph
         if (!colorable){
             HelperFunctions.printError("Register Allocation Failed");
         }
-        this.printIRs();
+        //this.printIRs();
         //this.printLivenessCFG();
         assignRegisters();
     }
