@@ -19,7 +19,6 @@ public class ControlFlowGraph
         for (Block block : blocks){
             livelinessAnalysis(block);
         }
-        //livelinessAnalysis(this.blocks.get(this.blocks.size() - 1));
         addAllNodesToInterferenceGraph(this.graphNodesNumbers);
         addInterferenceEdges();
         boolean colorable = colorGraph(this.interference_graph_map);
@@ -177,7 +176,6 @@ public class ControlFlowGraph
         }
     }
 
-    //TODO: when calling this function remember to initialize the graphNodesNumbers
     private void livelinessAnalysis(Block currBlock)
     {
         // The direction of edges is reversed as we go from the end to the beginning

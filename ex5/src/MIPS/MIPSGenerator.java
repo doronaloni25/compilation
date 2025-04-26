@@ -95,7 +95,6 @@ public class MIPSGenerator
 
 	public void loadMethodParam(int offset, TEMP dst)
 	{
-		// TODO: figure out offset
 		// first place is dispatch vector
 		int method_offset = (offset + 3) * 4;
 		TEMP fp = new TEMP("fp", -1);
@@ -120,7 +119,6 @@ public class MIPSGenerator
 
 	public void store(String var_name,TEMP src)
 	{
-		// TODO: check if necessary
 		int idxsrc=src.getSerialNumber();
 		fileWriter.format("\tsw Temp_%d,global_%s\n",idxsrc,var_name);		
 	}
@@ -396,7 +394,6 @@ public class MIPSGenerator
 	public void pushRegistersToStack(TEMP sp){
 		for (int i = 0; i <10; i++)
 		{
-			//TODO: make sure that the add and sub are correct
 			TEMP tempReg = new TEMP("t", i);
 			this.subu(sp, sp, 4);
 			this.sw(tempReg, 0, sp);

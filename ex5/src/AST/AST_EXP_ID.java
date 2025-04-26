@@ -100,7 +100,7 @@ public class AST_EXP_ID extends AST_EXP
         }
         if (this.isMethod){
             System.out.println("exp id called for a method inside a class");
-            IR.getInstance().Add_IRcommand(new IRcommand_Call_Func(name, dest, funcArgs, isMethod, classDec.name));
+            IR.getInstance().Add_IRcommand(new IRcommand_Call_Func(name, dest, funcArgs, isMethod, classDec));
         }
         else{
             System.out.println("exp id called for a normal func call");

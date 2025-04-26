@@ -65,8 +65,6 @@ public class Main
 
 			ControlFlowGraph cfg = IR.getInstance().createCFG();
 			Set<String> invalidVars = cfg.getInvalidVars();
-			//	TODO: change this to ex5!
-			//HelperFunctions.printInvalidVars(invalidVars);
 			
 			/***********************/
 			/* [9] MIPS the IR ... */
